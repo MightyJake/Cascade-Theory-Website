@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cascade Theory - Multimedia Marketing by Jake Fischer</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Load THREE.js library (consider hosting locally or using a module bundler later) -->
+  <!-- Load THREE.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <!-- Add Favicon Links Here -->
   <!-- <link rel="icon" href="/favicon.ico" sizes="any"> -->
   <!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
   <!-- <link rel="apple-touch-icon" href="/apple-touch-icon.png"> -->
+  <!-- Google Calendar Button CSS -->
+  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
 </head>
 <body class="home-page">
   <!-- Gradient Background Canvas -->
@@ -20,21 +22,18 @@
   <!-- Header -->
   <header>
     <div class="logo">
-      <!-- Logo SVG: Decorative, linked by adjacent text link -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" height="40" class="logo-svg" aria-hidden="true" focusable="false">
          <circle cx="100" cy="100" r="90" stroke="currentColor" stroke-width="12" fill="none" />
          <path d="M60 130 Q90 60 140 130" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" />
       </svg>
-      <!-- Site Title / Link to Home -->
       <a href="index.html" class="logo-link"><span class="logo-text">Cascade Theory</span></a>
     </div>
-    <!-- Desktop Navigation -->
     <nav class="desktop-nav" aria-label="Main Navigation">
       <a href="#services">Services</a>
       <a href="#process">Our Process</a>
       <a href="#portfolio">Case Studies</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a> <!-- Changed from contact.html to #contact -->
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
@@ -45,74 +44,66 @@
     <span class="bar bar3"></span>
   </button>
   <div class="nav-overlay" id="mobile-nav-menu">
-    <!-- Mobile Nav Logo/Link -->
     <div class="mobile-nav-header">
       <a href="index.html" class="mobile-logo-link" aria-label="Homepage">
          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" height="32" class="logo-svg" aria-hidden="true" focusable="false"> <circle cx="100" cy="100" r="90" stroke="currentColor" stroke-width="12" fill="none" /> <path d="M60 130 Q90 60 140 130" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" /> </svg>
          <span class="logo-text">Cascade Theory</span>
       </a>
     </div>
-    <!-- Mobile Nav Links -->
     <nav class="mobile-nav" aria-label="Mobile Navigation">
       <a href="#services">Services</a>
       <a href="#process">Our Process</a>
       <a href="#portfolio">Case Studies</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a> <!-- Changed from contact.html to #contact -->
+      <a href="#contact">Contact</a>
     </nav>
   </div>
 
   <!-- Main Content Area -->
   <main>
-    <!-- HERO SECTION - UPDATED STRUCTURE -->
-<section class="hero-content hero-video-section" aria-labelledby="hero-heading">
-    <div class="hero-video-container">
-        <!-- Placeholder Video Link from Pexels - Replace with your actual video later -->
-        <video
-            src="\assets\video\mountains.mp4"
-            class="hero-background-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            aria-label="Abstract background video with flowing blue and purple particles.">
-        </video>
-        <!-- Centered Text Overlay -->
-        <div class="hero-text-overlay">
+    <!-- HERO SECTION -->
+    <section class="hero-section" aria-labelledby="hero-heading">
+        <!-- Text Content Div (Left Column) -->
+        <div class="hero-text-content">
             <h1 id="hero-heading" class="hero-title">
-                Strategy That Flows.<br>Creative That Connects.
+                Creative Solutions That <span class="accent-text">Convert</span>.<br>
+                For Brands That Want to <span class="accent-text"><em>Make Waves.</em></span>
             </h1>
-            <p class="hero-subtitle">
-                Hi, I'm Jake Fischer, the multimedia marketing creator behind Cascade Theory. I partner directly with businesses like yours to craft compelling narratives, design engaging visuals, and implement effective strategies that drive real growth.
-            </p>
-            <!-- Link this CTA to the new Contact Section on homepage -->
             <a href="#contact" class="cta-button hero-cta">Start Your Cascade</a>
         </div>
-    </div>
-</section>
-<!-- END OF UPDATED HERO SECTION -->
+
+        <!-- Video Container Div (Right Column) -->
+        <div class="hero-video-container">
+            <video
+                src="\assets\video\mountains.mp4"
+                class="hero-background-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                aria-label="Abstract background video with flowing blue particles.">
+            </video>
+        </div>
+    </section>
+    <!-- END OF HERO SECTION -->
 
     <!-- SERVICES SECTION -->
     <section id="services" class="content-section service-section" aria-labelledby="services-heading">
        <h2 id="services-heading" class="section-title animate-on-scroll">Catalyzing Growth Across the Creative Spectrum</h2>
        <p class="section-subtitle centered-text animate-on-scroll">My integrated services ensure your brand story cascades powerfully, from initial spark to widespread impact.</p>
        <div class="services-grid">
-        <!-- Service Card 1 -->
         <div class="service-card animate-on-scroll">
           <h3 class="service-title">Brand Strategy & Identity</h3>
           <p class="service-description">Defining your brand essence, voice, and visual identity for lasting recognition and market differentiation.</p>
         </div>
-        <!-- Service Card 2 -->
-        <div class="service-card animate-on-scroll" style="--delay: 0.1s;"> <!-- Staggered delay -->
+        <div class="service-card animate-on-scroll" style="--delay: 0.1s;">
           <h3 class="service-title">Web Design & Development</h3>
           <p class="service-description">Crafting beautiful, user-focused, high-performance websites that form the digital core of your brand presence.</p>
         </div>
-        <!-- Service Card 3 -->
         <div class="service-card animate-on-scroll" style="--delay: 0.2s;">
           <h3 class="service-title">Content & Storytelling</h3>
           <p class="service-description">Producing authentic photo, video, and written content designed to flow naturally, engage audiences, and convert.</p>
         </div>
-        <!-- Service Card 4 -->
         <div class="service-card animate-on-scroll" style="--delay: 0.3s;">
           <h3 class="service-title">Motion Design & Animation</h3>
           <p class="service-description">Bringing your brand narrative to life with compelling motion graphics and animations for the digital age.</p>
@@ -125,27 +116,22 @@
         <h2 id="process-heading" class="section-title animate-on-scroll">The Cascade Framework™</h2>
         <p class="section-subtitle centered-text animate-on-scroll">My proven methodology ensures strategic alignment and creative momentum, flowing seamlessly from discovery to amplification.</p>
         <div class="process-steps-container">
-             <!-- Visual Line (desktop only) -->
              <div class="process-line" aria-hidden="true"></div>
-             <!-- Step 1 -->
             <div class="process-step animate-on-scroll">
               <span class="step-number" aria-hidden="true">01</span>
               <h3 class="step-title">The Source: Discovery & Strategy</h3>
               <p class="step-description">We dive deep to understand your goals, audience, and unique value, forging a clear strategic foundation for success.</p>
             </div>
-            <!-- Step 2 -->
             <div class="process-step animate-on-scroll" style="--delay: 0.1s;">
               <span class="step-number" aria-hidden="true">02</span>
               <h3 class="step-title">The Flow: Concept & Creation</h3>
               <p class="step-description">Ideas take shape. Strategy is translated into compelling visuals, messaging, and engaging interactive experiences.</p>
             </div>
-            <!-- Step 3 -->
             <div class="process-step animate-on-scroll" style="--delay: 0.2s;">
               <span class="step-number" aria-hidden="true">03</span>
               <h3 class="step-title">The Ripple: Build & Launch</h3>
               <p class="step-description">Meticulous development and execution bring the vision to life, tested thoroughly and culminating in a powerful launch.</p>
             </div>
-            <!-- Step 4 -->
             <div class="process-step animate-on-scroll" style="--delay: 0.3s;">
               <span class="step-number" aria-hidden="true">04</span>
               <h3 class="step-title">The Current: Amplify & Adapt</h3>
@@ -169,10 +155,6 @@
               <p>"Like water shaping landscapes, brilliant ideas, intentionally directed, carve pathways to profound results. I help channel that flow for your brand."</p>
           </div>
         </div>
-        <!-- Optional: Add an image here if desired -->
-        <!-- <div class="about-image animate-on-scroll" style="--delay: 0.1s;">
-            <img src="https://picsum.photos/seed/about/500/600" alt="Inspiring image related to Cascade Theory's philosophy or location.">
-        </div> -->
       </div>
     </section>
 
@@ -181,17 +163,14 @@
       <h2 id="stats-heading" class="section-title animate-on-scroll">The Momentum We Build</h2>
       <p class="section-subtitle centered-text animate-on-scroll" style="font-size: 0.9rem; color: var(--subtext-color); margin-bottom: 2.5rem;">(Representative client results)</p>
       <div class="stats-container">
-        <!-- Stat 1 -->
         <div class="stat-item animate-on-scroll">
           <h3 id="stat1" class="stat-value">0%</h3>
           <p class="stat-label">Client Goal Achievement</p>
         </div>
-        <!-- Stat 2 -->
         <div class="stat-item animate-on-scroll" style="--delay: 0.1s;">
           <h3 id="stat2" class="stat-value">0</h3>
           <p class="stat-label">Successful Project Launches</p>
         </div>
-        <!-- Stat 3 -->
         <div class="stat-item animate-on-scroll" style="--delay: 0.2s;">
           <h3 id="stat3" class="stat-value">0k+</h3>
           <p class="stat-label">Audience Impressions</p>
@@ -199,7 +178,7 @@
      </div>
       <blockquote class="stats-context animate-on-scroll" style="--delay: 0.3s;">
         <p>"Working with Jake at Cascade Theory wasn't just about getting a new website; it was about clarifying our entire brand direction. The results speak for themselves, driving significant lead growth."</p>
-        <cite>– Jane D., CEO, Innovate Solutions</cite> <!-- Example citation -->
+        <cite>– Jane D., CEO, Innovate Solutions</cite>
       </blockquote>
     </section>
 
@@ -212,7 +191,6 @@
             <!-- Case Study Item 1 -->
             <div class="case-study-item animate-on-scroll">
                 <div class="case-study-image">
-                    <!-- Descriptive Alt Text Example -->
                     <img src="https://picsum.photos/seed/cs1/1000/700" alt="Screenshot of the redesigned Echo Labs website homepage, showing clean typography and vibrant blue/green accents." loading="lazy">
                 </div>
                 <div class="case-study-content">
@@ -221,7 +199,6 @@
                     <p class="case-study-description">
                         Facing market saturation, Echo Labs needed clear differentiation. We crafted a new brand identity and a user-centric website, resulting in a 40% increase in demo requests and establishing a distinct market voice.
                     </p>
-                    <!-- TODO: Update href="case-study-echolabs.html" when page exists -->
                     <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Echo Labs Rebrand">View Full Case Study</a>
                 </div>
             </div>
@@ -229,7 +206,6 @@
             <!-- Case Study Item 2 -->
             <div class="case-study-item animate-on-scroll" style="--delay: 0.1s;">
                  <div class="case-study-image">
-                    <!-- Descriptive Alt Text Example -->
                     <img src="https://picsum.photos/seed/cs2/1000/700" alt="Split screen showing the old Frame Interactive user interface versus the new, improved design with clearer data visualization." loading="lazy">
                  </div>
                  <div class="case-study-content">
@@ -238,7 +214,6 @@
                     <p class="case-study-description">
                        Low engagement plagued their platform. Through deep UX research and a redesign focusing on intuitive navigation and interactive visualizations, we boosted average time-on-site by 60% and significantly improved key task completion rates.
                     </p>
-                     <!-- TODO: Update href="case-study-frame.html" when page exists -->
                     <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Frame Interactive UX Overhaul">View Full Case Study</a>
                 </div>
             </div>
@@ -246,7 +221,6 @@
              <!-- Case Study Item 3 -->
              <div class="case-study-item animate-on-scroll" style="--delay: 0.2s;">
                  <div class="case-study-image">
-                    <!-- Descriptive Alt Text Example -->
                     <img src="https://picsum.photos/seed/cs3/1000/700" alt="Montage of colorful, dynamic motion graphics created for the Vibe Digital social media campaign." loading="lazy">
                  </div>
                 <div class="case-study-content">
@@ -255,7 +229,6 @@
                     <p class="case-study-description">
                         To cut through social media noise, Vibe needed dynamic content. We produced a suite of compelling motion graphics for a multi-platform campaign, leading to a 2x increase in social engagement and boosted brand recall.
                     </p>
-                    <!-- TODO: Update href="case-study-vibe.html" when page exists -->
                     <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Vibe Digital Campaign">View Full Case Study</a>
                 </div>
             </div>
@@ -268,7 +241,6 @@
         <p class="section-subtitle centered-text animate-on-scroll">Let's transform your marketing. Here’s how simple it is to begin – I'll guide you every step.</p>
 
         <div class="contact-steps-grid">
-            <!-- Step 1 -->
             <div class="contact-step animate-on-scroll" style="--delay: 0.1s;">
                 <span class="step-number-badge" aria-hidden="true">1</span>
                 <h3 class="step-title">Schedule a Call</h3>
@@ -276,7 +248,6 @@
                     Book a free 30-minute discovery call. We'll discuss your vision, goals, and see if we're the right fit to collaborate.
                 </p>
             </div>
-            <!-- Step 2 -->
             <div class="contact-step animate-on-scroll" style="--delay: 0.2s;">
                  <span class="step-number-badge" aria-hidden="true">2</span>
                 <h3 class="step-title">Review Proposal</h3>
@@ -284,7 +255,6 @@
                     If we align, I'll craft a custom proposal outlining the strategy, deliverables, timeline, and investment. Review it online at your convenience.
                 </p>
             </div>
-            <!-- Step 3 -->
             <div class="contact-step animate-on-scroll" style="--delay: 0.3s;">
                  <span class="step-number-badge" aria-hidden="true">3</span>
                 <h3 class="step-title">Begin Your Project</h3>
@@ -294,27 +264,41 @@
             </div>
         </div>
 
+        <!-- === UPDATED: Google Calendar Embed replaces the original button === -->
         <div class="contact-cta-button-container animate-on-scroll" style="--delay: 0.4s;">
-             <!-- !!! IMPORTANT: Update this href with your actual Calendly or scheduling link !!! -->
-            <a href="#" class="cta-button contact-cta-button">Schedule Free 30-minute Call</a>
+             <div id="google-calendar-button-wrapper"> <!-- Wrapper Div -->
+                 <!-- Google Calendar Appointment Scheduling begin -->
+                 <!-- Stylesheet link moved to <head> -->
+                 <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+                 <script>
+                 (function() {
+                   var target = document.currentScript; // Target this script tag
+                   window.addEventListener('load', function() {
+                     calendar.schedulingButton.load({
+                       url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true',
+                       color: '#2ababf', /* Use accent color */
+                       label: 'Schedule Free 30-minute Call', /* Match old button text */
+                       target,
+                     });
+                   });
+                 })();
+                 </script>
+                 <!-- end Google Calendar Appointment Scheduling -->
+             </div>
         </div>
+        <!-- === END UPDATED SECTION === -->
 
-        <!-- Optional: Direct Contact Link -->
+
         <div class="contact-alternate-home animate-on-scroll" style="--delay: 0.5s;">
              <p>Prefer to send a quick message first? <a href="contact.html" class="contact-page-link">Use the contact form</a> or email <a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a>.</p>
          </div>
 
-        <!-- Homepage Footer -->
         <footer class="contact-footer animate-on-scroll" style="--delay: 0.6s;">
              <p>© <span id="year">2024</span> Cascade Theory. All rights reserved. | Bend, Oregon</p>
-             <!-- Optional: Add simple social links here -->
-             <!-- <div class="footer-social-links"> -->
-             <!--   <a href="#" aria-label="LinkedIn">LinkedIn</a> | <a href="#" aria-label="Instagram">Instagram</a> -->
-             <!-- </div> -->
         </footer>
     </section>
 
-  </main> <!-- End of main -->
+  </main>
 
   <script src="script.js"></script>
 </body>
