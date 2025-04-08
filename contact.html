@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="contact-page"> <!-- Body class for styling -->
+<body class="contact-page">
 
   <!-- Header -->
   <header>
@@ -44,7 +44,10 @@
 
         <!-- Form Configured for Formspree with Redirect -->
         <form
-            action="https://formspree.io/f/xeoapnjy" method="POST" class="contact-form animate-on-scroll">
+            action="https://formspree.io/f/xeoapnjy" 
+            method="POST"
+            class="contact-form animate-on-scroll"
+        >
             <!-- Standard Form Fields -->
              <div class="form-group">
                  <label for="name">Full Name</label>
@@ -70,8 +73,9 @@
                  <textarea id="message" name="message" rows="5" required></textarea>
              </div>
 
-             <!-- == ADDED: Formspree Configuration for Redirect == -->
-             <input type="hidden" name="_next" value="thank-you.html"> <!-- Tells Formspree where to go after success -->
+             <!-- == UPDATED: Formspree Configuration for Redirect == -->
+             <!-- Using Absolute Path from domain root -->
+             <input type="hidden" name="_next" value="/thank-you.html">
              <!-- ================================================ -->
 
              <!-- Optional: Add a custom subject line -->

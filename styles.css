@@ -23,7 +23,7 @@ body { font-family: 'Outfit', sans-serif; background-color: var(--bg-color); col
 *:focus:not(:focus-visible) { outline: none; }
 a { color: var(--text-color); text-decoration: none; transition: color 0.3s ease; }
 a:hover, a:focus { color: var(--accent-teal); text-decoration: underline; }
-img { max-width: 100%; height: auto; display: block; }
+img, video { max-width: 100%; height: auto; display: block; } /* Added video here */
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 p, h1, h2, h3, h4, h5, h6, span, li { color: inherit; }
 
@@ -74,8 +74,23 @@ p, h1, h2, h3, h4, h5, h6, span, li { color: inherit; }
 .contact-email-link { /* Default link styles apply, hover styles use accent */ }
 
 /* === HEADER / NAV / STACKING CONTEXT === */
-#gradient-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: block; /* Default visible */ pointer-events: none; background-color: var(--bg-color); }
-main, header, .nav-overlay, .hamburger { position: relative; z-index: 1; }
+#gradient-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures it's behind everything */
+    display: block;
+    pointer-events: none;
+    background-color: var(--bg-color);
+}
+
+main, header, .nav-overlay, .hamburger {
+    position: relative; /* Keep main content above gradient */
+    z-index: 1;
+}
+
 header { position: sticky; top: 0; z-index: 999; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; background: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: top 0.3s ease; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 .logo { display: flex; align-items: center; }
 .logo-svg { fill: var(--text-color); margin-right: 12px; height: 40px; width: auto; }
@@ -102,7 +117,84 @@ header { position: sticky; top: 0; z-index: 999; padding: 1.5rem 2rem; display: 
 .home-page #gradient-canvas { display: block; }
 .home-page .content-section { background: transparent; } /* Override only if needed */
 
-/* Homepage Hero */
+/* Homepage Hero - UPDATED FOR VIDEO BACKGROUND */
+.home-page .hero-video-section { /* Renamed class for clarity */
+    padding: 0; /* Remove padding from section itself */
+    min-height: 85vh; /* Maintain similar height */
+    display: flex; /* Use flexbox for centering container */
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Center text by default */
+    position: relative; /* Needed for z-index stacking */
+    overflow: hidden; /* Hide potential video overflow */
+    /* Give some vertical spacing, especially on smaller screens */
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.home-page .hero-video-container {
+    position: relative; /* Positioning context for the text overlay */
+    width: 90%; /* Use percentage width */
+    max-width: 2000px; /* Max width for the video container */
+    /* margin: 4rem auto; Removed fixed vertical margin, handled by section */
+    border-radius: 16px; /* Rounded corners */
+    overflow: hidden; /* Crucial to clip the video to the rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Optional shadow */
+    z-index: 1; /* Above gradient, below text overlay */
+}
+
+.home-page .hero-background-video {
+  display: block; /* Remove extra space below video */
+  width: 100%; /* Make video fill container */
+  height: auto; /* Maintain aspect ratio */
+  aspect-ratio: 20 / 9; /* Assume 16:9, adjust if needed */
+  object-fit: cover; /* Cover the container, cropping if necessary */
+  border-radius: inherit; /* Inherit border radius (though overflow:hidden handles clipping) */
+  z-index: 1; /* Layer below text overlay */
+}
+
+.home-page .hero-text-overlay {
+  position: absolute; /* Position over the video */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the overlay */
+  z-index: 2; /* Ensure text is above video */
+  width: 90%; /* Prevent text hitting edges */
+  max-width: 750px; /* Max width for readability */
+  padding: 2rem; /* Add some space around the text */
+  text-align: center;
+  /* Add text shadow for better readability on varying video backgrounds */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  color: var(--text-color); /* Ensure text color is white */
+}
+
+/* Ensure hero text elements inherit centered alignment */
+.home-page .hero-text-overlay .hero-title,
+.home-page .hero-text-overlay .hero-subtitle {
+    text-align: center;
+    max-width: 100%; /* Allow them to use the overlay's width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-page .hero-text-overlay .hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.2rem); /* Adjust size as needed */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.home-page .hero-text-overlay .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.15rem); /* Adjust size as needed */
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.home-page .hero-text-overlay .cta-button {
+    /* CTA button styles are global, should work fine */
+}
+
+/* --- Remove or comment out old hero split layout styles --- */
+/*
 .home-page .hero-content { padding: 4rem 2rem; min-height: 85vh; display: flex; justify-content: center; align-items: center; text-align: left; }
 .home-page .hero-layout-split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; width: 100%; max-width: 1200px; }
 .home-page .hero-text-content .hero-title { font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1.2; margin-bottom: 1.5rem; }
@@ -120,6 +212,9 @@ header { position: sticky; top: 0; z-index: 999; padding: 1.5rem 2rem; display: 
     .home-page .hero-text-content .hero-title { font-size: clamp(2.2rem, 7vw, 2.8rem); }
     .home-page .hero-image-container { max-width: 300px; }
 }
+*/
+/* --- End of Removal --- */
+
 
 /* Homepage Sections with Card Backgrounds */
 .home-page .process-section,
@@ -207,6 +302,8 @@ header { position: sticky; top: 0; z-index: 999; padding: 1.5rem 2rem; display: 
 .case-study-page .case-study-hero { padding: 8rem 2rem 4rem 2rem; text-align: center; border-bottom: 1px solid var(--border-color); max-width: 1200px; margin-left: auto; margin-right: auto; }
 .case-study-page .case-study-hero .hero-title { font-size: clamp(2rem, 5vw, 3rem); max-width: 850px; margin: 0.5rem auto 3rem auto; line-height: 1.2; color: var(--text-color); }
 .case-study-page .case-study-hero .hero-image-container { max-width: 1000px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); }
+/* Added style for potential video in CS hero */
+.case-study-page .case-study-hero .hero-image-container video { display: block; width: 100%; height: auto; border-radius: inherit; }
 /* Content */
 .case-study-page .case-study-content { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
 .case-study-page .case-study-content h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 1.5rem; color: var(--accent-teal); margin-top: 3rem; text-align: left; }
@@ -217,6 +314,8 @@ header { position: sticky; top: 0; z-index: 999; padding: 1.5rem 2rem; display: 
 .case-study-page .case-study-content li { margin-bottom: 0.5rem; }
 .case-study-page .case-study-content blockquote { display: block; max-width: 100%; margin: 2.5rem 0; font-style: italic; padding: 1.5rem; border-left: 3px solid var(--accent-teal); background: rgba(24, 24, 26, 0.5); border-radius: 0 8px 8px 0; text-align: left; /* Color from global */ }
 .case-study-page .case-study-image { margin: 3rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+/* Added style for potential video in CS content */
+.case-study-page .case-study-image video { display: block; width: 100%; height: auto; border-radius: inherit; }
 /* Bottom Nav/CTA */
 .case-study-page .case-study-nav { text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--border-color); margin-top: 4rem; max-width: 900px; margin-left: auto; margin-right: auto; }
 .case-study-page .case-study-prev-next { margin-bottom: 3rem; }

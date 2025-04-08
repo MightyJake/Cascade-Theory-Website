@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - Cascade Theory</title> <!-- Specific Title -->
+  <!-- !! IMPORTANT: Title changed for Tanuki case study !! -->
+  <title>Case Study: Tanuki Japanese Learning App - Cascade Theory</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Add basic styling for videos within the template containers */
+    .hero-image-container video,
+    .case-study-image video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6; /* Inherit border-radius from parent if set */
+    }
+  </style>
 </head>
-<body class="contact-page"> <!-- Ensure this class is present -->
+<body class="case-study-page">
 
   <!-- REUSED HEADER -->
   <header>
@@ -20,7 +31,7 @@
         <a href="index.html#process">Our Process</a>
         <a href="index.html#portfolio">Case Studies</a>
         <a href="index.html#about">About</a>
-        <a href="contact.html">Contact</a> <!-- Link to this page -->
+        <a href="index.html#contact">Contact</a>
     </nav>
   </header>
 
@@ -32,36 +43,95 @@
         <a href="index.html#process">Our Process</a>
         <a href="index.html#portfolio">Case Studies</a>
         <a href="index.html#about">About</a>
-        <a href="contact.html">Contact</a> <!-- Link to this page -->
+        <a href="contact.html">Contact</a>
      </nav>
   </div>
 
   <main>
-    <!-- FULL CONTACT FORM SECTION MOVED HERE -->
-    <section id="contact-page-content" class="content-section" aria-labelledby="contact-heading">
-        <h2 id="contact-heading" class="section-title animate-on-scroll">Ready to Start Your Cascade?</h2>
-        <p class="section-subtitle centered-text contact-intro animate-on-scroll">Let's discuss how Cascade Theory can amplify your brand. Fill out the form below, or email me directly.</p>
-        <form action="#" method="POST" class="contact-form animate-on-scroll">
-             <div class="form-group"> <label for="name">Full Name</label> <input type="text" id="name" name="name" required> </div>
-             <div class="form-group"> <label for="email">Email Address</label> <input type="email" id="email" name="email" required> </div>
-             <div class="form-group"> <label for="service-interest">Service Interest (Optional)</label> <select id="service-interest" name="service-interest"> <option value="">-- Select a Service --</option> <option value="branding">Brand Strategy & Identity</option> <option value="web">Web Design & Development</option> <option value="content">Content & Storytelling</option> <option value="motion">Motion Design & Animation</option> <option value="other">Other / Unsure</option> </select> </div>
-             <div class="form-group"> <label for="message">Brief Project Description</label> <textarea id="message" name="message" rows="5" required></textarea> </div>
-             <div class="form-group form-submit-group"> <button type="submit" class="cta-button contact-submit-button">Send Message</button> </div>
-        </form>
-        <!-- Alternate contact info -->
-         <div class="contact-alternate animate-on-scroll" style="--delay: 0.2s">
-             <p>Prefer direct email? <a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a></p>
-         </div>
+    <!-- CASE STUDY HERO -->
+    <section class="case-study-hero content-section animate-on-scroll" aria-labelledby="case-study-heading">
+      <!-- !! REPLACE: Client Name changed !! -->
+      <span class="client-name">Client: Personal Capstone Project (Oregon State University)</span>
+      <!-- !! REPLACE: Project Title changed !! -->
+      <h1 id="case-study-heading" class="hero-title">Tanuki: Designing a Comprehensive Japanese Learning App</h1>
+      <!-- Optional Hero Image replaced with Video -->
+      <div class="hero-image-container">
+        <!-- !! REPLACE: Video Src and add attributes !! -->
+        <video src="case_studies/web/tanuki/tanuki_ad_web.mp4" autoplay muted loop playsinline aria-label="Promotional video montage showcasing the Tanuki Japanese Learning App interface and features."></video>
+      </div>
     </section>
-    <!-- END FULL CONTACT FORM SECTION -->
 
+    <!-- CASE STUDY CONTENT -->
+    <section class="case-study-content" aria-label="Case study details">
+
+      <!-- Animate each content chunk -->
+      <h2 class="animate-on-scroll">The Challenge</h2>
+      <p class="animate-on-scroll">With hundreds, if not thousands, of language learning apps available, the challenge was clear: why create another? As a Japanese language learner myself, I found many excellent resources, but none felt truly comprehensive. Existing apps often excelled in one area (like vocabulary flashcards or grammar drills) but lacked integration across essential skills like vocabulary acquisition, understanding writing systems (Hiragana, Katakana, Kanji), and grasping grammar concepts using proven methods like SRS (Spaced Repetition Software).</p>
+      <p class="animate-on-scroll">The goal was to conceptualize a more holistic tool that addressed this gap, providing a well-rounded and effective resource for Japanese learners, particularly as a final Capstone project at Oregon State University.</p>
+      <div class="case-study-image animate-on-scroll">
+        <!-- !! REPLACE: Image Src and Alt Text !! -->
+        <img src="case_studies/web/tanuki/tanuki_spread.jpg" alt="Early brand exploration showing logo development sketches and iterations for the Tanuki app.">
+      </div>
+
+      <h2 class="animate-on-scroll">Our Solution / The Cascade Applied</h2>
+      <p class="animate-on-scroll">Applying the 'Source' phase principles, the project began with research – analyzing existing apps and gathering feedback from Japanese learners at different levels. This involved collaboration with professors, fellow students, and a personal tutor to build a solid foundation of learning materials and understand user needs.</p>
+      <p class="animate-on-scroll">Moving into 'The Flow', the focus shifted to UI/UX design and brand identity. This involved creating wireframes, user flows, and ultimately a high-fidelity interactive prototype using Figma. A distinct brand identity was developed, including the logo, color palette, and typography, reflecting a modern yet approachable feel. The core concept revolved around integrating SRS for vocabulary, grammar, and writing systems. Promotional animations and product photography were also created to showcase the app concept.</p>
+       <p class="animate-on-scroll">You can explore the interactive prototype built in Figma <a href="https://www.figma.com/proto/XeBz6sQPfj53V9xzwdteVW/tanuki_app?node-id=44-82&t=AFWOZS9Bzs1u8xgF-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=44%3A82" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: var(--accent-teal);">here</a>.</p>
+      <ul class="animate-on-scroll">
+        <!-- !! REPLACE: List items reflect Tanuki project activities !! -->
+        <li>User Research & Needs Analysis</li>
+        <li>UI/UX Design (Wireframing, Prototyping in Figma)</li>
+        <li>Brand Identity Development (Logo, Color, Typography)</li>
+        <li>Spaced Repetition Software (SRS) Feature Integration Concept</li>
+        <li>Content Structuring (Vocab, Grammar, Writing Systems)</li>
+        <li>Animation & Motion Design for UI/Promotion</li>
+        <li>Product Photography & Mockups</li>
+      </ul>
+       <div class="case-study-image animate-on-scroll">
+        <!-- !! REPLACE: Image replaced with Video !! -->
+         <video src="case_studies/web/tanuki/frames_web.mp4" autoplay muted loop playsinline aria-label="Animation displaying various screen mockups and UI elements of the Tanuki app."></video>
+       </div>
+
+      <h2 class="animate-on-scroll">Results & Impact</h2>
+      <p class="animate-on-scroll">The 'Ripple' phase culminated in the successful completion of the Oregon State University Capstone project. The primary outcome was a well-researched, thoughtfully designed concept for a comprehensive Japanese learning app, demonstrated through a high-fidelity interactive prototype.</p>
+      <ul class="animate-on-scroll">
+        <!-- !! REPLACE: Quantifiable Results adapted for Capstone !! -->
+        <li>Delivered a <strong>fully interactive Figma prototype</strong> demonstrating core SRS functionality and user flows.</li>
+        <li>Developed a <strong>complete brand identity system</strong> including logo, color palette, and typography guidelines.</li>
+        <li>Produced <strong>promotional video and animation content</strong> effectively showcasing the app's vision and potential user experience.</li>
+        <li>Successfully integrated <strong>feedback from target users and language experts</strong> throughout the design and development process.</li>
+        <li>Achieved project goals for the <strong>university Capstone requirement</strong>, demonstrating proficiency in UI/UX, branding, and multimedia design.</li>
+      </ul>
+      <blockquote class="animate-on-scroll">
+         <!-- !! REPLACE: Quote adapted for personal project !! -->
+        "This project was a deep dive into merging my passion for Japanese with UI/UX design principles. The goal wasn't just to build an app concept, but to rigorously apply user-centered design and multimedia skills to solve a real problem I experienced as a learner, pushing my abilities in design, animation, and strategic thinking."
+        <cite>- Jake Fischer, Creator</cite>
+      </blockquote>
+        <div class="case-study-image animate-on-scroll">
+            <!-- !! REPLACE: Image Src and Alt Text !! -->
+            <img src="case_studies/web/tanuki/tanuki_instagram.png" alt="Mockup showing how the Tanuki app could be promoted on Instagram.">
+        </div>
+    </section>
+
+    <!-- NAVIGATION & CALL TO ACTION -->
+    <section class="case-study-nav content-section animate-on-scroll">
+       <div class="case-study-prev-next">
+           <!-- Add optional Prev/Next Links Here if other case studies exist -->
+           <!-- <a href="#">← Previous Project</a> -->
+           <!-- <a href="case-study-other.html">Next Project →</a> -->
+       </div>
+       <div class="case-study-cta">
+           <p>Inspired by this project?</p>
+           <a href="index.html#contact" class="cta-button">Start Your Cascade</a>
+       </div>
+    </section>
   </main>
 
-  <!-- REUSED Simplified Footer -->
+  <!-- Simplified Footer (not animated by default) -->
   <footer class="simple-footer">
       <p>© <span id="year">2024</span> Cascade Theory. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script> <!-- Standard script file -->
+  <script src="script.js"></script>
 </body>
 </html>
