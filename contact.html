@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Cascade Theory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="contact-page"> <!-- Body class for styling -->
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" height="48" class="logo-svg" aria-hidden="true" focusable="false"> <circle cx="100" cy="100" r="90" stroke="white" stroke-width="12" fill="none" /> <path d="M60 130 Q90 60 140 130" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" /> </svg>
+      <a href="index.html" class="logo-link"><span class="logo-text">Cascade Theory</span></a>
+    </div>
+    <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#process">Our Process</a>
+        <a href="index.html#portfolio">Case Studies</a>
+        <a href="index.html#about">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Mobile Nav Elements -->
+  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-menu"> <span class="bar bar1"></span> <span class="bar bar2"></span> <span class="bar bar3"></span> </button>
+  <div class="nav-overlay" id="mobile-nav-menu">
+    <nav class="mobile-nav" aria-label="Mobile Navigation">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#process">Our Process</a>
+        <a href="index.html#portfolio">Case Studies</a>
+        <a href="index.html#about">About</a>
+        <a href="contact.html">Contact</a>
+     </nav>
+  </div>
+
+  <main>
+    <!-- Contact Form Section -->
+    <section id="contact-page-content" class="content-section" aria-labelledby="contact-heading">
+        <h2 id="contact-heading" class="section-title animate-on-scroll">Ready to Start Your Cascade?</h2>
+        <p class="section-subtitle centered-text contact-intro animate-on-scroll">Let's discuss how Cascade Theory can amplify your brand. Fill out the form below, or email me directly.</p>
+
+        <!-- Form Configured for Formspree with Redirect -->
+        <form
+            action="https://formspree.io/f/xeoapnjy" method="POST" class="contact-form animate-on-scroll">
+            <!-- Standard Form Fields -->
+             <div class="form-group">
+                 <label for="name">Full Name</label>
+                 <input type="text" id="name" name="name" required>
+             </div>
+             <div class="form-group">
+                 <label for="email">Email Address</label>
+                 <input type="email" id="email" name="email" required>
+             </div>
+             <div class="form-group">
+                 <label for="service-interest">Service Interest (Optional)</label>
+                 <select id="service-interest" name="Service Interest">
+                     <option value="">-- Select a Service --</option>
+                     <option value="Branding">Brand Strategy & Identity</option>
+                     <option value="Web">Web Design & Development</option>
+                     <option value="Content">Content & Storytelling</option>
+                     <option value="Motion">Motion Design & Animation</option>
+                     <option value="Other/Unsure">Other / Unsure</option>
+                 </select>
+             </div>
+             <div class="form-group">
+                 <label for="message">Brief Project Description</label>
+                 <textarea id="message" name="message" rows="5" required></textarea>
+             </div>
+
+             <!-- == ADDED: Formspree Configuration for Redirect == -->
+             <input type="hidden" name="_next" value="thank-you.html"> <!-- Tells Formspree where to go after success -->
+             <!-- ================================================ -->
+
+             <!-- Optional: Add a custom subject line -->
+             <!-- <input type="hidden" name="_subject" value="New Cascade Theory Inquiry!"> -->
+
+             <!-- Submit Button -->
+             <div class="form-group form-submit-group">
+                 <button type="submit" class="cta-button contact-submit-button">Send Message</button>
+             </div>
+        </form>
+        <!-- End Form -->
+
+        <!-- Alternate contact info -->
+         <div class="contact-alternate animate-on-scroll" style="--delay: 0.2s">
+             <p>Prefer direct email? <a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a></p>
+         </div>
+    </section>
+  </main>
+
+  <!-- Simplified Footer -->
+  <footer class="simple-footer">
+      <p>© <span id="year">2024</span> Cascade Theory. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
