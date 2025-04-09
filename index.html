@@ -15,8 +15,8 @@
   <!-- Google Calendar Button CSS -->
   <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
 </head>
-<body class="home-page">
-  <!-- Gradient Background Canvas -->
+<body class="home-page"> <!-- Class for styling & JS checks -->
+  <!-- Gradient Background Canvas - JS will handle colors -->
   <canvas id="gradient-canvas"></canvas>
 
   <!-- Header -->
@@ -29,11 +29,13 @@
       <a href="index.html" class="logo-link"><span class="logo-text">Cascade Theory</span></a>
     </div>
     <nav class="desktop-nav" aria-label="Main Navigation">
-      <a href="#services">Services</a>
-      <a href="#process">Our Process</a>
-      <a href="#portfolio">Case Studies</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <div class="nav-links-centered">
+        <a href="#services">Services</a>
+        <a href="#pricing">Packages & Pricing</a>
+        <a href="#portfolio">Case Studies</a>
+        <a href="#about">About</a>
+      </div>
+      <a href="#" id="schedule-call-nav-link" class="schedule-call-nav-link">Schedule a Call</a>
     </nav>
   </header>
 
@@ -52,63 +54,63 @@
     </div>
     <nav class="mobile-nav" aria-label="Mobile Navigation">
       <a href="#services">Services</a>
-      <a href="#process">Our Process</a>
+      <a href="#pricing">Packages & Pricing</a>
       <a href="#portfolio">Case Studies</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#contact">Schedule a Call</a>
     </nav>
   </div>
 
   <!-- Main Content Area -->
   <main>
     <!-- HERO SECTION -->
-    <section class="hero-section" aria-labelledby="hero-heading">
-        <!-- Text Content Div (Left Column) -->
+    <section class="hero-section wide-hero" aria-labelledby="hero-heading">
         <div class="hero-text-content">
-            <h1 id="hero-heading" class="hero-title">
-                Creative Solutions That <span class="accent-text">Convert</span>.<br>
+            <h1 id="hero-heading" class="hero-title animate-on-scroll">
+                Creative Solutions That <span class="accent-text">Convert</span>.
                 For Brands That Want to <span class="accent-text"><em>Make Waves.</em></span>
             </h1>
-            <a href="#contact" class="cta-button hero-cta">Start Your Cascade</a>
+            <a href="#contact" class="cta-button hero-cta animate-on-scroll" style="--delay: 0.1s;">Start Your Cascade</a>
         </div>
-
-        <!-- Video Container Div (Right Column) -->
-        <div class="hero-video-container">
+        <div class="hero-video-container hero-video-larger animate-on-scroll" style="--delay: 0.2s;">
             <video
                 src="\assets\video\mountains.mp4"
                 class="hero-background-video"
-                autoplay
-                muted
-                loop
-                playsinline
+                autoplay muted loop playsinline
                 aria-label="Abstract background video with flowing blue particles.">
             </video>
         </div>
     </section>
     <!-- END OF HERO SECTION -->
 
-    <!-- SERVICES SECTION -->
-    <section id="services" class="content-section service-section" aria-labelledby="services-heading">
+    <!-- SERVICES & PRICING SECTION -->
+    <section id="services" class="content-section service-section" aria-labelledby="services-heading" style="margin-top: 4rem;">
        <h2 id="services-heading" class="section-title animate-on-scroll">Catalyzing Growth Across the Creative Spectrum</h2>
        <p class="section-subtitle centered-text animate-on-scroll">My integrated services ensure your brand story cascades powerfully, from initial spark to widespread impact.</p>
+       <h3 id="pricing" class="pricing-title centered-text animate-on-scroll">Packages & Pricing</h3>
        <div class="services-grid">
         <div class="service-card animate-on-scroll">
           <h3 class="service-title">Brand Strategy & Identity</h3>
           <p class="service-description">Defining your brand essence, voice, and visual identity for lasting recognition and market differentiation.</p>
+          <p class="service-price">Starting at $2000</p>
         </div>
         <div class="service-card animate-on-scroll" style="--delay: 0.1s;">
           <h3 class="service-title">Web Design & Development</h3>
           <p class="service-description">Crafting beautiful, user-focused, high-performance websites that form the digital core of your brand presence.</p>
+          <p class="service-price">Starting at $3500</p>
         </div>
         <div class="service-card animate-on-scroll" style="--delay: 0.2s;">
           <h3 class="service-title">Content & Storytelling</h3>
           <p class="service-description">Producing authentic photo, video, and written content designed to flow naturally, engage audiences, and convert.</p>
+           <p class="service-price">Starting at $1500</p>
         </div>
         <div class="service-card animate-on-scroll" style="--delay: 0.3s;">
           <h3 class="service-title">Motion Design & Animation</h3>
           <p class="service-description">Bringing your brand narrative to life with compelling motion graphics and animations for the digital age.</p>
+           <p class="service-price">Starting at $1000</p>
         </div>
       </div>
+       <p class="pricing-note centered-text animate-on-scroll" style="--delay: 0.4s;">Note: Prices are estimates and vary based on project scope. Let's chat for a custom quote!</p>
     </section>
 
     <!-- OUR PROCESS SECTION -->
@@ -146,22 +148,26 @@
 
     <!-- ABOUT SECTION -->
     <section id="about" class="content-section about-section" aria-labelledby="about-heading">
-      <div class="about-content-wrapper animate-on-scroll">
-        <div class="about-text">
-           <h2 id="about-heading" class="section-title accent-title">Beyond Aesthetics: Creative With Purpose</h2>
-           <p class="about-description">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is currently my solo venture, serving clients nationwide. I'm not just a designer; I'm a strategic partner focused on how great creative drives business forward. I believe true impact starts with a single, powerful idea allowed to flow, adapt, and amplify.</p>
-           <div class="manifesto">
-              <h4 class="manifesto-title">My Guiding Principle:</h4>
-              <p>"Like water shaping landscapes, brilliant ideas, intentionally directed, carve pathways to profound results. I help channel that flow for your brand."</p>
+      <div class="about-card-container animate-on-scroll">
+          <div class="about-content-wrapper">
+            <div class="about-text">
+              <h2 id="about-heading" class="section-title accent-title">Beyond Aesthetics: Creative With Purpose</h2>
+              <p class="about-description">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is currently my solo venture, serving clients nationwide. I'm not just a designer; I'm a strategic partner focused on how great creative drives business forward. I believe true impact starts with a single, powerful idea allowed to flow, adapt, and amplify.</p>
+              <div class="manifesto">
+                  <h4 class="manifesto-title">My Guiding Principle:</h4>
+                  <p>"Like water shaping landscapes, brilliant ideas, intentionally directed, carve pathways to profound results. I help channel that flow for your brand."</p>
+              </div>
+            </div>
+            <div class="about-image">
+              <img src="https://images.pexels.com/photos/3724038/pexels-photo-3724038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Scenic view of the Deschutes River flowing through Bend, Oregon with mountains in the background." loading="lazy">
+            </div>
           </div>
-        </div>
       </div>
     </section>
 
-    <!-- STATS SECTION -->
+    <!-- STATS & TESTIMONIALS SECTION -->
     <section id="stats" class="stats-section" aria-labelledby="stats-heading">
       <h2 id="stats-heading" class="section-title animate-on-scroll">The Momentum We Build</h2>
-      <p class="section-subtitle centered-text animate-on-scroll" style="font-size: 0.9rem; color: var(--subtext-color); margin-bottom: 2.5rem;">(Representative client results)</p>
       <div class="stats-container">
         <div class="stat-item animate-on-scroll">
           <h3 id="stat1" class="stat-value">0%</h3>
@@ -176,10 +182,31 @@
           <p class="stat-label">Audience Impressions</p>
         </div>
      </div>
-      <blockquote class="stats-context animate-on-scroll" style="--delay: 0.3s;">
-        <p>"Working with Jake at Cascade Theory wasn't just about getting a new website; it was about clarifying our entire brand direction. The results speak for themselves, driving significant lead growth."</p>
-        <cite>– Jane D., CEO, Innovate Solutions</cite>
-      </blockquote>
+
+     <!-- Testimonial Slider -->
+     <div id="testimonial-slider" class="testimonial-slider-container animate-on-scroll" style="--delay: 0.3s;">
+        <div class="testimonial-slider-track">
+            <blockquote class="testimonial-quote">
+                <p>"Working with Jake at Cascade Theory wasn't just about getting a new website; it was about clarifying our entire brand direction. The results speak for themselves, driving significant lead growth."</p>
+                <cite>– Jane D., CEO, Innovate Solutions</cite>
+            </blockquote>
+            <blockquote class="testimonial-quote">
+                <p>"The creativity and strategic thinking Jake brought to our project were outstanding. Our engagement metrics have never been better."</p>
+                <cite>– Mark S., Marketing Director, TechForward</cite>
+            </blockquote>
+            <blockquote class="testimonial-quote">
+                <p>"Cascade Theory delivered exactly what we needed – a powerful brand identity and a website that truly represents us. Highly recommended!"</p>
+                <cite>– Sarah L., Founder, Local Goods Co.</cite>
+            </blockquote>
+             <blockquote class="testimonial-quote">
+                <p>"From concept to launch, the process was seamless. Jake is not only talented but also a great communicator and partner."</p>
+                <cite>– Alex B., Project Manager, Creative Agency</cite>
+            </blockquote>
+            <!-- Cloned quotes added by JS -->
+        </div>
+     </div>
+     <!-- End Testimonial Slider -->
+
     </section>
 
     <!-- PORTFOLIO / CASE STUDIES SECTION -->
@@ -187,76 +214,72 @@
        <h2 id="portfolio-heading" class="section-title accent-title animate-on-scroll">Case Studies In Cascade</h2>
        <p class="section-subtitle centered-text animate-on-scroll">Explore how the Cascade Framework™ transforms vision into measurable success.</p>
 
-        <div class="case-studies-container">
-            <!-- Case Study Item 1 -->
-            <div class="case-study-item animate-on-scroll">
-                <div class="case-study-image">
-                    <img src="https://picsum.photos/seed/cs1/1000/700" alt="Screenshot of the redesigned Echo Labs website homepage, showing clean typography and vibrant blue/green accents." loading="lazy">
-                </div>
-                <div class="case-study-content">
-                    <h3 class="case-study-title">Echo Labs Rebrand & Web Launch</h3>
-                    <span class="case-study-client">Client: Echo Labs Technology</span>
-                    <p class="case-study-description">
-                        Facing market saturation, Echo Labs needed clear differentiation. We crafted a new brand identity and a user-centric website, resulting in a 40% increase in demo requests and establishing a distinct market voice.
-                    </p>
-                    <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Echo Labs Rebrand">View Full Case Study</a>
-                </div>
-            </div>
-
-            <!-- Case Study Item 2 -->
-            <div class="case-study-item animate-on-scroll" style="--delay: 0.1s;">
+        <div class="case-studies-container" style="max-width: 1200px;">
+             <div class="case-study-item animate-on-scroll">
                  <div class="case-study-image">
-                    <img src="https://picsum.photos/seed/cs2/1000/700" alt="Split screen showing the old Frame Interactive user interface versus the new, improved design with clearer data visualization." loading="lazy">
+                     <img src="case_studies/web/tanuki/tanuki_promo_thumb.jpg" alt="Promotional image for the Tanuki Japanese Learning App concept showing phone mockups." loading="lazy">
                  </div>
                  <div class="case-study-content">
-                    <h3 class="case-study-title">Frame Interactive UX Overhaul</h3>
-                     <span class="case-study-client">Client: Frame Interactive Data</span>
-                    <p class="case-study-description">
-                       Low engagement plagued their platform. Through deep UX research and a redesign focusing on intuitive navigation and interactive visualizations, we boosted average time-on-site by 60% and significantly improved key task completion rates.
-                    </p>
-                    <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Frame Interactive UX Overhaul">View Full Case Study</a>
-                </div>
-            </div>
-
-             <!-- Case Study Item 3 -->
-             <div class="case-study-item animate-on-scroll" style="--delay: 0.2s;">
-                 <div class="case-study-image">
-                    <img src="https://picsum.photos/seed/cs3/1000/700" alt="Montage of colorful, dynamic motion graphics created for the Vibe Digital social media campaign." loading="lazy">
+                     <h3 class="case-study-title">Tanuki Japanese Learning App</h3>
+                     <span class="case-study-client">Client: Personal Capstone Project</span>
+                     <p class="case-study-description">
+                         Conceptualized and designed a comprehensive Japanese learning app focusing on integrated SRS for vocabulary, grammar, and writing systems. Developed branding, UI/UX prototype, and promotional assets.
+                     </p>
+                     <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Tanuki Learning App">View Full Case Study</a>
                  </div>
-                <div class="case-study-content">
-                    <h3 class="case-study-title">Vibe Digital Motion Campaign</h3>
-                    <span class="case-study-client">Client: Vibe Creative Agency</span>
-                    <p class="case-study-description">
-                        To cut through social media noise, Vibe needed dynamic content. We produced a suite of compelling motion graphics for a multi-platform campaign, leading to a 2x increase in social engagement and boosted brand recall.
-                    </p>
-                    <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Vibe Digital Campaign">View Full Case Study</a>
-                </div>
-            </div>
+             </div>
+             <div class="case-study-item animate-on-scroll" style="--delay: 0.1s;">
+                  <div class="case-study-image">
+                     <img src="https://picsum.photos/seed/cs2/1000/700?grayscale" alt="Placeholder image for future case study 2" loading="lazy">
+                  </div>
+                  <div class="case-study-content">
+                     <h3 class="case-study-title">Project Title Two</h3>
+                      <span class="case-study-client">Client: Future Client Co.</span>
+                     <p class="case-study-description">
+                        Details about the challenge, the solution provided using the Cascade Framework™, and the positive impact achieved for the client will go here. Showcasing results and process.
+                     </p>
+                     <a href="#" class="cta-button case-study-button" aria-label="View full case study (Placeholder)" style="opacity: 0.5; pointer-events: none;">Case Study Coming Soon</a>
+                 </div>
+             </div>
+              <div class="case-study-item animate-on-scroll" style="--delay: 0.2s;">
+                  <div class="case-study-image">
+                     <img src="https://picsum.photos/seed/cs3/1000/700?blur=1" alt="Placeholder image for future case study 3" loading="lazy">
+                  </div>
+                 <div class="case-study-content">
+                     <h3 class="case-study-title">Project Title Three</h3>
+                     <span class="case-study-client">Client: Another Creative Partner</span>
+                     <p class="case-study-description">
+                         This space will detail another successful project, highlighting specific services like motion design, content creation, or web development, and demonstrating measurable outcomes.
+                     </p>
+                     <a href="#" class="cta-button case-study-button" aria-label="View full case study (Placeholder)" style="opacity: 0.5; pointer-events: none;">Case Study Coming Soon</a>
+                 </div>
+             </div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION (3 Steps) -->
+    <!-- CONTACT SECTION (3 Steps & Logos) -->
     <section id="contact" class="content-section contact-section-steps" aria-labelledby="contact-steps-heading">
         <h2 id="contact-steps-heading" class="section-title animate-on-scroll">Ready to Start Your Cascade?</h2>
         <p class="section-subtitle centered-text animate-on-scroll">Let's transform your marketing. Here’s how simple it is to begin – I'll guide you every step.</p>
 
         <div class="contact-steps-grid">
+             <div class="contact-steps-line" aria-hidden="true"></div>
             <div class="contact-step animate-on-scroll" style="--delay: 0.1s;">
-                <span class="step-number-badge" aria-hidden="true">1</span>
+                <span class="step-number" aria-hidden="true">1</span>
                 <h3 class="step-title">Schedule a Call</h3>
                 <p class="step-description">
                     Book a free 30-minute discovery call. We'll discuss your vision, goals, and see if we're the right fit to collaborate.
                 </p>
             </div>
             <div class="contact-step animate-on-scroll" style="--delay: 0.2s;">
-                 <span class="step-number-badge" aria-hidden="true">2</span>
+                <span class="step-number" aria-hidden="true">2</span>
                 <h3 class="step-title">Review Proposal</h3>
                 <p class="step-description">
                     If we align, I'll craft a custom proposal outlining the strategy, deliverables, timeline, and investment. Review it online at your convenience.
                 </p>
             </div>
             <div class="contact-step animate-on-scroll" style="--delay: 0.3s;">
-                 <span class="step-number-badge" aria-hidden="true">3</span>
+                <span class="step-number" aria-hidden="true">3</span>
                 <h3 class="step-title">Begin Your Project</h3>
                 <p class="step-description">
                     With the proposal approved, we'll kick off the project with an onboarding process and schedule our first working session.
@@ -264,41 +287,96 @@
             </div>
         </div>
 
-        <!-- === UPDATED: Google Calendar Embed replaces the original button === -->
-        <div class="contact-cta-button-container animate-on-scroll" style="--delay: 0.4s;">
-             <div id="google-calendar-button-wrapper"> <!-- Wrapper Div -->
-                 <!-- Google Calendar Appointment Scheduling begin -->
-                 <!-- Stylesheet link moved to <head> -->
-                 <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                 <script>
-                 (function() {
-                   var target = document.currentScript; // Target this script tag
-                   window.addEventListener('load', function() {
-                     calendar.schedulingButton.load({
-                       url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true',
-                       color: '#2ababf', /* Use accent color */
-                       label: 'Schedule Free 30-minute Call', /* Match old button text */
-                       target,
-                     });
-                   });
-                 })();
-                 </script>
-                 <!-- end Google Calendar Appointment Scheduling -->
-             </div>
+        <!-- Client Logo Section -->
+        <div class="client-logo-section animate-on-scroll" style="--delay: 0.4s;">
+            <h3 class="client-logo-title">Trusted By Brands Like Yours</h3>
+            <p class="client-logo-intro">We're proud to have helped diverse businesses make their mark.</p>
+            <div id="logo-slider" class="logo-slider-container">
+                <div class="logo-slider-track">
+                    <div class="logo-item"><img src="https://logo.clearbit.com/google.com" alt="Google Logo (placeholder)"></div>
+                    <div class="logo-item"><img src="https://logo.clearbit.com/stripe.com" alt="Stripe Logo (placeholder)"></div>
+                    <div class="logo-item"><img src="https://logo.clearbit.com/airbnb.com" alt="Airbnb Logo (placeholder)"></div>
+                    <div class="logo-item"><img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft Logo (placeholder)"></div>
+                    <div class="logo-item"><img src="https://logo.clearbit.com/spotify.com" alt="Spotify Logo (placeholder)"></div>
+                    <div class="logo-item"><img src="https://logo.clearbit.com/github.com" alt="GitHub Logo (placeholder)"></div>
+                    <div class="logo-item"><img src="https://logo.clearbit.com/slack.com" alt="Slack Logo (placeholder)"></div>
+                    <div class="logo-item"><img src="https://logo.clearbit.com/figma.com" alt="Figma Logo (placeholder)"></div>
+                     <!-- Cloned logos added by JS -->
+                </div>
+            </div>
         </div>
-        <!-- === END UPDATED SECTION === -->
+        <!-- End Client Logo Section -->
 
+        <!-- Google Calendar Embed -->
+        <div class="contact-cta-button-container animate-on-scroll" style="--delay: 0.5s;">
+             <div id="google-calendar-button-wrapper" class="cta-button-wrapper">
+                 <!-- Google button content generated here -->
+             </div>
+             <!-- Google Calendar Appointment Scheduling script -->
+             <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+             <script>
+             (function() {
+               var targetWrapper = document.getElementById('google-calendar-button-wrapper');
+               if (!targetWrapper) { console.error("Google Calendar wrapper div not found."); return; }
+               window.addEventListener('load', function() {
+                 calendar.schedulingButton.load({
+                   url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true',
+                   color: '#2ababf',
+                   label: 'Schedule Free 30-minute Call',
+                   target: targetWrapper, // Target the wrapper div
+                 });
+                 // Attempt to style the button after Google script loads it
+                 // Use MutationObserver for potentially more reliable detection
+                 const observer = new MutationObserver(mutations => {
+                     mutations.forEach(mutation => {
+                         if (mutation.addedNodes.length) {
+                             const googleButton = targetWrapper.querySelector('button');
+                             if (googleButton && !googleButton.classList.contains('google-cal-button-styled')) {
+                                 googleButton.classList.add('google-cal-button-styled'); // Use simplified class
+                                 console.log("Applied style class to Google Calendar button via MutationObserver.");
+                                 observer.disconnect(); // Stop observing once button is found and styled
+                             }
+                         }
+                     });
+                 });
+                 observer.observe(targetWrapper, { childList: true });
 
-        <div class="contact-alternate-home animate-on-scroll" style="--delay: 0.5s;">
+                 // Fallback with setTimeout just in case
+                 setTimeout(() => {
+                     const googleButton = targetWrapper.querySelector('button');
+                     if (googleButton && !googleButton.classList.contains('google-cal-button-styled')) {
+                         googleButton.classList.add('google-cal-button-styled');
+                         console.warn("Applied style class to Google Calendar button via setTimeout fallback.");
+                         observer.disconnect(); // Stop observer if timeout fires first
+                     }
+                 }, 1500); // Slightly longer delay for fallback
+
+               });
+             })();
+             </script>
+        </div>
+
+        <div class="contact-alternate-home animate-on-scroll" style="--delay: 0.6s;">
              <p>Prefer to send a quick message first? <a href="contact.html" class="contact-page-link">Use the contact form</a> or email <a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a>.</p>
          </div>
 
-        <footer class="contact-footer animate-on-scroll" style="--delay: 0.6s;">
+        <footer class="contact-footer animate-on-scroll" style="--delay: 0.7s;">
              <p>© <span id="year">2024</span> Cascade Theory. All rights reserved. | Bend, Oregon</p>
         </footer>
     </section>
 
   </main>
+
+  <!-- Theme Toggle Button -->
+  <button id="theme-toggle" aria-label="Toggle light/dark theme">
+    <svg class="icon-sun" enable-background="new 0 0 512 512" height="24px" width="24px" id="Layer_1" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" aria-hidden="true"> <g><g><path d="M256,144c-61.75,0-112,50.25-112,112s50.25,112,112,112s112-50.25,112-112S317.75,144,256,144z M256,336    c-44.188,0-80-35.812-80-80c0-44.188,35.812-80,80-80c44.188,0,80,35.812,80,80C336,300.188,300.188,336,256,336z M256,112    c8.833,0,16-7.167,16-16V64c0-8.833-7.167-16-16-16s-16,7.167-16,16v32C240,104.833,247.167,112,256,112z M256,400    c-8.833,0-16,7.167-16,16v32c0,8.833,7.167,16,16,16s16-7.167,16-16v-32C272,407.167,264.833,400,256,400z M380.438,154.167    l22.625-22.625c6.25-6.25,6.25-16.375,0-22.625s-16.375-6.25-22.625,0l-22.625,22.625c-6.25,6.25-6.25,16.375,0,22.625    S374.188,160.417,380.438,154.167z M131.562,357.834l-22.625,22.625c-6.25,6.249-6.25,16.374,0,22.624s16.375,6.25,22.625,0    l22.625-22.624c6.25-6.271,6.25-16.376,0-22.625C147.938,351.583,137.812,351.562,131.562,357.834z M112,256    c0-8.833-7.167-16-16-16H64c-8.833,0-16,7.167-16,16s7.167,16,16,16h32C104.833,272,112,264.833,112,256z M448,240h-32    c-8.833,0-16,7.167-16,16s7.167,16,16,16h32c8.833,0,16-7.167,16-16S456.833,240,448,240z M131.541,154.167    c6.251,6.25,16.376,6.25,22.625,0c6.251-6.25,6.251-16.375,0-22.625l-22.625-22.625c-6.25-6.25-16.374-6.25-22.625,0    c-6.25,6.25-6.25,16.375,0,22.625L131.541,154.167z M380.459,357.812c-6.271-6.25-16.376-6.25-22.625,0    c-6.251,6.25-6.271,16.375,0,22.625l22.625,22.625c6.249,6.25,16.374,6.25,22.624,0s6.25-16.375,0-22.625L380.459,357.812z"/></g></g> </svg>
+    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
+  </button>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="Scroll back to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="24" height="24"> <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /> </svg>
+  </button>
 
   <script src="script.js"></script>
 </body>
