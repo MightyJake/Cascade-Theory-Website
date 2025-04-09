@@ -35,7 +35,10 @@
         <a href="#portfolio">Case Studies</a>
         <a href="#about">About</a>
       </div>
-      <a href="#" id="schedule-call-nav-link" class="schedule-call-nav-link">Schedule a Call</a>
+      <!-- UPDATED: Link directly, opens new tab -->
+      <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
+         target="_blank" rel="noopener noreferrer"
+         class="schedule-call-nav-link">Schedule a Call</a>
     </nav>
   </header>
 
@@ -57,7 +60,10 @@
       <a href="#pricing">Packages & Pricing</a>
       <a href="#portfolio">Case Studies</a>
       <a href="#about">About</a>
-      <a href="#contact">Schedule a Call</a>
+      <!-- Mobile link already correct -->
+      <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
+         target="_blank" rel="noopener noreferrer"
+         class="mobile-nav-cta">Schedule a Call</a>
     </nav>
   </div>
 
@@ -323,34 +329,31 @@
                    url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true',
                    color: '#2ababf',
                    label: 'Schedule Free 30-minute Call',
-                   target: targetWrapper, // Target the wrapper div
+                   target: targetWrapper,
                  });
-                 // Attempt to style the button after Google script loads it
-                 // Use MutationObserver for potentially more reliable detection
+                 // Use MutationObserver to reliably add class after Google script loads
                  const observer = new MutationObserver(mutations => {
                      mutations.forEach(mutation => {
                          if (mutation.addedNodes.length) {
                              const googleButton = targetWrapper.querySelector('button');
                              if (googleButton && !googleButton.classList.contains('google-cal-button-styled')) {
-                                 googleButton.classList.add('google-cal-button-styled'); // Use simplified class
+                                 googleButton.classList.add('google-cal-button-styled');
                                  console.log("Applied style class to Google Calendar button via MutationObserver.");
-                                 observer.disconnect(); // Stop observing once button is found and styled
+                                 observer.disconnect();
                              }
                          }
                      });
                  });
                  observer.observe(targetWrapper, { childList: true });
-
-                 // Fallback with setTimeout just in case
+                 // Fallback just in case
                  setTimeout(() => {
                      const googleButton = targetWrapper.querySelector('button');
                      if (googleButton && !googleButton.classList.contains('google-cal-button-styled')) {
                          googleButton.classList.add('google-cal-button-styled');
                          console.warn("Applied style class to Google Calendar button via setTimeout fallback.");
-                         observer.disconnect(); // Stop observer if timeout fires first
+                         observer.disconnect();
                      }
-                 }, 1500); // Slightly longer delay for fallback
-
+                 }, 1500);
                });
              })();
              </script>
@@ -377,6 +380,8 @@
   <button id="back-to-top" aria-label="Scroll back to top">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="24" height="24"> <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /> </svg>
   </button>
+
+  <!-- REMOVED Schedule Modal Div -->
 
   <script src="script.js"></script>
 </body>

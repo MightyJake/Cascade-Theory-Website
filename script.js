@@ -1,4 +1,4 @@
-/* START OF FILE script.js (Includes Schedule Call Nav Listener) */
+/* START OF FILE script.js (Removed Modal Logic) */
 
 // --- THEME TOGGLE LOGIC ---
 const themeToggleButton = document.getElementById('theme-toggle');
@@ -140,7 +140,17 @@ function initMobileMenu() {
     const hamburger = document.querySelector('.hamburger'); const navOverlay = document.querySelector('.nav-overlay'); if (!hamburger || !navOverlay) return;
     const mobileNavLinks = navOverlay.querySelectorAll('a');
     const toggleMenu = (forceClose = false) => { const isOpen = navOverlay.classList.contains('active'); if (forceClose && !isOpen) return; const newStateOpen = forceClose ? false : !isOpen; navOverlay.classList.toggle('active', newStateOpen); hamburger.classList.toggle('open', newStateOpen); hamburger.setAttribute('aria-expanded', String(newStateOpen)); document.body.style.overflow = newStateOpen ? 'hidden' : ''; };
-    hamburger.addEventListener('click', () => toggleMenu()); mobileNavLinks.forEach(link => link.addEventListener('click', () => toggleMenu(true))); window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navOverlay.classList.contains('active')) { toggleMenu(true); } });
+    hamburger.addEventListener('click', () => toggleMenu());
+    // Close menu when *any* link inside is clicked
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Only force close if it's a regular link, not the CTA opening a new tab
+             if (!link.classList.contains('mobile-nav-cta') || !link.target === '_blank') {
+                toggleMenu(true);
+             } // Let the CTA link with target blank behave normally
+        });
+    });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navOverlay.classList.contains('active')) { toggleMenu(true); } });
 }
 /** Updates copyright year */
 function updateCopyrightYear() {
@@ -199,35 +209,7 @@ function initBackToTopButton() {
     console.log("[Init] Back to Top button initialized.");
 }
 
-/** Initializes Schedule Call Link */
-function initScheduleCallLink() {
-    const scheduleLink = document.getElementById('schedule-call-nav-link');
-    if (!scheduleLink) {
-        console.warn("[Init] Schedule call nav link (#schedule-call-nav-link) not found.");
-        return;
-    }
-
-    scheduleLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        console.log("[Schedule Link] Clicked.");
-
-        const googleButtonWrapper = document.getElementById('google-calendar-button-wrapper');
-        // Try finding the button *within* the wrapper more reliably
-        const googleButton = googleButtonWrapper ? googleButtonWrapper.querySelector('button[aria-label*="Schedule"]') : null; // Be more specific if possible
-
-        if (googleButton) {
-            console.log("[Schedule Link] Found Google button, attempting click...");
-            googleButton.click(); // Trigger Google's popup
-        } else {
-            console.warn("[Schedule Link] Could not find the Google Calendar button to click programmatically. Scrolling to contact section instead.");
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-    });
-    console.log("[Init] Schedule Call nav link initialized.");
-}
+/* REMOVED initScheduleCallLink function */
 
 
 /** Main initialization function, runs after DOM is loaded. */
@@ -245,10 +227,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if(canvas && body.classList.contains('home-page')) { initAdvancedGradient(); }
     else { if (canvas) canvas.style.display = 'none'; }
     initStickyNav();
-    initMobileMenu();
+    initMobileMenu(); // Make sure this runs
     initScrollAnimations();
     initBackToTopButton();
-    initScheduleCallLink(); // Initialize the schedule link listener
+    /* REMOVED call to initScheduleCallLink(); */
+    /* REMOVED call to initScheduleModal(); */
+
 
     console.log("[Init] All initializations complete.");
 });

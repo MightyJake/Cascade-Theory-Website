@@ -26,7 +26,6 @@
         <!-- UPDATED Button Link -->
         <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
            target="_blank" rel="noopener noreferrer"
-           id="schedule-call-nav-link"
            class="schedule-call-nav-link">Schedule a Call</a>
     </nav>
   </header>
@@ -46,7 +45,9 @@
         <a href="index.html#pricing">Packages & Pricing</a>
         <a href="index.html#portfolio">Case Studies</a>
         <a href="index.html#about">About</a>
-        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true" target="_blank" rel="noopener noreferrer">Schedule a Call</a>
+        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
+           target="_blank" rel="noopener noreferrer"
+           class="mobile-nav-cta">Schedule a Call</a>
      </nav>
   </div>
 
@@ -123,12 +124,19 @@
     <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
   </button>
 
-   <!-- ADDED: Back to Top Button -->
+   <!-- Back to Top Button -->
    <button id="back-to-top" aria-label="Scroll back to top">
-       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="24" height="24">
-         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-       </svg>
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="24" height="24"> <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /> </svg>
    </button>
+
+    <!-- ADDED: Schedule Modal (Same as index.html) -->
+   <div id="schedule-modal" class="schedule-modal-overlay">
+       <div class="schedule-modal-content">
+           <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">×</button>
+           <iframe id="schedule-iframe" src="" frameborder="0" allowfullscreen></iframe>
+           <div class="modal-loading">Loading Scheduler...</div>
+       </div>
+   </div>
 
   <!-- Link to the main script file (MUST BE LAST) -->
   <script src="script.js"></script>
