@@ -71,14 +71,8 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero-section wide-hero" aria-labelledby="hero-heading">
-        <div class="hero-text-content">
-            <h1 id="hero-heading" class="hero-title animate-on-scroll">
-                Creative Solutions That <span class="accent-text">Convert</span>.
-                For Brands That Want to <span class="accent-text"><em>Make Waves.</em></span>
-            </h1>
-            <a href="#contact" class="cta-button hero-cta animate-on-scroll" style="--delay: 0.1s;">Start Your Cascade</a>
-        </div>
-        <div class="hero-video-container hero-video-larger animate-on-scroll" style="--delay: 0.2s;">
+        <!-- Video Background -->
+        <div class="hero-video-container hero-video-larger">
             <video
                 src="\assets\video\mountains.mp4"
                 class="hero-background-video"
@@ -86,11 +80,21 @@
                 aria-label="Abstract background video with flowing blue particles.">
             </video>
         </div>
+        <!-- Text Content Overlay Card -->
+        <div class="hero-text-overlay-card animate-on-scroll">
+            <div class="hero-text-content">
+                <h1 id="hero-heading" class="hero-title">
+                    Creative Solutions That <span class="accent-text">Convert</span>.<br/>
+                    For Brands That Want to <span class="accent-text"><em>Make Waves.</em></span>
+                </h1>
+                <a href="#contact" class="cta-button hero-cta">Start Your Cascade</a>
+            </div>
+        </div>
     </section>
     <!-- END OF HERO SECTION -->
 
     <!-- SERVICES & PRICING SECTION -->
-    <section id="services" class="content-section service-section" aria-labelledby="services-heading" style="margin-top: 4rem;">
+    <section id="services" class="content-section service-section" aria-labelledby="services-heading">
        <h2 id="services-heading" class="section-title animate-on-scroll">Catalyzing Growth Across the Creative Spectrum</h2>
        <p class="section-subtitle centered-text animate-on-scroll">My integrated services ensure your brand story cascades powerfully, from initial spark to widespread impact.</p>
        <h3 id="pricing" class="pricing-title centered-text animate-on-scroll">Packages & Pricing</h3>
@@ -106,7 +110,7 @@
           <p class="service-price">Starting at $3500</p>
         </div>
         <div class="service-card animate-on-scroll" style="--delay: 0.2s;">
-          <h3 class="service-title">Content & Storytelling</h3>
+          <h3 class="service-title">Content & <br> Storytelling</h3>
           <p class="service-description">Producing authentic photo, video, and written content designed to flow naturally, engage audiences, and convert.</p>
            <p class="service-price">Starting at $1500</p>
         </div>
@@ -116,7 +120,6 @@
            <p class="service-price">Starting at $1000</p>
         </div>
       </div>
-       <p class="pricing-note centered-text animate-on-scroll" style="--delay: 0.4s;">Note: Prices are estimates and vary based on project scope. Let's chat for a custom quote!</p>
     </section>
 
     <!-- OUR PROCESS SECTION -->
@@ -220,46 +223,42 @@
        <h2 id="portfolio-heading" class="section-title accent-title animate-on-scroll">Case Studies In Cascade</h2>
        <p class="section-subtitle centered-text animate-on-scroll">Explore how the Cascade Framework™ transforms vision into measurable success.</p>
 
-        <div class="case-studies-container" style="max-width: 1200px;">
-             <div class="case-study-item animate-on-scroll">
-                 <div class="case-study-image">
-                     <img src="case_studies/web/tanuki/tanuki_promo_thumb.jpg" alt="Promotional image for the Tanuki Japanese Learning App concept showing phone mockups." loading="lazy">
+        <div class="case-studies-grid-container animate-on-scroll"> <!-- Changed container class -->
+
+             <a href="case-study-template.html" class="case-study-card" aria-label="View full case study for Tanuki Learning App"> <!-- Changed item to card link -->
+                 <div class="case-study-image-wrapper">
+                     <img src="case_studies/covers/tanuki.jpg" alt="" loading="lazy"> <!-- Alt left empty for decorative image -->
+                     <div class="case-study-overlay">
+                         <h3 class="case-study-title">Tanuki Japanese Learning App</h3>
+                         <span class="case-study-client">Personal Capstone Project</span>
+                     </div>
                  </div>
-                 <div class="case-study-content">
-                     <h3 class="case-study-title">Tanuki Japanese Learning App</h3>
-                     <span class="case-study-client">Client: Personal Capstone Project</span>
-                     <p class="case-study-description">
-                         Conceptualized and designed a comprehensive Japanese learning app focusing on integrated SRS for vocabulary, grammar, and writing systems. Developed branding, UI/UX prototype, and promotional assets.
-                     </p>
-                     <a href="case-study-template.html" class="cta-button case-study-button" aria-label="View full case study for Tanuki Learning App">View Full Case Study</a>
-                 </div>
-             </div>
-             <div class="case-study-item animate-on-scroll" style="--delay: 0.1s;">
-                  <div class="case-study-image">
-                     <img src="https://picsum.photos/seed/cs2/1000/700?grayscale" alt="Placeholder image for future case study 2" loading="lazy">
+                 <!-- Description and button could potentially be added here or linked page only -->
+             </a>
+
+             <a href="#" class="case-study-card disabled-card" aria-label="View full case study for Project Title Two (Coming Soon)"> <!-- Disabled link -->
+                  <div class="case-study-image-wrapper">
+                     <img src="https://picsum.photos/seed/cs2/800/600?grayscale" alt="" loading="lazy"> <!-- Adjusted size, added grayscale -->
+                     <div class="case-study-overlay">
+                         <h3 class="case-study-title">Project Title Two</h3>
+                         <span class="case-study-client">Future Client Co.</span>
+                     </div>
                   </div>
-                  <div class="case-study-content">
-                     <h3 class="case-study-title">Project Title Two</h3>
-                      <span class="case-study-client">Client: Future Client Co.</span>
-                     <p class="case-study-description">
-                        Details about the challenge, the solution provided using the Cascade Framework™, and the positive impact achieved for the client will go here. Showcasing results and process.
-                     </p>
-                     <a href="#" class="cta-button case-study-button" aria-label="View full case study (Placeholder)" style="opacity: 0.5; pointer-events: none;">Case Study Coming Soon</a>
+                  <span class="coming-soon-badge">Coming Soon</span>
+             </a>
+
+              <a href="#" class="case-study-card disabled-card" aria-label="View full case study for Project Title Three (Coming Soon)"> <!-- Disabled link -->
+                  <div class="case-study-image-wrapper">
+                     <img src="https://picsum.photos/seed/cs3/800/600?grayscale&blur=1" alt="" loading="lazy"> <!-- Adjusted size, added grayscale and blur -->
+                     <div class="case-study-overlay">
+                         <h3 class="case-study-title">Project Title Three</h3>
+                         <span class="case-study-client">Another Creative Partner</span>
+                     </div>
                  </div>
-             </div>
-              <div class="case-study-item animate-on-scroll" style="--delay: 0.2s;">
-                  <div class="case-study-image">
-                     <img src="https://picsum.photos/seed/cs3/1000/700?blur=1" alt="Placeholder image for future case study 3" loading="lazy">
-                  </div>
-                 <div class="case-study-content">
-                     <h3 class="case-study-title">Project Title Three</h3>
-                     <span class="case-study-client">Client: Another Creative Partner</span>
-                     <p class="case-study-description">
-                         This space will detail another successful project, highlighting specific services like motion design, content creation, or web development, and demonstrating measurable outcomes.
-                     </p>
-                     <a href="#" class="cta-button case-study-button" aria-label="View full case study (Placeholder)" style="opacity: 0.5; pointer-events: none;">Case Study Coming Soon</a>
-                 </div>
-             </div>
+                 <span class="coming-soon-badge">Coming Soon</span>
+             </a>
+             <!-- Add more case study cards as needed -->
+
         </div>
     </section>
 

@@ -1,4 +1,4 @@
-/* START OF FILE script.js (Removed Modal Logic) */
+/* START OF FILE script.js (Removed Schedule Call/Modal Logic) */
 
 // --- THEME TOGGLE LOGIC ---
 const themeToggleButton = document.getElementById('theme-toggle');
@@ -141,13 +141,11 @@ function initMobileMenu() {
     const mobileNavLinks = navOverlay.querySelectorAll('a');
     const toggleMenu = (forceClose = false) => { const isOpen = navOverlay.classList.contains('active'); if (forceClose && !isOpen) return; const newStateOpen = forceClose ? false : !isOpen; navOverlay.classList.toggle('active', newStateOpen); hamburger.classList.toggle('open', newStateOpen); hamburger.setAttribute('aria-expanded', String(newStateOpen)); document.body.style.overflow = newStateOpen ? 'hidden' : ''; };
     hamburger.addEventListener('click', () => toggleMenu());
-    // Close menu when *any* link inside is clicked
     mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Only force close if it's a regular link, not the CTA opening a new tab
-             if (!link.classList.contains('mobile-nav-cta') || !link.target === '_blank') {
+        link.addEventListener('click', (event) => {
+             if (!link.classList.contains('mobile-nav-cta') || link.target !== '_blank') {
                 toggleMenu(true);
-             } // Let the CTA link with target blank behave normally
+             }
         });
     });
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navOverlay.classList.contains('active')) { toggleMenu(true); } });
@@ -209,7 +207,7 @@ function initBackToTopButton() {
     console.log("[Init] Back to Top button initialized.");
 }
 
-/* REMOVED initScheduleCallLink function */
+/* Removed initScheduleCallLink and initScheduleModal functions */
 
 
 /** Main initialization function, runs after DOM is loaded. */
@@ -230,8 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu(); // Make sure this runs
     initScrollAnimations();
     initBackToTopButton();
-    /* REMOVED call to initScheduleCallLink(); */
-    /* REMOVED call to initScheduleModal(); */
+    /* Removed calls to schedule link/modal functions */
 
 
     console.log("[Init] All initializations complete.");

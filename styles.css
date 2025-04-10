@@ -21,6 +21,7 @@
     --button-text-color: #0d0d0d; /* Dark text on filled buttons */
      --glow-color: rgba(42, 186, 191, 0.6); /* Glow color for price */
      /* --modal-overlay-bg REMOVED */
+     --portfolio-overlay-bg: linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, rgba(13, 13, 13, 0.8) 80%);
   }
 
   /* === Light Mode Variables === */
@@ -43,6 +44,7 @@
     /* --button-text-color: #0d0d0d; */ /* Keep dark text on filled buttons */
     --glow-color: rgba(42, 186, 191, 0.4); /* Glow color for price - light */
      /* --modal-overlay-bg REMOVED */
+     --portfolio-overlay-bg: linear-gradient(180deg, rgba(244, 247, 246, 0) 0%, rgba(244, 247, 246, 0.8) 80%);
   }
 
   /* Base & Reset */
@@ -208,50 +210,179 @@
   .home-page main { position: relative; z-index: 1; }
 
   /* Hero */
-  .home-page .hero-section.wide-hero { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center; max-width: 90%; width: 100%; margin: 6rem auto; padding: 5rem 3rem; min-height: 85vh; }
-  .home-page .hero-text-content { text-align: left; padding-right: 2rem; }
-  .home-page .hero-video-container { position: relative; width: 100%; max-width: none; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px var(--shadow-color-card); z-index: 1; transition: box-shadow 0.3s ease;}
-  .home-page .hero-background-video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
-  .home-page .hero-text-content .hero-title { font-size: clamp(2.5rem, 5.5vw, 4rem); line-height: 1.35; margin-bottom: 3rem; text-transform: uppercase; font-weight: 700; text-align: left; color: var(--text-color); max-width: 700px; }
-  .home-page .hero-text-content .hero-title span { display: block; }
-  .home-page .hero-text-content .hero-title span:first-of-type { margin-bottom: 0.2em; }
+  .home-page .hero-section.wide-hero {
+      position: relative; /* Changed from grid */
+      width: 100%;
+      height: 100vh; /* Full viewport height */
+      display: flex; /* Use flex for alignment */
+      align-items: center; /* Vertically center the text card */
+      justify-content: flex-start; /* Align text card to the left */
+      padding: 0 5%; /* Add some horizontal padding */
+      overflow: hidden; /* Prevent content spill */
+      margin: 0; /* Reset default margin */
+  }
+  /* Hero Video Container & Video */
+  .home-page .hero-video-container.hero-video-larger {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Behind text */
+      border-radius: 0; /* Remove border-radius */
+      box-shadow: none; /* Remove box-shadow */
+      overflow: hidden;
+  }
+  .home-page .hero-background-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Cover the entire container */
+      border-radius: 0;
+  }
+  /* Hero Text Overlay Card */
+  .home-page .hero-text-overlay-card {
+      position: relative; /* Position relative to hero-section */
+      z-index: 2; /* Above video */
+      background: var(--header-bg); /* Translucent background */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 2.5rem 3rem; /* Padding inside the card */
+      border-radius: 12px;
+      box-shadow: 0 8px 25px var(--shadow-color-card);
+      max-width: 35%; /* Reduced width (approx 2/3 of 50%) */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-align: left; /* Ensure text inside is left-aligned */
+  }
+  .home-page .hero-text-content {
+      padding-right: 0; /* Remove previous padding */
+      text-align: left; /* Explicitly left align */
+  }
+  .home-page .hero-text-content .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.5rem); /* Adjust size */
+      line-height: 1.3;
+      margin-bottom: 2rem; /* Space before CTA */
+      text-transform: uppercase;
+      font-weight: 700;
+      text-align: left;
+      color: var(--text-color);
+      max-width: none; /* Allow text to fill card */
+  }
+  .home-page .hero-text-content .hero-title span {
+      display: inline; /* Allow text to wrap naturally */
+  }
+  .home-page .hero-text-content .hero-title br {
+      display: block; /* Keep line breaks */
+  }
   .home-page .hero-text-content .hero-title .accent-text em { font-style: italic; }
-  .home-page .hero-cta { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; }
+  .home-page .hero-cta {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      /* Button is already left-aligned by parent */
+  }
   @media (max-width: 992px) {
-       .home-page .hero-section.wide-hero { grid-template-columns: 1fr; gap: 3rem; max-width: 90%; min-height: auto; padding: 3rem 1.5rem; margin: 4rem auto; }
-       .home-page .hero-text-content { order: 1; text-align: center; padding-right: 0; }
-       .home-page .hero-video-container { order: 2; max-width: 90%; margin: 0 auto; }
-       .home-page .hero-text-content .hero-title { margin-left: auto; margin-right: auto; text-align: center; font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.3; margin-bottom: 2rem; }
-       .home-page .hero-text-content .hero-title span { display: inline; }
+       .home-page .hero-section.wide-hero {
+           padding: 0 5%; /* Keep horizontal padding */
+           align-items: center; /* Center card */
+           justify-content: center; /* Center card */
+           height: 85vh; /* Reduce height slightly */
+       }
+       .home-page .hero-text-overlay-card {
+           max-width: 55%; /* Reduced width (approx 2/3 of 80%) */
+           padding: 2rem 2.5rem;
+           text-align: center; /* Center text on smaller screens */
+       }
+       .home-page .hero-text-content {
+           text-align: center;
+       }
+       .home-page .hero-text-content .hero-title {
+           text-align: center;
+           font-size: clamp(1.8rem, 4vw, 3rem);
+           margin-bottom: 1.5rem;
+       }
        .home-page .hero-text-content .hero-title br { display: none; }
   }
+  @media (max-width: 600px) {
+       .home-page .hero-text-overlay-card {
+           max-width: 60%; /* Reduced width (2/3 of 90%) */
+           padding: 1.5rem 2rem;
+       }
+       .home-page .hero-text-content .hero-title {
+           font-size: clamp(1.6rem, 5vw, 2.5rem);
+       }
+       .home-page .hero-cta {
+           font-size: 1rem;
+           padding: 0.8rem 1.8rem;
+       }
+  }
 
+  /* Ensure first section after hero has no top margin */
+  .home-page main > section:first-of-type {
+      margin-top: 0 !important;
+  }
 
   /* Sections with Card Backgrounds */
   .home-page .process-section,
   .home-page .contact-section-steps { background: var(--card-bg); transition: background-color 0.3s ease;}
 
-  /* Services & Pricing */
-  .home-page .service-section { margin-top: 4rem; }
+  /* Services & Pricing - REDESIGNED CARD */
+  .home-page .service-section {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+  }
   .home-page .service-section .section-subtitle { margin-bottom: 2rem; }
-  .home-page .pricing-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 2rem; color: var(--text-color); font-weight: 600; }
-  .home-page .services-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto 2rem; }
+  .home-page .pricing-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 3rem; color: var(--text-color); font-weight: 600; }
+  .home-page .services-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto; }
   @media (min-width: 600px) { .home-page .services-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 992px) { .home-page .services-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } }
   @media (min-width: 1200px) { .home-page .services-grid { grid-template-columns: repeat(4, 1fr); } }
-  .home-page .service-card { background-color: var(--card-bg); padding: 2rem 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease; min-height: 300px; display: flex; flex-direction: column; justify-content: flex-start; }
-  .home-page .service-title { color: var(--text-color); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.75rem; flex-grow: 0; }
-  .home-page .service-description { flex-grow: 1; margin-bottom: 1rem; }
-  .home-page .service-price {
-      font-size: 1.1rem; font-weight: 700;
-      margin-top: auto; padding-top: 1rem;
-      opacity: 0; color: var(--accent-color);
-      text-shadow: 0 0 8px var(--glow-color);
-      transition: opacity 0.4s ease, color 0.3s ease, text-shadow 0.3s ease;
+
+  .home-page .service-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+      min-height: 300px; /* Ensure consistent height */
+      display: flex;
+      flex-direction: column;
+      position: relative; /* For absolute positioning of price */
+      overflow: hidden; /* Important for absolute positioning */
+      padding: 2rem 1.5rem 6rem 1.5rem; /* Increased bottom padding to reserve space */
   }
-  .home-page .service-card:hover { transform: translateY(-8px); border-color: var(--accent-color); box-shadow: 0 8px 20px var(--shadow-color-card); }
-  .home-page .service-card:hover .service-price { opacity: 1; }
-  .home-page .pricing-note { font-size: 0.9rem; margin-top: 1rem; color: var(--subtext-color); }
+  .home-page .service-title {
+      color: var(--text-color);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+  }
+  .home-page .service-description {
+      margin-bottom: 0; /* Remove margin-bottom as price is now absolute */
+      flex-grow: 1; /* Allow description to take available space */
+  }
+  .home-page .service-price {
+      position: absolute;
+      bottom: 2rem; /* Positioned within the bottom padding */
+      left: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.3rem; /* Matches title size */
+      font-weight: 700;
+      color: var(--accent-color);
+      text-shadow: 0 0 8px var(--glow-color);
+      opacity: 0;
+      transform: translateY(15px); /* Start slightly lower */
+      pointer-events: none; /* Prevent interaction when hidden */
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out, color 0.3s ease, text-shadow 0.3s ease;
+      will-change: opacity, transform;
+  }
+  .home-page .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-color);
+      box-shadow: 0 8px 20px var(--shadow-color-card);
+  }
+  .home-page .service-card:hover .service-price {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+  }
 
 
   /* Process */
@@ -285,24 +416,152 @@
 
   .testimonial-slider-container { width: 100%; max-width: 900px; margin: 3rem auto 0; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
   .testimonial-slider-track { display: flex; width: fit-content; animation: slide-testimonials 40s linear infinite; will-change: transform; }
-  .testimonial-slider-track:hover { animation-play-state: paused; }
+  /* .testimonial-slider-track:hover { animation-play-state: paused; } */ /* Removed pause on hover */
   .testimonial-quote { flex-shrink: 0; width: 80%; max-width: 550px; margin: 0 2rem; padding: 1.5rem; border-left: 3px solid var(--accent-color); background: var(--blockquote-bg); border-radius: 0 8px 8px 0; text-align: left; transition: background-color 0.3s ease, border-color 0.3s ease; box-sizing: border-box; }
   .testimonial-quote p { margin-bottom: 0.75em; font-style: italic; color: var(--text-color); transition: color 0.3s ease; }
   .testimonial-quote cite { display: block; margin-top: 0.5em; font-style: normal; font-weight: 600; color: var(--subtext-color); transition: color 0.3s ease; }
   @keyframes slide-testimonials { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
 
-  /* Portfolio */
-  .home-page .portfolio-section { padding: 6rem 2rem; }
-  .home-page .case-studies-container { max-width: 1200px; margin: 4rem auto 0; display: flex; flex-direction: column; gap: 8rem; }
-  .home-page .case-study-item { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
-  @media (min-width: 768px) { .home-page .case-study-item { grid-template-columns: 1fr 1fr; gap: 4rem; } .home-page .case-study-item:nth-child(even) .case-study-image { order: 2; } .home-page .case-study-item:nth-child(even) .case-study-content { order: 1; } .home-page .case-study-item .case-study-content { padding: 1rem; text-align: left; } }
-  .home-page .case-study-image { overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px var(--shadow-color-card); transition: box-shadow 0.3s ease; }
-  .home-page .case-study-image img { display: block; width: 100%; height: auto; aspect-ratio: 10/7; object-fit: cover; transition: transform 0.5s ease; }
-  .home-page .case-study-item:hover .case-study-image img { transform: scale(1.05); }
-  .home-page .case-study-item .case-study-title { text-align: left; font-size: clamp(1.5rem, 3vw, 1.8rem); margin-bottom: 0.5rem; font-weight: 600; }
-  .home-page .case-study-item .case-study-client { text-align: left; display: block; margin-bottom: 1rem; font-size: 0.9rem; }
-  .home-page .case-study-item .case-study-description { text-align: left; line-height: 1.7; margin-bottom: 1.5rem; }
-  .home-page .case-study-item .case-study-button {}
+  /* Portfolio - REDESIGNED GRID */
+  .home-page .portfolio-section { padding: 8rem 2rem; } /* Increased padding */
+  .home-page .case-studies-grid-container {
+      max-width: 1400px; /* Wider container */
+      margin: 4rem auto 0;
+      display: grid;
+      /* Responsive grid: 1 column mobile, 2 columns tablet, 3 columns desktop */
+      grid-template-columns: 1fr;
+      gap: 3rem; /* Increased gap */
+  }
+  @media (min-width: 768px) {
+      .home-page .case-studies-grid-container {
+          grid-template-columns: repeat(2, 1fr);
+      }
+  }
+  @media (min-width: 1024px) {
+       .home-page .case-studies-grid-container {
+           grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+           gap: 2.5rem;
+       }
+  }
+
+  /* Individual Case Study Card */
+  .case-study-card {
+      display: block; /* Make the anchor a block */
+      position: relative; /* For overlay and badge positioning */
+      border-radius: 12px;
+      overflow: hidden; /* Clip image zoom */
+      box-shadow: 0 8px 25px var(--shadow-color-card);
+      text-decoration: none;
+      color: var(--text-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+  }
+  .case-study-card:hover, .case-study-card:focus-within {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px var(--shadow-color-card);
+  }
+  .case-study-card:focus-visible {
+      outline: 3px solid var(--accent-color);
+      outline-offset: 4px;
+  }
+
+  /* Image Wrapper within Card */
+  .case-study-image-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+  .case-study-image-wrapper img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      /* Apply grayscale/blur initially for placeholders if needed */
+      filter: grayscale(50%) blur(0px); /* Slight grayscale start */
+  }
+  .case-study-card:hover .case-study-image-wrapper img,
+  .case-study-card:focus-within .case-study-image-wrapper img {
+      transform: scale(1.08); /* Slightly more zoom */
+      filter: grayscale(0%) blur(0px); /* Remove filter on hover/focus */
+  }
+   /* Specific filters for placeholders */
+   .case-study-card img[src*="picsum.photos/seed/cs2"] { filter: grayscale(100%); }
+   .case-study-card img[src*="picsum.photos/seed/cs3"] { filter: grayscale(100%) blur(2px); }
+   .case-study-card:hover img[src*="picsum.photos/seed/cs2"],
+   .case-study-card:focus-within img[src*="picsum.photos/seed/cs2"] { filter: grayscale(0%); }
+   .case-study-card:hover img[src*="picsum.photos/seed/cs3"],
+   .case-study-card:focus-within img[src*="picsum.photos/seed/cs3"] { filter: grayscale(0%) blur(0px); }
+
+  /* Overlay Content */
+  .case-study-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      background: var(--portfolio-overlay-bg); /* Gradient background */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Align text left */
+      text-align: left;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+  }
+  .case-study-card:hover .case-study-overlay,
+  .case-study-card:focus-within .case-study-overlay {
+      opacity: 0; /* Fade out overlay text on hover/focus */
+      pointer-events: none; /* Prevent interaction when faded */
+  }
+  .case-study-title {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem); /* Responsive title */
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: var(--text-color); /* Ensure good contrast */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Add shadow for readability */
+  }
+  .case-study-client {
+      font-size: 0.9rem;
+      color: var(--subtext-color);
+      font-weight: 400;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  }
+
+  /* Disabled Card Specifics */
+  .disabled-card {
+      cursor: default;
+      pointer-events: none; /* Disable click */
+  }
+  .disabled-card:hover, .disabled-card:focus-within {
+       transform: none; /* No hover lift */
+       box-shadow: 0 8px 25px var(--shadow-color-card); /* Keep initial shadow */
+  }
+  .disabled-card .case-study-image-wrapper img {
+       filter: grayscale(100%) blur(1px); /* Keep desaturated/blurred */
+       transform: scale(1); /* No zoom */
+  }
+   .disabled-card:hover .case-study-image-wrapper img,
+   .disabled-card:focus-within .case-study-image-wrapper img {
+       filter: grayscale(100%) blur(1px); /* Keep desaturated/blurred */
+       transform: scale(1); /* No zoom */
+   }
+   .disabled-card .case-study-overlay {
+       opacity: 1 !important; /* Keep overlay visible */
+   }
+  .coming-soon-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--accent-color);
+      color: var(--button-text-color);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 3;
+  }
 
   /* Contact (3 steps & Logos) */
   .home-page .contact-section-steps { padding: 6rem 2rem 4rem 2rem; text-align: center; }
@@ -318,9 +577,15 @@
   .client-logo-intro { margin-bottom: 2.5rem; font-size: 1rem; color: var(--subtext-color); }
   .logo-slider-container { width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
   .logo-slider-track { display: flex; width: fit-content; animation: slide-logos 45s linear infinite; will-change: transform; }
-  .logo-slider-track:hover { animation-play-state: paused; }
-  .logo-item { flex-shrink: 0; padding: 0 2.5rem; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
-  .logo-item img { max-height: 45px; width: auto; max-width: 150px; filter: grayscale(1) opacity(0.7); transition: filter 0.3s ease; }
+  /* .logo-slider-track:hover { animation-play-state: paused; } */ /* Removed pause on hover */
+  .logo-item { flex-shrink: 0; padding: 0 3rem; /* Increased padding */ display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+  .logo-item img {
+      max-height: 55px; /* Increased size */
+      width: auto;
+      max-width: 180px; /* Increased max width */
+      filter: grayscale(1) opacity(0.7);
+      transition: filter 0.3s ease;
+  }
   .logo-item:hover img { filter: grayscale(0) opacity(1); }
   body.light-mode .logo-item img { filter: grayscale(1) opacity(0.6) brightness(0.8); }
   body.light-mode .logo-item:hover img { filter: grayscale(0) opacity(1) brightness(1); }
@@ -342,27 +607,44 @@
   #google-calendar-button-wrapper { display: inline-block; line-height: 1; }
   /* Apply .cta-button styles via added class */
   button.google-cal-button-styled {
-      /* Apply .cta-button styles */
-      background-color: var(--accent-color); color: var(--button-text-color); font-weight: 700;
-      padding: 0.9rem 2.2rem !important; font-size: 1.1rem !important; border-radius: 6px !important;
-      cursor: pointer !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-      text-shadow: none !important; display: inline-block !important; text-decoration: none !important;
+      /* Match .cta-button styles */
+      background-color: var(--accent-color);
+      color: var(--button-text-color);
+      font-weight: 700;
+      padding: 0.9rem 2.2rem !important; /* Use !important carefully */
+      font-size: 1.1rem !important;
+      border-radius: 6px !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+      text-shadow: none !important;
+      display: inline-block !important;
+      text-decoration: none !important;
       border: 2px solid transparent !important;
       font-family: 'Outfit', sans-serif !important;
-      /* Override Google's specifics */
-      height: auto !important; line-height: normal !important; min-width: auto !important;
-      text-transform: none !important; letter-spacing: normal !important; vertical-align: middle;
+      /* Override Google's specifics that might interfere */
+      height: auto !important;
+      line-height: normal !important;
+      min-width: auto !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      vertical-align: middle !important; /* Ensure vertical alignment is good */
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
   }
-  button.google-cal-button-styled:hover, button.google-cal-button-styled:focus-visible {
-      background-color: transparent !important; color: var(--accent-color) !important;
-      border: 2px solid var(--accent-color) !important; transform: translateY(-3px) scale(1.03) !important;
-      box-shadow: 0 6px 20px var(--shadow-color-cta) !important; text-decoration: none !important;
-      outline: none !important;
+  button.google-cal-button-styled:hover,
+  button.google-cal-button-styled:focus-visible {
+      background-color: transparent !important;
+      color: var(--accent-color) !important;
+      border: 2px solid var(--accent-color) !important;
+      transform: translateY(-3px) scale(1.03) !important;
+      box-shadow: 0 6px 20px var(--shadow-color-cta) !important;
+      text-decoration: none !important;
+      outline: none !important; /* Remove default focus outline */
   }
   button.google-cal-button-styled:focus-visible {
-       transform: none !important; box-shadow: none !important;
-       outline: 3px solid var(--accent-color) !important; outline-offset: 2px !important;
+       /* Keep transform/shadow for hover state on focus-visible */
+       /* Use site's focus outline */
+       outline: 3px solid var(--accent-color) !important;
+       outline-offset: 2px !important;
    }
 
 
@@ -441,8 +723,15 @@
     #theme-toggle:hover, #theme-toggle:focus-visible { transform: none; }
     #back-to-top:hover, #back-to-top:focus-visible { transform: none; }
     .service-card:hover { transform: none; border-color: var(--border-color); box-shadow: none; }
-    .service-card:hover .service-price { opacity: 0; text-shadow: none; }
-    .home-page .case-study-item:hover .case-study-image img { transform: none; }
+    /* Allow price reveal on hover even with reduced motion */
+    .home-page .service-card:hover .service-price { opacity: 1; transform: translateY(0); }
+    /* Case study hover reduced motion */
+    .case-study-card:hover, .case-study-card:focus-within { transform: none; box-shadow: 0 8px 25px var(--shadow-color-card); }
+    .case-study-card:hover .case-study-image-wrapper img,
+    .case-study-card:focus-within .case-study-image-wrapper img { transform: scale(1); } /* No zoom */
+    .case-study-card:hover .case-study-overlay,
+    .case-study-card:focus-within .case-study-overlay { opacity: 1; } /* Keep overlay visible */
+
     header { transition: none !important; }
     .nav-overlay { transition: none !important; }
     .hamburger .bar { transition: none !important; }
@@ -455,9 +744,11 @@
     .case-study-page .case-study-prev-next a:hover { color: var(--accent-color); }
     body.light-mode .case-study-page .case-study-prev-next a:hover { color: var(--accent-color); }
     .testimonial-slider-track { animation: none !important; }
-    .testimonial-slider-track:hover { animation-play-state: running !important; }
+    /* .testimonial-slider-track:hover { animation-play-state: running !important; } */ /* Removed pause on hover */
     .logo-slider-track { animation: none !important; }
-    .logo-slider-track:hover { animation-play-state: running !important; }
+    /* .logo-slider-track:hover { animation-play-state: running !important; } */ /* Removed pause on hover */
+    /* Price reveal transition should still work */
+    .service-price { transition-duration: 0.01ms !important; }
   }
 
   /* ==== THANK YOU PAGE SPECIFIC ==== */
