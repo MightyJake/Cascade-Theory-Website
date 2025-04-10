@@ -171,10 +171,23 @@ function initTestimonialSlider() {
     const quotes = track.querySelectorAll('.testimonial-quote');
     if (quotes.length === 0) return;
     console.log(`[Slider] Found ${quotes.length} original testimonials. Cloning.`);
+    
+    // Clone each testimonial exactly once
     quotes.forEach(quote => {
         const clone = quote.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
         track.appendChild(clone);
+    });
+    
+    // Add transition to improve pause/resume behavior
+    track.addEventListener('mouseenter', () => {
+        track.style.animationPlayState = 'paused';
+        track.style.transition = 'all 0.5s ease';
+    });
+    
+    track.addEventListener('mouseleave', () => {
+        track.style.animationPlayState = 'running';
+        track.style.transition = 'all 0.5s ease';
     });
 }
 
@@ -207,8 +220,140 @@ function initBackToTopButton() {
     console.log("[Init] Back to Top button initialized.");
 }
 
-/* Removed initScheduleCallLink and initScheduleModal functions */
+/** Initializes Schedule Call Links (including Nav Button) */
+function initScheduleCallLink() {
+    // Target both regular schedule links and the nav button
+    const scheduleLinks = document.querySelectorAll('.schedule-call-link, .schedule-call-nav-link');
+    if (scheduleLinks.length === 0) { console.warn("[Init] No schedule call links found."); return; }
+    
+    const modal = document.getElementById('schedule-modal');
+    const iframe = document.getElementById('schedule-iframe');
+    const closeBtn = document.getElementById('modal-close-btn');
+    const loading = document.querySelector('.modal-loading');
+    if (!modal || !iframe || !closeBtn) { console.error("[Init] Schedule modal elements not found."); return; }
+    
+    // Google Calendar URL
+    const calendarURL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true';
+    
+    const openModal = (e) => {
+        e.preventDefault();
+        iframe.src = calendarURL;
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        // Show loading first, hide when iframe loads
+        if (loading) loading.style.display = 'flex';
+        iframe.onload = () => {
+            if (loading) loading.style.display = 'none';
+        };
+    };
+    
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+        // Clear iframe source to prevent continued resource usage
+        setTimeout(() => { iframe.src = ''; }, 300);
+    };
+    
+    // Add click event to all schedule links
+    scheduleLinks.forEach(link => {
+        link.addEventListener('click', openModal);
+        
+        // Fix the visited state color issue for nav button
+        if (link.classList.contains('schedule-call-nav-link')) {
+            link.addEventListener('click', () => {
+                // Reset the styling to maintain consistent appearance after closing modal
+                // This addresses the issue where text color would stay blue after clicking
+                requestAnimationFrame(() => {
+                    link.style.setProperty('color', '');
+                });
+            });
+        }
+    });
+    
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Close when clicking outside content
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    // Close on escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    console.log("[Init] Schedule Call Links initialized.");
+}
 
+
+/** Initializes Read More functionality for mobile view */
+function initReadMoreButtons() {
+    const readMoreButtons = document.querySelectorAll('.read-more-button');
+    if (!readMoreButtons.length) return;
+    
+    readMoreButtons.forEach(button => {
+        const content = button.previousElementSibling;
+        if (!content || !content.classList.contains('read-more-content')) return;
+        
+        let isExpanded = false;
+        
+        button.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            content.classList.toggle('expanded', isExpanded);
+            button.textContent = isExpanded ? 'Read Less' : 'Read More';
+        });
+    });
+    
+    console.log("[Init] Read More buttons initialized.");
+}
+
+/** Initializes Mobile Contact Steps Slider */
+function initMobileContactSteps() {
+    if (!body.classList.contains('home-page')) return;
+    
+    const contactStepsContainer = document.querySelector('.contact-steps-grid');
+    if (!contactStepsContainer) return;
+    
+    // Only apply for mobile
+    const handleResize = () => {
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+            // Apply mobile styling
+            contactStepsContainer.style.display = 'flex';
+            contactStepsContainer.style.overflowX = 'auto';
+            contactStepsContainer.style.scrollSnapType = 'x mandatory';
+            
+            const steps = contactStepsContainer.querySelectorAll('.contact-step');
+            steps.forEach(step => {
+                step.style.flex = '0 0 85%';
+                step.style.scrollSnapAlign = 'center';
+                step.style.marginRight = '1rem';
+            });
+        } else {
+            // Reset to default grid styling
+            contactStepsContainer.style.display = '';
+            contactStepsContainer.style.overflowX = '';
+            contactStepsContainer.style.scrollSnapType = '';
+            
+            const steps = contactStepsContainer.querySelectorAll('.contact-step');
+            steps.forEach(step => {
+                step.style.flex = '';
+                step.style.scrollSnapAlign = '';
+                step.style.marginRight = '';
+            });
+        }
+    };
+    
+    // Initial setup
+    handleResize();
+    
+    // Update on resize
+    window.addEventListener('resize', handleResize);
+    
+    console.log("[Init] Mobile Contact Steps initialized.");
+}
 
 /** Main initialization function, runs after DOM is loaded. */
 document.addEventListener('DOMContentLoaded', () => {
@@ -228,8 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu(); // Make sure this runs
     initScrollAnimations();
     initBackToTopButton();
-    /* Removed calls to schedule link/modal functions */
-
+    initScheduleCallLink(); // Re-enabled schedule modal functionality
+    initReadMoreButtons(); // Initialize read more functionality
+    initMobileContactSteps(); // Initialize mobile contact steps
 
     console.log("[Init] All initializations complete.");
 });

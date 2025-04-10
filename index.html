@@ -35,10 +35,9 @@
         <a href="#portfolio">Case Studies</a>
         <a href="#about">About</a>
       </div>
-      <!-- UPDATED: Link directly, opens new tab -->
-      <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
-         target="_blank" rel="noopener noreferrer"
-         class="schedule-call-nav-link">Schedule a Call</a>
+      <!-- Changed to schedule-call-link class to use the modal instead of direct link -->
+      <a href="#schedule" 
+         class="schedule-call-nav-link schedule-call-link">Schedule a Call</a>
     </nav>
   </header>
 
@@ -60,10 +59,9 @@
       <a href="#pricing">Packages & Pricing</a>
       <a href="#portfolio">Case Studies</a>
       <a href="#about">About</a>
-      <!-- Mobile link already correct -->
-      <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
-         target="_blank" rel="noopener noreferrer"
-         class="mobile-nav-cta">Schedule a Call</a>
+      <!-- Updated mobile link to use the modal -->
+      <a href="#schedule" 
+         class="mobile-nav-cta schedule-call-link">Schedule a Call</a>
     </nav>
   </div>
 
@@ -84,7 +82,7 @@
         <div class="hero-text-overlay-card animate-on-scroll">
             <div class="hero-text-content">
                 <h1 id="hero-heading" class="hero-title">
-                    Creative Solutions That <span class="accent-text">Convert</span>.<br/>
+                    Creative Solutions That <span class="accent-text">Convert</span>.
                     For Brands That Want to <span class="accent-text"><em>Make Waves.</em></span>
                 </h1>
                 <a href="#contact" class="cta-button hero-cta">Start Your Cascade</a>
@@ -161,7 +159,10 @@
           <div class="about-content-wrapper">
             <div class="about-text">
               <h2 id="about-heading" class="section-title accent-title">Beyond Aesthetics: Creative With Purpose</h2>
-              <p class="about-description">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is currently my solo venture, serving clients nationwide. I'm not just a designer; I'm a strategic partner focused on how great creative drives business forward. I believe true impact starts with a single, powerful idea allowed to flow, adapt, and amplify.</p>
+              <div class="read-more-content">
+                <p class="about-description">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is currently my solo venture, serving clients nationwide. I'm not just a designer; I'm a strategic partner focused on how great creative drives business forward. I believe true impact starts with a single, powerful idea allowed to flow, adapt, and amplify.</p>
+              </div>
+              <button class="read-more-button">Read More</button>
               <div class="manifesto">
                   <h4 class="manifesto-title">My Guiding Principle:</h4>
                   <p>"Like water shaping landscapes, brilliant ideas, intentionally directed, carve pathways to profound results. I help channel that flow for your brand."</p>
@@ -265,7 +266,7 @@
     <!-- CONTACT SECTION (3 Steps & Logos) -->
     <section id="contact" class="content-section contact-section-steps" aria-labelledby="contact-steps-heading">
         <h2 id="contact-steps-heading" class="section-title animate-on-scroll">Ready to Start Your Cascade?</h2>
-        <p class="section-subtitle centered-text animate-on-scroll">Let's transform your marketing. Here’s how simple it is to begin – I'll guide you every step.</p>
+        <p class="section-subtitle centered-text animate-on-scroll">Let's transform your marketing. Here's how simple it is to begin – I'll guide you every step.</p>
 
         <div class="contact-steps-grid">
              <div class="contact-steps-line" aria-hidden="true"></div>
@@ -327,7 +328,7 @@
                  calendar.schedulingButton.load({
                    url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true',
                    color: '#2ababf',
-                   label: 'Schedule Free 30-minute Call',
+                   label: 'Schedule a Call',
                    target: targetWrapper,
                  });
                  // Use MutationObserver to reliably add class after Google script loads
@@ -380,7 +381,14 @@
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="24" height="24"> <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /> </svg>
   </button>
 
-  <!-- REMOVED Schedule Modal Div -->
+  <!-- Schedule Modal -->
+  <div id="schedule-modal" class="schedule-modal-overlay">
+      <div class="schedule-modal-content">
+          <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">×</button>
+          <iframe id="schedule-iframe" src="" frameborder="0" allowfullscreen></iframe>
+          <div class="modal-loading">Loading Scheduler...</div>
+      </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
