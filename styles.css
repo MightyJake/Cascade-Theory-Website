@@ -330,7 +330,7 @@
   }
 
   /* Sections with Card Backgrounds */
-  .home-page .process-section,
+  /* .home-page .process-section, */ /* Removed process section bg globally */
   .home-page .contact-section-steps { background: var(--card-bg); transition: background-color 0.3s ease;}
 
   /* Services & Pricing - REDESIGNED CARD */
@@ -462,118 +462,261 @@
       color: var(--text-color); 
   }
   
-  /* Mobile Process Sliding Container */
+  /* Mobile Process Sticky Horizontal Scroll */
   @media (max-width: 767px) {
       .home-page .process-section {
-          overflow: hidden; /* Contain the sliding elements */
+          /* Height set by JS */
+          position: relative;
+          overflow: visible; /* Keep visible */
+          margin-bottom: 5rem;
+          background: transparent !important; /* Keep transparent */
+          padding-top: 0; /* Remove padding, handled by sticky wrapper */
+          padding-bottom: 0; /* Remove padding, handled by sticky wrapper */
+      }
+      /* New styles for the sticky wrapper */
+      .home-page .sticky-scroll-content {
+          position: sticky;
+          top: 80px; /* Adjust based on header height */
+          left: 0;
+          width: 100%;
+          z-index: 5; /* Further increase z-index */
+          background-color: var(--card-bg); /* Re-affirm solid background */
+          padding: 4rem 0 2rem 0; /* Keep vertical padding */
+          /* Add border-radius if desired */
+          /* border-radius: 12px; */
+          /* Add shadow if desired */
+          /* box-shadow: 0 4px 12px var(--shadow-color-card); */
+      }
+      .home-page .sticky-scroll-content .section-title,
+      .home-page .sticky-scroll-content .section-subtitle {
+          padding-left: 1rem;
+          padding-right: 1rem;
       }
       .home-page .process-steps-container {
-          display: flex;
           width: 100%;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
+          display: flex;
+          overflow-x: hidden !important; /* Force hide scrollbar */
           gap: 1rem;
-          padding: 0 1rem 2rem 1rem;
-          scrollbar-width: none; /* Hide scrollbar in Firefox */
-          -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
-          margin: 3rem auto 2rem;
+          padding: 2rem 1rem; /* Keep padding */
+          margin: 0;
+          z-index: auto; /* Keep auto */
+          /* Re-apply scrollbar hiding styles */
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE/Edge */
       }
       .home-page .process-steps-container::-webkit-scrollbar {
-          display: none; /* Hide scrollbar in Chrome/Safari */
+          display: none; /* Chrome/Safari/Opera */
       }
+
       .home-page .process-step {
-          flex: 0 0 85%; /* Width of each step */
-          scroll-snap-align: center; /* Snap to center */
+          flex: 0 0 85%; /* Keep width */
+          /* Remove scroll-snap-align */
           background-color: var(--blockquote-bg);
           border-radius: 12px;
           padding: 40px 1.5rem 1.5rem;
-          margin-right: 1rem;
+          margin-right: 1rem; /* Keep margin for spacing */
           border-left: 3px solid var(--accent-color);
           box-shadow: 0 4px 12px var(--shadow-color-card);
+          /* Ensure steps don't shrink */
+          min-height: 200px; /* Example min-height */
       }
-      /* Add scroll indicators */
+      /* Remove scroll indicators */
       .home-page .process-section::after {
-          content: "← Swipe →";
-          display: block;
-          text-align: center;
-          padding: 0.5rem;
-          font-size: 0.9rem;
-          color: var(--subtext-color);
-          margin-top: -1rem;
+          display: none;
+      }
+      /* Hide the desktop line on mobile */
+      .home-page .process-line {
+          display: none;
       }
   }
 
-  /* About Section Card Styling */
+  /* About Section Card Styling - UPDATED */
   .home-page .about-section { background: transparent; }
-  .home-page .about-card-container { 
-      background-color: var(--card-bg); 
-      padding: 3rem; 
-      border-radius: 12px; 
-      border: 1px solid var(--border-color); 
-      max-width: 1000px; 
-      margin: 0 auto; 
-      transition: background-color 0.3s ease, border-color 0.3s ease; 
+
+  /* New Layout Container */
+  .home-page .about-section-layout {
+      display: grid;
+      grid-template-columns: 1fr; /* Stack by default */
+      gap: 2rem;
+      max-width: 1200px; /* Control overall width */
+      margin: 0 auto;
+      align-items: stretch; /* Make items same height */
   }
-  .home-page .about-content-wrapper { 
-      display: grid; 
-      grid-template-columns: 1fr; 
-      gap: 2rem; 
-      align-items: center; 
-      margin: 0; 
-      max-width: none; 
-  }
-  .home-page .about-section .section-title { 
-      text-align: center; 
-      margin-bottom: 2rem; 
-  }
-  .home-page .about-image { 
-      position: relative; 
-      width: 100%; 
-      border-radius: 8px; 
-      overflow: hidden; 
-      box-shadow: 0 6px 15px var(--shadow-color-card); 
-      transition: box-shadow 0.3s ease; 
-  }
-  .home-page .about-image img { 
-      display: block; 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      border-radius: inherit; 
-  }
-  .home-page .manifesto { 
-      background-color: var(--blockquote-bg); 
-      padding: 1.5rem; 
-      border-radius: 8px; 
-      border-left: 3px solid var(--accent-color); 
-      margin-top: 2rem; 
-      transition: background-color 0.3s ease, border-color 0.3s ease; 
-  }
-  .home-page .manifesto-title { 
-      color: var(--text-color); 
-      margin-bottom: 0.5rem; 
-      font-size: 1.1rem; 
-      font-weight: 600; 
-  }
-  
-  /* Desktop View */
-  @media (min-width: 768px) { 
-      .home-page .about-content-wrapper { 
-          grid-template-columns: 3fr 2fr; 
-          gap: 3rem; 
-      } 
-      .home-page .about-text { 
-          text-align: left; 
-      } 
-  }
-  
-  /* Mobile View Improvements */
-  @media (max-width: 767px) { 
-      .home-page .about-card-container {
-          padding: 2rem 1.5rem;
+  @media (min-width: 992px) {
+      .home-page .about-section-layout {
+          grid-template-columns: 2fr 1fr; /* Card takes 2/3, image 1/3 */
+          gap: 3rem;
       }
-      .home-page .about-image { 
-          display: none; 
+  }
+
+  /* Styling for the main card container within the new layout */
+  .home-page .about-card-container {
+      background-color: var(--card-bg);
+      padding: 3rem; /* Keep padding */
+      border-radius: 12px; /* Keep border-radius */
+      border: 1px solid var(--border-color); /* Keep border */
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      /* Remove max-width, margin, position, overflow - handled by layout container */
+      grid-column: 1 / 2; /* Position in the first column on desktop */
+      grid-row: 1 / 2;
+  }
+
+  /* Title styling - now inside the card container */
+   .home-page .about-card-container .section-title {
+       text-align: left;
+       margin-bottom: 1.5rem;
+       padding: 0; /* No extra padding needed */
+   }
+
+  /* Wrapper for text card (if needed, or apply styles directly) */
+  .home-page .about-content-wrapper {
+      /* This might not need specific styles anymore if text card is only child */
+      margin: 0;
+      max-width: none;
+  }
+
+  /* Styling for the inner text card */
+  .home-page .about-text-card {
+      background-color: transparent; /* Make transparent, parent has bg */
+      padding: 0; /* Remove padding, parent has padding */
+      border-radius: 0; /* Remove border-radius */
+      /* border-left removed */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      height: 100%;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Styling for the image (now a direct child of layout container) */
+  .home-page .about-image {
+      position: relative;
+      width: 100%;
+      height: 100%; /* Stretch to grid row height */
+      border-radius: 12px; /* Match card radius */
+      overflow: hidden;
+      box-shadow: 0 6px 15px var(--shadow-color-card);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      aspect-ratio: auto;
+      grid-column: 1 / 2; /* Stack on mobile */
+      grid-row: 2 / 3; /* Below card on mobile */
+  }
+   @media (min-width: 992px) {
+       .home-page .about-image {
+           grid-column: 2 / 3; /* Position in second column on desktop */
+           grid-row: 1 / 2; /* Align with card row */
+       }
+   }
+  .home-page .about-image img {
+      display: block;
+      width: 100%;
+      height: 100%; /* Make image fill container height */
+      object-fit: cover;
+      border-radius: inherit;
+  }
+  .home-page .manifesto {
+      background-color: var(--blockquote-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-color); /* Keep border on manifesto */
+      margin-top: 2rem;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      text-align: left; /* Ensure manifesto text is left-aligned */
+  }
+  .home-page .manifesto-title {
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+  }
+
+  /* Removed #testimonial-slider-about styles */
+
+  /* Desktop View - About Section */
+  @media (min-width: 992px) { /* Changed breakpoint to 992px */
+      .home-page .about-card-container {
+          padding: 3rem; /* Reset padding */
+      }
+      .home-page .about-content-wrapper {
+      /* Styles for grid layout within card container removed as image is outside */
+  }
+  /* Adjustments for the card container within the new layout */
+  .home-page .about-card-container {
+      /* No grid positioning needed here, handled by parent layout */
+  }
+  /* Adjustments for the text card within the card container */
+  .home-page .about-text-card {
+      /* No grid positioning needed */
+      text-align: left;
+  }
+  /* Adjustments for the image within the new layout */
+  .home-page .about-image {
+      /* Grid positioning handled by .about-section-layout media query */
+      position: relative;
+      right: auto;
+      top: auto;
+      width: 100%;
+      height: 100%;
+      z-index: auto;
+      aspect-ratio: auto;
+  }
+  .home-page .about-image:hover {
+          transform: scale(1.03); /* Keep hover effect */
+      }
+  }
+
+  /* Tablet View - Adjustments */
+   /* Tablet View - Adjustments for new layout */
+   @media (min-width: 768px) and (max-width: 991px) {
+       .home-page .about-section-layout {
+           grid-template-columns: 1fr; /* Stack on tablet */
+       }
+       .home-page .about-image {
+           margin-top: 0; /* Reset margin */
+           width: 100%; /* Full width */
+           max-width: 500px; /* Optional max width */
+           margin-left: auto;
+           margin-right: auto;
+           grid-row: 2 / 3; /* Ensure image is below card */
+           height: auto; /* Allow height to adjust */
+           aspect-ratio: 16/9; /* Give it an aspect ratio */
+       }
+       /* Remove testimonial slider styles if they were here */
+   }
+
+  /* Mobile View Improvements - About Section */
+  @media (max-width: 767px) {
+       .home-page .about-section-layout {
+           gap: 1.5rem; /* Reduce gap */
+       }
+       .home-page .about-card-container .section-title {
+           text-align: center; /* Center title on mobile */
+       }
+       .home-page .about-card-container {
+           padding: 2rem 1.5rem; /* Adjust padding */
+       }
+       .home-page .about-image {
+           /* Keep stacked layout from default */
+           height: auto; /* Allow height to adjust */
+           aspect-ratio: 16/9; /* Give it an aspect ratio */
+       }
+       /* Remove testimonial slider styles if they were here */
+       #testimonial-slider-about {
+           /* Remove if not used */
+      }
+      #testimonial-slider-about .testimonial-slider-track {
+          animation: none; /* Disable animation on mobile */
+          display: block; /* Stack quotes vertically */
+          width: 100%;
+      }
+      #testimonial-slider-about .testimonial-quote {
+          width: 100%;
+          max-width: 100%;
+          margin: 0 0 1rem 0; /* Adjust margin */
+      }
+      #testimonial-slider-about .testimonial-quote[aria-hidden="true"] {
+          display: none; /* Hide cloned quotes */
       }
       .home-page .about-description {
           font-size: 0.95rem;
@@ -590,15 +733,15 @@
       .home-page .manifesto-title {
           font-size: 1rem;
       }
-      /* Create expandable text with "read more" functionality */
+      /* Read More Functionality */
       .home-page .read-more-content {
-          max-height: 150px;
+          max-height: 150px; /* Initial collapsed height */
           overflow: hidden;
           position: relative;
-          transition: max-height 0.3s ease;
+          transition: max-height 0.4s ease-in-out;
       }
       .home-page .read-more-content.expanded {
-          max-height: 1000px;
+          max-height: 1000px; /* Large enough height when expanded */
       }
       .home-page .read-more-content::after {
           content: "";
@@ -610,18 +753,22 @@
           background: linear-gradient(to bottom, transparent, var(--card-bg));
           pointer-events: none;
           transition: opacity 0.3s ease;
+          opacity: 1; /* Ensure visible when collapsed */
       }
       .home-page .read-more-content.expanded::after {
-          opacity: 0;
+          opacity: 0; /* Hide gradient when expanded */
       }
       .home-page .read-more-button {
-          display: inline-block;
+          display: inline-block; /* Default display */
           margin-top: 0.5rem;
           color: var(--accent-color);
           font-weight: 600;
           font-size: 0.9rem;
           cursor: pointer;
-          transition: color 0.3s ease;
+          transition: color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .home-page .read-more-button.hidden {
+          display: none; /* Hide button if JS determines it's not needed */
       }
       .home-page .read-more-button:hover {
           text-decoration: underline;
@@ -629,9 +776,9 @@
   }
 
 
-  /* Stats & Testimonial Slider */
+  /* Stats & Testimonial Slider (Original - Keep for #stats section) */
   .home-page .stats-section { padding: 6rem 2rem; text-align: center; background: transparent; }
-  .home-page .stats-container { 
+  .home-page .stats-container {
       display: flex; 
       justify-content: center; 
       flex-wrap: wrap; 

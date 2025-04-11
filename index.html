@@ -122,10 +122,12 @@
 
     <!-- OUR PROCESS SECTION -->
     <section id="process" class="content-section process-section" aria-labelledby="process-heading">
+      <!-- New wrapper for sticky content on mobile -->
+      <div class="sticky-scroll-content">
         <h2 id="process-heading" class="section-title animate-on-scroll">The Cascade Framework™</h2>
         <p class="section-subtitle centered-text animate-on-scroll">My proven methodology ensures strategic alignment and creative momentum, flowing seamlessly from discovery to amplification.</p>
         <div class="process-steps-container">
-             <div class="process-line" aria-hidden="true"></div>
+             <div class="process-line" aria-hidden="true"></div> <!-- This line might need adjustment or removal for mobile sticky -->
             <div class="process-step animate-on-scroll">
               <span class="step-number" aria-hidden="true">01</span>
               <h3 class="step-title">The Source: Discovery & Strategy</h3>
@@ -147,7 +149,10 @@
               <p class="step-description">Post-launch, performance is analyzed, growth opportunities identified, and strategies adapted for ongoing momentum.</p>
             </div>
         </div>
-         <div class="process-cta-container animate-on-scroll" style="--delay: 0.4s;">
+      </div> <!-- End of sticky-scroll-content -->
+
+      <!-- CTA remains outside the sticky wrapper -->
+      <div class="process-cta-container animate-on-scroll" style="--delay: 0.4s;">
           <p class="process-cta-text">See how this framework drives tangible results.</p>
           <a href="#portfolio" class="cta-button process-cta-button">View Case Studies</a>
       </div>
@@ -155,23 +160,27 @@
 
     <!-- ABOUT SECTION -->
     <section id="about" class="content-section about-section" aria-labelledby="about-heading">
-      <div class="about-card-container animate-on-scroll">
-          <div class="about-content-wrapper">
-            <div class="about-text">
-              <h2 id="about-heading" class="section-title accent-title">Beyond Aesthetics: Creative With Purpose</h2>
-              <div class="read-more-content">
+      <!-- New wrapper for card + image layout -->
+      <div class="about-section-layout animate-on-scroll">
+        <!-- Main card container -->
+        <div class="about-card-container">
+            <h2 id="about-heading" class="section-title accent-title">Beyond Aesthetics: Creative With Purpose</h2>
+            <div class="about-content-wrapper">
+              <!-- Text content card (remains inside) -->
+              <div class="about-text-card">
                 <p class="about-description">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is currently my solo venture, serving clients nationwide. I'm not just a designer; I'm a strategic partner focused on how great creative drives business forward. I believe true impact starts with a single, powerful idea allowed to flow, adapt, and amplify.</p>
+                <div class="manifesto">
+                    <h4 class="manifesto-title">My Guiding Principle:</h4>
+                    <p>"Like water shaping landscapes, brilliant ideas, intentionally directed, carve pathways to profound results. I help channel that flow for your brand."</p>
+                </div>
               </div>
-              <button class="read-more-button">Read More</button>
-              <div class="manifesto">
-                  <h4 class="manifesto-title">My Guiding Principle:</h4>
-                  <p>"Like water shaping landscapes, brilliant ideas, intentionally directed, carve pathways to profound results. I help channel that flow for your brand."</p>
-              </div>
+              <!-- Image div is now moved outside this wrapper -->
             </div>
-            <div class="about-image">
-              <img src="https://images.pexels.com/photos/3724038/pexels-photo-3724038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Scenic view of the Deschutes River flowing through Bend, Oregon with mountains in the background." loading="lazy">
-            </div>
-          </div>
+        </div>
+        <!-- Image moved outside the card container, now a sibling -->
+        <div class="about-image">
+          <img src="https://images.pexels.com/photos/3724038/pexels-photo-3724038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Scenic view of the Deschutes River flowing through Bend, Oregon with mountains in the background." loading="lazy">
+        </div>
       </div>
     </section>
 

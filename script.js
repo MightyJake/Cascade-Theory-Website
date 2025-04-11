@@ -292,21 +292,59 @@ function initScheduleCallLink() {
 function initReadMoreButtons() {
     const readMoreButtons = document.querySelectorAll('.read-more-button');
     if (!readMoreButtons.length) return;
-    
+
     readMoreButtons.forEach(button => {
         const content = button.previousElementSibling;
         if (!content || !content.classList.contains('read-more-content')) return;
-        
+
         let isExpanded = false;
-        
+
+        // Function to check overflow and hide button if needed
+        const checkOverflow = () => {
+            // Check only on mobile viewports (consistent with CSS media query)
+            if (window.innerWidth < 768) {
+                // Temporarily remove 'expanded' to measure collapsed height accurately
+                const wasExpanded = content.classList.contains('expanded');
+                if (wasExpanded) content.classList.remove('expanded');
+
+                // Check if content overflows its container
+                const overflows = content.scrollHeight > content.clientHeight;
+
+                // Add/remove 'hidden' class based on overflow
+                button.classList.toggle('hidden', !overflows);
+
+                // Restore 'expanded' state if it was removed
+                if (wasExpanded) content.classList.add('expanded');
+
+                console.log(`[Read More] Button for content checked. Overflows: ${overflows}. Button hidden: ${!overflows}`);
+            } else {
+                // Ensure button is visible on larger screens if it was hidden
+                button.classList.remove('hidden');
+            }
+        };
+
+        // Initial check on load
+        checkOverflow();
+
+        // Re-check on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(checkOverflow, 150); // Debounce resize check
+        });
+
+        // Click event listener
         button.addEventListener('click', () => {
-            isExpanded = !isExpanded;
-            content.classList.toggle('expanded', isExpanded);
-            button.textContent = isExpanded ? 'Read Less' : 'Read More';
+            // Only toggle if the button isn't hidden
+            if (!button.classList.contains('hidden')) {
+                isExpanded = !isExpanded;
+                content.classList.toggle('expanded', isExpanded);
+                button.textContent = isExpanded ? 'Read Less' : 'Read More';
+            }
         });
     });
-    
-    console.log("[Init] Read More buttons initialized.");
+
+    console.log("[Init] Read More buttons initialized with overflow check.");
 }
 
 /** Initializes Mobile Contact Steps Slider */
@@ -355,6 +393,119 @@ function initMobileContactSteps() {
     console.log("[Init] Mobile Contact Steps initialized.");
 }
 
+/** Initializes Sticky Horizontal Scroll for Process Section on Mobile */
+function initStickyHorizontalScroll() {
+    const section = document.querySelector('.home-page .process-section');
+    const container = section?.querySelector('.process-steps-container');
+
+    if (!section || !container) {
+        console.warn('[StickyScroll] Process section or container not found.');
+        return;
+    }
+
+    let sectionHeight = 0;
+    let maxScrollLeft = 0;
+    let sectionOffsetTop = 0;
+    let isMobileSetup = false; // Flag to track if mobile setup is active
+
+    function calculateDimensions() {
+        // Check if we should be in mobile mode
+        const shouldBeMobile = window.innerWidth < 768;
+
+        if (!shouldBeMobile) {
+            // If not mobile, reset styles and flag
+            if (isMobileSetup) {
+                section.style.height = '';
+                container.style.overflowX = 'auto'; // Restore default overflow if needed
+                console.log('[StickyScroll] Resetting styles for desktop view.');
+                isMobileSetup = false;
+            }
+            return false; // Indicate not mobile
+        }
+
+        // --- Mobile Setup ---
+        container.style.overflowX = 'hidden'; // Ensure JS controls scroll
+
+        // Calculate required dimensions for mobile effect
+        // Ensure container has rendered its children to get correct scrollWidth
+        requestAnimationFrame(() => {
+            maxScrollLeft = container.scrollWidth - container.clientWidth;
+            // Height = 1 viewport height (to scroll into view) + horizontal scroll distance
+            sectionHeight = window.innerHeight + maxScrollLeft;
+            section.style.height = `${sectionHeight}px`;
+            // Get offsetTop *after* potentially changing height
+            sectionOffsetTop = section.offsetTop;
+            isMobileSetup = true; // Set flag
+
+            console.log(`[StickyScroll] Calculated - MaxScroll: ${maxScrollLeft}, SectionHeight: ${sectionHeight}, OffsetTop: ${sectionOffsetTop}`);
+        });
+
+        return true; // Indicate is mobile
+    }
+
+    function handleScroll() {
+        if (!isMobileSetup) return; // Only run if mobile setup is active
+
+        const scrollY = window.scrollY;
+        const stickyStart = sectionOffsetTop;
+        // End point for the sticky effect calculation (start of section + its scrollable height)
+        const stickyEnd = stickyStart + maxScrollLeft; // Use maxScrollLeft as the scroll distance
+
+        // Check if we are within the vertical scroll range for the sticky effect
+        if (scrollY >= stickyStart && scrollY <= stickyEnd) {
+            // Calculate progress within the sticky scroll range (0 to 1)
+            // Ensure maxScrollLeft is not zero to avoid division by zero
+            const progress = maxScrollLeft > 0 ? (scrollY - stickyStart) / maxScrollLeft : 0;
+            // Calculate the target horizontal scroll position
+            const targetScrollLeft = progress * maxScrollLeft;
+
+            // Apply the scrollLeft directly
+            container.scrollLeft = targetScrollLeft;
+
+        } else if (scrollY < stickyStart) {
+            // Before sticky section - ensure it's scrolled to the start
+            if (container.scrollLeft !== 0) {
+                container.scrollLeft = 0;
+            }
+        } else {
+            // After sticky section - ensure it's scrolled to the end
+             if (container.scrollLeft !== maxScrollLeft) {
+                container.scrollLeft = maxScrollLeft;
+            }
+        }
+    }
+
+    // Initial calculation and listener setup
+    let scrollListenerAttached = false;
+    function setup() {
+        if (calculateDimensions()) {
+            if (!scrollListenerAttached) {
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                scrollListenerAttached = true;
+                console.log('[StickyScroll] Scroll listener added.');
+            }
+        } else {
+            if (scrollListenerAttached) {
+                window.removeEventListener('scroll', handleScroll);
+                scrollListenerAttached = false;
+                console.log('[StickyScroll] Scroll listener removed.');
+            }
+        }
+    }
+
+    setup(); // Run initial setup
+
+    // Recalculate on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(setup, 150); // Debounced setup call
+    });
+
+    console.log('[Init] Sticky Horizontal Scroll initialized.');
+}
+
+
 /** Main initialization function, runs after DOM is loaded. */
 document.addEventListener('DOMContentLoaded', () => {
     console.log("[Init] DOMContentLoaded event fired.");
@@ -370,12 +521,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if(canvas && body.classList.contains('home-page')) { initAdvancedGradient(); }
     else { if (canvas) canvas.style.display = 'none'; }
     initStickyNav();
-    initMobileMenu(); // Make sure this runs
+    initMobileMenu();
     initScrollAnimations();
     initBackToTopButton();
-    initScheduleCallLink(); // Re-enabled schedule modal functionality
-    initReadMoreButtons(); // Initialize read more functionality
-    initMobileContactSteps(); // Initialize mobile contact steps
+    initScheduleCallLink();
+    initReadMoreButtons();
+    initMobileContactSteps();
+    initStickyHorizontalScroll(); // Initialize the new sticky scroll feature
 
     console.log("[Init] All initializations complete.");
 });
