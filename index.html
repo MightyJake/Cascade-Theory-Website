@@ -322,50 +322,9 @@
         </div>
         <!-- End Client Logo Section -->
 
-        <!-- Google Calendar Embed -->
+        <!-- Schedule Call Button (Matches Nav) -->
         <div class="contact-cta-button-container animate-on-scroll" style="--delay: 0.5s;">
-             <div id="google-calendar-button-wrapper" class="cta-button-wrapper">
-                 <!-- Google button content generated here -->
-             </div>
-             <!-- Google Calendar Appointment Scheduling script -->
-             <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-             <script>
-             (function() {
-               var targetWrapper = document.getElementById('google-calendar-button-wrapper');
-               if (!targetWrapper) { console.error("Google Calendar wrapper div not found."); return; }
-               window.addEventListener('load', function() {
-                 calendar.schedulingButton.load({
-                   url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true',
-                   color: '#2ababf',
-                   label: 'Schedule a Call',
-                   target: targetWrapper,
-                 });
-                 // Use MutationObserver to reliably add class after Google script loads
-                 const observer = new MutationObserver(mutations => {
-                     mutations.forEach(mutation => {
-                         if (mutation.addedNodes.length) {
-                             const googleButton = targetWrapper.querySelector('button');
-                             if (googleButton && !googleButton.classList.contains('google-cal-button-styled')) {
-                                 googleButton.classList.add('google-cal-button-styled');
-                                 console.log("Applied style class to Google Calendar button via MutationObserver.");
-                                 observer.disconnect();
-                             }
-                         }
-                     });
-                 });
-                 observer.observe(targetWrapper, { childList: true });
-                 // Fallback just in case
-                 setTimeout(() => {
-                     const googleButton = targetWrapper.querySelector('button');
-                     if (googleButton && !googleButton.classList.contains('google-cal-button-styled')) {
-                         googleButton.classList.add('google-cal-button-styled');
-                         console.warn("Applied style class to Google Calendar button via setTimeout fallback.");
-                         observer.disconnect();
-                     }
-                 }, 1500);
-               });
-             })();
-             </script>
+            <a href="#schedule" class="schedule-call-nav-link schedule-call-link">Schedule a Call</a>
         </div>
 
         <div class="contact-alternate-home animate-on-scroll" style="--delay: 0.6s;">
