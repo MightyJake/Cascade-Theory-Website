@@ -158,13 +158,20 @@
 
   main { display: block; position: relative; z-index: 1; color: var(--text-color); transition: color 0.3s ease; }
   main > * { color: inherit; }
-  .logo { display: flex; align-items: center; flex-shrink: 0; margin-right: 24px; }
-  .logo-svg { margin-right: 12px; height: 40px; width: auto; transition: color 0.3s ease; color: var(--text-color); }
+  .logo { display: flex; align-items: center; flex-shrink: 0; margin-right: 40px; /* Increased margin */ }
   .logo-link { color: var(--text-color); text-decoration: none; display: flex; align-items: center; transition: color 0.3s ease; }
   .logo-link:hover { text-decoration: none; }
-  .logo-text { font-size: 1.5rem; font-weight: 600; color: inherit; transition: color 0.3s ease; }
-  .logo-link:hover .logo-text, .logo-link:focus .logo-text { color: var(--accent-color); }
-   .logo-link:hover .logo-svg { color: var(--accent-color); }
+  .logo-img { /* Updated rule for the image logo */
+      display: block;
+      height: 50px; /* Increased height */
+      width: auto;
+      filter: invert(1) brightness(2); /* Default to white for dark mode */
+      transition: filter 0.3s ease;
+  }
+  body.light-mode .logo-img {
+      filter: none; /* Revert to original (assuming black) for light mode */
+  }
+  /* Removed .logo-svg, .logo-text, and their hover rules */
 
   /* Desktop Nav Layout */
   .desktop-nav { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; }
@@ -208,7 +215,16 @@
   .nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay-bg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; transform: scale(0); transform-origin: top right; transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease; z-index: 1000; /* Below hamburger */ backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-top: 6rem; }
   .nav-overlay.active { transform: scale(1); }
   .mobile-nav-header { position: absolute; top: 1.5rem; left: 2rem; z-index: 1001;}
-  .mobile-logo-link .logo-svg { height: 32px; }
+  .mobile-nav-header .logo-img { /* Style mobile logo */
+      height: 40px; /* Increased height */
+      width: auto;
+      filter: invert(1) brightness(2); /* Default to white for dark mode */
+      transition: filter 0.3s ease;
+  }
+  body.light-mode .mobile-nav-header .logo-img {
+      filter: none; /* Revert to original (assuming black) for light mode */
+  }
+  /* Removed .mobile-logo-link .logo-svg rule */
   .mobile-nav { display: flex; flex-direction: column; align-items: center; margin-top: 2rem; }
   .mobile-nav a { margin: 1.5rem 0; text-decoration: none; color: var(--text-color); font-weight: 700; font-size: 1.8rem; position: relative; padding: 0.5rem 1rem; transition: color 0.3s ease; }
   .mobile-nav a::after { display: none; }
