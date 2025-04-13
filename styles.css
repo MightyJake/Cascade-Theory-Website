@@ -595,12 +595,12 @@
       padding: 0; /* Remove padding, parent has padding */
       border-radius: 0; /* Remove border-radius */
       /* border-left removed */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-      height: 100%;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
+      display: flex; 
+      justify-content: center; 
+      flex-wrap: wrap; 
+      gap: 1.5rem; 
+      max-width: 1200px; /* Increased from 1000px for wider section */ 
+      margin: 2rem auto 1rem; 
   }
 
   /* Styling for the image (now a direct child of layout container) */
@@ -892,146 +892,142 @@
       }
   }
 
-  /* Portfolio - REDESIGNED GRID */
-  .home-page .portfolio-section { padding: 8rem 2rem; } /* Increased padding */
+  /* Portfolio - NEW STYLE */
+  .home-page .portfolio-section { padding: 8rem 2rem; }
   .home-page .case-studies-grid-container {
-      max-width: 1400px; /* Wider container */
+      max-width: 1200px; /* Adjusted max-width */
       margin: 4rem auto 0;
       display: grid;
-      /* Responsive grid: 1 column mobile, 2 columns tablet, 3 columns desktop */
+      /* Responsive grid: 1 column mobile, 2 columns desktop */
       grid-template-columns: 1fr;
-      gap: 3rem; /* Increased gap */
+      gap: 3rem;
   }
+  /* Change to 2 columns on larger screens */
   @media (min-width: 768px) {
       .home-page .case-studies-grid-container {
           grid-template-columns: repeat(2, 1fr);
+          gap: 2.5rem; /* Slightly smaller gap for 2 columns */
       }
   }
+  /* Change to 3 columns on larger screens */
   @media (min-width: 1024px) {
        .home-page .case-studies-grid-container {
-           grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
-           gap: 2.5rem;
+           grid-template-columns: repeat(3, 1fr); /* Use 3 columns */
+           gap: 2.5rem; /* Adjust gap for 3 columns */
        }
   }
 
-  /* Individual Case Study Card */
+  /* Individual Case Study Card - NEW STYLE */
   .case-study-card {
-      display: block; /* Make the anchor a block */
-      position: relative; /* For overlay and badge positioning */
-      border-radius: 12px;
-      overflow: hidden; /* Clip image zoom */
-      box-shadow: 0 8px 25px var(--shadow-color-card);
+      display: flex; /* Use flexbox */
+      flex-direction: column; /* Stack image and content */
+      border-radius: 16px; /* Slightly larger radius */
+      overflow: hidden;
+      background-color: var(--card-bg); /* Card background for content area */
+      box-shadow: 0 6px 18px var(--shadow-color-card);
       text-decoration: none;
       color: var(--text-color);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Added border-color */
+      border: 1px solid var(--border-color);
   }
   .case-study-card:hover, .case-study-card:focus-within {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 35px var(--shadow-color-card);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px var(--shadow-color-card), 0 0 15px 3px var(--glow-color); /* Added glow effect */
+      border-color: var(--accent-color); /* Change border color on hover */
+      text-decoration: none; /* Prevent underline on hover for the link */
   }
   .case-study-card:focus-visible {
       outline: 3px solid var(--accent-color);
-      outline-offset: 4px;
+      outline-offset: 3px;
   }
 
-  /* Image Wrapper within Card */
+  /* Image Wrapper - NEW STYLE */
   .case-study-image-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
+      position: relative; /* Keep relative for potential future overlays if needed */
       width: 100%;
-      height: 100%;
+      aspect-ratio: 16 / 9; /* Give image a fixed aspect ratio */
+      overflow: hidden; /* Clip image zoom */
   }
   .case-study-image-wrapper img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      /* Apply grayscale/blur initially for placeholders if needed */
-      filter: grayscale(50%) blur(0px); /* Slight grayscale start */
+      transition: transform 0.4s ease; /* Only transition transform */
+      /* Removed initial filter */
   }
   .case-study-card:hover .case-study-image-wrapper img,
   .case-study-card:focus-within .case-study-image-wrapper img {
-      transform: scale(1.08); /* Slightly more zoom */
-      filter: grayscale(0%) blur(0px); /* Remove filter on hover/focus */
+      transform: scale(1.05); /* Slightly less zoom */
+      /* Removed filter change */
   }
-   /* Specific filters for placeholders */
-   .case-study-card img[src*="picsum.photos/seed/cs2"] { filter: grayscale(100%); }
-   .case-study-card img[src*="picsum.photos/seed/cs3"] { filter: grayscale(100%) blur(2px); }
-   .case-study-card:hover img[src*="picsum.photos/seed/cs2"],
-   .case-study-card:focus-within img[src*="picsum.photos/seed/cs2"] { filter: grayscale(0%); }
-   .case-study-card:hover img[src*="picsum.photos/seed/cs3"],
-   .case-study-card:focus-within img[src*="picsum.photos/seed/cs3"] { filter: grayscale(0%) blur(0px); }
+  /* Removed placeholder filters */
 
-  /* Overlay Content */
-  .case-study-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 2rem 1.5rem 1.5rem 1.5rem;
-      background: var(--portfolio-overlay-bg); /* Gradient background */
+  /* Content Area Below Image - NEW STYLE */
+  .case-study-content-area {
+      padding: 1rem 1.5rem; /* Adjust padding */
       display: flex;
-      flex-direction: column;
-      align-items: flex-start; /* Align text left */
-      text-align: left;
-      transition: opacity 0.3s ease;
-      z-index: 2;
+      justify-content: space-between; /* Space out text and button */
+      align-items: center; /* Vertically align items */
+      background-color: var(--card-bg); /* Ensure background color */
+      transition: background-color 0.3s ease;
+      flex-grow: 1; /* Allow content area to take remaining space if needed */
   }
-  .case-study-card:hover .case-study-overlay,
-  .case-study-card:focus-within .case-study-overlay {
-      opacity: 0; /* Fade out overlay text on hover/focus */
-      pointer-events: none; /* Prevent interaction when faded */
+
+  /* Text block (Title + Client) */
+  .case-study-text {
+      margin-right: 1rem; /* Add space between text and button */
   }
+
+  /* Title - NEW STYLE */
   .case-study-title {
-      font-size: clamp(1.2rem, 2.5vw, 1.5rem); /* Responsive title */
-      margin-bottom: 0.25rem;
+      font-size: 1.1rem; /* Adjusted size */
+      margin-bottom: 0.15rem; /* Smaller margin */
       font-weight: 600;
-      color: var(--text-color); /* Ensure good contrast */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Add shadow for readability */
+      color: var(--text-color);
+      /* Removed text-shadow */
+      transition: color 0.3s ease;
   }
+  .case-study-card:hover .case-study-title,
+  .case-study-card:focus-within .case-study-title {
+      color: var(--accent-color); /* Optional: Change title color on hover */
+      text-decoration: none; /* Ensure no underline on title specifically */
+  }
+
+  /* Client - NEW STYLE */
   .case-study-client {
-      font-size: 0.9rem;
+      font-size: 0.85rem; /* Adjusted size */
       color: var(--subtext-color);
       font-weight: 400;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      /* Removed text-shadow */
+      transition: color 0.3s ease;
+      display: block; /* Ensure it takes its own line */
   }
 
-  /* Disabled Card Specifics */
-  .disabled-card {
-      cursor: default;
-      pointer-events: none; /* Disable click */
-  }
-  .disabled-card:hover, .disabled-card:focus-within {
-       transform: none; /* No hover lift */
-       box-shadow: 0 8px 25px var(--shadow-color-card); /* Keep initial shadow */
-  }
-  .disabled-card .case-study-image-wrapper img {
-       filter: grayscale(100%) blur(1px); /* Keep desaturated/blurred */
-       transform: scale(1); /* No zoom */
-  }
-   .disabled-card:hover .case-study-image-wrapper img,
-   .disabled-card:focus-within .case-study-image-wrapper img {
-       filter: grayscale(100%) blur(1px); /* Keep desaturated/blurred */
-       transform: scale(1); /* No zoom */
-   }
-   .disabled-card .case-study-overlay {
-       opacity: 1 !important; /* Keep overlay visible */
-   }
-  .coming-soon-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background-color: var(--accent-color);
-      color: var(--button-text-color);
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
+  /* View Project Button - NEW STYLE */
+  .case-study-button {
+      display: inline-block;
+      background-color: var(--accent-color); /* Use site accent color */
+      color: var(--button-text-color); /* Use button text color variable */
+      padding: 0.5rem 1.2rem; /* Adjust padding */
+      border-radius: 20px; /* Pill shape */
+      font-size: 0.85rem;
       font-weight: 600;
-      z-index: 3;
+      text-decoration: none;
+      white-space: nowrap; /* Prevent wrapping */
+      border: 1px solid transparent; /* Add border for hover transition */
+      transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      cursor: pointer; /* Ensure pointer cursor */
   }
+  .case-study-button:hover {
+      background-color: transparent;
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+      transform: scale(1.03);
+  }
+
+  /* Remove Old/Unused Styles */
+  /* .case-study-overlay, .disabled-card, .coming-soon-badge removed */
 
   /* Contact (3 steps & Logos) */
   .home-page .contact-section-steps { padding: 6rem 2rem 4rem 2rem; text-align: center; }
@@ -1050,9 +1046,9 @@
   /* .logo-slider-track:hover { animation-play-state: paused; } */ /* Removed pause on hover */
   .logo-item { flex-shrink: 0; padding: 0 3rem; /* Increased padding */ display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
   .logo-item img {
-      max-height: 55px; /* Increased size */
+      max-height: 80px; /* Made logos ~50% larger */
       width: auto;
-      max-width: 180px; /* Increased max width */
+      max-width: 270px; /* Made logos ~50% larger */
       filter: grayscale(1) opacity(0.7);
       transition: filter 0.3s ease;
   }
