@@ -68,7 +68,8 @@
   }
 
   .content-section { padding: 6rem 2rem; position: relative; transition: background-color 0.3s ease; }
-  .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5rem; text-align: center; } /* Removed color */
+  /* Updated section title size to match hero title */
+  .section-title { font-size: clamp(2rem, 4.5vw, 3.5rem); margin-bottom: 2rem; text-align: center; } /* Increased font size and margin */
   .section-subtitle { max-width: 700px; margin: 0 auto 2rem; text-align: center; font-size: 1.1rem; color: var(--text-color); }
   .centered-text { text-align: center; margin-left: auto; margin-right: auto; }
   .accent-title { color: var(--text-color); }
@@ -128,7 +129,8 @@
   #gradient-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: block; pointer-events: none; background-color: var(--bg-color); transition: background-color 0.3s ease; }
   header {
       position: sticky; top: 0; z-index: 999;
-      padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
+      /* Removed all padding, will be handled by children */
+      padding: 0; display: flex; justify-content: space-between; align-items: center;
       background: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       transition: top 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
       /* border-bottom REMOVED */
@@ -136,7 +138,21 @@
 
   main { display: block; position: relative; z-index: 1; color: var(--text-color); transition: color 0.3s ease; }
   main > * { color: inherit; }
-  .logo { display: flex; align-items: center; flex-shrink: 0; margin-right: 40px; /* Increased margin */ }
+  /* Added integrated rectangular background for header logo */
+  header .logo {
+      display: flex; /* Use flex to center content */
+      align-items: center;
+      justify-content: center; /* Center logo horizontally */
+      flex-shrink: 0;
+      margin-right: 0; /* Remove right margin */
+      background-color: #f8f9fa; /* Off-white background */
+      border-radius: 0; /* No rounded corners */
+      padding: 0 2rem; /* Only horizontal padding to space logo from edge */
+      box-shadow: none; /* No shadow */
+      transition: background-color 0.3s ease;
+      /* Height will be determined by header's height due to align-items: center */
+      align-self: stretch; /* Make it stretch to header height */
+  }
   .logo-link { color: var(--text-color); text-decoration: none; display: flex; align-items: center; transition: color 0.3s ease; }
   .logo-link:hover { text-decoration: none; }
   .logo-img { /* Updated rule for the image logo */
@@ -150,7 +166,7 @@
   /* Removed .logo-svg, .logo-text, and their hover rules */
 
   /* Desktop Nav Layout */
-  .desktop-nav { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; }
+  .desktop-nav { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; padding: 1.5rem 2rem 1.5rem 0; /* Added padding back here */ }
   .nav-links-centered { display: flex; justify-content: center; flex-grow: 1; }
   .desktop-nav .nav-links-centered a { margin: 0 18px; text-decoration: none; color: var(--text-color); font-weight: 600; font-size: 1.1rem; position: relative; padding: 0.25rem 0; transition: color 0.3s ease; }
   .desktop-nav .nav-links-centered a::after { content: ''; position: absolute; width: 0; height: 2px; background-color: var(--accent-color); bottom: 0; left: 0; transition: width 0.3s ease; }
@@ -285,32 +301,58 @@
       margin-bottom: 1.5rem; /* Adjusted margin */
   }
 
-  /* New Styles for Hero Services List */
-  .home-page .hero-services-list {
+  /* Shared Styles for Services Lists (Hero & Revised Section) */
+  .hero-services-list,
+  .services-list-expanded {
       margin-bottom: 1.5rem; /* Space below services */
       font-size: 1.1rem; /* Match CTA button size */
       font-weight: 600;
       color: var(--text-color);
       opacity: 0.9;
       display: flex;
-      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      flex-wrap: wrap; /* Allow wrapping */
       gap: 0.5rem 0.75rem; /* Row and column gap */
-      justify-content: flex-start; /* Align left */
+      justify-content: flex-start; /* Align left by default */
+      line-height: 1.5; /* Improve readability when wrapped */
   }
-  .home-page .hero-services-list span:not(.plus-separator) { /* Target only service names */
+  .hero-services-list span:not(.plus-separator),
+  .services-list-expanded span:not(.plus-separator) { /* Target only service names */
       display: inline-block;
       transition: transform 0.2s ease-out, color 0.2s ease-out; /* Add transition */
       cursor: default; /* Indicate non-clickable */
   }
-  .home-page .hero-services-list span:not(.plus-separator):hover {
+  .hero-services-list span:not(.plus-separator):hover,
+  .services-list-expanded span:not(.plus-separator):hover {
       transform: scale(1.08); /* Subtle scale up */
       color: var(--secondary-accent-color); /* Change color on hover */
   }
-  .home-page .hero-services-list .plus-separator {
+  .hero-services-list .plus-separator,
+  .services-list-expanded .plus-separator {
       color: var(--secondary-accent-color); /* Use orange accent for '+' */
       font-weight: 700;
       margin: 0 0.25rem; /* Small space around '+' */
+      /* Prevent hover effect on separator */
+      transform: none !important;
+      cursor: default !important;
   }
+
+  /* Specific alignment for hero */
+  .home-page .hero-services-list {
+      justify-content: flex-start; /* Align left */
+  }
+  @media (max-width: 992px) {
+      .home-page .hero-services-list {
+          justify-content: center; /* Center align on tablet/mobile */
+          font-size: 0.95rem; /* Slightly smaller font */
+      }
+  }
+   @media (max-width: 600px) {
+       .home-page .hero-services-list {
+           font-size: 0.9rem; /* Further reduce font size */
+           gap: 0.3rem 0.6rem; /* Adjust gap */
+       }
+   }
+
 
   /* New Styles for Hero Description */
   .home-page .hero-description {
@@ -405,7 +447,8 @@
   /* .home-page .process-section, */ /* Removed process section bg globally */
   .home-page .contact-section-steps { background: var(--card-bg); transition: background-color 0.3s ease;}
 
-  /* Services & Pricing - REDESIGNED CARD */
+  /* --- OLD Services & Pricing Section (Commented Out) --- */
+  /*
   .home-page .service-section {
       padding-top: 8rem;
       padding-bottom: 8rem;
@@ -424,11 +467,11 @@
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
       height: 100%;
-      min-height: 280px; /* Slightly reduced for better mobile view */
+      min-height: 280px;
       display: flex;
       flex-direction: column;
       position: relative;
-      padding: 2rem 1.5rem 6rem 1.5rem; /* Increased bottom padding */
+      padding: 2rem 1.5rem 6rem 1.5rem;
   }
   .home-page .service-title {
       color: var(--text-color);
@@ -437,8 +480,8 @@
       margin-bottom: 0.75rem;
   }
   .home-page .service-description {
-      margin-bottom: 1.5rem; /* Add margin to separate from price */
-      flex-grow: 1; /* Allow description to take available space */
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
   }
   .home-page .service-price {
       font-size: 1.3rem;
@@ -446,13 +489,13 @@
       color: var(--accent-color);
       padding: 0.5rem 1rem;
       border-radius: 6px;
-      margin-top: auto; /* Push to bottom */
+      margin-top: auto;
       position: absolute;
       bottom: 1.5rem;
       left: 50%;
       transform: translateX(-50%);
       width: 80%;
-      background-color: rgba(26, 97, 114, 0.1); /* Swapped price background */
+      background-color: rgba(26, 97, 114, 0.1);
       border: 1px solid transparent;
       transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   }
@@ -467,7 +510,6 @@
       transform: translateX(-50%) scale(1.05);
       border-color: var(--accent-color);
   }
-  /* Improve mobile view for service cards */
   @media (max-width: 767px) {
       .home-page .service-card {
           padding: 1.5rem 1rem 5rem 1rem;
@@ -477,6 +519,71 @@
           width: 90%;
       }
   }
+  */
+  /* --- END OF OLD Services & Pricing Section --- */
+
+  /* --- NEW Revised Services Section --- */
+  .home-page .service-section-revised {
+      padding: 6rem 5%; /* Match hero horizontal padding */
+      /* background-color: var(--card-bg); REMOVED background */
+      transition: background-color 0.3s ease;
+  }
+  .home-page .services-layout-container {
+      display: flex;
+      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      gap: 2rem 4rem; /* Row and column gap */
+      max-width: 1400px; /* Allow wider content */
+      margin: 0 auto;
+      align-items: center; /* Vertically center items */
+  }
+  .home-page .services-heading-column {
+      flex: 1 1 35%; /* Takes up ~35% width, allows shrinking/growing */
+      min-width: 280px; /* Minimum width before wrapping */
+  }
+  .home-page .services-heading-column .section-title {
+      text-align: right; /* Right-align the heading */
+      margin-bottom: 0; /* Remove bottom margin */
+      padding-right: 2rem; /* Add padding to separate from the list */
+      /* Inherits font size from global .section-title */
+  }
+  .home-page .services-list-column {
+      flex: 1 1 55%; /* Takes up ~55% width */
+      min-width: 320px; /* Minimum width */
+  }
+  .home-page .services-list-expanded {
+      justify-content: flex-start; /* Keep list items left-aligned */
+      margin-bottom: 0; /* Remove bottom margin */
+      /* Inherits styles from shared rule */
+  }
+
+  /* Responsive adjustments for the revised services section */
+  @media (max-width: 768px) {
+      .home-page .service-section-revised {
+          padding: 4rem 5%; /* Adjust padding */
+      }
+      .home-page .services-layout-container {
+          flex-direction: column; /* Stack columns */
+          gap: 2rem; /* Adjust gap for stacked layout */
+      }
+      .home-page .services-heading-column {
+          flex-basis: auto; /* Reset flex basis */
+          width: 100%; /* Full width */
+      }
+      .home-page .services-heading-column .section-title {
+          text-align: center; /* Center heading on mobile */
+          padding-right: 0; /* Remove right padding */
+          margin-bottom: 1.5rem; /* Add margin below heading */
+      }
+      .home-page .services-list-column {
+          flex-basis: auto; /* Reset flex basis */
+          width: 100%; /* Full width */
+      }
+      .home-page .services-list-expanded {
+          justify-content: center; /* Center list items */
+          font-size: 1rem; /* Adjust font size */
+      }
+  }
+  /* --- END OF NEW Revised Services Section --- */
 
   /* Process Section Background */
   .home-page .process-section {
@@ -510,7 +617,7 @@
           left: 12.5%; 
           right: 12.5%; 
           height: 2px; 
-          background-color: var(--accent-color); 
+          background-color: var(--secondary-accent-color); /* Changed to orange */
           z-index: 0; 
           opacity: 0.3; 
           transition: background-color 0.3s ease; 
@@ -696,7 +803,7 @@
       background-color: var(--blockquote-bg);
       padding: 1.5rem;
       border-radius: 8px;
-      border-left: 3px solid var(--accent-color); /* Keep border on manifesto */
+      border-left: 3px solid var(--secondary-accent-color); /* Changed to orange */
       margin-top: 2rem;
       transition: background-color 0.3s ease, border-color 0.3s ease;
       text-align: left; /* Ensure manifesto text is left-aligned */
@@ -911,7 +1018,7 @@
       max-width: 550px; 
       margin: 0 2rem; 
       padding: 1.5rem; 
-      border-left: 3px solid var(--accent-color); 
+      border-left: 3px solid var(--secondary-accent-color); /* Changed to orange */
       background: var(--blockquote-bg); 
       border-radius: 0 8px 8px 0; 
       text-align: left; 
@@ -955,19 +1062,43 @@
       }
   }
 
-  /* Portfolio - MASONRY GRID STYLE */
-  .home-page .portfolio-section {
-      padding: 8rem 0; /* Removed horizontal padding */
-  }
-  .home-page .case-studies-grid-container.masonry-grid {
+/* Portfolio - MASONRY GRID STYLE */
+.home-page .portfolio-section {
+    padding: 8rem 5%; /* Added horizontal padding like hero */
+}
+
+/* Left-align title and subtitle within portfolio section and constrain width */
+.home-page .portfolio-section .section-title {
+    text-align: left;
+    max-width: 600px; /* Constrain width */
+    margin-left: 0; /* Align left within constraint */
+    margin-right: auto;
+    padding-left: 0; /* Remove specific padding, rely on section padding */
+}
+.home-page .portfolio-section .section-subtitle {
+    text-align: left;
+    max-width: 600px; /* Constrain width */
+    margin-left: 0; /* Align left within constraint */
+    margin-right: auto;
+    padding-left: 0; /* Remove specific padding, rely on section padding */
+}
+
+.home-page .case-studies-grid-container.masonry-grid {
       /* max-width: 1400px; Removed max-width */
       margin: 4rem 0 0; /* Removed horizontal auto margin */
-      padding: 0 1.5rem; /* Add horizontal padding matching the gap */
+      padding: 0; /* REMOVED horizontal padding */
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Increased min column width */
       grid-auto-rows: 320px; /* Increased base row height */
       grid-auto-flow: dense; /* Important for masonry effect */
       gap: 1.5rem; /* Adjust gap */
+  }
+
+  /* Explicit 4-column layout for larger screens */
+  @media (min-width: 1025px) {
+      .home-page .case-studies-grid-container.masonry-grid {
+          grid-template-columns: repeat(4, 1fr);
+      }
   }
 
   /* Individual Case Study Card - MASONRY STYLE */
@@ -1014,6 +1145,7 @@
           grid-template-columns: 1fr; /* Single column */
           grid-auto-rows: auto; /* Let rows size automatically */
           gap: 1rem;
+          padding: 0 1rem; /* Add horizontal padding back for mobile */
       }
       .case-study-card.cs-wide,
       .case-study-card.cs-tall,
@@ -1089,7 +1221,7 @@
   /* Contact (3 steps & Logos) */
   .home-page .contact-section-steps { padding: 6rem 2rem 4rem 2rem; text-align: center; }
   .home-page .contact-steps-grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1100px; margin: 0 auto 4rem auto; text-align: left; }
-  .home-page .contact-steps-line { position: absolute; top: 25px; left: 16.66%; right: 16.66%; height: 2px; background-color: var(--accent-color); z-index: 0; opacity: 0.3; transition: background-color 0.3s ease; }
+  .home-page .contact-steps-line { position: absolute; top: 25px; left: 16.66%; right: 16.66%; height: 2px; background-color: var(--secondary-accent-color); z-index: 0; opacity: 0.3; transition: background-color 0.3s ease; } /* Changed to orange */
   .home-page .contact-step { position: relative; z-index: 1; padding: 1.5rem; padding-top: 40px; border-radius: 8px; text-align: center; }
   /* Removed media query that set text-align: left; */
   .step-number { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background-color: var(--accent-color); color: var(--button-text-color); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; border: 3px solid var(--card-bg); transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; z-index: 2; }
