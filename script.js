@@ -1,54 +1,12 @@
-/* START OF FILE script.js (Removed Schedule Call/Modal Logic) */
+/* START OF FILE script.js (Removed Schedule Call/Modal Logic & Theme Toggle) */
 
-// --- THEME TOGGLE LOGIC ---
-const themeToggleButton = document.getElementById('theme-toggle');
-const body = document.body;
-const lightModeClass = 'light-mode';
+const body = document.body; // Keep body reference if needed elsewhere
 
 // --- WebGL Variables ---
 let gradientUniforms = null;
 let gradientRenderer = null;
 let gradientScene = null;
 let gradientCamera = null;
-
-// Function to apply the theme
-function setTheme(theme) {
-    console.log("[Theme] Attempting to set theme:", theme);
-    if (theme === 'light') { body.classList.add(lightModeClass); console.log("[Theme] Added light-mode class"); }
-    else { body.classList.remove(lightModeClass); console.log("[Theme] Removed light-mode class"); }
-    localStorage.setItem('themePreference', theme);
-    if (themeToggleButton) {
-      const nextAriaLabel = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
-      themeToggleButton.setAttribute('aria-label', nextAriaLabel);
-    } else { console.warn("[Theme] Theme toggle button not found for ARIA update."); }
-    body.style.opacity = '0'; // Set opacity to 0 just before fade-in
-    requestAnimationFrame(() => { // Ensure the opacity change is registered before starting transition
-        body.style.opacity = '1'; // Trigger fade-in
-    });
-    console.log("[Theme] Theme set complete. Current body classes:", body.className);
-}
-
-// Listener for the theme toggle button
-if (themeToggleButton) {
-    themeToggleButton.addEventListener('click', () => {
-        const isCurrentlyLight = body.classList.contains(lightModeClass);
-        const nextTheme = isCurrentlyLight ? 'dark' : 'light';
-        console.log(`[Theme] Toggle clicked. Currently light: ${isCurrentlyLight}. Switching to: ${nextTheme}`);
-        setTheme(nextTheme);
-    });
-} else { console.error("[Init] CRITICAL: Theme toggle button (#theme-toggle) not found!"); }
-
-// Determine and Apply Initial Theme on Load
-function initializeTheme() {
-    const savedPreference = localStorage.getItem('themePreference');
-    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    let initialTheme = savedPreference || (prefersLight ? 'light' : 'dark');
-    console.log(`[Theme] Initial theme: ${initialTheme} (from ${savedPreference ? 'localStorage' : 'OS preference'})`);
-    // body.style.opacity = '0'; // REMOVED - Moved into setTheme
-    setTheme(initialTheme);
-}
-// --- END THEME TOGGLE LOGIC ---
-
 
 // --- UTILITY & FEATURE FUNCTIONS ---
 
@@ -105,9 +63,9 @@ function initAdvancedGradient() {
         gradientRenderer.setSize(window.innerWidth, window.innerHeight);
         gradientRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
         camera.position.z = 1;
-        const isCurrentlyLight = document.body.classList.contains(lightModeClass);
-        const initialBgColor = isCurrentlyLight ? webGLColors.lightBg : webGLColors.darkBg;
-        const initialAccentColor = webGLColors.primaryAccent; // Use updated primary accent
+        // Default to dark mode colors since light mode is removed
+        const initialBgColor = webGLColors.darkBg;
+        const initialAccentColor = webGLColors.primaryAccent;
         const uniforms = {
             u_time: { value: 0.0 },
             u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
@@ -124,7 +82,7 @@ function initAdvancedGradient() {
                 void main(){vec2 uv=vUv;uv.x*=u_resolution.x/u_resolution.y;float i=0.;float n1=getNoiseLayer(uv,u_time,.3,.06,.2,vec2(0.,0.));i+=smoothstep(.35,.7,n1)*.25;float n2=getNoiseLayer(uv,u_time,.5,.09,.15,vec2(2.,1.));i+=smoothstep(.45,.65,n2)*.35;float n3=getNoiseLayer(uv,u_time,.8,.12,.1,vec2(-1.,3.));i+=smoothstep(.5,.6,n3)*.15;i=clamp(i,0.,1.);vec3 fc=mix(u_color_bg,u_color_accent,i);gl_FragColor=vec4(fc,1.);}`
         });
         mesh = new THREE.Mesh(geometry, material); scene.add(mesh); clock = new THREE.Clock();
-        function animate() { if (!gradientRenderer) return; animationFrameId = requestAnimationFrame(animate); const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if (!gradientUniforms) return; if (prm) { if (!isFrozenForMotionPref) { gradientUniforms.u_time.value = 1.5; const isLight = body.classList.contains(lightModeClass); gradientUniforms.u_color_bg.value.copy(isLight ? webGLColors.lightBg : webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); gradientRenderer.render(scene, camera); isFrozenForMotionPref = true; if (clock && clock.running) clock.stop(); } return; } else { if (isFrozenForMotionPref) { isFrozenForMotionPref = false; if (clock && !clock.running) clock.start(); } const isLight = body.classList.contains(lightModeClass); gradientUniforms.u_color_bg.value.copy(isLight ? webGLColors.lightBg : webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); if (clock) { const et = clock.getElapsedTime(); gradientUniforms.u_time.value = et; } gradientRenderer.render(scene, camera); } } animate();
+        function animate() { if (!gradientRenderer) return; animationFrameId = requestAnimationFrame(animate); const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if (!gradientUniforms) return; if (prm) { if (!isFrozenForMotionPref) { gradientUniforms.u_time.value = 1.5; gradientUniforms.u_color_bg.value.copy(webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); gradientRenderer.render(scene, camera); isFrozenForMotionPref = true; if (clock && clock.running) clock.stop(); } return; } else { if (isFrozenForMotionPref) { isFrozenForMotionPref = false; if (clock && !clock.running) clock.start(); } gradientUniforms.u_color_bg.value.copy(webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); if (clock) { const et = clock.getElapsedTime(); gradientUniforms.u_time.value = et; } gradientRenderer.render(scene, camera); } } animate();
         let resizeTimeout; const onWindowResize = () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { if (!gradientRenderer || !camera || !gradientUniforms) return; const w = window.innerWidth; const h = window.innerHeight; camera.aspect = w / h; camera.updateProjectionMatrix(); gradientRenderer.setSize(w, h); gradientRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); gradientUniforms.u_resolution.value.set(w, h); if (gradientRenderer && scene && camera) { gradientRenderer.render(scene, camera); } }, 150); }; window.addEventListener('resize', onWindowResize, false);
         const cleanup = () => { console.log("[WebGL] Cleaning up WebGL resources."); cancelAnimationFrame(animationFrameId); window.removeEventListener('resize', onWindowResize); window.removeEventListener('beforeunload', cleanup); try { if (material) material.dispose(); if (geometry) geometry.dispose(); if (gradientRenderer) { gradientRenderer.dispose(); const context = gradientRenderer.domElement.getContext('webgl'); if (context) { const loseContextExt = context.getExtension('WEBGL_lose_context'); if (loseContextExt) { loseContextExt.loseContext(); } } } } catch (e) { console.error("Error during WebGL cleanup:", e); } finally { scene = null; camera = null; clock = null; material = null; geometry = null; mesh = null; gradientRenderer = null; gradientScene = null; gradientCamera = null; gradientUniforms = null; console.log("[WebGL] Cleanup complete."); } }; window.addEventListener('beforeunload', cleanup);
     } catch (error) { console.error("WebGL initialization failed:", error); if (canvas) canvas.style.display = 'none'; gradientRenderer = null; gradientScene = null; gradientCamera = null; gradientUniforms = null; }
@@ -547,8 +505,11 @@ function initStickyHorizontalScroll() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log("[Init] DOMContentLoaded event fired.");
 
-    initializeTheme(); // Theme FIRST
-    console.log("[Init] Theme initialization called.");
+    // Set body opacity for fade-in (previously in setTheme)
+    body.style.opacity = '0';
+    requestAnimationFrame(() => {
+        body.style.opacity = '1';
+    });
 
     // Other initializations
     console.log("[Init] Calling updateCopyrightYear...");

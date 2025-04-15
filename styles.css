@@ -14,7 +14,7 @@
     --secondary-accent-color: #e86c46; /* Swapped: Secondary Accent (Orange) */
     --form-bg: #222224;
     --form-border: #444;
-    --header-bg: rgba(13, 13, 13, .6);
+    --header-bg: rgba(13, 13, 13, 0.4); /* Decreased alpha for more translucency */
     --overlay-bg: rgba(13, 13, 13, .9);
     --shadow-color-cta: rgba(26, 97, 114, 0.2); /* Swapped: Primary Accent Shadow */
     --shadow-color-card: rgba(0, 0, 0, 0.4);
@@ -25,29 +25,6 @@
      --glow-color: rgba(26, 97, 114, 0.6); /* Swapped: Primary Glow color */
      /* --modal-overlay-bg REMOVED */
      --portfolio-overlay-bg: linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, rgba(13, 13, 13, 0.8) 80%);
-  }
-
-  /* === Light Mode Variables === */
-  body.light-mode {
-    --bg-color: #f4f7f6; /* Light grey background */
-    --text-color: #18181a; /* Reverted: Dark text */
-    --subtext-color: #555555; /* Medium grey subtext */
-    --card-bg: #ffffff; /* White cards */
-    --border-color: #e0e0e0; /* Light grey border */
-    /* --accent-color: #2ababf; */ /* Keep accent */
-    --form-bg: #ffffff;
-    --form-border: #cccccc;
-    --header-bg: rgba(244, 247, 246, 0.7); /* Semi-transparent light bg */
-    --overlay-bg: rgba(244, 247, 246, 0.95); /* Mostly opaque light overlay */
-    --shadow-color-cta: rgba(26, 97, 114, 0.15); /* Swapped: Primary Accent Shadow */
-    --shadow-color-card: rgba(0, 0, 0, 0.1);
-    --blockquote-bg: rgba(224, 224, 224, 0.5);
-    --toggle-button-bg: #eee;
-    --toggle-button-icon-color: var(--text-color);
-    --button-text-color: #ffffff; /* Light text on filled buttons (better contrast with teal) */
-    --glow-color: rgba(26, 97, 114, 0.4); /* Swapped: Primary Glow color - light */
-     /* --modal-overlay-bg REMOVED */
-     --portfolio-overlay-bg: linear-gradient(180deg, rgba(244, 247, 246, 0) 0%, rgba(244, 247, 246, 0.8) 80%);
   }
 
   /* Base & Reset */
@@ -139,7 +116,7 @@
   .form-group input[type="text"], .form-group input[type="email"], .form-group select, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border-radius: 6px; background-color: var(--form-bg); border: 1px solid var(--form-border); color: var(--text-color); font-size: 1rem; font-family: inherit; transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(26, 97, 114, 0.5); } /* Swapped focus shadow */
   .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23cccccc'%3E%3Cpath d='M8 11.414l-4.707-4.707a1 1 0 0 1 1.414-1.414L8 8.586l3.293-3.293a1 1 0 1 1 1.414 1.414L8 11.414z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; padding-right: 2.5rem; transition: background-image 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
-  body.light-mode .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23555555'%3E%3Cpath d='M8 11.414l-4.707-4.707a1 1 0 0 1 1.414-1.414L8 8.586l3.293-3.293a1 1 0 1 1 1.414 1.414L8 11.414z'/%3E%3C/svg%3E"); }
+  /* Removed light mode select arrow */
   .form-group textarea { resize: vertical; min-height: 120px; }
   .form-submit-group { text-align: center; margin-top: 2.5rem; }
   .contact-submit-button { font-size: 1.2rem; padding: 1rem 2.5rem; }
@@ -169,9 +146,7 @@
       filter: none; /* Default to original color (light) for dark mode */
       transition: filter 0.3s ease;
   }
-  body.light-mode .logo-img {
-      filter: invert(1); /* Invert to dark for light mode */
-  }
+  /* Removed light mode logo invert */
   /* Removed .logo-svg, .logo-text, and their hover rules */
 
   /* Desktop Nav Layout */
@@ -205,10 +180,7 @@
       transform: translateY(-2px) scale(1.02); box-shadow: 0 4px 15px rgba(232, 108, 70, 0.2); /* Use secondary accent shadow */
       text-decoration: none;
   }
-  body.light-mode .schedule-call-nav-link:hover,
-  body.light-mode .schedule-call-nav-link:focus-visible {
-      box-shadow: 0 4px 15px rgba(232, 108, 70, 0.15); /* Use secondary accent shadow (light) */
-  }
+  /* Removed light mode schedule button hover */
   @media (max-width: 992px) { .nav-links-centered { margin-right: 0; } .schedule-call-nav-link { margin-left: 16px; } }
   @media (max-width: 768px) { .desktop-nav { display: none; } }
 
@@ -226,9 +198,7 @@
       filter: none; /* Default to original color (light) for dark mode */
       transition: filter 0.3s ease;
   }
-  body.light-mode .mobile-nav-header .logo-img {
-      filter: invert(1); /* Invert to dark for light mode */
-  }
+  /* Removed light mode mobile logo invert */
   /* Removed .mobile-logo-link .logo-svg rule */
   .mobile-nav { display: flex; flex-direction: column; align-items: center; margin-top: 2rem; }
   .mobile-nav a { margin: 1.5rem 0; text-decoration: none; color: var(--text-color); font-weight: 700; font-size: 1.8rem; position: relative; padding: 0.5rem 1rem; transition: color 0.3s ease; }
@@ -246,9 +216,7 @@
         transform: translateY(-3px) scale(1.03); box-shadow: 0 6px 20px rgba(232, 108, 70, 0.2); /* Use secondary accent shadow */
         text-decoration: none;
    }
-   body.light-mode .mobile-nav a.mobile-nav-cta:hover {
-       box-shadow: 0 6px 20px rgba(232, 108, 70, 0.15); /* Use secondary accent shadow (light) */
-   }
+   /* Removed light mode mobile CTA hover */
   @media (min-width: 769px) { .nav-overlay { display: none !important; } }
 
 
@@ -297,7 +265,7 @@
       padding: 2.5rem 3rem; /* Padding inside the card */
       border-radius: 12px;
       box-shadow: 0 8px 25px var(--shadow-color-card);
-      max-width: 35%; /* Reduced width (approx 2/3 of 50%) */
+      max-width: 40%; /* Decreased width */
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
       text-align: left; /* Ensure text inside is left-aligned */
   }
@@ -314,7 +282,45 @@
       text-align: left;
       /* color: var(--text-color); Inherited from global heading rule */
       max-width: none; /* Allow text to fill card */
+      margin-bottom: 1.5rem; /* Adjusted margin */
   }
+
+  /* New Styles for Hero Services List */
+  .home-page .hero-services-list {
+      margin-bottom: 1.5rem; /* Space below services */
+      font-size: 1.1rem; /* Match CTA button size */
+      font-weight: 600;
+      color: var(--text-color);
+      opacity: 0.9;
+      display: flex;
+      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      gap: 0.5rem 0.75rem; /* Row and column gap */
+      justify-content: flex-start; /* Align left */
+  }
+  .home-page .hero-services-list span:not(.plus-separator) { /* Target only service names */
+      display: inline-block;
+      transition: transform 0.2s ease-out, color 0.2s ease-out; /* Add transition */
+      cursor: default; /* Indicate non-clickable */
+  }
+  .home-page .hero-services-list span:not(.plus-separator):hover {
+      transform: scale(1.08); /* Subtle scale up */
+      color: var(--secondary-accent-color); /* Change color on hover */
+  }
+  .home-page .hero-services-list .plus-separator {
+      color: var(--secondary-accent-color); /* Use orange accent for '+' */
+      font-weight: 700;
+      margin: 0 0.25rem; /* Small space around '+' */
+  }
+
+  /* New Styles for Hero Description */
+  .home-page .hero-description {
+      margin-bottom: 2rem; /* Space above CTA button */
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--subtext-color); /* Use subtext color */
+      max-width: 90%; /* Prevent it from being full width */
+  }
+
   .home-page .hero-text-content .hero-title span {
       display: inline; /* Allow text to wrap naturally */
   }
@@ -326,35 +332,63 @@
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       /* Button is already left-aligned by parent */
   }
+
+  /* --- Responsive Adjustments for Hero --- */
+  /* Tablet and Larger Mobile */
   @media (max-width: 992px) {
        .home-page .hero-section.wide-hero {
            padding: 0 5%; /* Keep horizontal padding */
            align-items: center; /* Center card */
            justify-content: center; /* Center card */
-           height: 85vh; /* Reduce height slightly */
+           height: auto; /* Let height adjust to content */
+           min-height: 80vh; /* Ensure minimum height */
+           padding-top: 10vh; /* Add some top padding */
+           padding-bottom: 10vh; /* Add some bottom padding */
         }
         .home-page .hero-text-overlay-card {
-            max-width: 70%; /* Increased width for medium screens */
+            max-width: 80%; /* Allow slightly wider card */
             padding: 2rem 2.5rem;
-            text-align: center; /* Center text on smaller screens */
+            text-align: center; /* Center text */
         }
        .home-page .hero-text-content {
-           text-align: center;
+           text-align: center; /* Center align all content inside card */
        }
        .home-page .hero-text-content .hero-title {
            text-align: center;
-           font-size: clamp(1.8rem, 4vw, 3rem);
+           font-size: clamp(1.8rem, 5vw, 2.8rem); /* Slightly adjusted clamp */
            margin-bottom: 1.5rem;
        }
-       .home-page .hero-text-content .hero-title br { display: none; }
+       .home-page .hero-text-content .hero-title br { display: none; } /* Hide manual line break */
+       /* Center services list and description */
+       .home-page .hero-services-list {
+           justify-content: center; /* Center align */
+           font-size: 0.95rem; /* Slightly smaller font */
+       }
+       .home-page .hero-description {
+           margin-left: auto;
+           margin-right: auto;
+           max-width: 90%; /* Allow slightly wider */
+           font-size: 0.95rem; /* Slightly smaller font */
+       }
    }
+   /* Smaller Mobile */
    @media (max-width: 600px) {
+        .home-page .hero-section.wide-hero {
+            min-height: 75vh; /* Further adjust min height */
+        }
         .home-page .hero-text-overlay-card {
-            max-width: 85%; /* Increased width for small screens */
-            padding: 1.5rem 2rem;
+            max-width: 90%; /* Allow wider card on small screens */
+            padding: 1.5rem 1.5rem; /* Adjust padding */
         }
         .home-page .hero-text-content .hero-title {
-           font-size: clamp(1.6rem, 5vw, 2.5rem);
+           font-size: clamp(1.6rem, 6vw, 2.2rem); /* Adjust clamp for smaller screens */
+       }
+       .home-page .hero-services-list {
+           font-size: 0.9rem; /* Further reduce font size */
+           gap: 0.3rem 0.6rem; /* Adjust gap */
+       }
+       .home-page .hero-description {
+           font-size: 0.9rem; /* Further reduce font size */
        }
        .home-page .hero-cta {
            font-size: 1rem;
@@ -921,43 +955,33 @@
       }
   }
 
-  /* Portfolio - NEW STYLE */
-  .home-page .portfolio-section { padding: 8rem 2rem; }
-  .home-page .case-studies-grid-container {
-      max-width: 1200px; /* Adjusted max-width */
-      margin: 4rem auto 0;
+  /* Portfolio - MASONRY GRID STYLE */
+  .home-page .portfolio-section {
+      padding: 8rem 0; /* Removed horizontal padding */
+  }
+  .home-page .case-studies-grid-container.masonry-grid {
+      /* max-width: 1400px; Removed max-width */
+      margin: 4rem 0 0; /* Removed horizontal auto margin */
+      padding: 0 1.5rem; /* Add horizontal padding matching the gap */
       display: grid;
-      /* Responsive grid: 1 column mobile, 2 columns desktop */
-      grid-template-columns: 1fr;
-      gap: 3rem;
-  }
-  /* Change to 2 columns on larger screens */
-  @media (min-width: 768px) {
-      .home-page .case-studies-grid-container {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 2.5rem; /* Slightly smaller gap for 2 columns */
-      }
-  }
-  /* Change to 3 columns on larger screens */
-  @media (min-width: 1024px) {
-       .home-page .case-studies-grid-container {
-           grid-template-columns: repeat(3, 1fr); /* Use 3 columns */
-           gap: 2.5rem; /* Adjust gap for 3 columns */
-       }
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Increased min column width */
+      grid-auto-rows: 320px; /* Increased base row height */
+      grid-auto-flow: dense; /* Important for masonry effect */
+      gap: 1.5rem; /* Adjust gap */
   }
 
-  /* Individual Case Study Card - NEW STYLE */
+  /* Individual Case Study Card - MASONRY STYLE */
   .case-study-card {
-      display: flex; /* Use flexbox */
-      flex-direction: column; /* Stack image and content */
-      border-radius: 16px; /* Slightly larger radius */
+      display: block; /* Change from flex */
+      border-radius: 12px; /* Adjusted radius */
       overflow: hidden;
-      background-color: var(--card-bg); /* Card background for content area */
-      box-shadow: 0 6px 18px var(--shadow-color-card);
+      box-shadow: 0 4px 15px var(--shadow-color-card);
       text-decoration: none;
       color: var(--text-color);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Added border-color */
-      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative; /* Needed for overlay positioning */
+      background-color: transparent; /* Remove card background */
+      border: none; /* Remove border */
   }
   .case-study-card:hover, .case-study-card:focus-within {
       transform: translateY(-6px);
@@ -966,97 +990,101 @@
       text-decoration: none; /* Prevent underline on hover for the link */
   }
   .case-study-card:focus-visible {
-      outline: 3px solid var(--accent-color);
-      outline-offset: 3px;
+      outline: 2px solid transparent; /* Use transparent outline for focus */
+      outline-offset: 2px;
+  }
+  .case-study-card:focus-visible {
+      outline-color: var(--accent-color);
   }
 
-  /* Image Wrapper - NEW STYLE */
+  /* Grid Item Sizing */
+  .case-study-card.cs-wide {
+      grid-column: span 2;
+  }
+  .case-study-card.cs-tall {
+      grid-row: span 2;
+  }
+  .case-study-card.cs-square {
+      grid-column: span 1;
+      grid-row: span 1;
+  }
+  /* Adjustments for smaller screens if needed */
+  @media (max-width: 767px) {
+      .home-page .case-studies-grid-container.masonry-grid {
+          grid-template-columns: 1fr; /* Single column */
+          grid-auto-rows: auto; /* Let rows size automatically */
+          gap: 1rem;
+      }
+      .case-study-card.cs-wide,
+      .case-study-card.cs-tall,
+      .case-study-card.cs-square {
+          grid-column: span 1; /* All span 1 column */
+          grid-row: auto; /* Reset row span */
+      }
+  }
+
+  /* Image Wrapper - MASONRY STYLE */
   .case-study-image-wrapper {
-      position: relative; /* Keep relative for potential future overlays if needed */
+      position: relative; /* Changed to relative */
       width: 100%;
-      aspect-ratio: 16 / 9; /* Give image a fixed aspect ratio */
-      overflow: hidden; /* Clip image zoom */
+      height: 100%; /* Fill the grid cell */
+      overflow: hidden;
+      border-radius: inherit; /* Inherit radius from card */
   }
   .case-study-image-wrapper img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease; /* Only transition transform */
-      /* Removed initial filter */
+      transition: transform 0.4s ease;
+      border-radius: inherit;
   }
-  .case-study-card:hover .case-study-image-wrapper img,
-  .case-study-card:focus-within .case-study-image-wrapper img {
-      transform: scale(1.05); /* Slightly less zoom */
-      /* Removed filter change */
-  }
-  /* Removed placeholder filters */
-
-  /* Content Area Below Image - NEW STYLE */
-  .case-study-content-area {
-      padding: 1rem 1.5rem; /* Adjust padding */
-      display: flex;
-      justify-content: space-between; /* Space out text and button */
-      align-items: center; /* Vertically align items */
-      background-color: var(--card-bg); /* Ensure background color */
-      transition: background-color 0.3s ease;
-      flex-grow: 1; /* Allow content area to take remaining space if needed */
+  .case-study-card:hover .case-study-image-wrapper img {
+      transform: scale(1.05);
   }
 
-  /* Text block (Title + Client) */
-  .case-study-text {
-      margin-right: 1rem; /* Add space between text and button */
+  /* Overlay - MASONRY STYLE */
+  .case-study-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--portfolio-overlay-bg); /* Use variable */
+      padding: 1.5rem 1rem 1rem; /* Adjust padding */
+      transform: translateY(100%); /* Start hidden below */
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease;
+      border-radius: 0 0 12px 12px; /* Match bottom corners */
+      color: #ffffff; /* Ensure text is light on overlay */
+  }
+  body.light-mode .case-study-overlay {
+      color: var(--text-color); /* Use dark text on light overlay */
+  }
+  .case-study-card:hover .case-study-overlay,
+  .case-study-card:focus-within .case-study-overlay {
+      transform: translateY(0); /* Slide up */
+      opacity: 1;
   }
 
-  /* Title - NEW STYLE */
-  .case-study-title {
-      font-size: 1.1rem; /* Adjusted size */
-      margin-bottom: 0.15rem; /* Smaller margin */
+  /* Title & Client inside Overlay */
+  .case-study-overlay .case-study-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
       font-weight: 600;
-      color: var(--text-color);
-      /* Removed text-shadow */
-      transition: color 0.3s ease;
+      color: inherit; /* Inherit color from overlay */
+      transition: none; /* Remove individual transition */
   }
-  .case-study-card:hover .case-study-title,
-  .case-study-card:focus-within .case-study-title {
-      color: var(--accent-color); /* Optional: Change title color on hover */
-      text-decoration: none; /* Ensure no underline on title specifically */
-  }
-
-  /* Client - NEW STYLE */
-  .case-study-client {
-      font-size: 0.85rem; /* Adjusted size */
-      color: var(--subtext-color);
-      font-weight: 400;
-      /* Removed text-shadow */
-      transition: color 0.3s ease;
-      display: block; /* Ensure it takes its own line */
-  }
-
-  /* View Project Button - NEW STYLE */
-  .case-study-button {
-      display: inline-block;
-      background-color: var(--accent-color); /* Use site accent color */
-      color: var(--button-text-color); /* Use button text color variable */
-      padding: 0.5rem 1.2rem; /* Adjust padding */
-      border-radius: 20px; /* Pill shape */
+  .case-study-overlay .case-study-client {
       font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      white-space: nowrap; /* Prevent wrapping */
-      border: 1px solid transparent; /* Add border for hover transition */
-      transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-      cursor: pointer; /* Ensure pointer cursor */
-  }
-  .case-study-button:hover {
-      background-color: transparent;
-      color: var(--accent-color);
-      border-color: var(--accent-color);
-      transform: scale(1.03);
+      color: inherit; /* Inherit color from overlay */
+      opacity: 0.8; /* Slightly less prominent */
+      font-weight: 400;
+      transition: none; /* Remove individual transition */
+      display: block;
   }
 
-  /* Remove Old/Unused Styles */
-  /* .case-study-overlay, .disabled-card, .coming-soon-badge removed */
+  /* Remove old styles */
+  /* .case-study-content-area, .case-study-text, .case-study-button removed */
 
   /* Contact (3 steps & Logos) */
   .home-page .contact-section-steps { padding: 6rem 2rem 4rem 2rem; text-align: center; }
@@ -1082,8 +1110,7 @@
       transition: filter 0.3s ease;
   }
   .logo-item:hover img { filter: grayscale(0) opacity(1); }
-  body.light-mode .logo-item img { filter: grayscale(1) opacity(0.6) brightness(0.8); }
-  body.light-mode .logo-item:hover img { filter: grayscale(0) opacity(1) brightness(1); }
+  /* Removed light mode logo styles */
   @keyframes slide-logos { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
 
   .home-page .contact-cta-button-container { text-align: center; margin-top: 3rem; padding-bottom: 1rem; }
@@ -1091,7 +1118,7 @@
   .home-page .contact-alternate-home p { color: var(--subtext-color); }
   .home-page .contact-alternate-home a { color: var(--accent-color); font-weight: 600; transition: color 0.3s ease; }
   .home-page .contact-alternate-home a:hover { color: var(--text-color); text-decoration: underline; }
-  body.light-mode .home-page .contact-alternate-home a:hover { color: var(--bg-color); }
+  /* Removed light mode alternate link hover */
   .home-page .contact-footer { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); transition: border-color 0.3s ease;}
   /* Enhanced Footer Styles */
   .home-page .contact-footer {
@@ -1240,18 +1267,8 @@
        outline-offset: 2px !important;
    }
 
-
-  /* === Theme Toggle Button Styles === */
-  #theme-toggle { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 1001; background-color: var(--toggle-button-bg); color: var(--toggle-button-icon-color); border: none; width: 48px; height: 48px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; }
-  #theme-toggle:hover, #theme-toggle:focus-visible { transform: scale(1.1); outline: none; }
-  #theme-toggle:focus-visible { box-shadow: 0 0 0 3px var(--accent-color); }
-  #theme-toggle svg { width: 24px; height: 24px; fill: currentColor; }
-  .icon-moon { display: block; } .icon-sun { display: none; }
-  body.light-mode .icon-moon { display: none; } body.light-mode .icon-sun { display: block; }
-  @media (prefers-reduced-motion: reduce) { #theme-toggle:hover, #theme-toggle:focus-visible { transform: none; } }
-
   /* === Back to Top Button === */
-  #back-to-top { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 1001; background-color: var(--toggle-button-bg); color: var(--toggle-button-icon-color); border: none; width: 48px; height: 48px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); opacity: 0; visibility: hidden; pointer-events: none; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, opacity 0.4s ease, visibility 0.4s ease; }
+  #back-to-top { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 1001; background-color: var(--blockquote-bg); /* Use a slightly different bg */ color: var(--text-color); border: none; width: 48px; height: 48px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); opacity: 0; visibility: hidden; pointer-events: none; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, opacity 0.4s ease, visibility 0.4s ease; }
   #back-to-top.visible { opacity: 1; visibility: visible; pointer-events: auto; }
   #back-to-top:hover, #back-to-top:focus-visible { transform: scale(1.1); outline: none; }
   #back-to-top:focus-visible { box-shadow: 0 0 0 3px var(--accent-color); }
@@ -1276,9 +1293,7 @@
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
   }
-  body.light-mode .schedule-modal-overlay {
-      background-color: rgba(244, 247, 246, 0.9);
-  }
+  /* Removed light mode modal overlay */
   .schedule-modal-overlay.active {
       opacity: 1;
       visibility: visible;
@@ -1363,7 +1378,7 @@
   .case-study-page .case-study-prev-next { margin-bottom: 3rem; }
   .case-study-page .case-study-prev-next a { margin: 0 1rem; color: var(--accent-color); font-weight: 600; text-decoration: none; transition: color 0.3s ease; }
   .case-study-page .case-study-prev-next a:hover { color: var(--text-color); text-decoration: underline; }
-  body.light-mode .case-study-page .case-study-prev-next a:hover { color: var(--bg-color); }
+  /* Removed light mode case study nav hover */
   .case-study-page .case-study-cta p { margin-bottom: 1.5rem; font-size: 1.2rem; color: var(--text-color); transition: color 0.3s ease; }
   .case-study-page .case-study-cta .cta-button {}
 
@@ -1390,7 +1405,7 @@
     .cta-button:hover, .cta-button:focus-visible { transform: none; background-color: var(--accent-color); color: var(--button-text-color); border-color: transparent; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
     .schedule-call-nav-link:hover, .schedule-call-nav-link:focus-visible { transform: none; background-color: var(--accent-color); color: var(--button-text-color); border-color: transparent; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); }
     #google-calendar-button-wrapper button:hover, button.google-cal-button-styled:hover { filter: none !important; transform: none !important; background-color: var(--accent-color) !important; color: var(--button-text-color) !important; border-color: transparent !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; }
-    #theme-toggle:hover, #theme-toggle:focus-visible { transform: none; }
+    /* Removed theme toggle reduced motion */
     #back-to-top:hover, #back-to-top:focus-visible { transform: none; }
     .service-card:hover { transform: none; border-color: var(--border-color); box-shadow: none; }
     /* Allow price reveal on hover even with reduced motion */
@@ -1410,9 +1425,9 @@
     .logo-link:hover .logo-svg { color: var(--text-color); }
     .desktop-nav .nav-links-centered a:hover::after, .desktop-nav .nav-links-centered a:focus::after { width: 0; }
     .contact-email-link:hover { color: var(--accent-color); }
-    body.light-mode .contact-email-link:hover { color: var(--accent-color); }
+    /* Removed light mode email link hover */
     .case-study-page .case-study-prev-next a:hover { color: var(--accent-color); }
-    body.light-mode .case-study-page .case-study-prev-next a:hover { color: var(--accent-color); }
+    /* Removed light mode case study nav hover */
     .testimonial-slider-track { animation: none !important; }
     /* .testimonial-slider-track:hover { animation-play-state: running !important; } */ /* Removed pause on hover */
     .logo-slider-track { animation: none !important; }
