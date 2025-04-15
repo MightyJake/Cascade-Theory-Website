@@ -10,18 +10,19 @@
     --subtext-color: #cccccc;
     --card-bg: #18181a;
     --border-color: #333333;
-    --accent-color: #2ababf;
+    --accent-color: #1a6172; /* Swapped: Primary Accent */
+    --secondary-accent-color: #e86c46; /* Swapped: Secondary Accent (Orange) */
     --form-bg: #222224;
     --form-border: #444;
     --header-bg: rgba(13, 13, 13, .6);
     --overlay-bg: rgba(13, 13, 13, .9);
-    --shadow-color-cta: rgba(42, 186, 191, 0.2);
+    --shadow-color-cta: rgba(26, 97, 114, 0.2); /* Swapped: Primary Accent Shadow */
     --shadow-color-card: rgba(0, 0, 0, 0.4);
     --blockquote-bg: rgba(24, 24, 26, 0.5);
     --toggle-button-bg: #333;
     --toggle-button-icon-color: var(--text-color);
-    --button-text-color: #0d0d0d; /* Dark text on filled buttons */
-     --glow-color: rgba(42, 186, 191, 0.6); /* Glow color for price */
+    --button-text-color: #ffffff; /* Light text on filled buttons (better contrast with teal) */
+     --glow-color: rgba(26, 97, 114, 0.6); /* Swapped: Primary Glow color */
      /* --modal-overlay-bg REMOVED */
      --portfolio-overlay-bg: linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, rgba(13, 13, 13, 0.8) 80%);
   }
@@ -29,7 +30,7 @@
   /* === Light Mode Variables === */
   body.light-mode {
     --bg-color: #f4f7f6; /* Light grey background */
-    --text-color: #18181a; /* Dark text */
+    --text-color: #18181a; /* Reverted: Dark text */
     --subtext-color: #555555; /* Medium grey subtext */
     --card-bg: #ffffff; /* White cards */
     --border-color: #e0e0e0; /* Light grey border */
@@ -38,13 +39,13 @@
     --form-border: #cccccc;
     --header-bg: rgba(244, 247, 246, 0.7); /* Semi-transparent light bg */
     --overlay-bg: rgba(244, 247, 246, 0.95); /* Mostly opaque light overlay */
-    --shadow-color-cta: rgba(42, 186, 191, 0.15);
+    --shadow-color-cta: rgba(26, 97, 114, 0.15); /* Swapped: Primary Accent Shadow */
     --shadow-color-card: rgba(0, 0, 0, 0.1);
     --blockquote-bg: rgba(224, 224, 224, 0.5);
     --toggle-button-bg: #eee;
     --toggle-button-icon-color: var(--text-color);
-    /* --button-text-color: #0d0d0d; */ /* Keep dark text on filled buttons */
-    --glow-color: rgba(42, 186, 191, 0.4); /* Glow color for price - light */
+    --button-text-color: #ffffff; /* Light text on filled buttons (better contrast with teal) */
+    --glow-color: rgba(26, 97, 114, 0.4); /* Swapped: Primary Glow color - light */
      /* --modal-overlay-bg REMOVED */
      --portfolio-overlay-bg: linear-gradient(180deg, rgba(244, 247, 246, 0) 0%, rgba(244, 247, 246, 0.8) 80%);
   }
@@ -58,7 +59,7 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
-      opacity: 0; /* JS fade-in */
+      /* opacity: 0; /* JS fade-in - REMOVED, will be handled by JS */
       position: relative;
       overflow-x: hidden;
       margin: 0;
@@ -94,7 +95,7 @@
   .section-subtitle { max-width: 700px; margin: 0 auto 2rem; text-align: center; font-size: 1.1rem; color: var(--text-color); }
   .centered-text { text-align: center; margin-left: auto; margin-right: auto; }
   .accent-title { color: var(--text-color); }
-  .accent-text { color: var(--accent-color); transition: color 0.3s ease;}
+  .accent-text { color: var(--secondary-accent-color); transition: color 0.3s ease;} /* Use secondary accent */
 
   /* CTA Button */
   .cta-button {
@@ -136,7 +137,7 @@
   .form-group { margin-bottom: 1.5rem; }
   .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--subtext-color); }
   .form-group input[type="text"], .form-group input[type="email"], .form-group select, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border-radius: 6px; background-color: var(--form-bg); border: 1px solid var(--form-border); color: var(--text-color); font-size: 1rem; font-family: inherit; transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(42, 186, 191, 0.5); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(26, 97, 114, 0.5); } /* Swapped focus shadow */
   .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23cccccc'%3E%3Cpath d='M8 11.414l-4.707-4.707a1 1 0 0 1 1.414-1.414L8 8.586l3.293-3.293a1 1 0 1 1 1.414 1.414L8 11.414z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; padding-right: 2.5rem; transition: background-image 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
   body.light-mode .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23555555'%3E%3Cpath d='M8 11.414l-4.707-4.707a1 1 0 0 1 1.414-1.414L8 8.586l3.293-3.293a1 1 0 1 1 1.414 1.414L8 11.414z'/%3E%3C/svg%3E"); }
   .form-group textarea { resize: vertical; min-height: 120px; }
@@ -165,11 +166,11 @@
       display: block;
       height: 50px; /* Increased height */
       width: auto;
-      filter: invert(1) brightness(2); /* Default to white for dark mode */
+      filter: none; /* Default to original color (light) for dark mode */
       transition: filter 0.3s ease;
   }
   body.light-mode .logo-img {
-      filter: none; /* Revert to original (assuming black) for light mode */
+      filter: invert(1); /* Invert to dark for light mode */
   }
   /* Removed .logo-svg, .logo-text, and their hover rules */
 
@@ -182,7 +183,7 @@
 
   /* Schedule Call Button Styling */
   .schedule-call-nav-link {
-      background-color: var(--accent-color); color: var(--button-text-color); font-weight: 700;
+      background-color: var(--secondary-accent-color); color: var(--button-text-color); font-weight: 700; /* Use secondary accent */
       padding: 0.6rem 1.5rem; font-size: 1rem; border-radius: 6px; cursor: pointer;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); text-shadow: none; display: inline-block;
       text-decoration: none; border: 2px solid transparent;
@@ -197,12 +198,16 @@
   /* Fix for hover state after being visited */
   .schedule-call-nav-link.schedule-call-link:hover,
   .schedule-call-nav-link.schedule-call-link:focus-visible {
-      color: var(--accent-color); /* Ensure text is accent color on hover */
+      color: var(--secondary-accent-color); /* Ensure text is secondary accent color on hover */
   }
   .schedule-call-nav-link:hover, .schedule-call-nav-link:focus-visible {
-      background-color: transparent; color: var(--accent-color); border: 2px solid var(--accent-color);
-      transform: translateY(-2px) scale(1.02); box-shadow: 0 4px 15px var(--shadow-color-cta);
+      background-color: transparent; color: var(--secondary-accent-color); border: 2px solid var(--secondary-accent-color); /* Use secondary accent */
+      transform: translateY(-2px) scale(1.02); box-shadow: 0 4px 15px rgba(232, 108, 70, 0.2); /* Use secondary accent shadow */
       text-decoration: none;
+  }
+  body.light-mode .schedule-call-nav-link:hover,
+  body.light-mode .schedule-call-nav-link:focus-visible {
+      box-shadow: 0 4px 15px rgba(232, 108, 70, 0.15); /* Use secondary accent shadow (light) */
   }
   @media (max-width: 992px) { .nav-links-centered { margin-right: 0; } .schedule-call-nav-link { margin-left: 16px; } }
   @media (max-width: 768px) { .desktop-nav { display: none; } }
@@ -218,11 +223,11 @@
   .mobile-nav-header .logo-img { /* Style mobile logo */
       height: 40px; /* Increased height */
       width: auto;
-      filter: invert(1) brightness(2); /* Default to white for dark mode */
+      filter: none; /* Default to original color (light) for dark mode */
       transition: filter 0.3s ease;
   }
   body.light-mode .mobile-nav-header .logo-img {
-      filter: none; /* Revert to original (assuming black) for light mode */
+      filter: invert(1); /* Invert to dark for light mode */
   }
   /* Removed .mobile-logo-link .logo-svg rule */
   .mobile-nav { display: flex; flex-direction: column; align-items: center; margin-top: 2rem; }
@@ -231,15 +236,18 @@
   /* Mobile nav CTA button */
   .mobile-nav a.mobile-nav-cta {
         font-size: 1.3rem; font-weight: 700; text-decoration: none; margin-top: 2rem;
-        background-color: var(--accent-color); color: var(--button-text-color);
+        background-color: var(--secondary-accent-color); color: var(--button-text-color); /* Use secondary accent */
         padding: 0.8rem 2rem; border-radius: 6px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         text-shadow: none; display: inline-block; border: 2px solid transparent;
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
    }
    .mobile-nav a.mobile-nav-cta:hover {
-        background-color: transparent; color: var(--accent-color); border: 2px solid var(--accent-color);
-        transform: translateY(-3px) scale(1.03); box-shadow: 0 6px 20px var(--shadow-color-cta);
+        background-color: transparent; color: var(--secondary-accent-color); border: 2px solid var(--secondary-accent-color); /* Use secondary accent */
+        transform: translateY(-3px) scale(1.03); box-shadow: 0 6px 20px rgba(232, 108, 70, 0.2); /* Use secondary accent shadow */
         text-decoration: none;
+   }
+   body.light-mode .mobile-nav a.mobile-nav-cta:hover {
+       box-shadow: 0 6px 20px rgba(232, 108, 70, 0.15); /* Use secondary accent shadow (light) */
    }
   @media (min-width: 769px) { .nav-overlay { display: none !important; } }
 
@@ -410,7 +418,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 80%;
-      background-color: rgba(42, 186, 191, 0.1);
+      background-color: rgba(26, 97, 114, 0.1); /* Swapped price background */
       border: 1px solid transparent;
       transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   }
@@ -436,9 +444,14 @@
       }
   }
 
+  /* Process Section Background */
+  .home-page .process-section {
+      background-color: var(--card-bg);
+      transition: background-color 0.3s ease;
+  }
 
   /* Process - Desktop */
-  .home-page .process-steps-container { 
+  .home-page .process-steps-container {
       position: relative; 
       display: grid; 
       grid-template-columns: 1fr; 
@@ -499,7 +512,7 @@
           position: relative;
           overflow: visible; /* Keep visible */
           margin-bottom: 5rem;
-          background: transparent !important; /* Keep transparent */
+          /* background: transparent !important; REMOVED - Allow section background */
           padding-top: 0; /* Remove padding, handled by sticky wrapper */
           padding-bottom: 0; /* Remove padding, handled by sticky wrapper */
       }
@@ -1050,7 +1063,7 @@
   .home-page .contact-steps-grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1100px; margin: 0 auto 4rem auto; text-align: left; }
   .home-page .contact-steps-line { position: absolute; top: 25px; left: 16.66%; right: 16.66%; height: 2px; background-color: var(--accent-color); z-index: 0; opacity: 0.3; transition: background-color 0.3s ease; }
   .home-page .contact-step { position: relative; z-index: 1; padding: 1.5rem; padding-top: 40px; border-radius: 8px; text-align: center; }
-  @media (min-width: 768px) { .home-page .contact-step { text-align: left; } }
+  /* Removed media query that set text-align: left; */
   .step-number { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background-color: var(--accent-color); color: var(--button-text-color); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; border: 3px solid var(--card-bg); transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; z-index: 2; }
 
   /* Client Logo Section */
@@ -1058,7 +1071,7 @@
   .client-logo-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-color); }
   .client-logo-intro { margin-bottom: 2.5rem; font-size: 1rem; color: var(--subtext-color); }
   .logo-slider-container { width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
-  .logo-slider-track { display: flex; width: fit-content; animation: slide-logos 45s linear infinite; will-change: transform; }
+  .logo-slider-track { display: flex; width: fit-content; animation: slide-logos 68s linear infinite; will-change: transform; } /* Slowed down animation */
   /* .logo-slider-track:hover { animation-play-state: paused; } */ /* Removed pause on hover */
   .logo-item { flex-shrink: 0; padding: 0 3rem; /* Increased padding */ display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
   .logo-item img {
@@ -1080,9 +1093,103 @@
   .home-page .contact-alternate-home a:hover { color: var(--text-color); text-decoration: underline; }
   body.light-mode .home-page .contact-alternate-home a:hover { color: var(--bg-color); }
   .home-page .contact-footer { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); transition: border-color 0.3s ease;}
-  .home-page .contact-footer p { color: var(--subtext-color); }
-  .home-page .contact-footer #year { color: inherit; }
-  @media (max-width: 768px) { .home-page .contact-steps-grid { grid-template-columns: 1fr; gap: 3rem; max-width: 500px; } .home-page .contact-step { text-align: center; } .home-page .contact-steps-line { display: none; } }
+  /* Enhanced Footer Styles */
+  .home-page .contact-footer {
+      text-align: left; /* Override previous center alignment */
+      margin-top: 4rem;
+      padding: 3rem 2rem 2rem; /* Adjust padding */
+      border-top: 1px solid var(--border-color);
+      transition: border-color 0.3s ease;
+      background-color: var(--card-bg); /* Give footer a background */
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .footer-content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+      gap: 2rem;
+      max-width: 1100px; /* Match other sections */
+      margin: 0 auto; /* Center the grid */
+  }
+  .footer-column h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      transition: color 0.3s ease;
+  }
+  .footer-column p,
+  .footer-column a {
+      font-size: 0.9rem;
+      color: var(--subtext-color);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
+  }
+  .footer-column a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+  }
+  .social-links {
+      display: flex; /* Align links horizontally */
+      gap: 1rem; /* Space between links */
+  }
+  .social-link {
+      display: inline-flex; /* Use flex for centering */
+      align-items: center;
+      justify-content: center;
+      width: 36px; /* Fixed size */
+      height: 36px;
+      border: 1px solid var(--subtext-color); /* Border */
+      border-radius: 50%; /* Make it circular */
+      color: var(--subtext-color);
+      font-size: 0.8rem; /* Smaller font for placeholder text */
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .social-link:hover {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: var(--button-text-color); /* Use button text color for contrast */
+      text-decoration: none;
+  }
+  /* Reverted: Removed SVG specific styles */
+  .footer-copyright {
+      grid-column: 1 / -1; /* Span full width */
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      transition: border-color 0.3s ease;
+  }
+  .footer-copyright p {
+      font-size: 0.85rem;
+      color: var(--subtext-color);
+      margin-bottom: 0;
+  }
+  .footer-copyright #year { color: inherit; }
+
+  /* Responsive Footer */
+  @media (max-width: 768px) {
+      .footer-content-grid {
+          grid-template-columns: 1fr; /* Stack columns */
+          text-align: center; /* Center text in columns */
+      }
+      .footer-column {
+          margin-bottom: 1.5rem;
+      }
+      .social-links {
+          justify-content: center; /* Center links within the column */
+      }
+      .footer-social a { /* Restored old mobile rule */
+          display: inline-block; /* Put social links side-by-side */
+          margin: 0 0.5rem;
+      }
+      .footer-copyright {
+          margin-top: 1rem;
+      }
+      .home-page .contact-steps-grid { grid-template-columns: 1fr; gap: 3rem; max-width: 500px; } /* .home-page .contact-step { text-align: center; } - Already centered by default */ .home-page .contact-steps-line { display: none; }
+  }
 
 
   /* Styling for Google Calendar Button */
@@ -1090,7 +1197,7 @@
   /* Apply .cta-button styles via added class */
   button.google-cal-button-styled {
       /* Match .cta-button styles */
-      background-color: var(--accent-color);
+      background-color: var(--secondary-accent-color); /* Use secondary accent */
       color: var(--button-text-color);
       font-weight: 700;
       padding: 0.9rem 2.2rem !important; /* Use !important carefully */
@@ -1115,17 +1222,21 @@
   button.google-cal-button-styled:hover,
   button.google-cal-button-styled:focus-visible {
       background-color: transparent !important;
-      color: var(--accent-color) !important;
-      border: 2px solid var(--accent-color) !important;
+      color: var(--secondary-accent-color) !important; /* Use secondary accent */
+      border: 2px solid var(--secondary-accent-color) !important; /* Use secondary accent */
       transform: translateY(-3px) scale(1.03) !important;
-      box-shadow: 0 6px 20px var(--shadow-color-cta) !important;
+      box-shadow: 0 6px 20px rgba(232, 108, 70, 0.2) !important; /* Use secondary accent shadow */
       text-decoration: none !important;
       outline: none !important; /* Remove default focus outline */
+  }
+  body.light-mode button.google-cal-button-styled:hover,
+  body.light-mode button.google-cal-button-styled:focus-visible {
+      box-shadow: 0 6px 20px rgba(232, 108, 70, 0.15) !important; /* Use secondary accent shadow (light) */
   }
   button.google-cal-button-styled:focus-visible {
        /* Keep transform/shadow for hover state on focus-visible */
        /* Use site's focus outline */
-       outline: 3px solid var(--accent-color) !important;
+       outline: 3px solid var(--secondary-accent-color) !important; /* Use secondary accent */
        outline-offset: 2px !important;
    }
 

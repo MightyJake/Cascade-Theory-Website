@@ -21,7 +21,10 @@ function setTheme(theme) {
       const nextAriaLabel = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
       themeToggleButton.setAttribute('aria-label', nextAriaLabel);
     } else { console.warn("[Theme] Theme toggle button not found for ARIA update."); }
-    body.style.opacity = '1'; // Trigger fade-in
+    body.style.opacity = '0'; // Set opacity to 0 just before fade-in
+    requestAnimationFrame(() => { // Ensure the opacity change is registered before starting transition
+        body.style.opacity = '1'; // Trigger fade-in
+    });
     console.log("[Theme] Theme set complete. Current body classes:", body.className);
 }
 
@@ -41,7 +44,7 @@ function initializeTheme() {
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
     let initialTheme = savedPreference || (prefersLight ? 'light' : 'dark');
     console.log(`[Theme] Initial theme: ${initialTheme} (from ${savedPreference ? 'localStorage' : 'OS preference'})`);
-    body.style.opacity = '0'; // Prepare for fade-in
+    // body.style.opacity = '0'; // REMOVED - Moved into setTheme
     setTheme(initialTheme);
 }
 // --- END THEME TOGGLE LOGIC ---
@@ -91,7 +94,7 @@ function initAdvancedGradient() {
     const webGLColors = {
         darkBg: new THREE.Vector3(13 / 255, 13 / 255, 13 / 255),
         lightBg: new THREE.Vector3(244 / 255, 247 / 255, 246 / 255),
-        accentTeal: new THREE.Vector3(42 / 255, 186 / 255, 191 / 255)
+        primaryAccent: new THREE.Vector3(26 / 255, 97 / 255, 114 / 255) // Updated to primary color #1a6172
     };
     let animationFrameId = null; let isFrozenForMotionPref = false; let clock, scene, camera, material, geometry, mesh;
     try {
@@ -104,7 +107,7 @@ function initAdvancedGradient() {
         camera.position.z = 1;
         const isCurrentlyLight = document.body.classList.contains(lightModeClass);
         const initialBgColor = isCurrentlyLight ? webGLColors.lightBg : webGLColors.darkBg;
-        const initialAccentColor = webGLColors.accentTeal;
+        const initialAccentColor = webGLColors.primaryAccent; // Use updated primary accent
         const uniforms = {
             u_time: { value: 0.0 },
             u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
@@ -121,7 +124,7 @@ function initAdvancedGradient() {
                 void main(){vec2 uv=vUv;uv.x*=u_resolution.x/u_resolution.y;float i=0.;float n1=getNoiseLayer(uv,u_time,.3,.06,.2,vec2(0.,0.));i+=smoothstep(.35,.7,n1)*.25;float n2=getNoiseLayer(uv,u_time,.5,.09,.15,vec2(2.,1.));i+=smoothstep(.45,.65,n2)*.35;float n3=getNoiseLayer(uv,u_time,.8,.12,.1,vec2(-1.,3.));i+=smoothstep(.5,.6,n3)*.15;i=clamp(i,0.,1.);vec3 fc=mix(u_color_bg,u_color_accent,i);gl_FragColor=vec4(fc,1.);}`
         });
         mesh = new THREE.Mesh(geometry, material); scene.add(mesh); clock = new THREE.Clock();
-        function animate() { if (!gradientRenderer) return; animationFrameId = requestAnimationFrame(animate); const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if (!gradientUniforms) return; if (prm) { if (!isFrozenForMotionPref) { gradientUniforms.u_time.value = 1.5; const isLight = body.classList.contains(lightModeClass); gradientUniforms.u_color_bg.value.copy(isLight ? webGLColors.lightBg : webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.accentTeal); gradientRenderer.render(scene, camera); isFrozenForMotionPref = true; if (clock && clock.running) clock.stop(); } return; } else { if (isFrozenForMotionPref) { isFrozenForMotionPref = false; if (clock && !clock.running) clock.start(); } const isLight = body.classList.contains(lightModeClass); gradientUniforms.u_color_bg.value.copy(isLight ? webGLColors.lightBg : webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.accentTeal); if (clock) { const et = clock.getElapsedTime(); gradientUniforms.u_time.value = et; } gradientRenderer.render(scene, camera); } } animate();
+        function animate() { if (!gradientRenderer) return; animationFrameId = requestAnimationFrame(animate); const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if (!gradientUniforms) return; if (prm) { if (!isFrozenForMotionPref) { gradientUniforms.u_time.value = 1.5; const isLight = body.classList.contains(lightModeClass); gradientUniforms.u_color_bg.value.copy(isLight ? webGLColors.lightBg : webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); gradientRenderer.render(scene, camera); isFrozenForMotionPref = true; if (clock && clock.running) clock.stop(); } return; } else { if (isFrozenForMotionPref) { isFrozenForMotionPref = false; if (clock && !clock.running) clock.start(); } const isLight = body.classList.contains(lightModeClass); gradientUniforms.u_color_bg.value.copy(isLight ? webGLColors.lightBg : webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); if (clock) { const et = clock.getElapsedTime(); gradientUniforms.u_time.value = et; } gradientRenderer.render(scene, camera); } } animate();
         let resizeTimeout; const onWindowResize = () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { if (!gradientRenderer || !camera || !gradientUniforms) return; const w = window.innerWidth; const h = window.innerHeight; camera.aspect = w / h; camera.updateProjectionMatrix(); gradientRenderer.setSize(w, h); gradientRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); gradientUniforms.u_resolution.value.set(w, h); if (gradientRenderer && scene && camera) { gradientRenderer.render(scene, camera); } }, 150); }; window.addEventListener('resize', onWindowResize, false);
         const cleanup = () => { console.log("[WebGL] Cleaning up WebGL resources."); cancelAnimationFrame(animationFrameId); window.removeEventListener('resize', onWindowResize); window.removeEventListener('beforeunload', cleanup); try { if (material) material.dispose(); if (geometry) geometry.dispose(); if (gradientRenderer) { gradientRenderer.dispose(); const context = gradientRenderer.domElement.getContext('webgl'); if (context) { const loseContextExt = context.getExtension('WEBGL_lose_context'); if (loseContextExt) { loseContextExt.loseContext(); } } } } catch (e) { console.error("Error during WebGL cleanup:", e); } finally { scene = null; camera = null; clock = null; material = null; geometry = null; mesh = null; gradientRenderer = null; gradientScene = null; gradientCamera = null; gradientUniforms = null; console.log("[WebGL] Cleanup complete."); } }; window.addEventListener('beforeunload', cleanup);
     } catch (error) { console.error("WebGL initialization failed:", error); if (canvas) canvas.style.display = 'none'; gradientRenderer = null; gradientScene = null; gradientCamera = null; gradientUniforms = null; }
@@ -157,9 +160,43 @@ function updateCopyrightYear() {
 }
 /** Initializes IntersectionObserver for scroll animations */
 function initScrollAnimations() {
-    const animationClass = 'animate-on-scroll'; const visibilityClass = 'is-visible'; const elementsToAnimate = document.querySelectorAll('.' + animationClass); if (!elementsToAnimate.length) return;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if (prefersReducedMotion) { elementsToAnimate.forEach(el => { el.classList.remove(animationClass); el.style.opacity = 1; el.style.transform = 'none'; }); return; }
-    const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 }; const observerCallback = (entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add(visibilityClass); observer.unobserve(entry.target); } }); }; const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions); elementsToAnimate.forEach(el => intersectionObserver.observe(el));
+    const animationClass = 'animate-on-scroll';
+    const visibilityClass = 'is-visible';
+    const elementsToAnimate = document.querySelectorAll('.' + animationClass);
+    if (!elementsToAnimate.length) {
+        console.log("[Init] No elements found for scroll animation.");
+        return;
+    }
+    console.log(`[Init] Found ${elementsToAnimate.length} elements for scroll animation.`);
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        console.log("[Init] Reduced motion preference detected. Applying styles directly.");
+        elementsToAnimate.forEach(el => {
+            el.classList.remove(animationClass); // Remove class to prevent potential conflicts
+            el.style.opacity = 1;
+            el.style.transform = 'none';
+            el.classList.add(visibilityClass); // Add visible class for consistency if needed elsewhere
+        });
+        return; // Exit if reduced motion is preferred
+    }
+
+    // --- Original IntersectionObserver Logic ---
+    const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 };
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // console.log("[ScrollAnim] Element intersecting:", entry.target); // Optional: Keep for debugging if needed
+                entry.target.classList.add(visibilityClass);
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+    const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions);
+    elementsToAnimate.forEach(el => {
+        // console.log("[ScrollAnim] Observing element:", el); // Optional: Keep for debugging if needed
+        intersectionObserver.observe(el);
+    });
 }
 
 /** Initializes Testimonial Slider */
@@ -511,23 +548,61 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("[Init] DOMContentLoaded event fired.");
 
     initializeTheme(); // Theme FIRST
+    console.log("[Init] Theme initialization called.");
 
     // Other initializations
+    console.log("[Init] Calling updateCopyrightYear...");
     updateCopyrightYear();
-    if(document.getElementById('stats') && body.classList.contains('home-page')) { initStatsObserver(); }
-    if (document.getElementById('testimonial-slider')) { initTestimonialSlider(); }
-    if (document.getElementById('logo-slider')) { initLogoSlider(); }
+    console.log("[Init] updateCopyrightYear complete.");
+
+    if(document.getElementById('stats') && body.classList.contains('home-page')) {
+        console.log("[Init] Calling initStatsObserver...");
+        initStatsObserver();
+        console.log("[Init] initStatsObserver complete.");
+    }
+    if (document.getElementById('testimonial-slider')) {
+        console.log("[Init] Calling initTestimonialSlider...");
+        initTestimonialSlider();
+        console.log("[Init] initTestimonialSlider complete.");
+    }
+    if (document.getElementById('logo-slider')) {
+        console.log("[Init] Calling initLogoSlider...");
+        initLogoSlider();
+        console.log("[Init] initLogoSlider complete.");
+    }
     const canvas = document.getElementById('gradient-canvas');
-    if(canvas && body.classList.contains('home-page')) { initAdvancedGradient(); }
-    else { if (canvas) canvas.style.display = 'none'; }
+    if(canvas && body.classList.contains('home-page')) {
+        console.log("[Init] Calling initAdvancedGradient...");
+        initAdvancedGradient();
+        console.log("[Init] initAdvancedGradient complete.");
+    } else {
+        if (canvas) canvas.style.display = 'none';
+        console.log("[Init] Skipping WebGL gradient init (not homepage or no canvas).");
+    }
+    console.log("[Init] Calling initStickyNav...");
     initStickyNav();
+    console.log("[Init] initStickyNav complete.");
+    console.log("[Init] Calling initMobileMenu...");
     initMobileMenu();
+    console.log("[Init] initMobileMenu complete.");
+    console.log("[Init] Calling initScrollAnimations...");
     initScrollAnimations();
+    console.log("[Init] initScrollAnimations complete.");
+    console.log("[Init] Calling initBackToTopButton...");
     initBackToTopButton();
+    console.log("[Init] initBackToTopButton complete.");
+    console.log("[Init] Calling initScheduleCallLink...");
     initScheduleCallLink();
+    console.log("[Init] initScheduleCallLink complete.");
+    console.log("[Init] Calling initReadMoreButtons...");
     initReadMoreButtons();
+    console.log("[Init] initReadMoreButtons complete.");
+    console.log("[Init] Calling initMobileContactSteps...");
     initMobileContactSteps();
+    console.log("[Init] initMobileContactSteps complete.");
+    console.log("[Init] Calling initStickyHorizontalScroll...");
     initStickyHorizontalScroll(); // Initialize the new sticky scroll feature
+    console.log("[Init] initStickyHorizontalScroll complete.");
 
     console.log("[Init] All initializations complete.");
 });

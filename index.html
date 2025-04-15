@@ -345,6 +345,11 @@
             </div>
         </div>
 
+        <!-- Schedule Call Button (Moved Here) -->
+        <div class="contact-cta-button-container animate-on-scroll" style="--delay: 0.5s;">
+            <a href="#schedule" class="schedule-call-nav-link schedule-call-link">Schedule a Call</a>
+        </div>
+
         <!-- Client Logo Section -->
         <div class="client-logo-section animate-on-scroll" style="--delay: 0.4s;">
             <h3 class="client-logo-title">Trusted By Brands Like Yours</h3>
@@ -372,42 +377,62 @@
         </div>
         <!-- End Client Logo Section -->
 
-        <!-- Schedule Call Button (Matches Nav) -->
-        <div class="contact-cta-button-container animate-on-scroll" style="--delay: 0.5s;">
-            <a href="#schedule" class="schedule-call-nav-link schedule-call-link">Schedule a Call</a>
-        </div>
-
-        <div class="contact-alternate-home animate-on-scroll" style="--delay: 0.6s;">
-             <p>Prefer to send a quick message first? <a href="contact.html" class="contact-page-link">Use the contact form</a> or email <a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a>.</p>
-         </div>
+        <!-- Removed contact-alternate-home div -->
 
         <footer class="contact-footer animate-on-scroll" style="--delay: 0.7s;">
-             <p>© <span id="year">2024</span> Cascade Theory. All rights reserved. | Bend, Oregon</p>
-        </footer>
-    </section>
+             <div class="footer-content-grid">
+                 <div class="footer-column footer-contact">
+                     <h4>Contact</h4>
+                     <p>Bend, Oregon</p>
+                     <p><a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a></p>
+                     <p>Prefer to send a quick message first? <a href="contact.html" class="contact-page-link">Use the contact form</a>.</p> <!-- Moved text -->
+                 </div>
+                 <div class="footer-column footer-social">
+                     <h4>Connect</h4>
+                     <div class="social-links"> <!-- Wrapper for styling -->
+                         <a href="#" class="social-link" aria-label="LinkedIn">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                         </a>
+                         <a href="#" class="social-link" aria-label="Instagram">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.645-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                         </a>
+                         <a href="#" class="social-link" aria-label="Twitter">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                         </a>
+                     </div> <!-- Closes social-links -->
+                 </div> <!-- Closes footer-social -->
+                 <div class="footer-column footer-copyright">
+                     <p>&copy; <span id="year"></span> Cascade Theory. All rights reserved.</p>
+                 </div> <!-- Closes footer-copyright -->
+             </div> <!-- Closes footer-content-grid -->
+        </footer> <!-- Closes contact-footer -->
 
-  </main>
+    </section> <!-- Closes contact-section-steps -->
+
+  </main> <!-- Closes main content area -->
 
   <!-- Theme Toggle Button -->
-  <button id="theme-toggle" aria-label="Toggle light/dark theme">
-    <svg class="icon-sun" enable-background="new 0 0 512 512" height="24px" width="24px" id="Layer_1" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" aria-hidden="true"> <g><g><path d="M256,144c-61.75,0-112,50.25-112,112s50.25,112,112,112s112-50.25,112-112S317.75,144,256,144z M256,336    c-44.188,0-80-35.812-80-80c0-44.188,35.812-80,80-80c44.188,0,80,35.812,80,80C336,300.188,300.188,336,256,336z M256,112    c8.833,0,16-7.167,16-16V64c0-8.833-7.167-16-16-16s-16,7.167-16,16v32C240,104.833,247.167,112,256,112z M256,400    c-8.833,0-16,7.167-16,16v32c0,8.833,7.167,16,16,16s16-7.167,16-16v-32C272,407.167,264.833,400,256,400z M380.438,154.167    l22.625-22.625c6.25-6.25,6.25-16.375,0-22.625s-16.375-6.25-22.625,0l-22.625,22.625c-6.25,6.25-6.25,16.375,0,22.625    S374.188,160.417,380.438,154.167z M131.562,357.834l-22.625,22.625c-6.25,6.249-6.25,16.374,0,22.624s16.375,6.25,22.625,0    l22.625-22.624c6.25-6.271,6.25-16.376,0-22.625C147.938,351.583,137.812,351.562,131.562,357.834z M112,256    c0-8.833-7.167-16-16-16H64c-8.833,0-16,7.167-16,16s7.167,16,16,16h32C104.833,272,112,264.833,112,256z M448,240h-32    c-8.833,0-16,7.167-16,16s7.167,16,16,16h32c8.833,0,16-7.167,16-16S456.833,240,448,240z M131.541,154.167    c6.251,6.25,16.376,6.25,22.625,0c6.251-6.25,6.251-16.375,0-22.625l-22.625-22.625c-6.25-6.25-16.374-6.25-22.625,0    c-6.25,6.25-6.25,16.375,0,22.625L131.541,154.167z M380.459,357.812c-6.271-6.25-16.376-6.25-22.625,0    c-6.251,6.25-6.271,16.375,0,22.625l22.625,22.625c6.249,6.25,16.374,6.25,22.624,0s6.25-16.375,0-22.625L380.459,357.812z"/></g></g> </svg>
-    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
+  <button id="theme-toggle" aria-label="Switch to light theme">
+    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.166 7.758a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-3.51 1.713-6.63 4.362-8.552a.75.75 0 01.819.162z" clip-rule="evenodd"/></svg>
   </button>
 
   <!-- Back to Top Button -->
-  <button id="back-to-top" aria-label="Scroll back to top">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="24" height="24"> <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /> </svg>
+  <button id="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
   </button>
 
   <!-- Schedule Modal -->
-  <div id="schedule-modal" class="schedule-modal-overlay">
-      <div class="schedule-modal-content">
-          <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">×</button>
-          <iframe id="schedule-iframe" src="" frameborder="0" allowfullscreen></iframe>
-          <div class="modal-loading">Loading Scheduler...</div>
-      </div>
+  <div id="schedule-modal" class="schedule-modal-overlay" aria-modal="true" role="dialog">
+    <div class="schedule-modal-content">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">&times;</button>
+      <div class="modal-loading">Loading Scheduler...</div>
+      <iframe id="schedule-iframe" title="Scheduling Page"></iframe>
+    </div>
   </div>
 
+  <!-- Load Main Script -->
   <script src="script.js"></script>
+
 </body>
 </html>
