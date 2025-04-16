@@ -78,7 +78,10 @@
   /* CTA Button */
   .cta-button {
       background-color: var(--accent-color); color: var(--button-text-color); font-weight: 700;
-      padding: 0.9rem 2.2rem; font-size: 1.1rem; border-radius: 6px; cursor: pointer;
+      padding: 0.8rem 2rem; /* Slightly adjusted padding */
+      font-size: 1.1rem;
+      border-radius: 30px; /* Rounded pill shape */
+      cursor: pointer;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); text-shadow: none; display: inline-block;
       text-decoration: none; border: 2px solid transparent;
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -114,13 +117,14 @@
   .contact-form { max-width: 700px; margin: 0 auto; text-align: left; }
   .form-group { margin-bottom: 1.5rem; }
   .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--subtext-color); }
-  .form-group input[type="text"], .form-group input[type="email"], .form-group select, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border-radius: 6px; background-color: var(--form-bg); border: 1px solid var(--form-border); color: var(--text-color); font-size: 1rem; font-family: inherit; transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
+  .form-group input[type="text"], .form-group input[type="email"], .form-group select, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border-radius: 6px; background-color: var(--form-bg); border: 1px solid var(--form-border); color: var(--text-color); font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(26, 97, 114, 0.5); } /* Swapped focus shadow */
   .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23cccccc'%3E%3Cpath d='M8 11.414l-4.707-4.707a1 1 0 0 1 1.414-1.414L8 8.586l3.293-3.293a1 1 0 1 1 1.414 1.414L8 11.414z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; padding-right: 2.5rem; transition: background-image 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
   /* Removed light mode select arrow */
   .form-group textarea { resize: vertical; min-height: 120px; }
   .form-submit-group { text-align: center; margin-top: 2.5rem; }
-  .contact-submit-button { font-size: 1.2rem; padding: 1rem 2.5rem; }
+  /* Inherits pill shape from .cta-button, adjust padding */
+  .contact-submit-button { font-size: 1.2rem; padding: 0.9rem 2.5rem; }
   .contact-email-link { color: var(--accent-color); font-weight: 600; transition: color 0.3s ease; }
   .contact-email-link:hover { color: var(--text-color); }
   body.light-mode .contact-email-link:hover { color: var(--bg-color); }
@@ -129,14 +133,14 @@
   #gradient-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: block; pointer-events: none; background-color: var(--bg-color); transition: background-color 0.3s ease; }
   header {
       position: sticky; top: 0; z-index: 999;
-      padding: 0.75rem 2rem; /* Add some padding back to the header */
-      display: flex; justify-content: space-between; align-items: center;
-      /* Updated Background: Lighter, more translucent teal */
-      background: rgba(26, 97, 114, 0.15); /* Light teal with low opacity */
-      backdrop-filter: blur(16px) saturate(180%); /* Enhanced blur/saturation */
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
-      transition: top 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    padding: 0.75rem 2rem; /* Add some padding back to the header */
+    display: flex; justify-content: space-between; align-items: center;
+    /* Re-added bright translucent background and blur */
+    background: rgba(255, 255, 255, 0.1); /* Bright translucent background */
+    backdrop-filter: blur(16px) saturate(120%); /* Re-add blur */
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
+      transition: top 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Added background transition back */
   }
 
   main { display: block; position: relative; z-index: 1; color: var(--text-color); transition: color 0.3s ease; }
@@ -147,8 +151,11 @@
       align-items: center;
       justify-content: flex-start; /* Align logo left */
       flex-shrink: 0;
-      /* Removed background-color, padding, box-shadow, align-self */
-      /* transition: background-color 0.3s ease; REMOVED */
+      /* Removed background, padding, and radius */
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+      transition: none; /* Removed transition */
   }
   .logo-link { color: var(--text-color); text-decoration: none; display: flex; align-items: center; transition: color 0.3s ease; }
   .logo-link:hover { text-decoration: none; }
@@ -162,37 +169,77 @@
   /* Removed light mode logo invert */
   /* Removed .logo-svg, .logo-text, and their hover rules */
 
-  /* Desktop Nav Layout */
-  .desktop-nav { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; /* Removed padding */ }
-  .nav-links-centered { display: flex; justify-content: center; flex-grow: 1; }
-  .desktop-nav .nav-links-centered a { margin: 0 18px; text-decoration: none; color: var(--text-color); font-weight: 600; font-size: 1.1rem; position: relative; padding: 0.25rem 0; transition: color 0.3s ease; }
-  .desktop-nav .nav-links-centered a::after { content: ''; position: absolute; width: 0; height: 2px; background-color: var(--accent-color); bottom: 0; left: 0; transition: width 0.3s ease; }
-  .desktop-nav .nav-links-centered a:hover::after, .desktop-nav .nav-links-centered a:focus::after { width: 100%; }
+/* Desktop Nav Layout */
+.desktop-nav { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; /* Removed padding */ }
+.nav-links-centered { display: flex; justify-content: center; align-items: center; flex-grow: 1; gap: 0.75rem; /* Add gap for spacing */ }
+.desktop-nav .nav-links-centered a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1rem; /* Slightly smaller font */
+    background-color: var(--card-bg); /* Use card background */
+    padding: 0.6rem 1rem; /* Padding for shape */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    border: 1px solid var(--border-color); /* Subtle border */
+}
+.desktop-nav .nav-links-centered a:hover,
+.desktop-nav .nav-links-centered a:focus-visible {
+    background-color: var(--accent-color); /* Accent color on hover/focus */
+    color: var(--button-text-color); /* Ensure contrast */
+    text-decoration: none; /* Remove underline */
+    transform: translateY(-2px); /* Slight lift effect */
+    border-color: var(--accent-color);
+}
+.desktop-nav .nav-links-centered a:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+/* Removed ::after underline styles */
 
-  /* Schedule Call Button Styling */
-  .schedule-call-nav-link {
-      background-color: var(--secondary-accent-color); color: var(--button-text-color); font-weight: 700; /* Use secondary accent */
-      padding: 0.6rem 1.5rem; font-size: 1rem; border-radius: 6px; cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); text-shadow: none; display: inline-block;
-      text-decoration: none; border: 2px solid transparent;
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      margin-left: 24px;
-  }
-  .schedule-call-nav-link:visited,
-  .schedule-call-nav-link:link {
-      color: var(--button-text-color); /* Ensure text color stays the same for all states */
-  }
-  
-  /* Fix for hover state after being visited */
-  .schedule-call-nav-link.schedule-call-link:hover,
-  .schedule-call-nav-link.schedule-call-link:focus-visible {
-      color: var(--secondary-accent-color); /* Ensure text is secondary accent color on hover */
-  }
-  .schedule-call-nav-link:hover, .schedule-call-nav-link:focus-visible {
-      background-color: transparent; color: var(--secondary-accent-color); border: 2px solid var(--secondary-accent-color); /* Use secondary accent */
-      transform: translateY(-2px) scale(1.02); box-shadow: 0 4px 15px rgba(232, 108, 70, 0.2); /* Use secondary accent shadow */
-      text-decoration: none;
-  }
+/* Schedule Call Button Styling - Updated for filled orange pill shape */
+.schedule-call-nav-link {
+    background-color: var(--secondary-accent-color); /* Orange background */
+    color: var(--button-text-color); /* White text */
+    font-weight: 700; /* Revert weight */
+    padding: 0.6rem 1.5rem; /* Revert padding */
+    font-size: 1rem;
+    border-radius: 30px; /* Pill shape */
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Re-add subtle shadow */
+    text-shadow: none;
+    display: inline-block;
+    text-decoration: none;
+    border: 2px solid transparent; /* No border */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 1.5rem; /* Keep adjusted margin */
+}
+.schedule-call-nav-link:visited,
+.schedule-call-nav-link:link {
+    color: var(--button-text-color); /* Ensure text color stays the same for all states */
+}
+
+/* Fix for hover state after being visited */
+.schedule-call-nav-link.schedule-call-link:hover,
+.schedule-call-nav-link.schedule-call-link:focus-visible {
+    /* Hover state: Outlined orange */
+    background-color: transparent;
+    color: var(--secondary-accent-color); /* Orange text on hover */
+    border: 2px solid var(--secondary-accent-color); /* Orange border on hover */
+}
+.schedule-call-nav-link:hover,
+.schedule-call-nav-link:focus-visible {
+    background-color: transparent;
+    color: var(--secondary-accent-color); /* Orange text on hover */
+    border: 2px solid var(--secondary-accent-color); /* Orange border on hover */
+    transform: translateY(-2px) scale(1.02); /* Re-add transform */
+    box-shadow: 0 4px 15px rgba(232, 108, 70, 0.2); /* Re-add orange shadow */
+    text-decoration: none;
+}
+.schedule-call-nav-link:focus-visible {
+    outline: 2px solid var(--secondary-accent-color);
+    outline-offset: 2px;
+}
   /* Removed light mode schedule button hover */
   @media (max-width: 992px) { .nav-links-centered { margin-right: 0; } .schedule-call-nav-link { margin-left: 16px; } }
   @media (max-width: 768px) {
@@ -245,7 +292,9 @@
   .mobile-nav a.mobile-nav-cta {
         font-size: 1.3rem; font-weight: 700; text-decoration: none; margin-top: 2rem;
         background-color: var(--secondary-accent-color); color: var(--button-text-color); /* Use secondary accent */
-        padding: 0.8rem 2rem; border-radius: 6px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 0.8rem 2rem;
+        border-radius: 30px; /* Rounded pill shape */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         text-shadow: none; display: inline-block; border: 2px solid transparent;
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
    }
@@ -265,26 +314,27 @@
 
   /* Hero */
   .home-page .hero-section.wide-hero {
-      position: relative; /* Changed from grid */
+      position: relative; /* Keep relative */
       width: 100%;
       height: 100vh; /* Full viewport height */
       display: flex; /* Use flex for alignment */
       align-items: center; /* Vertically center the text card */
       justify-content: flex-start; /* Align text card to the left */
-      padding: 0 5%; /* Add some horizontal padding */
+      padding: 0 5%; /* REMOVE top padding */
       overflow: hidden; /* Prevent content spill */
       margin: 0; /* Reset default margin */
+      box-sizing: border-box;
   }
   /* Hero Video Container & Video */
   .home-page .hero-video-container.hero-video-larger {
-      position: absolute;
-      top: 0;
+      position: absolute; /* Keep absolute */
+      top: 0; /* Align to top of hero section */
       left: 0;
       width: 100%;
-      height: 100%;
-      z-index: 1; /* Behind text */
-      border-radius: 0; /* Remove border-radius */
-      box-shadow: none; /* Remove box-shadow */
+      height: 100%; /* Fill the hero section */
+      z-index: -1; /* Sit behind hero text content */
+      border-radius: 0;
+      box-shadow: none;
       overflow: hidden;
   }
   .home-page .hero-background-video {
@@ -398,10 +448,10 @@
   }
 
   /* --- Responsive Adjustments for Hero --- */
-  /* Tablet and Larger Mobile */
+   /* Tablet and Larger Mobile */
   @media (max-width: 992px) {
        .home-page .hero-section.wide-hero {
-           padding: 0 5%; /* Keep horizontal padding */
+           padding: 10vh 5% 10vh; /* Adjust padding, remove fixed top padding */
            align-items: center; /* Center card */
            justify-content: center; /* Center card */
            height: auto; /* Let height adjust to content */
@@ -469,79 +519,6 @@
   /* .home-page .process-section, */ /* Removed process section bg globally */
   .home-page .contact-section-steps { background: var(--card-bg); transition: background-color 0.3s ease;}
 
-  /* --- OLD Services & Pricing Section (Commented Out) --- */
-  /*
-  .home-page .service-section {
-      padding-top: 8rem;
-      padding-bottom: 8rem;
-  }
-  .home-page .service-section .section-subtitle { margin-bottom: 2rem; }
-  .home-page .pricing-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 3rem; color: var(--text-color); font-weight: 600; }
-  .home-page .services-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto; }
-  @media (min-width: 600px) { .home-page .services-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 992px) { .home-page .services-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } }
-  @media (min-width: 1200px) { .home-page .services-grid { grid-template-columns: repeat(4, 1fr); } }
-
-  .home-page .service-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-      height: 100%;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      padding: 2rem 1.5rem 6rem 1.5rem;
-  }
-  .home-page .service-title {
-      color: var(--text-color);
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-  }
-  .home-page .service-description {
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
-  }
-  .home-page .service-price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--accent-color);
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      margin-top: auto;
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      background-color: rgba(26, 97, 114, 0.1);
-      border: 1px solid transparent;
-      transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-  }
-  .home-page .service-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--accent-color);
-      box-shadow: 0 8px 20px var(--shadow-color-card);
-  }
-  .home-page .service-card:hover .service-price {
-      background-color: var(--accent-color);
-      color: var(--button-text-color);
-      transform: translateX(-50%) scale(1.05);
-      border-color: var(--accent-color);
-  }
-  @media (max-width: 767px) {
-      .home-page .service-card {
-          padding: 1.5rem 1rem 5rem 1rem;
-          margin-bottom: 1.5rem;
-      }
-      .home-page .service-price {
-          width: 90%;
-      }
-  }
-  */
   /* --- END OF OLD Services & Pricing Section --- */
 
   /* --- NEW Revised Services Section --- */
@@ -652,12 +629,11 @@
       text-align: center; 
       transition: transform 0.3s ease, opacity 0.3s ease;
   }
-  .home-page .step-title { 
-      color: var(--text-color); 
-      font-size: 1.2rem; 
-      font-weight: 600; 
-      margin-bottom: 0.5rem; 
-      margin-top: 1rem; 
+  .home-page .step-title { /* font-weight: 600; removed (inherited) */
+      color: var(--text-color);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
   }
   .home-page .process-cta-container { 
       text-align: center; 
@@ -841,11 +817,10 @@
       transition: background-color 0.3s ease, border-color 0.3s ease;
       text-align: left; /* Ensure manifesto text is left-aligned */
   }
-  .home-page .manifesto-title {
+  .home-page .manifesto-title { /* font-weight: 600; removed (inherited) */
       color: var(--text-color);
       margin-bottom: 0.5rem;
       font-size: 1.1rem;
-      font-weight: 600;
   }
 
   /* Removed #testimonial-slider-about styles */
@@ -915,28 +890,12 @@
        }
        .home-page .about-image {
            /* Keep stacked layout from default */
-           height: auto; /* Allow height to adjust */
-           aspect-ratio: 16/9; /* Give it an aspect ratio */
-       }
-       /* Remove testimonial slider styles if they were here */
-       #testimonial-slider-about {
-           /* Remove if not used */
-      }
-      #testimonial-slider-about .testimonial-slider-track {
-          animation: none; /* Disable animation on mobile */
-          display: block; /* Stack quotes vertically */
-          width: 100%;
-      }
-      #testimonial-slider-about .testimonial-quote {
-          width: 100%;
-          max-width: 100%;
-          margin: 0 0 1rem 0; /* Adjust margin */
-      }
-      #testimonial-slider-about .testimonial-quote[aria-hidden="true"] {
-          display: none; /* Hide cloned quotes */
-      }
-      .home-page .about-description {
-          font-size: 0.95rem;
+            height: auto; /* Allow height to adjust */
+            aspect-ratio: 16/9; /* Give it an aspect ratio */
+        }
+        /* Removed testimonial slider styles for #testimonial-slider-about */
+       .home-page .about-description {
+           font-size: 0.95rem;
           line-height: 1.5;
       }
       .home-page .manifesto {
@@ -1261,7 +1220,7 @@
 
   /* Client Logo Section */
   .client-logo-section { margin: 4rem auto 3rem; max-width: 1100px; text-align: center; }
-  .client-logo-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-color); }
+  .client-logo-title { font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--text-color); } /* font-weight: 600; removed (inherited) */
   .client-logo-intro { margin-bottom: 2.5rem; font-size: 1rem; color: var(--subtext-color); }
   .logo-slider-container { width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
   .logo-slider-track { display: flex; width: fit-content; animation: slide-logos 68s linear infinite; will-change: transform; } /* Slowed down animation */
@@ -1300,15 +1259,14 @@
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
       gap: 2rem;
       max-width: 1100px; /* Match other sections */
-      margin: 0 auto; /* Center the grid */
-  }
-  .footer-column h4 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--text-color);
-      transition: color 0.3s ease;
-  }
+       margin: 0 auto; /* Center the grid */
+   }
+   .footer-column h4 { /* font-weight: 600; removed (inherited) */
+       font-size: 1.1rem;
+       margin-bottom: 1rem;
+       color: var(--text-color);
+       transition: color 0.3s ease;
+   }
   .footer-column p,
   .footer-column a {
       font-size: 0.9rem;
@@ -1392,9 +1350,9 @@
       background-color: var(--secondary-accent-color); /* Use secondary accent */
       color: var(--button-text-color);
       font-weight: 700;
-      padding: 0.9rem 2.2rem !important; /* Use !important carefully */
+      padding: 0.8rem 2rem !important; /* Adjusted padding */
       font-size: 1.1rem !important;
-      border-radius: 6px !important;
+      border-radius: 30px !important; /* Rounded pill shape */
       cursor: pointer !important;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
       text-shadow: none !important;
@@ -1608,11 +1566,7 @@
   .thank-you-page .thank-you-content .section-title { margin-bottom: 0.5rem; }
   .thank-you-page .thank-you-content .section-subtitle { margin-bottom: 1.5rem; font-size: 1.2rem; color: var(--text-color); transition: color 0.3s ease; }
   .thank-you-page .thank-you-info { margin-bottom: 2.5rem; max-width: 500px; transition: color 0.3s ease; }
-  .thank-you-page .back-home-button {}
 
-/* ==== GENERAL RESPONSIVENESS IMPROVEMENTS ==== */
-
-/* --- Tablet & Larger Mobile (Portrait) --- */
 @media (max-width: 992px) {
     /* Reduce overall section padding */
     .content-section {
@@ -1651,7 +1605,6 @@
     }
 }
 
-/* --- Smaller Mobile (Portrait) --- */
 @media (max-width: 600px) {
     /* Further reduce section padding */
     .content-section {
@@ -1724,31 +1677,3 @@
         max-width: 200px;
     }
 }
-
-
-/* END OF FILE styles.css */
-
-</final_file_content>
-
-IMPORTANT: For any future changes to this file, use the final_file_content shown above as your reference. This content reflects the current state of the file, including any auto-formatting (e.g., if you used single quotes but the formatter converted them to double quotes). Always base your SEARCH/REPLACE operations on this final version to ensure accuracy.
-
-<environment_details>
-# VSCode Visible Files
-styles.css
-
-# VSCode Open Tabs
-contact.html
-case-study-template.html
-script.js
-index.html
-styles.css
-
-# Current Time
-4/15/2025, 8:15:02 PM (America/Los_Angeles, UTC-7:00)
-
-# Context Window Usage
-727,949 / 1,048.576K tokens used (69%)
-
-# Current Mode
-ACT MODE
-</environment_details>
