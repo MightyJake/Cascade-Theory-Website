@@ -391,51 +391,62 @@ function initMobileContactSteps() {
 /** Initializes Sticky Horizontal Scroll for Process Section on Mobile */
 function initStickyHorizontalScroll() {
     const section = document.querySelector('.home-page .process-section');
-    const container = section?.querySelector('.process-steps-container');
+    const stickyContent = section?.querySelector('.sticky-scroll-content'); // Target the sticky element
+    const container = stickyContent?.querySelector('.process-steps-container'); // The scrollable container
 
-    if (!section || !container) {
-        console.warn('[StickyScroll] Process section or container not found.');
+    if (!section || !stickyContent || !container) {
+        console.warn('[StickyScroll] Process section, sticky content, or container not found.');
         return;
     }
 
     let sectionHeight = 0;
     let maxScrollLeft = 0;
     let sectionOffsetTop = 0;
+    // let stickyContentHeight = 0; // No longer explicitly needed for height calc
     let isMobileSetup = false; // Flag to track if mobile setup is active
+    let scrollListenerAttached = false;
 
-    function calculateDimensions() {
-        // Check if we should be in mobile mode
-        const shouldBeMobile = window.innerWidth < 768;
+    function calculateDimensions(callback) { // Added callback
+        requestAnimationFrame(() => { // Wrap calculations
+            const shouldBeMobile = window.innerWidth < 768;
 
-        if (!shouldBeMobile) {
-            // If not mobile, reset styles and flag
-            if (isMobileSetup) {
-                section.style.height = '';
-                container.style.overflowX = 'auto'; // Restore default overflow if needed
-                console.log('[StickyScroll] Resetting styles for desktop view.');
-                isMobileSetup = false;
+            if (!shouldBeMobile) {
+                if (isMobileSetup) {
+                    // Reset styles applied for mobile
+                    section.style.height = '';
+                    container.style.overflowX = 'auto'; // Restore default overflow
+                    stickyContent.style.position = ''; // Reset sticky position
+                    stickyContent.style.top = '';
+                    console.log('[StickyScroll] Resetting styles for desktop view.');
+                    isMobileSetup = false;
+                }
+                if (callback) callback(false); // Indicate not mobile
+                return;
             }
-            return false; // Indicate not mobile
-        }
 
-        // --- Mobile Setup ---
-        container.style.overflowX = 'hidden'; // Ensure JS controls scroll
+            // --- Mobile Setup ---
+            container.style.overflowX = 'hidden'; // Ensure JS controls scroll
+            stickyContent.style.position = 'sticky'; // Ensure sticky is applied via JS
+            stickyContent.style.top = '80px'; // Ensure top offset is applied via JS (matches CSS)
 
-        // Calculate required dimensions for mobile effect
-        // Ensure container has rendered its children to get correct scrollWidth
-        requestAnimationFrame(() => {
+            // Calculate required dimensions for mobile effect
             maxScrollLeft = container.scrollWidth - container.clientWidth;
-            // Height = 1 viewport height (to scroll into view) + horizontal scroll distance
-            sectionHeight = window.innerHeight + maxScrollLeft;
+            // stickyContentHeight = stickyContent.offsetHeight; // Measure if needed for debugging
+
+            // Simplified Height Calculation:
+            // Height = (horizontal scroll distance) + (one viewport height)
+            // This provides enough vertical scroll room to map to the horizontal scroll.
+            sectionHeight = maxScrollLeft + window.innerHeight;
             section.style.height = `${sectionHeight}px`;
+
             // Get offsetTop *after* potentially changing height
             sectionOffsetTop = section.offsetTop;
             isMobileSetup = true; // Set flag
 
             console.log(`[StickyScroll] Calculated - MaxScroll: ${maxScrollLeft}, SectionHeight: ${sectionHeight}, OffsetTop: ${sectionOffsetTop}`);
-        });
 
-        return true; // Indicate is mobile
+            if (callback) callback(true); // Indicate mobile setup done
+        });
     }
 
     function handleScroll() {
@@ -443,61 +454,89 @@ function initStickyHorizontalScroll() {
 
         const scrollY = window.scrollY;
         const stickyStart = sectionOffsetTop;
-        // End point for the sticky effect calculation (start of section + its scrollable height)
-        const stickyEnd = stickyStart + maxScrollLeft; // Use maxScrollLeft as the scroll distance
+        // End point for the sticky effect calculation (start of section + horizontal scroll distance)
+        const stickyEnd = stickyStart + maxScrollLeft;
+
+        // Add debugging logs
+        // console.log(`[StickyScroll] ScrollY: ${scrollY.toFixed(0)}, StickyStart: ${stickyStart.toFixed(0)}, StickyEnd: ${stickyEnd.toFixed(0)}, MaxScrollLeft: ${maxScrollLeft.toFixed(0)}`);
 
         // Check if we are within the vertical scroll range for the sticky effect
         if (scrollY >= stickyStart && scrollY <= stickyEnd) {
             // Calculate progress within the sticky scroll range (0 to 1)
-            // Ensure maxScrollLeft is not zero to avoid division by zero
             const progress = maxScrollLeft > 0 ? (scrollY - stickyStart) / maxScrollLeft : 0;
-            // Calculate the target horizontal scroll position
             const targetScrollLeft = progress * maxScrollLeft;
-
-            // Apply the scrollLeft directly
+            // console.log(`[StickyScroll] Progress: ${progress.toFixed(2)}, TargetScrollLeft: ${targetScrollLeft.toFixed(0)}`);
             container.scrollLeft = targetScrollLeft;
+            // CSS `position: sticky` should keep the stickyContent visually fixed during this phase.
 
         } else if (scrollY < stickyStart) {
             // Before sticky section - ensure it's scrolled to the start
             if (container.scrollLeft !== 0) {
+                // console.log('[StickyScroll] Before sticky range, setting scrollLeft to 0.');
                 container.scrollLeft = 0;
             }
-        } else {
+        } else { // scrollY > stickyEnd
             // After sticky section - ensure it's scrolled to the end
-             if (container.scrollLeft !== maxScrollLeft) {
+             if (container.scrollLeft < maxScrollLeft - 1) { // Use a small tolerance
+                // console.log(`[StickyScroll] After sticky range, setting scrollLeft to ${maxScrollLeft.toFixed(0)}.`);
                 container.scrollLeft = maxScrollLeft;
             }
         }
     }
 
-    // Initial calculation and listener setup
-    let scrollListenerAttached = false;
     function setup() {
-        if (calculateDimensions()) {
-            if (!scrollListenerAttached) {
-                window.addEventListener('scroll', handleScroll, { passive: true });
-                scrollListenerAttached = true;
-                console.log('[StickyScroll] Scroll listener added.');
+        calculateDimensions((mobileSetupSuccess) => { // Pass callback to calculateDimensions
+             if (mobileSetupSuccess) {
+                if (!scrollListenerAttached) {
+                    window.addEventListener('scroll', handleScroll, { passive: true });
+                    scrollListenerAttached = true;
+                    console.log('[StickyScroll] Scroll listener added.');
+                    // Initial scroll check needed after dimensions are calculated
+                    handleScroll();
+                } else {
+                    // If listener already attached, just re-run handleScroll in case offsetTop changed
+                    handleScroll();
+                }
+            } else { // Desktop mode or failed mobile setup
+                if (scrollListenerAttached) {
+                    window.removeEventListener('scroll', handleScroll);
+                    scrollListenerAttached = false;
+                    console.log('[StickyScroll] Scroll listener removed.');
+                }
             }
-        } else {
-            if (scrollListenerAttached) {
-                window.removeEventListener('scroll', handleScroll);
-                scrollListenerAttached = false;
-                console.log('[StickyScroll] Scroll listener removed.');
-            }
-        }
+        });
     }
 
-    setup(); // Run initial setup
+    // Run setup after DOM content is loaded and also on window load for better stability
+    let initialSetupDone = false;
+    const runInitialSetup = () => {
+        if (!initialSetupDone) {
+            console.log('[StickyScroll] Running initial setup.');
+            setup();
+            initialSetupDone = true;
+        }
+    };
+
+    // Use window.onload for potentially more stable layout calculation
+    window.addEventListener('load', () => {
+        console.log('[StickyScroll] Window loaded, running setup.');
+        runInitialSetup();
+    });
+    // Fallback with setTimeout in case load event is missed or slow
+    setTimeout(runInitialSetup, 500);
+
 
     // Recalculate on resize
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(setup, 150); // Debounced setup call
+        resizeTimeout = setTimeout(() => {
+            console.log('[StickyScroll] Resize detected, running setup.');
+            setup(); // Re-run the setup logic which includes calculateDimensions
+        }, 250); // Increased debounce slightly
     });
 
-    console.log('[Init] Sticky Horizontal Scroll initialized.');
+    console.log('[Init] Sticky Horizontal Scroll initialization logic updated (v2).');
 }
 
 

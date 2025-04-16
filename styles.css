@@ -129,29 +129,26 @@
   #gradient-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: block; pointer-events: none; background-color: var(--bg-color); transition: background-color 0.3s ease; }
   header {
       position: sticky; top: 0; z-index: 999;
-      /* Removed all padding, will be handled by children */
-      padding: 0; display: flex; justify-content: space-between; align-items: center;
-      background: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      padding: 0.75rem 2rem; /* Add some padding back to the header */
+      display: flex; justify-content: space-between; align-items: center;
+      /* Updated Background: Lighter, more translucent teal */
+      background: rgba(26, 97, 114, 0.15); /* Light teal with low opacity */
+      backdrop-filter: blur(16px) saturate(180%); /* Enhanced blur/saturation */
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
       transition: top 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-      /* border-bottom REMOVED */
   }
 
   main { display: block; position: relative; z-index: 1; color: var(--text-color); transition: color 0.3s ease; }
   main > * { color: inherit; }
-  /* Added integrated rectangular background for header logo */
+  /* REMOVED white background from logo container */
   header .logo {
-      display: flex; /* Use flex to center content */
+      display: flex;
       align-items: center;
-      justify-content: center; /* Center logo horizontally */
+      justify-content: flex-start; /* Align logo left */
       flex-shrink: 0;
-      margin-right: 0; /* Remove right margin */
-      background-color: #f8f9fa; /* Off-white background */
-      border-radius: 0; /* No rounded corners */
-      padding: 0 2rem; /* Only horizontal padding to space logo from edge */
-      box-shadow: none; /* No shadow */
-      transition: background-color 0.3s ease;
-      /* Height will be determined by header's height due to align-items: center */
-      align-self: stretch; /* Make it stretch to header height */
+      /* Removed background-color, padding, box-shadow, align-self */
+      /* transition: background-color 0.3s ease; REMOVED */
   }
   .logo-link { color: var(--text-color); text-decoration: none; display: flex; align-items: center; transition: color 0.3s ease; }
   .logo-link:hover { text-decoration: none; }
@@ -166,7 +163,7 @@
   /* Removed .logo-svg, .logo-text, and their hover rules */
 
   /* Desktop Nav Layout */
-  .desktop-nav { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; padding: 1.5rem 2rem 1.5rem 0; /* Added padding back here */ }
+  .desktop-nav { display: flex; align-items: center; flex-grow: 1; justify-content: flex-end; /* Removed padding */ }
   .nav-links-centered { display: flex; justify-content: center; flex-grow: 1; }
   .desktop-nav .nav-links-centered a { margin: 0 18px; text-decoration: none; color: var(--text-color); font-weight: 600; font-size: 1.1rem; position: relative; padding: 0.25rem 0; transition: color 0.3s ease; }
   .desktop-nav .nav-links-centered a::after { content: ''; position: absolute; width: 0; height: 2px; background-color: var(--accent-color); bottom: 0; left: 0; transition: width 0.3s ease; }
@@ -198,16 +195,41 @@
   }
   /* Removed light mode schedule button hover */
   @media (max-width: 992px) { .nav-links-centered { margin-right: 0; } .schedule-call-nav-link { margin-left: 16px; } }
-  @media (max-width: 768px) { .desktop-nav { display: none; } }
+  @media (max-width: 768px) {
+      header {
+          padding: 0.5rem 1.5rem; /* Adjust padding for mobile */
+      }
+      .desktop-nav { display: none; }
+      /* Ensure hamburger is displayed and positioned correctly on mobile */
+      .hamburger {
+          display: block;
+          position: fixed; /* Revert to fixed positioning */
+          top: 1rem;      /* Adjust top position (align with header padding/center) */
+          right: 1.5rem;   /* Match header padding */
+          z-index: 2000;   /* Ensure it's above other elements */
+      }
+  }
 
-  .hamburger { position: fixed; top: 1.7rem; right: 2rem; width: 30px; height: 21px; cursor: pointer; z-index: 2000; /* Ensure hamburger is above overlay */ display: none; padding: 5px; background: transparent; border: none; }
+  /* Hamburger base styles (simplified) */
+  /* Hide by default, show via media query */
+  .hamburger {
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      padding: 5px;
+      background: transparent;
+      border: none;
+      display: none; /* Hide by default */
+      /* Positioning is now handled entirely within the media query */
+  }
   .bar { position: absolute; left: 0; width: 100%; height: 3px; background: var(--text-color); transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.3s ease; border-radius: 2px; }
   .bar1 { top: 0; } .bar2 { top: 50%; transform: translateY(-50%); } .bar3 { bottom: 0; }
   .hamburger.open .bar1 { transform: translateY(9px) rotate(45deg); } .hamburger.open .bar2 { opacity: 0; } .hamburger.open .bar3 { transform: translateY(-9px) rotate(-45deg); }
+  /* Ensure hamburger is shown on mobile - uncommented */
   @media (max-width: 768px) { .hamburger { display: block; } }
   .nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay-bg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; transform: scale(0); transform-origin: top right; transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease; z-index: 1000; /* Below hamburger */ backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-top: 6rem; }
   .nav-overlay.active { transform: scale(1); }
-  .mobile-nav-header { position: absolute; top: 1.5rem; left: 2rem; z-index: 1001;}
+  .mobile-nav-header { position: absolute; top: 1.5rem; left: 1.5rem; /* Match header padding */ z-index: 1001;}
   .mobile-nav-header .logo-img { /* Style mobile logo */
       height: 40px; /* Increased height */
       width: auto;
@@ -660,7 +682,8 @@
       /* New styles for the sticky wrapper */
       .home-page .sticky-scroll-content {
           position: sticky;
-          top: 80px; /* Adjust based on header height */
+          /* top: 80px; /* Adjust based on header height */
+          top: 20vh; /* Position lower down for better centering during scroll */
           left: 0;
           width: 100%;
           z-index: 5; /* Further increase z-index */
@@ -697,12 +720,22 @@
           /* Remove scroll-snap-align */
           background-color: var(--blockquote-bg);
           border-radius: 12px;
-          padding: 40px 1.5rem 1.5rem;
+          padding: 40px 1.5rem 2rem; /* Increased bottom padding */
           margin-right: 1rem; /* Keep margin for spacing */
           border-left: 3px solid var(--accent-color);
           box-shadow: 0 4px 12px var(--shadow-color-card);
-          /* Ensure steps don't shrink */
-          min-height: 200px; /* Example min-height */
+          /* Ensure steps don't shrink and are taller */
+          min-height: 320px; /* Increased min-height for taller cards */
+          display: flex; /* Use flexbox for vertical alignment */
+          flex-direction: column; /* Stack content vertically */
+          justify-content: center; /* Center content vertically */
+      }
+      .home-page .process-step .step-title {
+          margin-top: 0.5rem; /* Reduce top margin slightly */
+      }
+      .home-page .process-step .step-description {
+          font-size: 0.9rem; /* Slightly smaller text if needed */
+          line-height: 1.5;
       }
       /* Remove scroll indicators */
       .home-page .process-section::after {
@@ -1577,4 +1610,145 @@
   .thank-you-page .thank-you-info { margin-bottom: 2.5rem; max-width: 500px; transition: color 0.3s ease; }
   .thank-you-page .back-home-button {}
 
+/* ==== GENERAL RESPONSIVENESS IMPROVEMENTS ==== */
+
+/* --- Tablet & Larger Mobile (Portrait) --- */
+@media (max-width: 992px) {
+    /* Reduce overall section padding */
+    .content-section {
+        padding: 4rem 1.5rem;
+    }
+
+    /* Adjust base font size slightly for better readability */
+    /* html { font-size: 95%; } /* Uncomment if needed, but clamp/rem usually suffice */
+
+    /* Reduce title margins */
+    .section-title {
+        margin-bottom: 1.5rem;
+    }
+    .section-subtitle {
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+    }
+
+    /* Case Study Page Adjustments */
+    .case-study-page .case-study-hero {
+        padding: 6rem 1.5rem 3rem 1.5rem;
+    }
+    .case-study-page .case-study-content {
+        padding: 3rem 1.5rem;
+    }
+    .case-study-page .case-study-content h2 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+    .case-study-page .case-study-nav {
+        padding: 3rem 1.5rem;
+    }
+
+    /* Contact Page Adjustments */
+    .contact-page #contact-page-content {
+        padding: 4rem 1.5rem;
+    }
+}
+
+/* --- Smaller Mobile (Portrait) --- */
+@media (max-width: 600px) {
+    /* Further reduce section padding */
+    .content-section {
+        padding: 3rem 1rem;
+    }
+
+    /* Further reduce title margins */
+    .section-title {
+        margin-bottom: 1rem;
+        font-size: clamp(1.8rem, 6vw, 2.5rem); /* Adjust clamp */
+    }
+    .section-subtitle {
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+    }
+
+    /* Adjust CTA button size */
+    .cta-button {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+    }
+
+    /* Case Study Page Adjustments */
+    .case-study-page .case-study-hero {
+        padding: 5rem 1rem 2rem 1rem;
+    }
+     .case-study-page .case-study-hero .hero-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem); /* Adjust clamp */
+        margin-bottom: 2rem;
+    }
+    .case-study-page .case-study-content {
+        padding: 2rem 1rem;
+    }
+     .case-study-page .case-study-content h2 {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+    }
+    .case-study-page .case-study-content p,
+    .case-study-page .case-study-content ul {
+        font-size: 0.95rem;
+    }
+    .case-study-page .case-study-nav {
+        padding: 2rem 1rem;
+    }
+    .case-study-page .case-study-cta p {
+        font-size: 1.1rem;
+    }
+
+    /* Contact Page Adjustments */
+    .contact-page #contact-page-content {
+        padding: 3rem 1rem;
+    }
+    .contact-page .form-group input[type="text"],
+    .contact-page .form-group input[type="email"],
+    .contact-page .form-group select,
+    .contact-page .form-group textarea {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.9rem;
+    }
+    .contact-page .contact-submit-button {
+        font-size: 1.1rem;
+        padding: 0.9rem 2rem;
+    }
+
+    /* Adjust logo slider item padding */
+    .logo-item {
+        padding: 0 1.5rem; /* Reduce padding */
+    }
+    .logo-item img {
+        max-height: 60px; /* Slightly smaller logos */
+        max-width: 200px;
+    }
+}
+
+
 /* END OF FILE styles.css */
+
+</final_file_content>
+
+IMPORTANT: For any future changes to this file, use the final_file_content shown above as your reference. This content reflects the current state of the file, including any auto-formatting (e.g., if you used single quotes but the formatter converted them to double quotes). Always base your SEARCH/REPLACE operations on this final version to ensure accuracy.
+
+<environment_details>
+# VSCode Visible Files
+styles.css
+
+# VSCode Open Tabs
+contact.html
+case-study-template.html
+script.js
+index.html
+styles.css
+
+# Current Time
+4/15/2025, 8:15:02 PM (America/Los_Angeles, UTC-7:00)
+
+# Context Window Usage
+727,949 / 1,048.576K tokens used (69%)
+
+# Current Mode
+ACT MODE
+</environment_details>
