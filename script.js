@@ -604,7 +604,181 @@ document.addEventListener('DOMContentLoaded', () => {
     initStickyHorizontalScroll(); // Initialize the new sticky scroll feature
     console.log("[Init] initStickyHorizontalScroll complete.");
 
+    console.log("[Init] Calling initMobileTestimonialDeck...");
+    initMobileTestimonialDeck(); // Initialize the new testimonial deck feature
+    console.log("[Init] initMobileTestimonialDeck complete.");
+
+
     console.log("[Init] All initializations complete.");
 });
+
+
+/** Initializes Mobile Testimonial Card Deck Slider */
+function initMobileTestimonialDeck() {
+    const sliderContainer = document.getElementById('testimonial-slider');
+    if (!sliderContainer) {
+        console.warn('[TestimonialDeck] Slider container not found.');
+        return;
+    }
+    const track = sliderContainer.querySelector('.testimonial-slider-track');
+    if (!track) {
+        console.warn('[TestimonialDeck] Slider track not found.');
+        return;
+    }
+    // Select only the original quotes, not clones
+    const quotes = Array.from(track.querySelectorAll('.testimonial-quote:not([aria-hidden="true"])'));
+    if (quotes.length === 0) {
+        console.warn('[TestimonialDeck] No testimonial quotes found.');
+        return;
+    }
+
+    let currentIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    const swipeThreshold = 50; // Minimum pixels to register as a swipe
+
+    function applyCardClasses() {
+        quotes.forEach((quote, index) => {
+            quote.classList.remove(
+                'testimonial-visible',
+                'testimonial-next',
+                'testimonial-next-next',
+                'testimonial-swiped-left',
+                'testimonial-swiped-right'
+            );
+
+            const diff = index - currentIndex;
+            const normalizedDiff = (diff + quotes.length) % quotes.length; // Handle wrap-around
+
+            if (normalizedDiff === 0) {
+                quote.classList.add('testimonial-visible');
+            } else if (normalizedDiff === 1) {
+                quote.classList.add('testimonial-next');
+            } else if (normalizedDiff === 2) {
+                 quote.classList.add('testimonial-next-next');
+            }
+            // Cards further back remain hidden (opacity 0 by default)
+        });
+         // Ensure container height fits the content of the visible card
+         const visibleCard = quotes[currentIndex];
+         if (visibleCard) {
+             // Temporarily make it visible to measure height if needed, but CSS height should work
+             // sliderContainer.style.height = `${visibleCard.offsetHeight}px`; // Adjust height dynamically - might cause layout shifts
+             // Or rely on the fixed height set in CSS
+         }
+    }
+
+    function showNext() {
+        if (quotes.length === 0) return;
+        const currentCard = quotes[currentIndex];
+        currentCard.classList.add('testimonial-swiped-left'); // Animate out left
+
+        currentIndex = (currentIndex + 1) % quotes.length;
+
+        // Wait for animation before reapplying classes to avoid glitches
+        setTimeout(applyCardClasses, 50); // Small delay
+    }
+
+    function showPrev() {
+        if (quotes.length === 0) return;
+        const currentCard = quotes[currentIndex];
+        currentCard.classList.add('testimonial-swiped-right'); // Animate out right
+
+        currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+
+        setTimeout(applyCardClasses, 50);
+    }
+
+    function handleTouchStart(e) {
+        if (window.innerWidth >= 768) return; // Only run on mobile
+        touchStartX = e.touches[0].clientX;
+        isDragging = true;
+        // Optional: Add a class to the container while dragging
+        sliderContainer.classList.add('is-dragging');
+    }
+
+    function handleTouchMove(e) {
+        if (!isDragging || window.innerWidth >= 768) return;
+        touchEndX = e.touches[0].clientX;
+        // Optional: Add visual feedback during drag (e.g., slight card movement)
+        // const diffX = touchEndX - touchStartX;
+        // const currentCard = quotes[currentIndex];
+        // currentCard.style.transform = `translateX(${diffX}px) scale(1)`; // Example feedback
+        // currentCard.style.transition = 'none'; // Disable transition during drag for direct feedback
+    }
+
+    function handleTouchEnd() {
+        if (!isDragging || window.innerWidth >= 768) return;
+        isDragging = false;
+        sliderContainer.classList.remove('is-dragging');
+
+        const diffX = touchEndX - touchStartX;
+
+        // Reset any temporary drag styles
+        // const currentCard = quotes[currentIndex];
+        // currentCard.style.transform = '';
+        // currentCard.style.transition = ''; // Re-enable transitions
+
+        if (Math.abs(diffX) > swipeThreshold) {
+            if (diffX < 0) {
+                // Swiped left
+                showNext();
+            } else {
+                // Swiped right
+                showPrev();
+            }
+        } else {
+             // Optional: Snap back if swipe wasn't far enough
+             applyCardClasses(); // Reapply original classes to snap back
+        }
+
+        // Reset touch points
+        touchStartX = 0;
+        touchEndX = 0;
+    }
+
+    // Initial setup only on mobile
+    function setupMobileDeck() {
+        if (window.innerWidth < 768) {
+            console.log('[TestimonialDeck] Setting up mobile deck.');
+            applyCardClasses(); // Apply initial classes
+
+            // Remove existing listeners before adding new ones to prevent duplicates on resize
+            sliderContainer.removeEventListener('touchstart', handleTouchStart);
+            sliderContainer.removeEventListener('touchmove', handleTouchMove);
+            sliderContainer.removeEventListener('touchend', handleTouchEnd);
+            sliderContainer.removeEventListener('touchcancel', handleTouchEnd); // Handle cancellation
+
+            // Add touch listeners
+            sliderContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+            sliderContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+            sliderContainer.addEventListener('touchend', handleTouchEnd);
+            sliderContainer.addEventListener('touchcancel', handleTouchEnd); // Handle cancellation
+        } else {
+             console.log('[TestimonialDeck] Desktop view detected, removing mobile listeners.');
+             // Ensure listeners are removed if resizing from mobile to desktop
+             sliderContainer.removeEventListener('touchstart', handleTouchStart);
+             sliderContainer.removeEventListener('touchmove', handleTouchMove);
+             sliderContainer.removeEventListener('touchend', handleTouchEnd);
+             sliderContainer.removeEventListener('touchcancel', handleTouchEnd);
+             // Optional: Reset any inline styles applied by JS if needed
+             quotes.forEach(q => q.style.transform = '');
+        }
+    }
+
+    // Initial setup
+    setupMobileDeck();
+
+    // Re-run setup on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(setupMobileDeck, 250);
+    });
+
+    console.log("[Init] Mobile Testimonial Deck initialized.");
+}
+
 
 /* END OF FILE script.js */

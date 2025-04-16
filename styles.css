@@ -323,16 +323,17 @@
       padding: 0 5%; /* REMOVE top padding */
       overflow: hidden; /* Prevent content spill */
       margin: 0; /* Reset default margin */
+      margin-top: -80px; /* Pull section up behind header */
       box-sizing: border-box;
   }
   /* Hero Video Container & Video */
   .home-page .hero-video-container.hero-video-larger {
-      position: absolute; /* Keep absolute */
+      position: absolute; /* Reverted to absolute */
       top: 0; /* Align to top of hero section */
       left: 0;
       width: 100%;
       height: 100%; /* Fill the hero section */
-      z-index: -1; /* Sit behind hero text content */
+      z-index: -1; /* Reverted: Sit behind hero text content */
       border-radius: 0;
       box-shadow: none;
       overflow: hidden;
@@ -713,6 +714,10 @@
           font-size: 0.9rem; /* Slightly smaller text if needed */
           line-height: 1.5;
       }
+      /* Adjust step number position on mobile */
+      .home-page .process-step .step-number {
+          top: 1.5rem; /* Push the number down from the top edge */
+      }
       /* Remove scroll indicators */
       .home-page .process-section::after {
           display: none;
@@ -1026,31 +1031,84 @@
       100% { transform: translateX(-50%); } 
   }
   
-  /* Mobile Testimonial View */
+  /* Mobile Testimonial View - Card Deck Slider */
   @media (max-width: 767px) {
       .testimonial-slider-container {
           -webkit-mask-image: none;
           mask-image: none;
-          max-width: 90%;
+          max-width: 90%; /* Keep max width */
           margin: 2rem auto 0;
+          position: relative; /* Needed for absolute positioning of cards */
+          height: 300px; /* Define a height for the stack */
+          overflow: visible; /* Allow cards to peek out slightly */
+          cursor: grab; /* Indicate draggable */
+      }
+      .testimonial-slider-container:active {
+          cursor: grabbing;
+      }
+      .testimonial-slider-container { /* Ensure spacing around the container */
+          margin: 2rem auto 2rem; /* Added bottom margin */
       }
       .testimonial-slider-track {
-          display: block; /* Change to vertical stack */
+          position: relative; /* Position context for cards */
           width: 100%;
-          animation: none; /* Disable animation */
+          height: 100%;
+          display: block; /* Override flex from desktop */
+          animation: none; /* Disable desktop animation */
+          transform-style: preserve-3d; /* For potential 3D effects */
       }
       .testimonial-quote {
+          position: absolute; /* Stack cards */
+          top: 0;
+          left: 0;
           width: 100%;
-          max-width: 100%;
-          margin: 0 0 1.5rem 0;
-          border-left-width: 4px;
+          height: 100%; /* Make cards fill container height */
+          max-width: 100%; /* Override desktop max-width */
+          margin: 0; /* Reset margin */
+          border-left-width: 4px; /* Keep border */
+          border-radius: 8px; /* Add border-radius to all corners */
+          box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Add shadow */
+          opacity: 0; /* Start hidden, JS will show */
+          transform-origin: center center;
+          transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease; /* Reverted transform easing */
+          will-change: transform, opacity;
+          backface-visibility: hidden; /* Prevent flickering during transforms */
+          display: flex; /* Use flex for content alignment */
+          flex-direction: column;
+          justify-content: center; /* Center content vertically */
+          padding: 1.5rem; /* Keep padding */
+          background-color: var(--card-bg); /* Use solid card background */
       }
-      .testimonial-quote:last-child {
-          margin-bottom: 0;
+      /* Styling for stacked cards */
+      .testimonial-quote.testimonial-visible {
+          opacity: 1;
+          /* Stacking effect: lower cards are slightly smaller and lower */
+          transform: translateY(0) scale(1);
+          z-index: 3; /* Top card */
       }
-      /* Only show original quotes, hide clones on mobile */
+      .testimonial-quote.testimonial-next {
+          opacity: 1;
+          transform: translateY(30px) scale(0.92); /* Further increased offset */
+          z-index: 2; /* Card below top */
+      }
+       .testimonial-quote.testimonial-next-next {
+          opacity: 1;
+          transform: translateY(60px) scale(0.84); /* Further increased offset */
+          z-index: 1; /* Card below that */
+      }
+      /* State for card being swiped out */
+      .testimonial-quote.testimonial-swiped-left {
+          transform: translateX(-120%) rotate(-15deg) scale(0.8); /* Removed translateY */
+          opacity: 0;
+      }
+      .testimonial-quote.testimonial-swiped-right {
+          transform: translateX(120%) rotate(15deg) scale(0.8); /* Removed translateY */
+          opacity: 0;
+      }
+
+      /* Hide cloned quotes (if any exist from desktop JS) */
       .testimonial-quote[aria-hidden="true"] {
-          display: none;
+          display: none !important;
       }
   }
 
@@ -1059,10 +1117,16 @@
     padding: 8rem 5%; /* Added horizontal padding like hero */
 }
 
+@media (max-width: 767px) {
+    .home-page .portfolio-section {
+        padding-top: 2rem; /* Reduced top padding on mobile */
+    }
+}
+
 /* Left-align title and subtitle within portfolio section and constrain width */
 .home-page .portfolio-section .section-title {
     text-align: left;
-    max-width: 600px; /* Constrain width */
+    /* max-width: 600px; /* Constrain width - REMOVED */
     margin-left: 0; /* Align left within constraint */
     margin-right: auto;
     padding-left: 0; /* Remove specific padding, rely on section padding */
