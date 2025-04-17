@@ -36,6 +36,26 @@ function initStatsObserver() {
     setTimeout(() => { const rect = section.getBoundingClientRect(); if (rect.top < window.innerHeight && rect.bottom >= 0 && !animated) { triggerAnimation(); if (intersectionObserver) intersectionObserver.disconnect(); } }, 300);
 }
 
+/** Runs hero stats counter animation */
+function runHeroStatsAnimation() {
+    // Use the new IDs for the hero stats section
+    animateValue("hero-stat-1", 0, 50, 1500, "+"); // Example end value
+    animateValue("hero-stat-2", 0, 7, 1500, "+");  // Example end value
+    animateValue("hero-stat-3", 0, 98, 1500, "%"); // Example end value
+}
+/** Initializes IntersectionObserver for hero stats */
+function initHeroStatsObserver() {
+    const section = document.getElementById("hero-stats"); if (!section) return;
+    console.log("[Init] Initializing Hero Stats Observer.");
+    let animated = false; const triggerAnimation = () => { if (!animated) { animated = true; runHeroStatsAnimation(); } };
+    const observerOptions = { threshold: 0.3, rootMargin: '0px 0px -50px 0px' };
+    const observerCallback = (entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { triggerAnimation(); observer.unobserve(entry.target); } }); };
+    const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions); intersectionObserver.observe(section);
+    // Trigger if already visible on load
+    setTimeout(() => { const rect = section.getBoundingClientRect(); if (rect.top < window.innerHeight && rect.bottom >= 0 && !animated) { triggerAnimation(); if (intersectionObserver) intersectionObserver.disconnect(); } }, 300);
+}
+
+
 /** Initializes WebGL background (Conditional) */
 function initAdvancedGradient() {
     const canvas = document.getElementById('gradient-canvas');
@@ -71,15 +91,18 @@ function initAdvancedGradient() {
             u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
             u_color_bg: { value: initialBgColor.clone() },
             u_color_accent: { value: initialAccentColor.clone() }
+            // Removed u_color_secondary uniform
         };
         gradientUniforms = uniforms; console.log("[WebGL] Initial Uniforms set:", gradientUniforms);
         geometry = new THREE.PlaneGeometry(2, 2);
         material = new THREE.ShaderMaterial({
             uniforms: uniforms,
             vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = vec4(position, 1.0); }`,
+            // --- ORIGINAL FRAGMENT SHADER ---
             fragmentShader: `precision mediump float; uniform vec2 u_resolution; uniform float u_time; uniform vec3 u_color_bg; uniform vec3 u_color_accent; varying vec2 vUv;
                 float random(vec2 st){return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453);} float noise(vec2 st){vec2 i=floor(st);vec2 f=fract(st);vec2 u=f*f*(3.-2.*f);return mix(mix(random(i+vec2(.0,.0)),random(i+vec2(1.0,.0)),u.x),mix(random(i+vec2(.0,1.0)),random(i+vec2(1.0,1.0)),u.x),u.y);} float fbm(vec2 st){float v=0.;float a=.5;int O=3;for(int i=0;i<O;i++){v+=a*noise(st);st*=2.;a*=.5;}return v;} float getNoiseLayer(vec2 uv, float t, float ns, float ms, float da, vec2 off){vec2 nuv=uv*ns+off;float time=t*ms;vec2 m=vec2(fbm(nuv+time*.7+off.yx*2.),fbm(nuv+time*.5+off*3.));vec2 d_uv=nuv+m*da+vec2(time*.1);return fbm(d_uv);}
                 void main(){vec2 uv=vUv;uv.x*=u_resolution.x/u_resolution.y;float i=0.;float n1=getNoiseLayer(uv,u_time,.3,.06,.2,vec2(0.,0.));i+=smoothstep(.35,.7,n1)*.25;float n2=getNoiseLayer(uv,u_time,.5,.09,.15,vec2(2.,1.));i+=smoothstep(.45,.65,n2)*.35;float n3=getNoiseLayer(uv,u_time,.8,.12,.1,vec2(-1.,3.));i+=smoothstep(.5,.6,n3)*.15;i=clamp(i,0.,1.);vec3 fc=mix(u_color_bg,u_color_accent,i);gl_FragColor=vec4(fc,1.);}`
+            // --- END OF ORIGINAL FRAGMENT SHADER ---
         });
         mesh = new THREE.Mesh(geometry, material); scene.add(mesh); clock = new THREE.Clock();
         function animate() { if (!gradientRenderer) return; animationFrameId = requestAnimationFrame(animate); const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if (!gradientUniforms) return; if (prm) { if (!isFrozenForMotionPref) { gradientUniforms.u_time.value = 1.5; gradientUniforms.u_color_bg.value.copy(webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); gradientRenderer.render(scene, camera); isFrozenForMotionPref = true; if (clock && clock.running) clock.stop(); } return; } else { if (isFrozenForMotionPref) { isFrozenForMotionPref = false; if (clock && !clock.running) clock.start(); } gradientUniforms.u_color_bg.value.copy(webGLColors.darkBg); gradientUniforms.u_color_accent.value.copy(webGLColors.primaryAccent); if (clock) { const et = clock.getElapsedTime(); gradientUniforms.u_time.value = et; } gradientRenderer.render(scene, camera); } } animate();
@@ -603,6 +626,12 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("[Init] Calling initStickyHorizontalScroll...");
     initStickyHorizontalScroll(); // Initialize the new sticky scroll feature
     console.log("[Init] initStickyHorizontalScroll complete.");
+    // Call the new hero stats observer
+    if(document.getElementById('hero-stats')) {
+        console.log("[Init] Calling initHeroStatsObserver...");
+        initHeroStatsObserver();
+        console.log("[Init] initHeroStatsObserver complete.");
+    }
 
     console.log("[Init] Calling initMobileTestimonialDeck...");
     initMobileTestimonialDeck(); // Initialize the new testimonial deck feature

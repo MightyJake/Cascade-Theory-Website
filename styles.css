@@ -8,8 +8,8 @@
     --bg-color: #0d0d0d;
     --text-color: #ffffff;
     --subtext-color: #cccccc;
-    --card-bg: #18181a;
-    --border-color: #333333;
+    --card-bg: #18181a; /* Used for section backgrounds now */
+    --border-color: #333333; /* Used for subtle borders */
     --accent-color: #1a6172; /* Swapped: Primary Accent */
     --secondary-accent-color: #e86c46; /* Swapped: Secondary Accent (Orange) */
     --form-bg: #222224;
@@ -60,7 +60,7 @@
   h1, h2, h3, h4, h5, h6,
   .section-title, .hero-title, .service-title, .step-title, .manifesto-title,
   .case-study-title, .client-name, .client-logo-title, .logo-text,
-  .pricing-title, .stat-value /* Added more title-like elements */ {
+  .pricing-title, .stat-value, .hero-stat-item h3 /* Added hero stat number */ {
       font-family: 'Sora', sans-serif;
       font-weight: 600;
       color: var(--text-color); /* Ensure headings inherit color correctly */
@@ -104,7 +104,7 @@
   .contact-step .step-description, .copyright,
   .home-page .contact-alternate-home p, .contact-footer p,
   .simple-footer p, .testimonial-quote cite,
-  .client-logo-intro {
+  .client-logo-intro, .hero-stat-item p /* Added hero stat label */ {
     color: var(--subtext-color); transition: color 0.3s ease;
   }
 
@@ -135,13 +135,13 @@
       position: sticky; top: 0; z-index: 999;
     padding: 0.75rem 2rem; /* Add some padding back to the header */
     display: flex; justify-content: space-between; align-items: center;
-    /* Re-added bright translucent background and blur */
-    background: rgba(255, 255, 255, 0.1); /* Bright translucent background */
-    backdrop-filter: blur(16px) saturate(120%); /* Re-add blur */
-    -webkit-backdrop-filter: blur(16px) saturate(120%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
-      transition: top 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Added background transition back */
-  }
+    /* Dark Translucent Nav (like Hero Card) */
+    background: rgba(13, 13, 13, 0.8); /* Dark translucent background */
+    backdrop-filter: blur(10px) saturate(100%); /* Re-add blur */
+    -webkit-backdrop-filter: blur(10px) saturate(100%); /* Re-add blur */
+    border-bottom: 1px solid var(--border-color); /* Use subtle border color */
+    transition: top 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
 
   main { display: block; position: relative; z-index: 1; color: var(--text-color); transition: color 0.3s ease; }
   main > * { color: inherit; }
@@ -157,13 +157,13 @@
       border-radius: 0;
       transition: none; /* Removed transition */
   }
-  .logo-link { color: var(--text-color); text-decoration: none; display: flex; align-items: center; transition: color 0.3s ease; }
+  .logo-link { color: var(--text-color); text-decoration: none; display: flex; align-items: center; transition: color 0.3s ease; } /* Reverted to default text color */
   .logo-link:hover { text-decoration: none; }
   .logo-img { /* Updated rule for the image logo */
       display: block;
       height: 50px; /* Increased height */
       width: auto;
-      filter: none; /* Default to original color (light) for dark mode */
+      /* filter: invert(1); Removed - Revert to original logo color */
       transition: filter 0.3s ease;
   }
   /* Removed light mode logo invert */
@@ -174,14 +174,14 @@
 .nav-links-centered { display: flex; justify-content: center; align-items: center; flex-grow: 1; gap: 0.75rem; /* Add gap for spacing */ }
 .desktop-nav .nav-links-centered a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-color); /* Reverted to default text color */
     font-weight: 600;
     font-size: 1rem; /* Slightly smaller font */
-    background-color: var(--card-bg); /* Use card background */
+    background-color: var(--card-bg); /* Reverted to card background */
     padding: 0.6rem 1rem; /* Padding for shape */
     border-radius: 8px; /* Rounded corners */
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    border: 1px solid var(--border-color); /* Subtle border */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    border: 1px solid var(--border-color); /* Reverted to border color */
 }
 .desktop-nav .nav-links-centered a:hover,
 .desktop-nav .nav-links-centered a:focus-visible {
@@ -269,24 +269,24 @@
       display: none; /* Hide by default */
       /* Positioning is now handled entirely within the media query */
   }
-  .bar { position: absolute; left: 0; width: 100%; height: 3px; background: var(--text-color); transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.3s ease; border-radius: 2px; }
+  .bar { position: absolute; left: 0; width: 100%; height: 3px; background: var(--text-color); transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.3s ease; border-radius: 2px; } /* Reverted to default text color */
   .bar1 { top: 0; } .bar2 { top: 50%; transform: translateY(-50%); } .bar3 { bottom: 0; }
   .hamburger.open .bar1 { transform: translateY(9px) rotate(45deg); } .hamburger.open .bar2 { opacity: 0; } .hamburger.open .bar3 { transform: translateY(-9px) rotate(-45deg); }
   /* Ensure hamburger is shown on mobile - uncommented */
   @media (max-width: 768px) { .hamburger { display: block; } }
-  .nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay-bg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; transform: scale(0); transform-origin: top right; transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease; z-index: 1000; /* Below hamburger */ backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-top: 6rem; }
+  .nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay-bg); display: flex; flex-direction: column; justify-content: flex-start; align-items: center; transform: scale(0); transform-origin: top right; transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease; z-index: 1000; /* Below hamburger */ backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-top: 6rem; } /* Reverted to dark overlay with blur */
   .nav-overlay.active { transform: scale(1); }
   .mobile-nav-header { position: absolute; top: 1.5rem; left: 1.5rem; /* Match header padding */ z-index: 1001;}
   .mobile-nav-header .logo-img { /* Style mobile logo */
       height: 40px; /* Increased height */
       width: auto;
-      filter: none; /* Default to original color (light) for dark mode */
+      /* filter: invert(1); Removed - Revert to original logo color */
       transition: filter 0.3s ease;
   }
   /* Removed light mode mobile logo invert */
   /* Removed .mobile-logo-link .logo-svg rule */
   .mobile-nav { display: flex; flex-direction: column; align-items: center; margin-top: 2rem; }
-  .mobile-nav a { margin: 1.5rem 0; text-decoration: none; color: var(--text-color); font-weight: 700; font-size: 1.8rem; position: relative; padding: 0.5rem 1rem; transition: color 0.3s ease; }
+  .mobile-nav a { margin: 1.5rem 0; text-decoration: none; color: var(--text-color); font-weight: 700; font-size: 1.8rem; position: relative; padding: 0.5rem 1rem; transition: color 0.3s ease; } /* Reverted to default text color */
   .mobile-nav a::after { display: none; }
   /* Mobile nav CTA button */
   .mobile-nav a.mobile-nav-cta {
@@ -312,31 +312,41 @@
   .home-page .content-section { background: transparent; }
   .home-page main { position: relative; z-index: 1; }
 
-  /* Hero */
+  /* Hero - Side-by-Side Layout (Text Left, Video Right) with Section Background */
   .home-page .hero-section.wide-hero {
-      position: relative; /* Keep relative */
+      position: relative;
       width: 100%;
-      height: 100vh; /* Full viewport height */
-      display: flex; /* Use flex for alignment */
-      align-items: center; /* Vertically center the text card */
-      justify-content: flex-start; /* Align text card to the left */
-      padding: 0 5%; /* REMOVE top padding */
-      overflow: hidden; /* Prevent content spill */
-      margin: 0; /* Reset default margin */
-      margin-top: -80px; /* Pull section up behind header */
+      min-height: 80vh; /* Adjusted min-height */
+      display: flex;
+      align-items: center; /* Center items vertically */
+      justify-content: space-between; /* Space between items */
+      padding: 100px 5% 4rem; /* Adjusted padding */
+      overflow: hidden;
+      margin: 0; /* Reset margin */
       box-sizing: border-box;
+      gap: 4rem; /* Adjusted gap */
+      background-color: var(--card-bg); /* Add grey background to the whole section */
+      border-bottom: 1px solid var(--border-color); /* Add bottom border */
   }
-  /* Hero Video Container & Video */
+  /* Hero Video Container & Video - Side-by-Side */
   .home-page .hero-video-container.hero-video-larger {
-      position: absolute; /* Reverted to absolute */
-      top: 0; /* Align to top of hero section */
-      left: 0;
-      width: 100%;
-      height: 100%; /* Fill the hero section */
-      z-index: -1; /* Reverted: Sit behind hero text content */
+      position: relative; /* Change from absolute */
+      flex: 0 1 50%; /* Take up half the space, allow shrinking */
+      height: auto; /* Let height adjust */
+      max-height: 55vh; /* Adjust max height */
+      z-index: 1; /* Ensure it's above gradient canvas */
+      /* border-radius: 12px; /* Add rounding */
+      /* box-shadow: 0 6px 20px var(--shadow-color-card); /* Add shadow */
+      overflow: hidden;
+      /* Reset absolute positioning styles */
+      top: auto;
+      left: auto;
+      width: auto; /* Let flexbox handle width */
+      order: 2; /* Video comes second (right) */
+      /* Remove individual card styles from video container */
       border-radius: 0;
       box-shadow: none;
-      overflow: hidden;
+      aspect-ratio: 1 / 1; /* Make video container square-ish */
   }
   .home-page .hero-background-video {
       width: 100%;
@@ -344,42 +354,49 @@
       object-fit: cover; /* Cover the entire container */
       border-radius: 0;
   }
-  /* Hero Text Overlay Card */
+  /* Hero Text Content Container (Left Column) - No Card Style */
   .home-page .hero-text-overlay-card {
-      position: relative; /* Position relative to hero-section */
-      z-index: 2; /* Above video */
-      background: var(--header-bg); /* Translucent background */
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 2.5rem 3rem; /* Padding inside the card */
-      border-radius: 12px;
-      box-shadow: 0 8px 25px var(--shadow-color-card);
-      max-width: 40%; /* Decreased width */
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      text-align: left; /* Ensure text inside is left-aligned */
+      position: relative;
+      z-index: 2;
+      /* Remove card styles */
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      padding: 0; /* Remove padding */
+      border-radius: 0;
+      box-shadow: none;
+      max-width: 45%;
+      flex: 0 1 45%;
+      transition: none;
+      text-align: left;
+      order: 1; /* Text comes first (left) */
+      /* Add internal padding via child if needed */
   }
   .home-page .hero-text-content {
       padding-right: 0; /* Remove previous padding */
       text-align: left; /* Explicitly left align */
+      display: flex; /* Use flex for vertical arrangement */
+      flex-direction: column;
+      justify-content: center; /* Vertically center content in the column */
   }
   .home-page .hero-text-content .hero-title {
-      font-size: clamp(2rem, 4.5vw, 3.5rem); /* Adjust size */
-      line-height: 1.3;
-      margin-bottom: 2rem; /* Space before CTA */
-      text-transform: capitalize; /* Changed from uppercase */
-      /* font-weight: 700; Inherited from global heading rule */
+      font-size: clamp(2.5rem, 5vw, 4rem); /* Slightly larger title */
+      line-height: 1.2; /* Tighter line height */
+      margin-bottom: 1rem; /* Space below title */
+      text-transform: none; /* Revert capitalize if needed */
+      /* font-weight: 700; Inherited */
       text-align: left;
       /* color: var(--text-color); Inherited from global heading rule */
-      max-width: none; /* Allow text to fill card */
-      margin-bottom: 1.5rem; /* Adjusted margin */
+      max-width: none; /* Allow text to fill container */
   }
 
   /* Shared Styles for Services Lists (Hero & Revised Section) */
   .hero-services-list,
   .services-list-expanded {
-      margin-bottom: 1.5rem; /* Space below services */
-      font-size: 1.1rem; /* Match CTA button size */
-      font-weight: 600;
+      margin-top: 0; /* Ensure no top margin */
+      margin-bottom: 1.5rem; /* Space below services list */
+      font-size: 1rem; /* Slightly smaller as per screenshot */
+      font-weight: 600; /* Keep bold */
       color: var(--text-color);
       opacity: 0.9;
       display: flex;
@@ -427,13 +444,14 @@
    }
 
 
-  /* New Styles for Hero Description */
+  /* Styles for Hero Description */
   .home-page .hero-description {
-      margin-bottom: 2rem; /* Space above CTA button */
-      font-size: 1rem;
-      line-height: 1.5;
-      color: var(--subtext-color); /* Use subtext color */
-      max-width: 90%; /* Prevent it from being full width */
+      margin-bottom: 2rem; /* Keep space above CTA button */
+      font-size: 0.95rem; /* Slightly smaller description */
+      line-height: 1.6;
+      color: var(--subtext-color);
+      max-width: 100%; /* Allow full width */
+      margin-top: 0; /* Remove margin added previously */
   }
 
   .home-page .hero-text-content .hero-title span {
@@ -446,24 +464,43 @@
   .home-page .hero-cta {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       /* Button is already left-aligned by parent */
+      margin-right: auto; /* Ensure it stays left */
+      /* margin-bottom: 0; /* Let services list handle bottom spacing */
+      /* Add styles for potential second button if needed */
   }
 
   /* --- Responsive Adjustments for Hero --- */
-   /* Tablet and Larger Mobile */
+   /* Tablet and Mobile - Stacked Layout */
   @media (max-width: 992px) {
        .home-page .hero-section.wide-hero {
-           padding: 10vh 5% 10vh; /* Adjust padding, remove fixed top padding */
-           align-items: center; /* Center card */
-           justify-content: center; /* Center card */
-           height: auto; /* Let height adjust to content */
-           min-height: 80vh; /* Ensure minimum height */
-           padding-top: 10vh; /* Add some top padding */
-           padding-bottom: 10vh; /* Add some bottom padding */
+           flex-direction: column; /* Stack items vertically */
+           padding: 100px 5% 4rem; /* Adjust padding */
+           min-height: auto; /* Reset min-height */
+           gap: 3rem; /* Adjust gap for stacked layout */
+           text-align: center; /* Center align text for stacked */
+        }
+        .home-page .hero-video-container.hero-video-larger {
+            flex-basis: auto; /* Reset flex basis */
+            width: 80%; /* Control width */
+            max-width: 450px; /* Max width for video */
+            max-height: 45vh; /* Adjust max height */
+            order: 2; /* Video comes second (below) in stacked view */
+            aspect-ratio: 1 / 1; /* Keep square-ish */
         }
         .home-page .hero-text-overlay-card {
-            max-width: 80%; /* Allow slightly wider card */
-            padding: 2rem 2.5rem;
+            order: 1; /* Text card comes first (above) in stacked view */
+            flex-basis: auto; /* Reset flex basis */
+            max-width: 90%; /* Allow wider card */
+            width: 100%;
+            padding: 0; /* Keep padding removed */
             text-align: center; /* Center text */
+            margin: 0 auto; /* Center card */
+            /* Remove card styles from stacked view */
+            background: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-radius: 0;
+            box-shadow: none;
         }
        .home-page .hero-text-content {
            text-align: center; /* Center align all content inside card */
@@ -471,29 +508,39 @@
        .home-page .hero-text-content .hero-title {
            text-align: center;
            font-size: clamp(1.8rem, 5vw, 2.8rem); /* Slightly adjusted clamp */
-           margin-bottom: 1.5rem;
+           margin-bottom: 1rem; /* Adjust margin */
        }
        .home-page .hero-text-content .hero-title br { display: none; } /* Hide manual line break */
        /* Center services list and description */
        .home-page .hero-services-list {
            justify-content: center; /* Center align */
            font-size: 0.95rem; /* Slightly smaller font */
+           margin-bottom: 1rem; /* Adjust margin */
        }
        .home-page .hero-description {
            margin-left: auto;
            margin-right: auto;
            max-width: 90%; /* Allow slightly wider */
            font-size: 0.95rem; /* Slightly smaller font */
+           margin-bottom: 1.5rem; /* Adjust margin */
+       }
+       .home-page .hero-cta {
+           margin-left: auto; /* Center button */
+           margin-right: auto;
        }
    }
-   /* Smaller Mobile */
+   /* Smaller Mobile Adjustments */
    @media (max-width: 600px) {
         .home-page .hero-section.wide-hero {
-            min-height: 75vh; /* Further adjust min height */
+            padding-top: 80px; /* Further adjust top padding */
+            padding-bottom: 3rem;
+        }
+         .home-page .hero-video-container.hero-video-larger {
+            width: 90%; /* Slightly wider video */
+            max-height: 40vh;
         }
         .home-page .hero-text-overlay-card {
-            max-width: 90%; /* Allow wider card on small screens */
-            padding: 1.5rem 1.5rem; /* Adjust padding */
+            padding: 0; /* Keep padding removed */
         }
         .home-page .hero-text-content .hero-title {
            font-size: clamp(1.6rem, 6vw, 2.2rem); /* Adjust clamp for smaller screens */
@@ -511,8 +558,76 @@
        }
   }
 
-  /* Ensure first section after hero has no top margin */
-  .home-page main > section:first-of-type {
+  /* --- HERO STATS SECTION --- */
+  .hero-stats-section {
+      padding: 2rem 5%; /* Padding top/bottom and horizontal */
+      background-color: var(--card-bg); /* Match hero background */
+      border-bottom: 1px solid var(--border-color); /* Separation line */
+  }
+  .hero-stats-container {
+      display: flex;
+      justify-content: space-around; /* Distribute items evenly */
+      align-items: center;
+      max-width: 800px; /* Constrain width */
+      margin: 0 auto; /* Center container */
+      gap: 1rem; /* Gap between items */
+  }
+  .hero-stat-item {
+      text-align: center;
+      padding: 0 1rem; /* Padding for spacing */
+      flex: 1; /* Allow items to grow/shrink equally */
+      position: relative; /* For border positioning */
+  }
+  /* Add vertical borders */
+  .hero-stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 10%; /* Adjust vertical position */
+      bottom: 10%;
+      right: -0.5rem; /* Position between items (adjust with gap) */
+      width: 1px;
+      background-color: var(--border-color); /* Use border color */
+      opacity: 0.5;
+  }
+  .hero-stat-item h3 { /* Style the number */
+      font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text-color);
+  }
+  .hero-stat-item p { /* Style the label */
+      font-size: 0.85rem;
+      color: var(--subtext-color);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+  }
+  /* Responsive Hero Stats */
+  @media (max-width: 768px) {
+      .hero-stats-section {
+          padding: 1.5rem 5%;
+      }
+      .hero-stats-container {
+          flex-direction: column; /* Stack vertically */
+          gap: 1.5rem; /* Increase gap for stacked */
+          max-width: 300px; /* Narrower max-width */
+      }
+      .hero-stat-item {
+          padding: 0; /* Remove horizontal padding */
+          width: 100%;
+      }
+      .hero-stat-item:not(:last-child)::after {
+          display: none; /* Hide vertical borders */
+      }
+      /* Optional: Add horizontal borders */
+      .hero-stat-item:not(:last-child) {
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid var(--border-color);
+      }
+  }
+
+
+  /* Ensure first section after hero stats has no top margin */
+  .home-page main > section:nth-of-type(2) { /* Target the section after hero-stats */
       margin-top: 0 !important;
   }
 
@@ -549,6 +664,15 @@
   .home-page .services-list-column {
       flex: 1 1 55%; /* Takes up ~55% width */
       min-width: 320px; /* Minimum width */
+      /* Match hero card styling */
+      background: var(--header-bg); /* Translucent background */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 2.5rem 3rem; /* Match hero card padding */
+      box-shadow: 0 8px 25px var(--shadow-color-card); /* Match hero card shadow */
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative; /* Keep for backdrop-filter context */
   }
   .home-page .services-list-expanded {
       justify-content: flex-start; /* Keep list items left-aligned */
@@ -577,6 +701,7 @@
       .home-page .services-list-column {
           flex-basis: auto; /* Reset flex basis */
           width: 100%; /* Full width */
+          padding: 2rem 2rem; /* Adjust padding for mobile, keep consistent with hero mobile */
       }
       .home-page .services-list-expanded {
           justify-content: center; /* Center list items */
