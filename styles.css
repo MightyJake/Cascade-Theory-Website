@@ -331,11 +331,11 @@
   /* Hero Video Container & Video - Side-by-Side */
   .home-page .hero-video-container.hero-video-larger {
       position: relative; /* Change from absolute */
-      flex: 0 1 50%; /* Take up half the space, allow shrinking */
+      flex: 0 1 66%; /* Take up ~2/3 space */
       height: auto; /* Let height adjust */
       max-height: 55vh; /* Adjust max height */
       z-index: 1; /* Ensure it's above gradient canvas */
-      /* border-radius: 12px; /* Add rounding */
+      border-radius: 12px; /* Add rounding */
       /* box-shadow: 0 6px 20px var(--shadow-color-card); /* Add shadow */
       overflow: hidden;
       /* Reset absolute positioning styles */
@@ -344,7 +344,6 @@
       width: auto; /* Let flexbox handle width */
       order: 2; /* Video comes second (right) */
       /* Remove individual card styles from video container */
-      border-radius: 0;
       box-shadow: none;
       aspect-ratio: 1 / 1; /* Make video container square-ish */
   }
@@ -352,7 +351,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover; /* Cover the entire container */
-      border-radius: 0;
+      border-radius: inherit; /* Inherit rounding from container */
   }
   /* Hero Text Content Container (Left Column) - No Card Style */
   .home-page .hero-text-overlay-card {
@@ -365,14 +364,15 @@
       padding: 0; /* Remove padding */
       border-radius: 0;
       box-shadow: none;
-      max-width: 45%;
-      flex: 0 1 45%;
+      max-width: 33%; /* Approx 1/3 */
+      flex: 0 1 33%; /* Approx 1/3 */
       transition: none;
       text-align: left;
       order: 1; /* Text comes first (left) */
       /* Add internal padding via child if needed */
   }
   .home-page .hero-text-content {
+      padding: 2rem; /* Add padding */
       padding-right: 0; /* Remove previous padding */
       text-align: left; /* Explicitly left align */
       display: flex; /* Use flex for vertical arrangement */
@@ -468,6 +468,42 @@
       /* margin-bottom: 0; /* Let services list handle bottom spacing */
       /* Add styles for potential second button if needed */
   }
+
+  /* Rotating Text Styles */
+  .rotating-text-container {
+      position: absolute; /* Position over video */
+      top: 1rem;          /* Adjust position from top */
+      right: 1rem;         /* Adjust position from right */
+      width: 150px;        /* Adjust size as needed */
+      height: 150px;
+      z-index: 10;         /* Ensure it's above the video */
+      filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5)); /* Add drop shadow */
+  }
+  .rotating-text-svg {
+      width: 100%;
+      height: 100%;
+      /* animation: rotateText 20s linear infinite; /* Removed from SVG container */
+      overflow: visible; /* Allow text to be seen outside the circle bounds if needed */
+  }
+  .rotating-text-path {
+      fill: none;
+      stroke: none; /* Hide the path itself */
+  }
+  .rotating-text {
+      fill: var(--secondary-accent-color); /* Use brand orange */
+      font-size: 16px; /* Increased font size */
+      font-weight: 600;
+      letter-spacing: 1.5px; /* Adjust letter spacing */
+      text-transform: uppercase;
+  }
+  /* Apply animation only to the text path */
+  .rotating-path-text { /* Changed selector to target the class added in HTML */
+      /* animation: rotateText 20s linear infinite; /* Animation handled by JS */
+  }
+  /* @keyframes rotateText { /* Removed CSS keyframes, handled by JS */
+  /*    from { transform: rotate(0deg); } */
+  /*    to { transform: rotate(360deg); } */
+  /* } */
 
   /* --- Responsive Adjustments for Hero --- */
    /* Tablet and Mobile - Stacked Layout */

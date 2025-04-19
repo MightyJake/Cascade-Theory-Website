@@ -94,6 +94,19 @@
                 autoplay muted loop playsinline
                 aria-label="Abstract background video with flowing blue particles.">
             </video>
+            <!-- Rotating Text Element (Moved Here) -->
+            <div class="rotating-text-container">
+                <svg class="rotating-text-svg" viewBox="0 0 150 150">
+                    <path id="circlePath" class="rotating-text-path" d="M 75, 75 m -60, 0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0"/>
+                    <!-- Centered Logo Image -->
+                    <image xlink:href="assets/temp_logo/mark.svg" x="25" y="25" width="100" height="100" />
+                    <text class="rotating-text">
+                        <textPath class="rotating-path-text" xlink:href="#circlePath" startOffset="50%" text-anchor="middle">
+                            Schedule a free consultation • Schedule a free consultation •
+                        </textPath>
+                    </text>
+                </svg>
+            </div>
         </div>
     </section>
     <!-- END OF HERO SECTION -->

@@ -637,9 +637,36 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileTestimonialDeck(); // Initialize the new testimonial deck feature
     console.log("[Init] initMobileTestimonialDeck complete.");
 
+    // --- Initialize Rotating Text Animation ---
+    console.log("[Init] Calling initRotatingTextAnimation...");
+    initRotatingTextAnimation();
+    console.log("[Init] initRotatingTextAnimation complete.");
+
 
     console.log("[Init] All initializations complete.");
 });
+
+/** Initializes Rotating Text Animation using startOffset */
+function initRotatingTextAnimation() {
+    const textPath = document.querySelector('.rotating-path-text'); // Use the specific class
+    if (!textPath) {
+        console.warn('[RotatingText] Text path element (.rotating-path-text) not found.');
+        return;
+    }
+
+    let currentOffset = 0;
+    const speed = 0.05; // Adjust speed as needed (percentage points per frame)
+
+    function animateTextPath() {
+        currentOffset = (currentOffset + speed) % 100; // Increment and wrap around 0-100
+        textPath.setAttribute('startOffset', currentOffset + '%');
+        requestAnimationFrame(animateTextPath); // Continue the loop
+    }
+
+    // Start the animation
+    requestAnimationFrame(animateTextPath);
+    console.log('[RotatingText] Animation started.');
+}
 
 
 /** Initializes Mobile Testimonial Card Deck Slider */
