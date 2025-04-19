@@ -320,7 +320,7 @@
       display: flex;
       align-items: center; /* Center items vertically */
       justify-content: space-between; /* Space between items */
-      padding: 100px 5% 4rem; /* Adjusted padding */
+      padding: 100px 5% 3rem; /* Reduced bottom padding from 4rem to 3rem */
       overflow: hidden;
       margin: 0; /* Reset margin */
       box-sizing: border-box;
@@ -471,13 +471,16 @@
 
   /* Rotating Text Styles */
   .rotating-text-container {
-      position: absolute; /* Position over video */
-      top: 1rem;          /* Adjust position from top */
-      right: 1rem;         /* Adjust position from right */
-      width: 150px;        /* Adjust size as needed */
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 150px;
       height: 150px;
-      z-index: 10;         /* Ensure it's above the video */
-      filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5)); /* Add drop shadow */
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      padding: 5px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   }
   .rotating-text-svg {
       width: 100%;
@@ -490,27 +493,23 @@
       stroke: none; /* Hide the path itself */
   }
   .rotating-text {
-      fill: var(--secondary-accent-color); /* Use brand orange */
-      font-size: 16px; /* Increased font size */
+      fill: var(--secondary-accent-color);
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: 1.5px; /* Adjust letter spacing */
+      letter-spacing: 1px;
       text-transform: uppercase;
   }
   /* Apply animation only to the text path */
-  .rotating-path-text { /* Changed selector to target the class added in HTML */
-      /* animation: rotateText 20s linear infinite; /* Animation handled by JS */
+  .rotating-path-text {
+      animation: none; /* Animation handled by JS */
   }
-  /* @keyframes rotateText { /* Removed CSS keyframes, handled by JS */
-  /*    from { transform: rotate(0deg); } */
-  /*    to { transform: rotate(360deg); } */
-  /* } */
 
   /* --- Responsive Adjustments for Hero --- */
    /* Tablet and Mobile - Stacked Layout */
   @media (max-width: 992px) {
        .home-page .hero-section.wide-hero {
            flex-direction: column; /* Stack items vertically */
-           padding: 100px 5% 4rem; /* Adjust padding */
+           padding: 100px 5% 2.5rem; /* Further reduced bottom padding on mobile */
            min-height: auto; /* Reset min-height */
            gap: 3rem; /* Adjust gap for stacked layout */
            text-align: center; /* Center align text for stacked */
@@ -569,7 +568,7 @@
    @media (max-width: 600px) {
         .home-page .hero-section.wide-hero {
             padding-top: 80px; /* Further adjust top padding */
-            padding-bottom: 3rem;
+            padding-bottom: 2rem; /* Even less padding on smaller screens */
         }
          .home-page .hero-video-container.hero-video-larger {
             width: 90%; /* Slightly wider video */
@@ -596,9 +595,10 @@
 
   /* --- HERO STATS SECTION --- */
   .hero-stats-section {
-      padding: 2rem 5%; /* Padding top/bottom and horizontal */
+      padding: 1.5rem 5%; /* Reduced top/bottom padding from 2rem to 1.5rem */
       background-color: var(--card-bg); /* Match hero background */
       border-bottom: 1px solid var(--border-color); /* Separation line */
+      margin-top: -1rem; /* Pull stats section up slightly */
   }
   .hero-stats-container {
       display: flex;
@@ -640,7 +640,7 @@
   /* Responsive Hero Stats */
   @media (max-width: 768px) {
       .hero-stats-section {
-          padding: 1.5rem 5%;
+          padding: 1rem 5%; /* Slightly less padding on mobile */
       }
       .hero-stats-container {
           flex-direction: column; /* Stack vertically */
@@ -698,17 +698,16 @@
       /* Inherits font size from global .section-title */
   }
   .home-page .services-list-column {
-      flex: 1 1 55%; /* Takes up ~55% width */
-      min-width: 320px; /* Minimum width */
-      /* Match hero card styling */
-      background: var(--header-bg); /* Translucent background */
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 12px;
-      padding: 2.5rem 3rem; /* Match hero card padding */
-      box-shadow: 0 8px 25px var(--shadow-color-card); /* Match hero card shadow */
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      position: relative; /* Keep for backdrop-filter context */
+      flex: 1 1 55%;
+      min-width: 320px;
+      /* Remove card styling */
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      position: relative;
   }
   .home-page .services-list-expanded {
       justify-content: flex-start; /* Keep list items left-aligned */
@@ -736,8 +735,8 @@
       }
       .home-page .services-list-column {
           flex-basis: auto; /* Reset flex basis */
-          width: 100%; /* Full width */
-          padding: 2rem 2rem; /* Adjust padding for mobile, keep consistent with hero mobile */
+          width: 100%;
+          padding: 0; /* Remove padding since we don't have a card background anymore */
       }
       .home-page .services-list-expanded {
           justify-content: center; /* Center list items */
@@ -918,6 +917,7 @@
       /* Remove max-width, margin, position, overflow - handled by layout container */
       grid-column: 1 / 2; /* Position in the first column on desktop */
       grid-row: 1 / 2;
+      position: relative;
   }
 
   /* Title styling - now inside the card container */
@@ -929,7 +929,6 @@
 
   /* Wrapper for text card (if needed, or apply styles directly) */
   .home-page .about-content-wrapper {
-      /* This might not need specific styles anymore if text card is only child */
       margin: 0;
       max-width: none;
   }
@@ -1175,14 +1174,51 @@
       width: 80%; 
       max-width: 550px; 
       margin: 0 2rem; 
-      padding: 1.5rem; 
-      border-left: 3px solid var(--secondary-accent-color); /* Changed to orange */
+      padding: 1.5rem 1.5rem 1.5rem 2rem;
+      border-left: 3px solid var(--secondary-accent-color);
       background: var(--blockquote-bg); 
-      border-radius: 0 8px 8px 0; 
+      border-radius: 0 8px 8px 0;
       text-align: left; 
       transition: background-color 0.3s ease, border-color 0.3s ease; 
       box-sizing: border-box; 
   }
+
+  .testimonial-profile {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+  }
+
+  .testimonial-profile-pic {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-right: 1rem;
+      object-fit: cover;
+  }
+
+  .testimonial-profile-info {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .testimonial-profile-name {
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 0.2rem;
+  }
+
+  .testimonial-profile-title {
+      font-size: 0.85rem;
+      color: var(--subtext-color);
+      margin-bottom: 0.2rem;
+  }
+
+  .testimonial-profile-company {
+      font-size: 0.85rem;
+      color: var(--subtext-color);
+  }
+
   .testimonial-quote p { margin-bottom: 0.75em; font-style: italic; color: var(--text-color); transition: color 0.3s ease; }
   .testimonial-quote cite { display: block; margin-top: 0.5em; font-style: normal; font-weight: 600; color: var(--subtext-color); transition: color 0.3s ease; }
   
