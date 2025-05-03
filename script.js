@@ -21,8 +21,8 @@ function animateValue(id, start, end, duration, suffix = '') {
 }
 /** Runs stats counter animation */
 function runStatsAnimationOnce() {
-    animateValue("stat1", 0, 98, 1500, "%");
-    animateValue("stat2", 0, 223, 1500);
+    animateValue("stat1", 0, 50, 1500, "+");
+    animateValue("stat2", 0, 7, 1500, "+");
     animateValue("stat3", 0, 110, 1500, "k+");
 }
 /** Initializes IntersectionObserver for stats */

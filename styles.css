@@ -316,7 +316,7 @@
   .home-page .hero-section.wide-hero {
       position: relative;
       width: 100%;
-      min-height: 80vh; /* Adjusted min-height */
+      height: 100vh; /* Change from min-height: 80vh to exact 100vh */
       display: flex;
       align-items: center; /* Center items vertically */
       justify-content: space-between; /* Space between items */
