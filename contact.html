@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Cascade Theory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="contact-page"> <!-- Class for styling & JS checks -->
+
+  <!-- REUSED HEADER -->
+  <header>
+    <div class="logo">
+      <a href="index.html" class="logo-link" aria-label="Homepage"> <!-- Link to homepage -->
+        <img src="/assets/temp_logo/temp_logo.svg" alt="Cascade Theory Logo" class="logo-img"> <!-- Use class logo-img, height is set in CSS -->
+      </a>
+    </div>
+     <!-- UPDATED NAV -->
+    <nav class="desktop-nav" aria-label="Main Navigation">
+        <div class="nav-links-centered"> <!-- Wrapper for centering -->
+            <a href="index.html#services">Services</a>
+            <a href="index.html#portfolio">Case Studies</a>
+            <a href="index.html#about">About</a>
+        </div>
+        <!-- UPDATED Button Link -->
+        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
+           target="_blank" rel="noopener noreferrer"
+           class="schedule-call-nav-link">Schedule a Call</a>
+    </nav>
+  </header>
+
+  <!-- REUSED MOBILE NAV ELEMENTS -->
+  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-menu"> <span class="bar bar1"></span> <span class="bar bar2"></span> <span class="bar bar3"></span> </button>
+  <div class="nav-overlay" id="mobile-nav-menu">
+     <div class="mobile-nav-header">
+       <a href="index.html" class="mobile-logo-link" aria-label="Homepage">
+         <img src="/assets/temp_logo/temp_logo.svg" alt="Cascade Theory Logo" class="logo-img"> <!-- Use class logo-img, height is set in CSS -->
+       </a>
+     </div>
+     <!-- UPDATED Mobile Nav Links -->
+    <nav class="mobile-nav" aria-label="Mobile Navigation">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#portfolio">Case Studies</a>
+        <a href="index.html#about">About</a>
+        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true"
+           target="_blank" rel="noopener noreferrer"
+           class="mobile-nav-cta">Schedule a Call</a>
+     </nav>
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main>
+    <!-- Contact Form Section - Simplified -->
+    <section id="contact-page-content" class="content-section" aria-labelledby="contact-heading">
+        <div class="animate-on-scroll">
+            <h2 id="contact-heading" class="section-title">Ready to Start Your Cascade?</h2>
+            <!-- UPDATED intro text -->
+            <p class="section-subtitle centered-text contact-intro">
+              Let's discuss how Cascade Theory can amplify your brand. Fill out the form below, email me directly, or <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true" target="_blank" rel="noopener noreferrer" class="contact-email-link">schedule a call instantly</a>.
+            </p>
+        </div>
+
+        <!-- Form Configured for Formspree -->
+        <form
+            action="https://formspree.io/f/xeoapnjy"
+            method="POST"
+            class="contact-form animate-on-scroll"
+            style="--delay: 0.1s;"
+        >
+            <!-- Standard Form Fields -->
+             <div class="form-group">
+                 <label for="name">Full Name</label>
+                 <input type="text" id="name" name="name" required>
+             </div>
+             <div class="form-group">
+                 <label for="email">Email Address</label>
+                 <input type="email" id="email" name="email" required>
+             </div>
+             <div class="form-group">
+                 <label for="service-interest">Service Interest (Optional)</label>
+                 <select id="service-interest" name="Service Interest">
+                     <option value="">-- Select a Service --</option>
+                     <option value="Branding">Brand Strategy & Identity</option>
+                     <option value="Web">Web Design & Development</option>
+                     <option value="Content">Content & Storytelling</option>
+                     <option value="Motion">Motion Design & Animation</option>
+                     <option value="Other/Unsure">Other / Unsure</option>
+                 </select>
+             </div>
+             <div class="form-group">
+                 <label for="message">Brief Project Description</label>
+                 <textarea id="message" name="message" rows="5" required></textarea>
+             </div>
+
+             <!-- Redirect for Formspree -->
+             <input type="hidden" name="_next" value="/thank-you.html"> <!-- Ensure thank-you.html exists -->
+
+             <!-- Submit Button -->
+             <div class="form-group form-submit-group">
+                 <button type="submit" class="cta-button contact-submit-button">Send Message</button>
+             </div>
+        </form>
+        <!-- End Form -->
+
+        <!-- Alternate contact info -->
+         <div class="contact-alternate animate-on-scroll" style="--delay: 0.2s;">
+             <p>Prefer direct email? <a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a></p>
+         </div>
+    </section>
+  </main>
+  <!-- END MAIN CONTENT AREA -->
+
+  <!-- REUSED Simplified Footer -->
+  <footer class="simple-footer">
+      <p>© <span id="year">2024</span> Cascade Theory. All rights reserved.</p>
+  </footer>
+
+  <!-- REUSED Theme Toggle Button -->
+  <button id="theme-toggle" aria-label="Toggle light/dark theme">
+    <svg class="icon-sun" enable-background="new 0 0 512 512" height="24px" width="24px" id="Layer_1" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" aria-hidden="true"> <g><g><path d="M256,144c-61.75,0-112,50.25-112,112s50.25,112,112,112s112-50.25,112-112S317.75,144,256,144z M256,336    c-44.188,0-80-35.812-80-80c0-44.188,35.812-80,80-80c44.188,0,80,35.812,80,80C336,300.188,300.188,336,256,336z M256,112    c8.833,0,16-7.167,16-16V64c0-8.833-7.167-16-16-16s-16,7.167-16,16v32C240,104.833,247.167,112,256,112z M256,400    c-8.833,0-16,7.167-16,16v32c0,8.833,7.167,16,16,16s16-7.167,16-16v-32C272,407.167,264.833,400,256,400z M380.438,154.167    l22.625-22.625c6.25-6.25,6.25-16.375,0-22.625s-16.375-6.25-22.625,0l-22.625,22.625c-6.25,6.25-6.25,16.375,0,22.625    S374.188,160.417,380.438,154.167z M131.562,357.834l-22.625,22.625c-6.25,6.249-6.25,16.374,0,22.624s16.375,6.25,22.625,0    l22.625-22.624c6.25-6.271,6.25-16.376,0-22.625C147.938,351.583,137.812,351.562,131.562,357.834z M112,256    c0-8.833-7.167-16-16-16H64c-8.833,0-16,7.167-16,16s7.167,16,16,16h32C104.833,272,112,264.833,112,256z M448,240h-32    c-8.833,0-16,7.167-16,16s7.167,16,16,16h32c8.833,0,16-7.167,16-16S456.833,240,448,240z M131.541,154.167    c6.251,6.25,16.376,6.25,22.625,0c6.251-6.25,6.251-16.375,0-22.625l-22.625-22.625c-6.25-6.25-16.374-6.25-22.625,0    c-6.25,6.25-6.25,16.375,0,22.625L131.541,154.167z M380.459,357.812c-6.271-6.25-16.376-6.25-22.625,0    c-6.251,6.25-6.271,16.375,0,22.625l22.625,22.625c6.249,6.25,16.374,6.25,22.624,0s6.25-16.375,0-22.625L380.459,357.812z"/></g></g> </svg>
+    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
+  </button>
+
+   <!-- Back to Top Button -->
+   <button id="back-to-top" aria-label="Scroll back to top">
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="24" height="24"> <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /> </svg>
+   </button>
+
+    <!-- ADDED: Schedule Modal (Same as index.html) -->
+   <div id="schedule-modal" class="schedule-modal-overlay">
+       <div class="schedule-modal-content">
+           <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">×</button>
+           <iframe id="schedule-iframe" src="" frameborder="0" allowfullscreen></iframe>
+           <div class="modal-loading">Loading Scheduler...</div>
+       </div>
+   </div>
+
+  <!-- Link to the main script file (MUST BE LAST) -->
+  <script src="script.js"></script>
+</body>
+</html>
