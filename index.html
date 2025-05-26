@@ -1,476 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cascade Theory - Multimedia Marketing by Jake Fischer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Load THREE.js library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Add Favicon Links Here -->
-  <!-- <link rel="icon" href="/favicon.ico" sizes="any"> -->
-  <!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
-  <!-- <link rel="apple-touch-icon" href="/apple-touch-icon.png"> -->
-  <!-- Google Calendar Button CSS -->
-  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cascade Theory - Multimedia Marketing by Jake Fischer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #desktop-nav-container { 
+            background-color: rgba(255, 255, 255, 0.92); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            padding: 6px 8px; 
+            border-radius: 50px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            display: flex; 
+            align-items: center; 
+        }
+        
+        #desktop-nav-list {
+            display: flex;
+            align-items: center;
+            position: relative; 
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #video-pin-outer-container {
+            height: 300vh; 
+            position: relative;
+        }
+        #hero-and-video-sticky-wrapper {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow: hidden; 
+        }
+        #scroll-video::-webkit-media-controls,
+        #scroll-video::-moz-media-controls,
+        #scroll-video::-ms-media-controls,
+        #scroll-video::media-controls {
+            display:none !important;
+        }
+        #scroll-video-container {
+            overflow: hidden; 
+        }
+    </style>
 </head>
-<body class="home-page"> <!-- Class for styling & JS checks -->
-  <!-- Gradient Background Canvas - JS will handle colors -->
-  <canvas id="gradient-canvas"></canvas>
+<body class="font-body">
 
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <a href="index.html" class="logo-link" aria-label="Homepage"> <!-- Link to homepage -->
-        <img src="/assets/temp_logo/temp_logo.svg" alt="Cascade Theory Logo" height="40" class="logo-img">
-      </a>
+    <header id="header-main-desktop" class="hidden lg:flex fixed top-4 left-0 right-0 z-[1000] items-center justify-between px-8" data-aos="fade-down" data-aos-delay="300">
+        <a href="#hero" class="block flex-shrink-0">
+            <img src="assets/temp_logo/logo_light.svg" alt="Cascade Theory Logo" id="main-header-logo" class="h-10">
+        </a>
+        <div id="desktop-nav-container"> 
+            <ul id="desktop-nav-list">
+                <div id="sliding-button"></div>
+                <li class="desktop-nav-item"><a href="#hero">Home</a></li>
+                <li class="desktop-nav-item"><a href="#services">Services</a></li>
+                <li class="desktop-nav-item"><a href="#case-studies">Case Studies</a></li>
+                <li class="desktop-nav-item"><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <a href="/shop.html" class="cta-button cta-button-secondary !text-sm !font-semibold !py-2 !px-5 flex-shrink-0 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-1.5">
+                <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.763.746-1.856 1.707l-.286 3.02A2.25 2.25 0 0 0 5.25 14.25h13.5a2.25 2.25 0 0 0 2.123-2.766l-.286-3.02A1.875 1.875 0 0 0 18.487 6.75H16.5V6A4.5 4.5 0 0 0 12 1.5A4.5 4.5 0 0 0 7.5 6Zm-2.625 8.25a.75.75 0 0 1 .75-.75h13.5a.75.75 0 0 1 0 1.5H5.625a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                <path d="M12 1.5a3 3 0 0 0-3 3V6h6V4.5a3 3 0 0 0-3-3Z" />
+            </svg>              
+            Shop
+        </a>
+    </header>
+    
+    <div class="lg:hidden fixed top-0 left-0 right-0 z-[49] bg-white shadow-sm">
+        <div class="container-custom mx-auto py-3 flex justify-between items-center">
+            <a href="#hero" class="block">
+                <img src="assets/temp_logo/logo_light.svg" alt="Cascade Theory Logo" class="h-10">
+            </a>
+            <button id="mobile-nav-toggle" aria-label="Open menu" class="hidden">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
     </div>
-    <nav class="desktop-nav" aria-label="Main Navigation">
-      <div class="nav-links-centered">
-        <a href="#services">Services</a>
-        <a href="#portfolio">Case Studies</a>
-        <a href="#about">About</a>
-      </div>
-      <!-- Changed to schedule-call-link class to use the modal instead of direct link -->
-      <a href="#schedule"
-         class="schedule-call-nav-link schedule-call-link">Schedule a Call</a>
-    </nav>
-  </header>
 
-  <!-- Mobile Navigation Elements -->
-  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav-menu">
-    <span class="bar bar1"></span>
-    <span class="bar bar2"></span>
-    <span class="bar bar3"></span>
-  </button>
-  <div class="nav-overlay" id="mobile-nav-menu">
-    <div class="mobile-nav-header">
-      <a href="index.html" class="mobile-logo-link" aria-label="Homepage">
-        <img src="/assets/temp_logo/temp_logo.svg" alt="Cascade Theory Logo" height="32" class="logo-img"> <!-- Updated mobile logo -->
-      </a>
+    <div id="mobile-menu" class="lg:hidden fixed top-0 right-0 h-full w-3/4 max-w-xs sm:max-w-sm bg-primary text-text-light shadow-xl p-6">
+        <button id="mobile-nav-close" class="absolute top-5 right-5 text-text-light" aria-label="Close menu">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <nav class="mt-16 space-y-5">
+            <a href="#hero" class="block text-2xl font-subheader hover:text-secondary mobile-nav-link">Home</a>
+            <a href="#services" class="block text-2xl font-subheader hover:text-secondary mobile-nav-link">Services</a>
+            <a href="#case-studies" class="block text-2xl font-subheader hover:text-secondary mobile-nav-link">Case Studies</a>
+            <a href="#contact" class="block text-2xl font-subheader hover:text-secondary mobile-nav-link">Contact</a>
+            <div class="pt-4"> 
+                <a href="#" class="cta-button cta-button-secondary !text-lg !py-2.5 !px-6 w-full text-center schedule-call-link">Schedule a Free Call</a>
+            </div>
+        </nav>
     </div>
-    <nav class="mobile-nav" aria-label="Mobile Navigation">
-      <a href="#services">Services</a>
-      <a href="#portfolio">Case Studies</a>
-      <a href="#about">About</a>
-      <!-- Updated mobile link to use the modal -->
-      <a href="#schedule"
-         class="mobile-nav-cta schedule-call-link">Schedule a Call</a>
-    </nav>
-  </div>
+    
+    <div id="video-pin-outer-container">
+        <div id="hero-and-video-sticky-wrapper">
+            <section id="hero" class="h-full w-full bg-transparent overflow-hidden flex items-center">
+                <div class="container-custom mx-auto lg:flex lg:justify-between lg:items-center lg:gap-8 xl:gap-12"> 
+                    <div class="w-full lg:w-7/12 text-left py-10 lg:py-12 relative"> 
+                        
+                        <h1 class="section-title !text-5xl sm:!text-6xl md:!text-7xl !mb-10 font-header-extra !text-left" data-aos="fade-up">Ignite Your Growth.</h1>
+                        
+                        <p class="text-gray-500 mb-12 text-base md:text-lg leading-relaxed !text-left" data-aos="fade-up" data-aos-delay="200"> Based in Bend, Oregon, Cascade Theory partners with ambitious brands nationwide. We blend strategic thinking with creative execution to build impactful digital experiences and compelling brand narratives that drive results. </p>
+                        
+                        <div class="!text-left flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0 mb-16 md:mb-20" data-aos="fade-up" data-aos-delay="300">
+                            <a href="#" class="cta-button cta-button-secondary schedule-call-link group flex items-center justify-center sm:justify-start !py-3 !px-8 text-base md:!text-lg">
+                                Start Your Cascade
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
 
-  <!-- Main Content Area -->
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero-section wide-hero" aria-labelledby="hero-heading">
-        <!-- Text Content Container (Left Column) -->
-        <div class="hero-text-overlay-card animate-on-scroll">
-            <div class="hero-text-content">
-                <h1 id="hero-heading" class="hero-title">
-                    Purpose-Driven Design <span class="accent-text">&</span> Marketing
-                </h1>
-                <!-- Services List Moved Back Under Title -->
-                <div class="hero-services-list">
-                    <span>Strategy</span> <span class="plus-separator">+</span>
-                    <span>Branding</span> <span class="plus-separator">+</span>
-                    <span>Content</span> <span class="plus-separator">+</span>
-                    <span>Motion</span> <span class="plus-separator">+</span>
-                    <span>Film</span>
-                </div>
-                <!-- Description -->
-                <p class="hero-description">
-                    Based in Bend, Oregon, Cascade Theory partners with ambitious brands nationwide. We blend strategic thinking with creative execution to build impactful digital experiences and compelling brand narratives that drive results.
-                </p>
-                <a href="#contact" class="cta-button hero-cta">Start Your Cascade</a>
-                <!-- Optional: Add second button here if desired -->
-            </div>
-        </div>
-        <!-- Video Container (Right Column) -->
-        <div class="hero-video-container hero-video-larger">
-            <video
-                src="\assets\video\cannonbeach_web.mp4"
-                class="hero-background-video"
-                autoplay muted loop playsinline
-                aria-label="Abstract background video with flowing blue particles.">
-            </video>
-            <!-- Rotating Text Element (Moved Here) -->
-            <div class="rotating-text-container">
-                <svg class="rotating-text-svg" viewBox="0 0 150 150">
-                    <path id="circlePath" class="rotating-text-path" d="M 75, 75 m -60, 0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0"/>
-                    <!-- Centered Logo Image -->
-                    <image xlink:href="assets/temp_logo/mark.svg" x="25" y="25" width="100" height="100" />
-                    <text class="rotating-text">
-                        <textPath class="rotating-path-text" xlink:href="#circlePath" startOffset="50%" text-anchor="middle">
-                            Schedule a free consultation • Schedule a free consultation •
-                        </textPath>
-                    </text>
-                </svg>
-            </div>
-        </div>
-    </section>
-    <!-- END OF HERO SECTION -->
-
-    <!-- SERVICES SECTION (Revised Layout) -->
-    <section id="services" class="content-section service-section-revised" aria-labelledby="services-heading">
-      <div class="services-layout-container animate-on-scroll">
-        <div class="services-heading-column">
-          <h2 id="services-heading" class="section-title">Catalyzing Growth Across the Creative Spectrum</h2>
-        </div>
-        <div class="services-list-column">
-          <div class="services-list-expanded">
-            <span>Strategy</span> <span class="plus-separator">+</span>
-            <span>Branding</span> <span class="plus-separator">+</span>
-            <span>Identity Design</span> <span class="plus-separator">+</span>
-            <span>Logo Design</span> <span class="plus-separator">+</span>
-            <span>Web Design</span> <span class="plus-separator">+</span>
-            <span>Web Development</span> <span class="plus-separator">+</span>
-            <span>UI/UX Design</span> <span class="plus-separator">+</span>
-            <span>E-commerce</span> <span class="plus-separator">+</span>
-            <span>Content Creation</span> <span class="plus-separator">+</span>
-            <span>Copywriting</span> <span class="plus-separator">+</span>
-            <span>Photography</span> <span class="plus-separator">+</span>
-            <span>Videography</span> <span class="plus-separator">+</span>
-            <span>Motion Graphics</span> <span class="plus-separator">+</span>
-            <span>Animation</span> <span class="plus-separator">+</span>
-            <span>Social Media</span> <span class="plus-separator">+</span>
-            <span>SEO</span> <span class="plus-separator">+</span>
-            <span>Marketing Campaigns</span> <span class="plus-separator">+</span>
-            <span>Print Design</span> <span class="plus-separator">+</span>
-            <span>Packaging</span> <span class="plus-separator">+</span>
-            <span>Brand Guidelines</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO / CASE STUDIES SECTION -->
-    <section id="portfolio" class="content-section portfolio-section" aria-labelledby="portfolio-heading">
-       <h2 id="portfolio-heading" class="section-title accent-title animate-on-scroll">Cascade Case Studies</h2>
-       <p class="section-subtitle centered-text animate-on-scroll">Explore how the Cascade Framework™ transforms vision into measurable success.</p>
-
-        <!-- Updated Grid Container -->
-        <div class="case-studies-grid-container masonry-grid animate-on-scroll">
-
-             <!-- Card 1: Wide -->
-             <a href="case-study-template.html" class="case-study-card cs-wide" aria-label="View full case study for Tanuki Learning App">
-                 <div class="case-study-image-wrapper">
-                     <img src="case_studies/covers/tanuki.jpg" alt="Tanuki Japanese Learning App interface mockup" loading="lazy">
-                     <div class="case-study-overlay">
-                         <h3 class="case-study-title">Tanuki Learning App</h3>
-                         <span class="case-study-client">Personal Capstone</span>
-                     </div>
-                 </div>
-             </a>
-
-             <!-- Card 2: Square -->
-             <a href="#" class="case-study-card cs-square" aria-label="View full case study for Project Title Two">
-                  <div class="case-study-image-wrapper">
-                     <img src="https://picsum.photos/seed/cs2/800/800" alt="Placeholder image for Project Two" loading="lazy"> <!-- Changed aspect ratio -->
-                     <div class="case-study-overlay">
-                         <h3 class="case-study-title">Project Title Two</h3>
-                         <span class="case-study-client">Client Co.</span>
-                     </div>
-                  </div>
-             </a>
-
-             <!-- Card 3: Square -->
-              <a href="#" class="case-study-card cs-square" aria-label="View full case study for Project Title Three">
-                  <div class="case-study-image-wrapper">
-                     <img src="https://picsum.photos/seed/cs3/800/800" alt="Placeholder image for Project Three" loading="lazy"> <!-- Changed aspect ratio -->
-                     <div class="case-study-overlay">
-                         <h3 class="case-study-title">Project Title Three</h3>
-                         <span class="case-study-client">Creative Partner</span>
-                     </div>
-                  </div>
-             </a>
-
-             <!-- Card 4: Square -->
-             <a href="#" class="case-study-card cs-square" aria-label="View full case study for Project Title Four">
-                  <div class="case-study-image-wrapper">
-                     <img src="https://picsum.photos/seed/cs4/800/800" alt="Placeholder image for Project Four" loading="lazy"> <!-- Changed aspect ratio -->
-                     <div class="case-study-overlay">
-                         <h3 class="case-study-title">Project Title Four</h3>
-                         <span class="case-study-client">Innovate Inc.</span>
-                     </div>
-                  </div>
-             </a>
-
-             <!-- Card 5: Square -->
-             <a href="#" class="case-study-card cs-square" aria-label="View full case study for Project Title Five">
-                  <div class="case-study-image-wrapper">
-                     <img src="https://picsum.photos/seed/cs5/800/800" alt="Placeholder image for Project Five" loading="lazy"> <!-- Changed aspect ratio -->
-                     <div class="case-study-overlay">
-                         <h3 class="case-study-title">Project Title Five</h3>
-                         <span class="case-study-client">Global Solutions</span>
-                     </div>
-                  </div>
-             </a>
-
-             <!-- Card 6: Wide -->
-             <a href="#" class="case-study-card cs-wide" aria-label="View full case study for Project Title Six">
-                  <div class="case-study-image-wrapper">
-                     <img src="https://picsum.photos/seed/cs6/1200/600" alt="Placeholder image for Project Six" loading="lazy"> <!-- Changed aspect ratio -->
-                     <div class="case-study-overlay">
-                         <h3 class="case-study-title">Project Title Six</h3>
-                         <span class="case-study-client">Startup Hub</span>
-                     </div>
-                  </div>
-             </a>
-
-        </div>
-    </section>
-
-    <!-- OUR PROCESS SECTION -->
-    <section id="process" class="content-section process-section" aria-labelledby="process-heading">
-      <!-- New wrapper for sticky content on mobile -->
-      <div class="sticky-scroll-content">
-        <h2 id="process-heading" class="section-title animate-on-scroll">The Cascade Framework™</h2>
-        <p class="section-subtitle centered-text animate-on-scroll">My proven methodology ensures strategic alignment and creative momentum, flowing seamlessly from discovery to amplification.</p>
-        <div class="process-steps-container">
-             <div class="process-line" aria-hidden="true"></div> <!-- This line might need adjustment or removal for mobile sticky -->
-            <div class="process-step animate-on-scroll">
-              <span class="step-number" aria-hidden="true">01</span>
-              <h3 class="step-title">Discovery & Strategy</h3>
-              <p class="step-description">We dive deep to understand your goals, audience, and unique value, forging a clear strategic foundation for success.</p>
-            </div>
-            <div class="process-step animate-on-scroll" style="--delay: 0.1s;">
-              <span class="step-number" aria-hidden="true">02</span>
-              <h3 class="step-title">Concept & Creation</h3>
-              <p class="step-description">Ideas take shape. Strategy is translated into compelling visuals, messaging, and engaging interactive experiences.</p>
-            </div>
-            <div class="process-step animate-on-scroll" style="--delay: 0.2s;">
-              <span class="step-number" aria-hidden="true">03</span>
-              <h3 class="step-title">Build & Launch</h3>
-              <p class="step-description">Meticulous development and execution bring the vision to life, tested thoroughly and culminating in an impactful launch.</p>
-            </div>
-            <div class="process-step animate-on-scroll" style="--delay: 0.3s;">
-              <span class="step-number" aria-hidden="true">04</span>
-              <h3 class="step-title">Amplify & Adapt</h3>
-              <p class="step-description">Post-launch, performance is analyzed, growth opportunities identified, and strategies adapted for ongoing momentum.</p>
-            </div>
-        </div>
-        <!-- CTA moved INSIDE the sticky wrapper -->
-        <div class="process-cta-container animate-on-scroll" style="--delay: 0.4s;">
-            <p class="process-cta-text">See how this framework drives tangible results.</p>
-            <a href="#portfolio" class="cta-button process-cta-button">View Case Studies</a>
-        </div>
-      </div> <!-- End of sticky-scroll-content -->
-    </section>
-
-    <!-- ABOUT SECTION -->
-    <section id="about" class="content-section about-section" aria-labelledby="about-heading">
-      <!-- New wrapper for card + image layout -->
-      <div class="about-section-layout animate-on-scroll">
-        <!-- Main card container -->
-        <div class="about-card-container">
-            <h2 id="about-heading" class="section-title accent-title">Beyond Aesthetics: Creative With Purpose</h2>
-            <div class="about-content-wrapper">
-              <!-- Text content card (remains inside) -->
-              <div class="about-text-card">
-                <p class="about-description">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is currently my solo venture, serving clients nationwide. I'm not just a designer; I'm a strategic partner focused on how great creative drives business forward. I believe true impact starts with a single, powerful idea allowed to flow, adapt, and amplify.</p>
-                <div class="manifesto">
-                  <h4 class="manifesto-title">What Drives Me</h4>
-                  <p>I believe thoughtful design and strategic storytelling create lasting impact. My goal is simple: produce work that resonates, moves audiences, and sparks momentum. Every project is crafted intentionally, because good ideas deserve to ripple far beyond their starting point.</p>
-              </div>
-              </div>
-              <!-- Image div is now moved outside this wrapper -->
-            </div>
-        </div>
-        <!-- Image moved outside the card container, now a sibling -->
-        <div class="about-image">
-          <img src="/assets/photo_misc/jake_1.jpg" alt="Scenic view of the Deschutes River flowing through Bend, Oregon with mountains in the background." loading="lazy">
-        </div>
-      </div>
-    </section>
-
-    <!-- STATS & TESTIMONIALS SECTION -->
-    <section id="stats" class="stats-section" aria-labelledby="stats-heading">
-      <h2 id="stats-heading" class="section-title animate-on-scroll">The <span class="accent-text">Momentum</span> We Build</h2>
-      <div class="stats-container">
-        <div class="stat-item animate-on-scroll">
-          <h3 id="stat1" class="stat-value">50+</h3>
-          <p class="stat-label">Projects Completed</p>
-        </div>
-        <div class="stat-item animate-on-scroll" style="--delay: 0.1s;">
-          <h3 id="stat2" class="stat-value">7+</h3>
-          <p class="stat-label">Years Experience</p>
-        </div>
-        <div class="stat-item animate-on-scroll" style="--delay: 0.2s;">
-          <h3 id="stat3" class="stat-value">110k+</h3>
-          <p class="stat-label">Impressions Generated</p>
-        </div>
-     </div>
-
-     <!-- Testimonial Slider -->
-     <div id="testimonial-slider" class="testimonial-slider-container animate-on-scroll" style="--delay: 0.3s;">
-        <div class="testimonial-slider-track">
-            <blockquote class="testimonial-quote">
-                <p>Throughout his time as a photojournalist, Jake always brought a positive attitude and optimism to the team. He showed dedication and commitment to every assignment he took and went the extra mile to support the community during his time at Orange Media Network.</p>
-                <div class="testimonial-profile">
-                    <img src="assets/testimonials/ashton.jpg" alt="Ashton Bisner" class="testimonial-profile-pic" loading="lazy">
-                    <div class="testimonial-profile-info">
-                        <span class="testimonial-profile-name">Ashton Bisner</span>
-                        <span class="testimonial-profile-title">Creative Lead</span>
-                        <span class="testimonial-profile-company">Orange Media Network</span>
+                        <div id="hero-stats-wrapper" class="w-full" data-aos="fade-up" data-aos-delay="400">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 text-center">
+                                <div class="hero-stat-pod">
+                                    <h3 id="hero-stat1" class="text-3xl md:text-4xl font-bold text-primary mb-1">0+</h3>
+                                    <p class="text-gray-600 uppercase text-xs sm:text-sm tracking-wider font-semibold">Projects Completed</p>
+                                </div>
+                                <div class="hero-stat-pod">
+                                    <h3 id="hero-stat2" class="text-3xl md:text-4xl font-bold text-primary mb-1">0+</h3>
+                                    <p class="text-gray-600 uppercase text-xs sm:text-sm tracking-wider font-semibold">Years Experience</p>
+                                </div>
+                                <div class="hero-stat-pod">
+                                    <h3 id="hero-stat3" class="text-3xl md:text-4xl font-bold text-primary mb-1">0k+</h3>
+                                    <p class="text-gray-600 uppercase text-xs sm:text-sm tracking-wider font-semibold">Impressions Generated</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex lg:w-5/12 items-center justify-center" data-aos="fade-left" data-aos-delay="400">
+                        <img src="assets/temp_logo/mark.svg" alt="Cascade Theory Mark" class="w-full max-w-md xl:max-w-lg h-auto">
                     </div>
                 </div>
-            </blockquote>
+            </section>
+            <div id="scroll-video-container"
+                 style="position: absolute; 
+                        bottom: 0; left: 50%; 
+                        width: 10vw; height: 10vh; 
+                        transform: translate(-50%, 100%) scale(0.1); 
+                        transform-origin: center bottom; 
+                        opacity: 0;
+                        z-index: 5; 
+                        pointer-events: none;
+                        ">
+                <video id="scroll-video"
+                       style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                       playsinline muted loop preload="auto">
+                    <source src="assets/video/cannonbeach_web.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
-            <blockquote class="testimonial-quote">
-                <p>Jake's dedication and creativity in creating Noti's branding were exceptional. Through exploring numerous designs, he delivered results that surpassed expectations. Noti now stands out with a unique identity thanks to Jake's expertise.</p>
-                <div class="testimonial-profile">
-                    <img src="assets/testimonials/adam.jpg" alt="Adam Helischauer" class="testimonial-profile-pic" loading="lazy">
-                    <div class="testimonial-profile-info">
-                        <span class="testimonial-profile-name">Adam Helischauer</span>
-                        <span class="testimonial-profile-title">CEO</span>
-                        <span class="testimonial-profile-company">Noti</span>
+            <div class="hero-client-logo-marquee-container" data-aos="fade-up" data-aos-anchor="#hero" data-aos-delay="700">
+                <div class="client-logo-row" data-direction="ltr">
+                    <div class="client-logo-set">
+                        <div class="client-logo-item"><img src="assets/company_logos/Blackstrap_Button_White.webp" alt="Blackstrap Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/cormic.png" alt="Corvallis Microfluidics Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/flashform.png" alt="Flashform Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/kickbot.png" alt="Kickbot Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/noti.png" alt="Noti Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/phase_transition.png" alt="Phase Transition Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/osu.png" alt="Oregon State University Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/Blackstrap_Button_White.webp" alt="Blackstrap Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/cormic.png" alt="Corvallis Microfluidics Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/flashform.png" alt="Flashform Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/kickbot.png" alt="Kickbot Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/noti.png" alt="Noti Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/phase_transition.png" alt="Phase Transition Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/osu.png" alt="Oregon State University Logo"></div>
+                    </div>
+                    <div class="client-logo-set" aria-hidden="true">
+                        <div class="client-logo-item"><img src="assets/company_logos/Blackstrap_Button_White.webp" alt="Blackstrap Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/cormic.png" alt="Corvallis Microfluidics Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/flashform.png" alt="Flashform Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/kickbot.png" alt="Kickbot Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/noti.png" alt="Noti Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/phase_transition.png" alt="Phase Transition Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/osu.png" alt="Oregon State University Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/Blackstrap_Button_White.webp" alt="Blackstrap Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/cormic.png" alt="Corvallis Microfluidics Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/flashform.png" alt="Flashform Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/kickbot.png" alt="Kickbot Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/noti.png" alt="Noti Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/phase_transition.png" alt="Phase Transition Logo"></div>
+                        <div class="client-logo-item"><img src="assets/company_logos/osu.png" alt="Oregon State University Logo"></div>
                     </div>
                 </div>
-            </blockquote>
-
-            <blockquote class="testimonial-quote">
-                <p>Working with Jake was a great experience. He took our vision for FlashForm and turned it into a clean, professional brand that perfectly aligns with the product. He's highly receptive to feedback and brings fresh ideas to the table, often thinking of details we hadn't even considered.</p>
-                <div class="testimonial-profile">
-                    <img src="assets/testimonials/henry.jpg" alt="Henry Kutrieb" class="testimonial-profile-pic" loading="lazy">
-                    <div class="testimonial-profile-info">
-                        <span class="testimonial-profile-name">Henry Kutrieb</span>
-                        <span class="testimonial-profile-title">Founder</span>
-                        <span class="testimonial-profile-company">FlashForm</span>
-                    </div>
-                </div>
-            </blockquote>
-
-            <blockquote class="testimonial-quote">
-                <p>Jake has been a joy to work with over the last two years. He is an incredibly versatile and talented designer with a positive, team-building attitude and a heart for social justice. His optimism is infectious.</p>
-                <div class="testimonial-profile">
-                    <img src="assets/testimonials/sharon.jpg" alt="Sharon Betterton" class="testimonial-profile-pic" loading="lazy">
-                    <div class="testimonial-profile-info">
-                        <span class="testimonial-profile-name">Sharon Betterton</span>
-                        <span class="testimonial-profile-title">Art Director</span>
-                        <span class="testimonial-profile-company">Oregon State College of Science</span>
-                    </div>
-                </div>
-            </blockquote>
-            <!-- Cloned quotes added by JS -->
-        </div>
-     </div>
-     <!-- End Testimonial Slider -->
-
-    </section>
-
-    <!-- CONTACT SECTION (3 Steps & Logos) -->
-    <section id="contact" class="content-section contact-section-steps" aria-labelledby="contact-steps-heading">
-        <h2 id="contact-steps-heading" class="section-title animate-on-scroll">Ready to Start Your Cascade?</h2>
-        <p class="section-subtitle centered-text animate-on-scroll">Let's transform your marketing. Here's how simple it is to begin – I'll guide you every step.</p>
-
-        <div class="contact-steps-grid">
-             <div class="contact-steps-line" aria-hidden="true"></div>
-            <div class="contact-step animate-on-scroll" style="--delay: 0.1s;">
-                <span class="step-number" aria-hidden="true">01</span>
-                <h3 class="step-title">Schedule a Call</h3>
-                <p class="step-description">
-                    Book a free 30-minute discovery call. We'll discuss your vision, goals, and see if we're the right fit to collaborate.
-                </p>
-            </div>
-            <div class="contact-step animate-on-scroll" style="--delay: 0.2s;">
-                <span class="step-number" aria-hidden="true">02</span>
-                <h3 class="step-title">Review Proposal</h3>
-                <p class="step-description">
-                    If we align, I'll craft a custom proposal outlining the strategy, deliverables, timeline, and investment. Review it online at your convenience.
-                </p>
-            </div>
-            <div class="contact-step animate-on-scroll" style="--delay: 0.3s;">
-                <span class="step-number" aria-hidden="true">03</span>
-                <h3 class="step-title">Begin Your Project</h3>
-                <p class="step-description">
-                    With the proposal approved, we'll kick off the project with an onboarding process and schedule our first working session.
-                </p>
             </div>
         </div>
-
-        <!-- Schedule Call Button (Moved Here) -->
-        <div class="contact-cta-button-container animate-on-scroll" style="--delay: 0.5s;">
-            <a href="#schedule" class="schedule-call-nav-link schedule-call-link">Schedule a Call</a>
-        </div>
-
-        <!-- Client Logo Section -->
-        <div class="client-logo-section animate-on-scroll" style="--delay: 0.4s;">
-            <h3 class="client-logo-title">Trusted By Brands Like Yours</h3>
-            <p class="client-logo-intro">We're proud to have helped diverse businesses make their mark.</p>
-            <div id="logo-slider" class="logo-slider-container">
-                <div class="logo-slider-track">
-                    <!-- Actual Logos -->
-                    <div class="logo-item"><img src="assets/company_logos/Blackstrap_Button_White.webp" alt="Blackstrap Logo"></div>
-                    <div class="logo-item"><img src="assets/company_logos/cormic.png" alt="Corvallis Microfluidics Logo"></div>
-                    <div class="logo-item"><img src="assets/company_logos/flashform.png" alt="Flashform Logo"></div>
-                    <div class="logo-item"><img src="assets/company_logos/kickbot.png" alt="Kickbot Logo"></div>
-                    <div class="logo-item"><img src="assets/company_logos/noti.png" alt="Noti Logo"></div>
-                    <div class="logo-item"><img src="assets/company_logos/phase_transition.png" alt="Phase Transition Logo"></div>
-                    <div class="logo-item"><img src="assets/company_logos/osu.png" alt="Oregon State University Logo"></div>
-                    <!-- Duplicate Logos for Seamless Scroll -->
-                    <div class="logo-item"><img src="assets/company_logos/Blackstrap_Button_White.webp" alt="Blackstrap Logo" aria-hidden="true"></div>
-                    <div class="logo-item"><img src="assets/company_logos/cormic.png" alt="Corvallis Microfluidics Logo" aria-hidden="true"></div>
-                    <div class="logo-item"><img src="assets/company_logos/flashform.png" alt="Flashform Logo" aria-hidden="true"></div>
-                    <div class="logo-item"><img src="assets/company_logos/kickbot.png" alt="Kickbot Logo" aria-hidden="true"></div>
-                    <div class="logo-item"><img src="assets/company_logos/noti.png" alt="Noti Logo" aria-hidden="true"></div>
-                    <div class="logo-item"><img src="assets/company_logos/phase_transition.png" alt="Phase Transition Logo" aria-hidden="true"></div>
-                    <div class="logo-item"><img src="assets/company_logos/osu.png" alt="Oregon State University Logo" aria-hidden="true"></div>
-                </div>
-            </div>
-        </div>
-        <!-- End Client Logo Section -->
-
-        <!-- Removed contact-alternate-home div -->
-
-        <footer class="contact-footer animate-on-scroll" style="--delay: 0.7s;">
-             <div class="footer-content-grid">
-                 <div class="footer-column footer-contact">
-                     <h4>Contact</h4>
-                     <p>Bend, Oregon</p>
-                     <p><a href="mailto:hello@cascadetheory.com" class="contact-email-link">hello@cascadetheory.com</a></p>
-                     <p>Prefer to send a quick message first? <a href="contact.html" class="contact-page-link">Use the contact form</a>.</p> <!-- Moved text -->
-                 </div>
-                 <div class="footer-column footer-social">
-                     <h4>Connect</h4>
-                     <div class="social-links"> <!-- Wrapper for styling -->
-                         <a href="#" class="social-link" aria-label="LinkedIn">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                         </a>
-                         <a href="#" class="social-link" aria-label="Instagram">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.225-.149-4.771-1.664-4.919-4.919-.058-1.265-.069-1.645-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                         </a>
-                         <a href="#" class="social-link" aria-label="Twitter">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                         </a>
-                     </div> <!-- Closes social-links -->
-                 </div> <!-- Closes footer-social -->
-                 <div class="footer-column footer-copyright">
-                     <p>&copy; <span id="year"></span> Cascade Theory. All rights reserved.</p>
-                 </div> <!-- Closes footer-copyright -->
-             </div> <!-- Closes footer-content-grid -->
-        </footer> <!-- Closes contact-footer -->
-
-    </section> <!-- Closes contact-section-steps -->
-
-  </main> <!-- Closes main content area -->
-
-  <!-- Back to Top Button -->
-  <button id="back-to-top" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24px" height="24px"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
-  </button>
-
-  <!-- Schedule Modal -->
-  <div id="schedule-modal" class="schedule-modal-overlay" aria-modal="true" role="dialog">
-    <div class="schedule-modal-content">
-      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">&times;</button>
-      <div class="modal-loading">Loading Scheduler...</div>
-      <iframe id="schedule-iframe" title="Scheduling Page"></iframe>
     </div>
-  </div>
 
-  <!-- Load Main Script -->
-  <script src="script.js"></script>
+    <main id="page-content-after-hero">
+        <section id="services" class="content-section bg-white">
+            <div class="container-custom mx-auto">
+                <h2 class="section-title" data-aos="fade-up">Growth Across the Creative Spectrum</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    Explore our comprehensive suite of services designed to elevate your brand and achieve your marketing objectives. Each capability is a thread in the larger tapestry of your success.
+                </p>
+            </div>
+            <div id="services-marquee" class="services-marquee-container mt-10 md:mt-16" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-row" data-direction="ltr">
+                    <div class="service-set">
+                        <span class="service-item">Strategy</span><span class="service-item">Branding</span><span class="service-item">Identity Design</span><span class="service-item">Logo Design</span><span class="service-item">Web Design</span>
+                        <span class="service-item">Strategy</span><span class="service-item">Branding</span><span class="service-item">Identity Design</span><span class="service-item">Logo Design</span><span class="service-item">Web Design</span>
+                    </div>
+                    <div class="service-set" aria-hidden="true">
+                        <span class="service-item">Strategy</span><span class="service-item">Branding</span><span class="service-item">Identity Design</span><span class="service-item">Logo Design</span><span class="service-item">Web Design</span>
+                        <span class="service-item">Strategy</span><span class="service-item">Branding</span><span class="service-item">Identity Design</span><span class="service-item">Logo Design</span><span class="service-item">Web Design</span>
+                    </div>
+                </div>
+                <div class="service-row" data-direction="rtl">
+                    <div class="service-set">
+                        <span class="service-item">Web Development</span><span class="service-item">UI/UX Design</span><span class="service-item">E-commerce</span><span class="service-item">Content Creation</span><span class="service-item">Copywriting</span>
+                        <span class="service-item">Web Development</span><span class="service-item">UI/UX Design</span><span class="service-item">E-commerce</span><span class="service-item">Content Creation</span><span class="service-item">Copywriting</span>
+                    </div>
+                    <div class="service-set" aria-hidden="true">
+                        <span class="service-item">Web Development</span><span class="service-item">UI/UX Design</span><span class="service-item">E-commerce</span><span class="service-item">Content Creation</span><span class="service-item">Copywriting</span>
+                        <span class="service-item">Web Development</span><span class="service-item">UI/UX Design</span><span class="service-item">E-commerce</span><span class="service-item">Content Creation</span><span class="service-item">Copywriting</span>
+                    </div>
+                </div>
+                <div class="service-row" data-direction="ltr">
+                    <div class="service-set">
+                        <span class="service-item">Photography</span><span class="service-item">Videography</span><span class="service-item">Motion Graphics</span><span class="service-item">Animation</span><span class="service-item">Social Media</span>
+                        <span class="service-item">Photography</span><span class="service-item">Videography</span><span class="service-item">Motion Graphics</span><span class="service-item">Animation</span><span class="service-item">Social Media</span>
+                    </div>
+                    <div class="service-set" aria-hidden="true">
+                        <span class="service-item">Photography</span><span class="service-item">Videography</span><span class="service-item">Motion Graphics</span><span class="service-item">Animation</span><span class="service-item">Social Media</span>
+                        <span class="service-item">Photography</span><span class="service-item">Videography</span><span class="service-item">Motion Graphics</span><span class="service-item">Animation</span><span class="service-item">Social Media</span>
+                    </div>
+                </div>
+                <div class="service-row" data-direction="rtl">
+                    <div class="service-set">
+                        <span class="service-item">SEO</span><span class="service-item">Marketing Campaigns</span><span class="service-item">Print Design</span><span class="service-item">Packaging</span><span class="service-item">Brand Guidelines</span>
+                        <span class="service-item">SEO</span><span class="service-item">Marketing Campaigns</span><span class="service-item">Print Design</span><span class="service-item">Packaging</span><span class="service-item">Brand Guidelines</span>
+                    </div>
+                    <div class="service-set" aria-hidden="true">
+                        <span class="service-item">SEO</span><span class="service-item">Marketing Campaigns</span><span class="service-item">Print Design</span><span class="service-item">Packaging</span><span class="service-item">Brand Guidelines</span>
+                        <span class="service-item">SEO</span><span class="service-item">Marketing Campaigns</span><span class="service-item">Print Design</span><span class="service-item">Packaging</span><span class="service-item">Brand Guidelines</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section id="case-studies" class="content-section bg-bg-subtle" data-aos="fade-up">
+            <div class="bento-grid-container grid gap-6 md:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bento-item bento-item-text-card col-span-2 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="title font-header">Selected Works</h2>
+                    <p class="description font-body"> Explore how the Cascade Framework™ transforms vision into measurable success. Using the latest technology to build future-proof systems that also speak to the ❤️. </p>
+                </div>
+                <a href="case-study-template.html" class="bento-item bento-item-image-card col-span-2 row-span-1 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 group" data-aos="fade-up" data-aos-delay="200"> <img src="assets/case_studies/covers/tanuki.jpg" alt="Tanuki Japanese Learning App Showcase"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg md:text-xl text-white mb-0.5">Tanuki Learning App</h3> <p class="text-xs text-slate-200 mb-2">Personal Capstone (OSU)</p> <span class="cta-button-small">View Project</span> </div> </a>
+                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="300"> <img src="https://picsum.photos/seed/bentoA/600/600" alt="Abstract design"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Two</h3> <p class="text-xs text-slate-200 mb-2">Client Co.</p> <span class="cta-button-small">View Project</span> </div> </a>
+                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="400"> <img src="https://picsum.photos/seed/bentoB/600/800" alt="Portrait aspect image"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Three</h3> <p class="text-xs text-slate-200 mb-2">Creative Partner</p> <span class="cta-button-small">View Project</span> </div> </a>
+                <a href="#" class="bento-item bento-item-image-card col-span-2 row-span-1 md:col-span-3 md:row-span-1 lg:col-span-2 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="250"> <img src="https://picsum.photos/seed/bentoC/1200/600" alt="Wide landscape image"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg md:text-xl text-white mb-0.5">Project Title Four</h3> <p class="text-xs text-slate-200 mb-2">Global Solutions</p> <span class="cta-button-small">View Project</span> </div> </a>
+                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="350"> <img src="https://picsum.photos/seed/bentoD/600/600" alt="Another design element"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Five</h3> <p class="text-xs text-slate-200 mb-2">Startup Hub</p> <span class="cta-button-small">View Project</span> </div> </a>
+                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="450"> <img src="https://picsum.photos/seed/bentoE/800/600" alt="Technology concept"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Six</h3> <p class="text-xs text-slate-200 mb-2">Tech Forward Inc.</p> <span class="cta-button-small">View Project</span> </div> </a>
+            </div>
+            <div class="text-center mt-16 md:mt-20" data-aos="fade-up"> <a href="#" class="cta-button !bg-transparent !text-primary !border-primary hover:!bg-primary hover:!text-white"> Explore All Projects </a> </div>
+        </section>
+
+        <section id="process" class="content-section bg-bg-subtle">
+            <div class="container-custom mx-auto">
+                <h2 class="section-title" data-aos="fade-up">The Cascade Framework™</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">My proven methodology ensures strategic alignment and creative momentum, flowing seamlessly from discovery to amplification.</p>
+                <div class="mt-16 md:mt-20 space-y-12 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-x-10 lg:gap-x-12 md:gap-y-16">
+                    
+                    <div class="process-step text-left" data-aos="fade-up" data-aos-delay="150">
+                        <div class="process-step-number">01</div>
+                        <h3 class="font-header text-xl text-text-dark mb-3">Discovery & Strategy</h3>
+                        <p class="font-body text-gray-600 text-sm leading-relaxed">We dive deep to understand your goals, audience, and unique value, forging a clear strategic foundation for success.</p>
+                    </div>
+                    
+                    <div class="process-step text-left" data-aos="fade-up" data-aos-delay="250">
+                        <div class="process-step-number">02</div>
+                        <h3 class="font-header text-xl text-text-dark mb-3">Concept & Creation</h3>
+                        <p class="font-body text-gray-600 text-sm leading-relaxed">Ideas take shape. Strategy is translated into compelling visuals, messaging, and engaging interactive experiences.</p>
+                    </div>
+                    
+                    <div class="process-step text-left" data-aos="fade-up" data-aos-delay="350">
+                        <div class="process-step-number">03</div>
+                        <h3 class="font-header text-xl text-text-dark mb-3">Build & Launch</h3>
+                        <p class="font-body text-gray-600 text-sm leading-relaxed">Meticulous development and execution bring the vision to life, tested thoroughly and culminating in an impactful launch.</p>
+                    </div>
+                    
+                    <div class="process-step text-left" data-aos="fade-up" data-aos-delay="450">
+                        <div class="process-step-number">04</div>
+                        <h3 class="font-header text-xl text-text-dark mb-3">Amplify & Adapt</h3>
+                        <p class="font-body text-gray-600 text-sm leading-relaxed">Post-launch, performance is analyzed, growth opportunities identified, and strategies adapted for ongoing momentum.</p>
+                    </div>
+
+                </div>
+                 <div class="text-center mt-16 md:mt-20" data-aos="fade-up"><a href="#" class="cta-button schedule-call-link">See the Framework in Action</a></div>
+            </div>
+        </section>
+
+        <section id="stats-testimonials" class="content-section bg-white">
+            <div class="testimonial-marquee-container mt-0" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-row" data-direction="ltr">
+                    <div class="testimonial-set"></div> <div class="testimonial-set" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section bg-primary text-text-light">
+            <div class="container-custom mx-auto">
+                <h2 class="section-title !text-white" data-aos="fade-up">Ready to Start Your Cascade?</h2>
+                <p class="section-subtitle !text-gray-200 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">Let's transform your marketing. Here's how simple it is to begin – I'll guide you every step.</p>
+                <div class="mt-12 md:mt-16 grid md:grid-cols-2 gap-10 lg:gap-16 items-start max-w-5xl mx-auto">
+                    <div class="flex flex-col space-y-10" data-aos="fade-right" data-aos-delay="150">
+                        <div class="space-y-8">
+                            <div class="contact-step-item text-center md:text-left"><div class="contact-step-number contact-step-number-on-primary-bg mx-auto md:mx-0">01</div><h3 class="font-subheader text-lg md:text-xl text-white mb-2">Schedule a Call</h3><p class="font-body text-gray-300 text-sm leading-relaxed">Book a free 30-minute discovery call. We'll discuss your vision, goals, and see if we're the right fit to collaborate.</p></div>
+                            <div class="contact-step-item text-center md:text-left"><div class="contact-step-number contact-step-number-on-primary-bg mx-auto md:mx-0">02</div><h3 class="font-subheader text-xl text-white mb-2">Review Proposal</h3><p class="font-body text-gray-300 text-sm leading-relaxed">If we align, I'll craft a custom proposal outlining the strategy, deliverables, timeline, and investment.</p></div>
+                            <div class="contact-step-item text-center md:text-left"><div class="contact-step-number contact-step-number-on-primary-bg mx-auto md:mx-0">03</div><h3 class="font-subheader text-lg md:text-xl text-white mb-2">Begin Your Project</h3><p class="font-body text-gray-300 text-sm leading-relaxed">With the proposal approved, we'll kick off the project with an onboarding process.</p></div>
+                        </div>
+                        <div class="mt-8 md:mt-10 text-center md:text-left"> <a href="#" class="cta-button bg-secondary text-text-light hover:!bg-transparent hover:!border-white hover:!text-white text-lg schedule-call-link inline-block" data-aos="fade-up" data-aos-delay="200">Schedule Your Free Consultation</a> </div>
+                    </div>
+                    <div class="max-w-lg w-full mx-auto md:mx-0" data-aos="fade-left" data-aos-delay="250">
+                        <div class="bg-white/10 p-8 md:p-10 rounded-xl shadow-lg">
+                            <h3 class="font-header text-xl md:text-2xl text-white mb-8 text-center">Or Send a Message</h3>
+                            <form action="https://formspree.io/f/xeoapnjy" method="POST" class="space-y-6 text-left">
+                                <div><label for="name_contact_form" class="block text-sm font-medium text-gray-200 mb-1.5">Full Name</label><input type="text" name="name" id="name_contact_form" required class="block w-full px-4 py-2.5 bg-white/20 border-transparent rounded-lg text-white placeholder-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent text-sm"></div>
+                                <div><label for="email_contact_form" class="block text-sm font-medium text-gray-200 mb-1.5">Email Address</label><input type="email" name="email" id="email_contact_form" required class="block w-full px-4 py-2.5 bg-white/20 border-transparent rounded-lg text-white placeholder-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent text-sm"></div>
+                                <div><label for="message_contact_form" class="block text-sm font-medium text-gray-200 mb-1.5">Brief Project Description</label><textarea id="message_contact_form" name="message" rows="4" required class="block w-full px-4 py-2.5 bg-white/20 border-transparent rounded-lg text-white placeholder-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent text-sm"></textarea></div>
+                                <input type="hidden" name="_next" value="/thank-you.html"> <div class="pt-2"><button type="submit" class="w-full cta-button cta-button-secondary text-base py-3">Send Message</button></div>
+                            </form>
+                            <p class="mt-8 text-xs text-gray-300 text-center">Prefer direct email? <a href="mailto:hello@cascadetheory.com" class="font-medium text-secondary hover:text-orange-300">hello@cascadetheory.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-text-dark text-gray-400 py-12 md:py-16">
+        <div class="container-custom mx-auto text-center"> <a href="#hero" class="font-header text-xl text-white mb-6 inline-block">Cascade Theory</a> <nav class="mb-6"> <ul class="flex justify-center space-x-5 md:space-x-8 text-sm"> <li><a href="#services" class="hover:text-secondary">Services</a></li> <li><a href="#case-studies" class="hover:text-secondary">Case Studies</a></li><li><a href="about.html" class="hover:text-secondary">About</a></li> <li><a href="#contact" class="hover:text-secondary">Contact</a></li> </ul> </nav> <div class="flex justify-center space-x-5 mb-8"> </div> <p class="text-xs">© <span id="currentYear"></span> Cascade Theory. All rights reserved. Bend, Oregon.</p> </div>
+    </footer>
+
+    <div id="schedule-modal" class="schedule-modal-overlay" aria-modal="true" role="dialog">
+        <div class="schedule-modal-content"> <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">×</button> <div class="modal-loading">Loading Scheduler...</div> <iframe id="schedule-iframe" title="Scheduling Page" allow="fullscreen"></iframe> </div>
+    </div>
+
+    <div id="mobile-fab-nav-container" class="lg:hidden fixed inset-0 z-[950] pointer-events-none">
+        <div id="mobile-fab-backdrop" class="absolute inset-0 bg-black/30 opacity-0 transition-opacity duration-300 ease-out cursor-pointer"></div>
+
+        <div id="mobile-fab-actions-wrapper"
+            class="absolute bottom-20 left-1/2 -translate-x-1/2 w-auto whitespace-nowrap
+                    opacity-0 scale-90 pointer-events-none transform translate-y-3
+                    transition-all duration-200 ease-out origin-bottom-center">
+            <div class="flex items-center bg-white/90 backdrop-blur-md shadow-xl rounded-full p-1.5 space-x-1 nav-pill-container">
+                <a href="#hero" class="mobile-fab-action-item">Home</a>
+                <a href="#services" class="mobile-fab-action-item">Services</a>
+                <a href="#case-studies" class="mobile-fab-action-item">Work</a> <a href="about.html" class="mobile-fab-action-item">About</a>
+                <a href="#" class="mobile-fab-action-item schedule-call-link">Schedule</a>
+            </div>
+        </div>
+
+        <button id="mobile-fab-toggle" aria-expanded="false" aria-controls="mobile-fab-actions-wrapper"
+            class="fixed bottom-5 left-1/2 -translate-x-1/2 w-14 h-14 bg-primary text-white rounded-full shadow-lg
+                flex items-center justify-center pointer-events-auto
+                hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+                transition-transform duration-200 ease-out group">
+            <svg id="fab-icon-menu" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            <svg id="fab-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+    </div>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
