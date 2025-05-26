@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Shop - Digital Assets & Merch - Cascade Theory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="shop.css">
+    <style>
+        #desktop-nav-container { 
+            background-color: rgba(255, 255, 255, 0.92); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            padding: 6px 8px; 
+            border-radius: 50px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            display: flex; 
+            align-items: center; 
+        }
+        #desktop-nav-list {
+            display: flex;
+            align-items: center;
+            position: relative; 
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body class="font-body">
+
+    <header id="header-main-desktop" class="hidden lg:flex sticky top-4 left-0 right-0 z-[1000] items-center justify-between px-8 site-header-shop">
+        <a href="index.html#hero" class="block flex-shrink-0">
+            <img src="assets/temp_logo/logo_light.svg" alt="Cascade Theory Logo" id="main-header-logo" class="h-10">
+        </a>
+        <div id="desktop-nav-container"> 
+            <ul id="desktop-nav-list">
+                <div id="sliding-button"></div>
+                <li class="desktop-nav-item"><a href="index.html#hero">Home</a></li>
+                <li class="desktop-nav-item"><a href="index.html#services">Services</a></li>
+                <li class="desktop-nav-item"><a href="index.html#case-studies">Case Studies</a></li>
+                <li class="desktop-nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+        <a href="shop.html" id="header-shop-button" class="cta-button cta-button-secondary !text-sm !font-semibold !py-2 !px-5 flex-shrink-0 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-1.5">
+                <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.763.746-1.856 1.707l-.286 3.02A2.25 2.25 0 0 0 5.25 14.25h13.5a2.25 2.25 0 0 0 2.123-2.766l-.286-3.02A1.875 1.875 0 0 0 18.487 6.75H16.5V6A4.5 4.5 0 0 0 12 1.5A4.5 4.5 0 0 0 7.5 6Zm-2.625 8.25a.75.75 0 0 1 .75-.75h13.5a.75.75 0 0 1 0 1.5H5.625a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                <path d="M12 1.5a3 3 0 0 0-3 3V6h6V4.5a3 3 0 0 0-3-3Z" />
+            </svg>              
+            Shop
+        </a>
+    </header>
+    
+    <div class="lg:hidden fixed top-0 left-0 right-0 z-[49] bg-white shadow-sm">
+        <div class="container-custom mx-auto py-3 flex justify-between items-center">
+            <a href="index.html#hero" class="block">
+                <img src="assets/temp_logo/logo_light.svg" alt="Cascade Theory Logo" class="h-10">
+            </a>
+             <a href="shop.html" class="text-primary font-semibold text-sm flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-1">
+                    <path fill-rule="evenodd" d="M6.25 4.5A2.25 2.25 0 0 0 4 6.75v.266c.354.037.704.114 1.044.226.34-.112.69-.19.1.044-.225V6.75a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 .75.75v.265c.354.037.704.114 1.044.226.34-.112.69-.19 1.044-.226V6.75A2.25 2.25 0 0 0 13.75 4.5h-7.5Z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M2 9.835v-.37C2 7.79 3.29 6.5 5 6.5h10c1.71 0 3 1.29 3 2.965v.37A4.501 4.501 0 0 1 13.5 14.25H10V16a1 1 0 0 1-2 0v-1.75H6.5A4.501 4.501 0 0 1 2 9.835ZM12 12H8v1.25a2.251 2.251 0 0 0 2 2.232A2.251 2.251 0 0 0 12 13.25V12Z" clip-rule="evenodd" />
+                </svg>
+                Shop
+            </a>
+        </div>
+    </div>
+
+    <main class="pt-20 lg:pt-28">
+        <section class="shop-hero py-16 md:py-24 bg-bg-subtle text-center">
+            <div class="container-custom mx-auto">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-header-extra text-text-dark mb-6" data-aos="fade-up">Digital Assets & Resources</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Elevate your projects with our curated collection of design kits, developer utilities, and exclusive studio merchandise.
+                </p>
+            </div>
+        </section>
+
+        <section id="premium-design-kits" class="shop-category py-12 md:py-20">
+            <div class="container-custom mx-auto">
+                <h2 class="category-title" data-aos="fade-up">Premium Design Kits</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://picsum.photos/seed/uikit/600/400" alt="UI Kit Thumbnail" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Cascade UI Pro</h3>
+                            <p class="product-description">A comprehensive UI kit for modern web applications. Figma and Sketch files included.</p>
+                            <p class="product-price">$49</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="cascade-ui-pro" data-price-id="price_YOUR_PRICE_ID_HERE_UIKIT">Get It Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://picsum.photos/seed/iconset/600/400" alt="Icon Set Thumbnail" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Minimalist Icon Pack</h3>
+                            <p class="product-description">Over 500+ clean and versatile SVG icons for any project.</p>
+                            <p class="product-price">$29</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="minimalist-icon-pack" data-price-id="price_YOUR_PRICE_ID_HERE_ICONS">Get It Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://picsum.photos/seed/wireframekit/600/400" alt="Wireframe Kit Thumbnail" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Rapid Wireframe Kit</h3>
+                            <p class="product-description">Speed up your design process with this extensive wireframing library.</p>
+                            <p class="product-price">$39</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="rapid-wireframe-kit" data-price-id="price_YOUR_PRICE_ID_HERE_WIRE">Get It Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="developer-utilities" class="shop-category py-12 md:py-20 bg-bg-subtle">
+            <div class="container-custom mx-auto">
+                <h2 class="category-title" data-aos="fade-up">Developer Utilities</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://picsum.photos/seed/jstool/600/400" alt="JS Utility Thumbnail" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Scroll-Animate.js</h3>
+                            <p class="product-description">A lightweight JavaScript library for smooth scroll-triggered animations.</p>
+                            <p class="product-price">$19</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="scroll-animate-js" data-price-id="price_YOUR_PRICE_ID_HERE_JS">Get It Now</button>
+                        </div>
+                    </div>
+                     <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://picsum.photos/seed/formhandler/600/400" alt="Form Handler Thumbnail" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Simple Form Handler PHP</h3>
+                            <p class="product-description">Easy-to-integrate PHP script for handling contact form submissions securely.</p>
+                            <p class="product-price">Free</p>
+                            <button class="product-button download-free-btn" data-product-id="simple-form-handler-php" data-download-link="/downloads/simple-form-handler.zip">Download Free</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://picsum.photos/seed/cssgrid/600/400" alt="CSS Grid Snippets Thumbnail" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Advanced CSS Grid Snippets</h3>
+                            <p class="product-description">A collection of powerful and responsive CSS Grid layout patterns.</p>
+                            <p class="product-price">$15</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="css-grid-snippets" data-price-id="price_YOUR_PRICE_ID_HERE_CSS">Get It Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="studio-merch" class="shop-category py-12 md:py-20">
+            <div class="container-custom mx-auto">
+                <h2 class="category-title" data-aos="fade-up">Studio Merch</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://picsum.photos/seed/tshirt/600/400" alt="Branded T-Shirt" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Cascade Theory Tee</h3>
+                            <p class="product-description">Premium cotton t-shirt with the classic Cascade Theory logo.</p>
+                            <p class="product-price">$25</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="cascade-tee" data-price-id="price_YOUR_PRICE_ID_HERE_TEE">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://picsum.photos/seed/mug/600/400" alt="Branded Mug" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Designer's Fuel Mug</h3>
+                            <p class="product-description">Start your day right with this stylish ceramic mug. Perfect for coffee or tea.</p>
+                            <p class="product-price">$18</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="designer-mug" data-price-id="price_YOUR_PRICE_ID_HERE_MUG">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://picsum.photos/seed/stickers/600/400" alt="Sticker Pack" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">Developer Sticker Pack</h3>
+                            <p class="product-description">High-quality vinyl stickers for your laptop, notebook, or anywhere you code.</p>
+                            <p class="product-price">$10</p>
+                            <button class="product-button add-to-cart-btn" data-product-id="dev-sticker-pack" data-price-id="price_YOUR_PRICE_ID_HERE_STICKER">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-text-dark text-gray-400 py-12 md:py-16">
+        <div class="container-custom mx-auto text-center"> <a href="index.html#hero" class="font-header text-xl text-white mb-6 inline-block">Cascade Theory</a> <nav class="mb-6"> <ul class="flex justify-center space-x-5 md:space-x-8 text-sm"> <li><a href="index.html#services" class="hover:text-secondary">Services</a></li> <li><a href="index.html#case-studies" class="hover:text-secondary">Case Studies</a></li><li><a href="about.html" class="hover:text-secondary">About</a></li> <li><a href="index.html#contact" class="hover:text-secondary">Contact</a></li> <li><a href="shop.html" class="hover:text-secondary">Shop</a></li></ul> </nav> <div class="flex justify-center space-x-5 mb-8"> </div> <p class="text-xs">© <span id="currentYear"></span> Cascade Theory. All rights reserved. Bend, Oregon.</p> </div>
+    </footer>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js" defer></script>
+    <script src="shop.js" defer></script>
+</body>
+</html>
