@@ -63,7 +63,25 @@ body::before {
     }
 }
 
-#desktop-nav-list { position: relative; display: flex; align-items: center; list-style: none; padding: 0; margin: 0; }
+#desktop-nav-container { 
+    background-color: rgba(255, 255, 255, 0.92); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    padding: 6px 8px; 
+    border-radius: 50px; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    display: flex; 
+    align-items: center; 
+}
+
+#desktop-nav-list { 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
 .desktop-nav-item a { display: block; padding: 9px 18px; text-decoration: none; font-weight: 600; color: var(--text-dark); transition: color 0.3s ease; position: relative; z-index: 2; font-size: 0.92rem; }
 .desktop-nav-item.active a { color: white; }
 .desktop-nav-item:not(.active) a:hover { color: var(--primary-color); }
@@ -96,6 +114,14 @@ section:not(#hero) {
     }
 }
 
+section#case-studies {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important; 
+    position: relative;
+}
+
+
 .content-section { 
     padding-top: 6rem; 
     padding-bottom: 6rem;
@@ -106,6 +132,7 @@ section:not(#hero) {
         padding-bottom: 8rem; 
     } 
 }
+
 
 .container-custom { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
 @media (min-width: 1024px) { .container-custom { padding-left: 2rem; padding-right: 2rem; } }
@@ -206,31 +233,6 @@ body.modal-open { overflow: hidden; }
     transform: translateY(-3px);
 }
 
-
-.bento-grid-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 768px) { .bento-grid-container { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: minmax(12rem, auto); } }
-@media (min-width: 1024px) { .bento-grid-container { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(14rem, auto); } }
-.bento-item { background-color: var(--bg-subtle); border-radius: 1.5rem; overflow: hidden; transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; display: flex; flex-direction: column; position: relative; }
-.bento-item:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-.bento-item-text-card { justify-content: center; align-items: flex-start; padding: 2rem; background-color: var(--bg-subtle); }
-@media (min-width: 768px) { .bento-item-text-card { padding: 2.5rem; } }
-.bento-item-text-card .title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--text-dark); line-height: 1.2; margin-bottom: 1rem; }
-.bento-item-text-card .description { font-size: 0.875rem; color: #4a5568; line-height: 1.65; }
-@media (min-width: 768px) { .bento-item-text-card .description { font-size: 0.95rem; } }
-.bento-item-image-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease-out, filter 0.3s ease-out; }
-.bento-item-image-card:hover img { transform: scale(1.05); filter: blur(2px) brightness(0.9); }
-.bento-info-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(10, 20, 30, 0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 1.25rem 1.5rem; transform: translateY(100%); opacity: 0; transition: transform 0.35s ease-out, opacity 0.35s ease-out; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-light); }
-.bento-item-image-card:hover .bento-info-overlay { transform: translateY(0); opacity: 1; }
-@media (max-width: 767px) {
-    .bento-item:hover { transform: none; box-shadow: none; } 
-    .bento-item-image-card:hover img { transform: none; filter: none; }
-    .bento-item-image-card .bento-info-overlay { opacity: 1; transform: translateY(0); background: rgba(10, 20, 30, 0.7); padding: 1rem 1.25rem; transition: none; }
-    .bento-item-image-card:hover .bento-info-overlay { opacity: 1; transform: translateY(0); }
-    .bento-item-text-card .title { font-size: clamp(1.3rem, 4vw, 1.8rem); }
-}
-.cta-button-small { display: inline-block; background-color: var(--secondary-color); color: var(--text-light) !important; padding: 0.5rem 1rem; border-radius: 9999px;  font-size: 0.8rem; font-weight: 600; text-decoration: none !important; transition: background-color 0.3s ease, transform 0.2s ease; }
-.cta-button-small:hover { background-color: #d95a33; transform: translateY(-1px); }
-
 .hero-client-logo-marquee-container {
     position: absolute;
     bottom: 0;
@@ -303,3 +305,281 @@ body.modal-open { overflow: hidden; }
 .mobile-fab-action-item.active { background-color: var(--primary-color); color: var(--text-light) !important;  }
 .mobile-fab-action-item:not(.active):hover { background-color: rgba(0,0,0,0.05);  color: var(--primary-color); }
 body.has-mobile-fab-nav { padding-bottom: 70px; }
+
+
+/* Video Pin Section Styles */
+#video-pin-outer-container {
+    height: 300vh; 
+    position: relative;
+}
+#hero-and-video-sticky-wrapper {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow: hidden; 
+}
+#scroll-video::-webkit-media-controls,
+#scroll-video::-moz-media-controls,
+#scroll-video::-ms-media-controls,
+#scroll-video::media-controls {
+    display:none !important;
+}
+#scroll-video-container {
+    position: absolute; 
+    bottom: 0; 
+    left: 50%; 
+    width: 10vw; 
+    height: 10vh; 
+    transform: translate(-50%, 100%) scale(0.1); 
+    transform-origin: center bottom; 
+    opacity: 0; 
+    z-index: 5; 
+    pointer-events: none; 
+    overflow: hidden; 
+}
+#scroll-video {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+}
+
+/* Case Study Section Refinements */
+#case-study-interactive-zone {
+    position: relative;
+}
+
+/* #case-study-header-sticky is styled by Tailwind classes */
+
+#case-study-stage-sticky-wrapper { 
+    height: calc(100vh - var(--case-study-stage-top-offset, 70px)); 
+    width: 100%;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+    pointer-events: none; 
+}
+
+.case-study-scroll-trigger {
+    height: 65vh; /* Adjust this value to control scroll length per panel. E.g., 75vh or 50vh */
+}
+
+.case-study-panel {
+    position: absolute; 
+    width: calc(100% - 4rem); 
+    max-width: 1100px;     
+    padding: 1.5rem 2rem; /* MODIFIED: Reduced top/bottom padding for desktop */
+    opacity: 0;
+    transform: translateY(5vh) scale(0.95); 
+    transform-origin: center; 
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
+                transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none; 
+    /* background-color, box-shadow, border-radius removed as requested */
+    max-height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.case-study-panel.is-active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto; 
+}
+
+.case-study-full-link { 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    cursor: none; 
+    max-height: 100%; 
+}
+
+.case-study-description-wrapper {
+    flex: 0 0 auto; 
+    width: 30%; 
+    padding-right: 2.5rem; 
+    color: var(--text-dark);
+    max-height: 100%; 
+    overflow-y: auto; 
+}
+
+.case-study-panel-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem); 
+    font-weight: 700; 
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.case-study-panel-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #4a5568; 
+}
+ @media (min-width: 1024px) { /* This was targeting lg, keep it for desktop specific text size */
+    .case-study-panel-text { font-size: 1.05rem; }
+}
+
+.case-study-image-wrapper { 
+    flex: 1 1 0px; 
+    aspect-ratio: 4 / 3; 
+    overflow: hidden;
+    border-radius: 0.75rem; 
+    box-shadow: 0 10px 25px rgba(var(--primary-color-rgb), 0.1), 0 5px 10px rgba(0,0,0,0.05);
+    position: relative; 
+    max-height: 100%; 
+}
+
+.case-study-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), filter 0.3s ease-out;
+}
+
+.case-study-full-link:hover .case-study-image-wrapper img { 
+    transform: scale(1.08);
+}
+
+/* DESKTOP Responsive adjustments for panel layout (inherited from previous if not overridden by mobile) */
+@media (max-width: 767px) { /* This was the previous breakpoint for panel structure changes */
+    .case-study-panel {
+        /* Desktop styles for padding are overridden by mobile below if screen is also < 1023.98px */
+        /* padding: 1.5rem; This will be handled by mobile-specific rules */
+        /* width: calc(100% - 2rem); This will be handled by mobile-specific rules */
+    }
+    /* These rules were for desktop responsive, mobile will override if screen is smaller than 1024px */
+    .case-study-description-wrapper {
+        /* flex-basis: 40%; Defaulting to mobile overrides */
+        /* width: auto; */
+        /* padding-right: 1.5rem; */
+    }
+    .case-study-panel-title {
+        /* font-size: clamp(1.5rem, 4vw, 2rem); Defaulting to mobile overrides */
+    }
+     .case-study-panel-text {
+        /* font-size: 0.9rem; Defaulting to mobile overrides */
+    }
+}
+
+@media (max-width: 480px) { 
+    /* These rules were for desktop responsive, mobile will override if screen is smaller than 1024px */
+    /* .case-study-full-link already column from 767px by mobile rules if screen is < 1024px */
+    .case-study-image-wrapper {
+        /* width: 100%; Defaulting to mobile overrides */
+        /* max-width: 320px; Defaulting to mobile overrides */
+    }
+}
+
+
+/* MOBILE OPTIMIZATIONS for Case Studies (lg breakpoint: 1023.98px) */
+@media (max-width: 1023.98px) {
+    #case-study-stage-sticky-wrapper,
+    .case-study-scroll-trigger {
+        display: none !important;
+    }
+
+    #case-study-header-sticky {
+        position: static !important;
+        top: auto !important; /* Ensure no sticky top remains */
+        z-index: auto !important; /* Reset z-index */
+    }
+    #case-study-header-sticky .container-custom {
+        padding-top: 4rem; 
+        padding-bottom: 2rem;
+    }
+
+    .case-study-panel {
+        position: static !important;
+        opacity: 1 !important;
+        transform: none !important;
+        width: 100%;
+        max-width: 500px; 
+        margin: 0 auto 2rem auto; 
+        padding: 0 !important; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        border-radius: 0.75rem;
+        overflow: hidden; 
+        background-color: white; 
+        max-height: none !important; /* Override desktop constraints */
+        /* Remove desktop flex centering as content flows naturally */
+        display: block !important; 
+        align-items: initial !important;
+        justify-content: initial !important;
+    }
+
+    .case-study-full-link {
+        flex-direction: column !important; 
+        align-items: stretch !important; 
+        padding: 0; 
+        cursor: pointer !important; 
+        max-height: none !important; /* Override desktop constraints */
+    }
+    
+    .case-study-image-wrapper {
+        width: 100%;
+        flex-basis: auto !important;
+        aspect-ratio: 16/9; 
+        border-radius: 0.75rem 0.75rem 0 0; 
+        box-shadow: none !important;
+        max-height: none !important; /* Override desktop constraints */
+    }
+
+    .case-study-description-wrapper {
+        width: 100% !important;
+        flex-basis: auto !important;
+        padding: 1.5rem !important; 
+        text-align: left !important;
+        max-height: none !important; /* Override desktop constraints */
+        overflow-y: visible !important; 
+    }
+     .case-study-panel-title {
+        font-size: 1.25rem !important; 
+    }
+     .case-study-panel-text {
+        font-size: 0.9rem !important;
+    }
+
+    #case-studies > .container-custom:last-of-type { 
+        padding-top: 2rem; 
+        padding-bottom: 3rem; 
+    }
+}
+
+
+.custom-project-cursor {
+    position: fixed; 
+    display: none; 
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    border-radius: 9999px;
+    font-weight: 600; 
+    font-size: 0.9rem;
+    white-space: nowrap;
+    z-index: 10000;
+    pointer-events: none; 
+    transform: translate(-50%, -50%) scale(0.9); 
+    opacity: 0;
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s ease-out;
+}
+.custom-project-cursor.visible {
+    display: inline-flex; 
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+.custom-project-cursor svg {
+    margin-left: 0.5rem;
+    transform: translateX(0px); 
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.custom-project-cursor.visible svg { 
+    transform: translateX(3px);
+}

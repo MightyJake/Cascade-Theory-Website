@@ -10,47 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        #desktop-nav-container { 
-            background-color: rgba(255, 255, 255, 0.92); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); 
-            padding: 6px 8px; 
-            border-radius: 50px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-            display: flex; 
-            align-items: center; 
-        }
-        
-        #desktop-nav-list {
-            display: flex;
-            align-items: center;
-            position: relative; 
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        #video-pin-outer-container {
-            height: 300vh; 
-            position: relative;
-        }
-        #hero-and-video-sticky-wrapper {
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            overflow: hidden; 
-        }
-        #scroll-video::-webkit-media-controls,
-        #scroll-video::-moz-media-controls,
-        #scroll-video::-ms-media-controls,
-        #scroll-video::media-controls {
-            display:none !important;
-        }
-        #scroll-video-container {
-            overflow: hidden; 
-        }
-    </style>
 </head>
 <body class="font-body">
 
@@ -143,19 +102,8 @@
                     </div>
                 </div>
             </section>
-            <div id="scroll-video-container"
-                 style="position: absolute; 
-                        bottom: 0; left: 50%; 
-                        width: 10vw; height: 10vh; 
-                        transform: translate(-50%, 100%) scale(0.1); 
-                        transform-origin: center bottom; 
-                        opacity: 0;
-                        z-index: 5; 
-                        pointer-events: none;
-                        ">
-                <video id="scroll-video"
-                       style="width: 100%; height: 100%; object-fit: cover; display: block;"
-                       playsinline muted loop preload="auto">
+            <div id="scroll-video-container">
+                <video id="scroll-video" playsinline muted loop preload="auto">
                     <source src="assets/video/cannonbeach_web.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -226,7 +174,6 @@
                     </div>
                     <div class="service-set" aria-hidden="true">
                         <span class="service-item">Web Development</span><span class="service-item">UI/UX Design</span><span class="service-item">E-commerce</span><span class="service-item">Content Creation</span><span class="service-item">Copywriting</span>
-                        <span class="service-item">Web Development</span><span class="service-item">UI/UX Design</span><span class="service-item">E-commerce</span><span class="service-item">Content Creation</span><span class="service-item">Copywriting</span>
                     </div>
                 </div>
                 <div class="service-row" data-direction="ltr">
@@ -235,7 +182,6 @@
                         <span class="service-item">Photography</span><span class="service-item">Videography</span><span class="service-item">Motion Graphics</span><span class="service-item">Animation</span><span class="service-item">Social Media</span>
                     </div>
                     <div class="service-set" aria-hidden="true">
-                        <span class="service-item">Photography</span><span class="service-item">Videography</span><span class="service-item">Motion Graphics</span><span class="service-item">Animation</span><span class="service-item">Social Media</span>
                         <span class="service-item">Photography</span><span class="service-item">Videography</span><span class="service-item">Motion Graphics</span><span class="service-item">Animation</span><span class="service-item">Social Media</span>
                     </div>
                 </div>
@@ -246,26 +192,78 @@
                     </div>
                     <div class="service-set" aria-hidden="true">
                         <span class="service-item">SEO</span><span class="service-item">Marketing Campaigns</span><span class="service-item">Print Design</span><span class="service-item">Packaging</span><span class="service-item">Brand Guidelines</span>
-                        <span class="service-item">SEO</span><span class="service-item">Marketing Campaigns</span><span class="service-item">Print Design</span><span class="service-item">Packaging</span><span class="service-item">Brand Guidelines</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="case-studies" class="content-section bg-bg-subtle" data-aos="fade-up">
-            <div class="bento-grid-container grid gap-6 md:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bento-item bento-item-text-card col-span-2 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="title font-header">Selected Works</h2>
-                    <p class="description font-body"> Explore how the Cascade Framework™ transforms vision into measurable success. Using the latest technology to build future-proof systems that also speak to the ❤️. </p>
+        <section id="case-studies" class="content-section bg-bg-subtle py-0 md:py-0 lg:py-0">
+            <div id="case-study-interactive-zone">
+                <div id="case-study-header-sticky" class="sticky top-[70px] w-full z-[60] bg-bg-subtle pointer-events-auto"> <div class="container-custom mx-auto text-center pt-20 pb-4 md:pt-24 md:pb-6"> 
+                        <h2 class="section-title !mb-3 md:!mb-4" data-aos="fade-up">Our Impactful Work</h2>
+                        <p class="section-subtitle !mb-6 md:!mb-8" data-aos-delay="100" data-aos="fade-up">
+                            Witness how we translate vision into reality through strategic design and compelling narratives. Each project below tells a story of success.
+                        </p>
+                    </div>
                 </div>
-                <a href="case-study-template.html" class="bento-item bento-item-image-card col-span-2 row-span-1 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 group" data-aos="fade-up" data-aos-delay="200"> <img src="assets/case_studies/covers/tanuki.jpg" alt="Tanuki Japanese Learning App Showcase"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg md:text-xl text-white mb-0.5">Tanuki Learning App</h3> <p class="text-xs text-slate-200 mb-2">Personal Capstone (OSU)</p> <span class="cta-button-small">View Project</span> </div> </a>
-                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="300"> <img src="https://picsum.photos/seed/bentoA/600/600" alt="Abstract design"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Two</h3> <p class="text-xs text-slate-200 mb-2">Client Co.</p> <span class="cta-button-small">View Project</span> </div> </a>
-                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="400"> <img src="https://picsum.photos/seed/bentoB/600/800" alt="Portrait aspect image"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Three</h3> <p class="text-xs text-slate-200 mb-2">Creative Partner</p> <span class="cta-button-small">View Project</span> </div> </a>
-                <a href="#" class="bento-item bento-item-image-card col-span-2 row-span-1 md:col-span-3 md:row-span-1 lg:col-span-2 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="250"> <img src="https://picsum.photos/seed/bentoC/1200/600" alt="Wide landscape image"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg md:text-xl text-white mb-0.5">Project Title Four</h3> <p class="text-xs text-slate-200 mb-2">Global Solutions</p> <span class="cta-button-small">View Project</span> </div> </a>
-                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="350"> <img src="https://picsum.photos/seed/bentoD/600/600" alt="Another design element"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Five</h3> <p class="text-xs text-slate-200 mb-2">Startup Hub</p> <span class="cta-button-small">View Project</span> </div> </a>
-                <a href="#" class="bento-item bento-item-image-card col-span-1 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-1 group" data-aos="fade-up" data-aos-delay="450"> <img src="https://picsum.photos/seed/bentoE/800/600" alt="Technology concept"> <div class="bento-info-overlay"> <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Six</h3> <p class="text-xs text-slate-200 mb-2">Tech Forward Inc.</p> <span class="cta-button-small">View Project</span> </div> </a>
+
+                <div id="case-study-stage-sticky-wrapper" class="sticky z-[50]"> 
+                    <div class="case-study-panel" data-project-id="1">
+                        <a href="case-study-template.html" class="case-study-full-link">
+                            <div class="case-study-description-wrapper">
+                                <h3 class="case-study-panel-title">Tanuki Learning App</h3>
+                                <p class="case-study-panel-text">A personal capstone project focused on gamified Japanese language learning. This app combines interactive lessons, progress tracking, and cultural insights to make learning engaging and effective for beginners.</p>
+                            </div>
+                            <div class="case-study-image-wrapper">
+                                <img src="assets/case_studies/covers/tanuki.jpg" alt="Tanuki Japanese Learning App interface design">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="case-study-panel" data-project-id="2">
+                        <a href="case-study-template.html" class="case-study-full-link">
+                            <div class="case-study-description-wrapper">
+                                <h3 class="case-study-panel-title">Client Co. Rebrand</h3>
+                                <p class="case-study-panel-text">A comprehensive rebranding for Client Co., involving a new visual identity, website overhaul, and marketing collateral. The goal was to modernize the brand and improve market positioning.</p>
+                            </div>
+                            <div class="case-study-image-wrapper">
+                                <img src="https://picsum.photos/seed/projectAlpha/800/600" alt="Abstract visual representing Client Co. Rebrand">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="case-study-panel" data-project-id="3">
+                        <a href="case-study-template.html" class="case-study-full-link">
+                            <div class="case-study-description-wrapper">
+                                <h3 class="case-study-panel-title">Creative Partner Campaign</h3>
+                                <p class="case-study-panel-text">Developed and executed a multi-channel marketing campaign for a key creative partner, resulting in increased lead generation and brand awareness across digital and print platforms.</p>
+                            </div>
+                            <div class="case-study-image-wrapper">
+                                <img src="https://picsum.photos/seed/projectBravo/800/600" alt="Dynamic visuals from Creative Partner Campaign">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="case-study-panel" data-project-id="4">
+                        <a href="case-study-template.html" class="case-study-full-link">
+                            <div class="case-study-description-wrapper">
+                                <h3 class="case-study-panel-title">Tech Forward Initiative</h3>
+                                <p class="case-study-panel-text">Led the design and development of an interactive web platform for a major tech initiative, focusing on user experience, accessibility, and showcasing cutting-edge technological advancements.</p>
+                            </div>
+                            <div class="case-study-image-wrapper">
+                                <img src="https://picsum.photos/seed/projectCharlie/800/600" alt="Interface of the Tech Forward Initiative platform">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="case-study-scroll-trigger" data-trigger-for="1"></div>
+                <div class="case-study-scroll-trigger" data-trigger-for="2"></div>
+                <div class="case-study-scroll-trigger" data-trigger-for="3"></div>
+                <div class="case-study-scroll-trigger" data-trigger-for="4"></div>
+                </div> 
+            <div class="container-custom mx-auto text-center pt-20 md:pt-24 pb-24 md:pb-32"> 
+                <a href="case-studies.html" class="cta-button !bg-transparent !text-primary !border-primary hover:!bg-primary hover:!text-white" data-aos="fade-up">
+                    Explore All Projects
+                </a>
             </div>
-            <div class="text-center mt-16 md:mt-20" data-aos="fade-up"> <a href="#" class="cta-button !bg-transparent !text-primary !border-primary hover:!bg-primary hover:!text-white"> Explore All Projects </a> </div>
         </section>
 
         <section id="process" class="content-section bg-bg-subtle">
@@ -317,8 +315,7 @@
                 <p class="section-subtitle !text-gray-200 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">Let's transform your marketing. Here's how simple it is to begin – I'll guide you every step.</p>
                 <div class="mt-12 md:mt-16 grid md:grid-cols-2 gap-10 lg:gap-16 items-start max-w-5xl mx-auto">
                     <div class="flex flex-col space-y-10" data-aos="fade-right" data-aos-delay="150">
-                        <div class="space-y-8">
-                            <div class="contact-step-item text-center md:text-left"><div class="contact-step-number contact-step-number-on-primary-bg mx-auto md:mx-0">01</div><h3 class="font-subheader text-lg md:text-xl text-white mb-2">Schedule a Call</h3><p class="font-body text-gray-300 text-sm leading-relaxed">Book a free 30-minute discovery call. We'll discuss your vision, goals, and see if we're the right fit to collaborate.</p></div>
+                        <div class="contact-step-item text-center md:text-left"><div class="contact-step-number contact-step-number-on-primary-bg mx-auto md:mx-0">01</div><h3 class="font-subheader text-lg md:text-xl text-white mb-2">Schedule a Call</h3><p class="font-body text-gray-300 text-sm leading-relaxed">Book a free 30-minute discovery call. We'll discuss your vision, goals, and see if we're the right fit to collaborate.</p></div>
                             <div class="contact-step-item text-center md:text-left"><div class="contact-step-number contact-step-number-on-primary-bg mx-auto md:mx-0">02</div><h3 class="font-subheader text-xl text-white mb-2">Review Proposal</h3><p class="font-body text-gray-300 text-sm leading-relaxed">If we align, I'll craft a custom proposal outlining the strategy, deliverables, timeline, and investment.</p></div>
                             <div class="contact-step-item text-center md:text-left"><div class="contact-step-number contact-step-number-on-primary-bg mx-auto md:mx-0">03</div><h3 class="font-subheader text-lg md:text-xl text-white mb-2">Begin Your Project</h3><p class="font-body text-gray-300 text-sm leading-relaxed">With the proposal approved, we'll kick off the project with an onboarding process.</p></div>
                         </div>
@@ -347,6 +344,12 @@
     <div id="schedule-modal" class="schedule-modal-overlay" aria-modal="true" role="dialog">
         <div class="schedule-modal-content"> <button id="modal-close-btn" class="modal-close-btn" aria-label="Close scheduling modal">×</button> <div class="modal-loading">Loading Scheduler...</div> <iframe id="schedule-iframe" title="Scheduling Page" allow="fullscreen"></iframe> </div>
     </div>
+
+    <div id="custom-project-cursor" class="custom-project-cursor">
+        View Project
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+    </div>
+
 
     <div id="mobile-fab-nav-container" class="lg:hidden fixed inset-0 z-[950] pointer-events-none">
         <div id="mobile-fab-backdrop" class="absolute inset-0 bg-black/30 opacity-0 transition-opacity duration-300 ease-out cursor-pointer"></div>
