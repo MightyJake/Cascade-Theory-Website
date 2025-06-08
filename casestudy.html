@@ -26,11 +26,61 @@
         .font-subheader { font-family: 'Sora', sans-serif; font-weight: 600; }
         .font-medium-sora { font-family: 'Sora', sans-serif; font-weight: 500; }
 
-
-        .section-title { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; text-align: center; font-weight: 700; color: var(--text-dark); }
-        @media (min-width: 768px) { .section-title { font-size: clamp(2.25rem, 4.5vw, 3.5rem); margin-bottom: 1.5rem; } }
-        .section-subtitle { max-width: 700px; margin: 0 auto 2.5rem; text-align: center; font-size: 1.05rem; color: #4a5568; line-height: 1.65; }
-        @media (min-width: 768px) { .section-subtitle { font-size: 1.15rem; margin-bottom: 3rem; line-height: 1.75; } }
+        .section-title { 
+            font-size: clamp(1.75rem, 6vw, 2.5rem); 
+            margin-bottom: 1rem; 
+            text-align: center; 
+            font-weight: 700; 
+            color: var(--text-dark); 
+        }
+        @media (min-width: 640px) { 
+            .section-title { 
+                font-size: clamp(2rem, 5.5vw, 2.75rem); 
+                margin-bottom: 1.25rem; 
+            } 
+        }
+        @media (min-width: 768px) { 
+            .section-title { 
+                font-size: clamp(2.25rem, 5vw, 3rem); 
+                margin-bottom: 1.5rem; 
+            } 
+        }
+        @media (min-width: 1024px) { 
+            .section-title { 
+                font-size: clamp(2.5rem, 4.5vw, 3.5rem); 
+                margin-bottom: 2rem; 
+            } 
+        }
+        
+        .section-subtitle { 
+            max-width: 700px; 
+            margin: 0 auto 2rem; 
+            text-align: center; 
+            font-size: 0.95rem; 
+            color: #4a5568; 
+            line-height: 1.6; 
+        }
+        @media (min-width: 640px) { 
+            .section-subtitle { 
+                font-size: 1rem; 
+                margin-bottom: 2.5rem; 
+                line-height: 1.65;
+            } 
+        }
+        @media (min-width: 768px) { 
+            .section-subtitle { 
+                font-size: 1.05rem; 
+                margin-bottom: 3rem; 
+                line-height: 1.7;
+            } 
+        }
+        @media (min-width: 1024px) { 
+            .section-subtitle { 
+                font-size: 1.15rem; 
+                margin-bottom: 4rem; 
+                line-height: 1.8;
+            } 
+        }
 
         .bento-grid-container {
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -38,52 +88,93 @@
         @media (min-width: 768px) { /* md breakpoint */
             .bento-grid-container {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                grid-auto-rows: minmax(12rem, auto); 
+                grid-auto-rows: minmax(10rem, auto); 
             }
         }
         @media (min-width: 1024px) { /* lg breakpoint for complex bento */
             .bento-grid-container {
                 grid-template-columns: repeat(4, minmax(0, 1fr)); 
-                grid-auto-rows: minmax(14rem, auto); 
+                grid-auto-rows: minmax(12rem, auto); 
             }
         }
 
         .bento-item {
             background-color: var(--bg-subtle); /* Fallback if image doesn't load */
-            border-radius: 1.5rem; /* rounded-3xl */
+            border-radius: 1rem; /* rounded-2xl */
             overflow: hidden;
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
             display: flex; 
             flex-direction: column;
             position: relative; /* For absolute positioning of overlay */
         }
-        .bento-item:hover {
-            transform: scale(1.03); /* Overall card scale */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        @media (min-width: 768px) {
+            .bento-item {
+                border-radius: 1.5rem; /* rounded-3xl */
+            }
         }
+        
+        .bento-item:hover {
+            transform: scale(1.02); /* Overall card scale */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        @media (min-width: 768px) {
+            .bento-item:hover {
+                transform: scale(1.03); /* Overall card scale */
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            }
+        }
+        
         .bento-item-text-card { /* The top-left text box */
             justify-content: center; 
             align-items: flex-start; 
-            padding: 1.5rem;
+            padding: 1.25rem;
             background-color: var(--bg-subtle)
         }
-         @media (min-width: 768px) {
-            .bento-item-text-card { padding: 2rem; }
+        @media (min-width: 640px) {
+            .bento-item-text-card { 
+                padding: 1.5rem; 
+            }
         }
+        @media (min-width: 768px) {
+            .bento-item-text-card { 
+                padding: 2rem; 
+            }
+        }
+        
         .bento-item-text-card .title {
-            font-size: clamp(1.5rem, 3vw, 2rem); 
+            font-size: clamp(1.25rem, 4vw, 1.75rem); 
             font-weight: 700; /* Sora Bold */
             color: var(--text-dark);
             line-height: 1.2;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
+        @media (min-width: 640px) {
+            .bento-item-text-card .title {
+                font-size: clamp(1.5rem, 3.5vw, 1.9rem); 
+                margin-bottom: 0.65rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .bento-item-text-card .title {
+                font-size: clamp(1.5rem, 3vw, 2rem); 
+                margin-bottom: 0.75rem;
+            }
+        }
+        
         .bento-item-text-card .description {
-            font-size: 0.875rem; /* text-sm */
+            font-size: 0.8rem; /* text-sm */
             color: #4a5568; /* gray-600 */
             line-height: 1.6;
         }
-         @media (min-width: 768px) {
-            .bento-item-text-card .description { font-size: 0.95rem; }
+        @media (min-width: 640px) {
+            .bento-item-text-card .description { 
+                font-size: 0.85rem; 
+            }
+        }
+        @media (min-width: 768px) {
+            .bento-item-text-card .description { 
+                font-size: 0.95rem; 
+            }
         }
 
         .bento-image-container { /* Wrapper for image if needed, or apply to <a> directly */
@@ -97,8 +188,14 @@
             transition: transform 0.4s ease-out, filter 0.3s ease-out;
         }
         .bento-item-image-card:hover img {
-            transform: scale(1.05);
-            filter: blur(2px) brightness(0.9); /* Blur and darken image slightly */
+            transform: scale(1.04);
+            filter: blur(1px) brightness(0.95); /* Blur and darken image slightly */
+        }
+        @media (min-width: 768px) {
+            .bento-item-image-card:hover img {
+                transform: scale(1.05);
+                filter: blur(2px) brightness(0.9); /* Blur and darken image slightly */
+            }
         }
 
         .bento-info-overlay {
@@ -109,12 +206,18 @@
             background: rgba(10, 20, 30, 0.5); /* Darker semi-transparent */
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            padding: 1rem 1.25rem;
+            padding: 0.75rem 1rem;
             transform: translateY(100%);
             opacity: 0;
             transition: transform 0.35s ease-out, opacity 0.35s ease-out;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
+        @media (min-width: 768px) {
+            .bento-info-overlay {
+                padding: 1rem 1.25rem;
+            }
+        }
+        
         .bento-item-image-card:hover .bento-info-overlay {
             transform: translateY(0);
             opacity: 1;
@@ -130,35 +233,49 @@
                  opacity: 1; /* Or make it always visible */
                  transform: translateY(0);
                  background: rgba(10, 20, 30, 0.7); /* Solid enough for readability */
-                 padding: 0.75rem 1rem;
+                 padding: 0.6rem 0.8rem;
             }
              .bento-item-image-card:hover .bento-info-overlay { /* Reset hover for mobile if needed */
                 opacity: 1; transform: translateY(0);
             }
         }
 
-
         .cta-button-small {
             display: inline-block;
             background-color: var(--secondary-color); /* Orange for visibility */
             color: var(--text-light);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.7rem;
             font-weight: 600; /* Sora Semibold */
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
+        @media (min-width: 640px) {
+            .cta-button-small {
+                padding: 0.45rem 0.9rem;
+                border-radius: 18px;
+                font-size: 0.75rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .cta-button-small {
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+            }
+        }
+        
         .cta-button-small:hover {
             background-color: #d95a33; /* Darker orange */
             transform: translateY(-1px);
         }
     </style>
 </head>
-<body class="py-10 px-4 sm:px-6 lg:px-8">
+<body class="py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
 
-    <section id="case-studies" class="py-16 md:py-20">
-        <div class="bento-grid-container grid gap-4 md:gap-6 max-w-7xl mx-auto">
+    <section id="case-studies" class="py-12 sm:py-14 md:py-16 lg:py-20">
+        <div class="bento-grid-container grid gap-3 sm:gap-4 md:gap-6 max-w-7xl mx-auto">
             <div class="bento-item bento-item-text-card 
                         col-span-2 row-span-1 
                         md:col-span-1 md:row-span-1 
@@ -175,8 +292,8 @@
                                                   lg:col-span-2 lg:row-span-2 group">
                 <img src="assets/case_studies/covers/tanuki.jpg" alt="Tanuki Japanese Learning App Showcase" class="bento-image">
                 <div class="bento-info-overlay">
-                    <h3 class="font-subheader text-lg md:text-xl text-white mb-0.5">Tanuki Learning App</h3>
-                    <p class="text-xs text-slate-200 mb-2">Personal Capstone (OSU)</p>
+                    <h3 class="font-subheader text-base sm:text-lg md:text-xl text-white mb-0.5">Tanuki Learning App</h3>
+                    <p class="text-xs text-slate-200 mb-1.5 sm:mb-2">Personal Capstone (OSU)</p>
                     <button class="cta-button-small">View Project</button>
                 </div>
             </a>
@@ -187,8 +304,8 @@
                               lg:col-span-1 lg:row-span-1 group">
                 <img src="https://picsum.photos/seed/bentoA/600/600" alt="Abstract design" class="bento-image">
                  <div class="bento-info-overlay">
-                    <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Two</h3>
-                    <p class="text-xs text-slate-200 mb-2">Client Co.</p>
+                    <h3 class="font-subheader text-sm sm:text-base lg:text-lg text-white mb-0.5">Project Title Two</h3>
+                    <p class="text-xs text-slate-200 mb-1.5 sm:mb-2">Client Co.</p>
                     <button class="cta-button-small">View Project</button>
                 </div>
             </a>
@@ -199,8 +316,8 @@
                               lg:col-span-1 lg:row-span-1 group">
                 <img src="https://picsum.photos/seed/bentoB/600/800" alt="Portrait aspect image" class="bento-image">
                 <div class="bento-info-overlay">
-                    <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Three</h3>
-                    <p class="text-xs text-slate-200 mb-2">Creative Partner</p>
+                    <h3 class="font-subheader text-sm sm:text-base lg:text-lg text-white mb-0.5">Project Title Three</h3>
+                    <p class="text-xs text-slate-200 mb-1.5 sm:mb-2">Creative Partner</p>
                     <button class="cta-button-small">View Project</button>
                 </div>
             </a>
@@ -211,8 +328,8 @@
                               lg:col-span-2 lg:row-span-1 group">
                 <img src="https://picsum.photos/seed/bentoC/1200/600" alt="Wide landscape image" class="bento-image">
                  <div class="bento-info-overlay">
-                    <h3 class="font-subheader text-lg md:text-xl text-white mb-0.5">Project Title Four</h3>
-                    <p class="text-xs text-slate-200 mb-2">Global Solutions</p>
+                    <h3 class="font-subheader text-base sm:text-lg md:text-xl text-white mb-0.5">Project Title Four</h3>
+                    <p class="text-xs text-slate-200 mb-1.5 sm:mb-2">Global Solutions</p>
                     <button class="cta-button-small">View Project</button>
                 </div>
             </a>
@@ -223,8 +340,8 @@
                               lg:col-span-1 lg:row-span-1 group">
                 <img src="https://picsum.photos/seed/bentoD/600/600" alt="Another design element" class="bento-image">
                 <div class="bento-info-overlay">
-                    <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Five</h3>
-                    <p class="text-xs text-slate-200 mb-2">Startup Hub</p>
+                    <h3 class="font-subheader text-sm sm:text-base lg:text-lg text-white mb-0.5">Project Title Five</h3>
+                    <p class="text-xs text-slate-200 mb-1.5 sm:mb-2">Startup Hub</p>
                     <button class="cta-button-small">View Project</button>
                 </div>
             </a>
@@ -235,15 +352,15 @@
                               lg:col-span-1 lg:row-span-1 group">
                 <img src="https://picsum.photos/seed/bentoE/800/600" alt="Technology concept" class="bento-image">
                  <div class="bento-info-overlay">
-                    <h3 class="font-subheader text-lg text-white mb-0.5">Project Title Six</h3>
-                    <p class="text-xs text-slate-200 mb-2">Tech Forward Inc.</p>
+                    <h3 class="font-subheader text-sm sm:text-base lg:text-lg text-white mb-0.5">Project Title Six</h3>
+                    <p class="text-xs text-slate-200 mb-1.5 sm:mb-2">Tech Forward Inc.</p>
                     <button class="cta-button-small">View Project</button>
                 </div>
             </a>
         </div>
 
-        <div class="text-center mt-12 md:mt-16">
-            <a href="#" class="inline-block bg-[var(--primary-color)] text-white font-semibold py-3 px-8 rounded-full hover:bg-opacity-80 transition duration-300 text-lg cta-button">
+        <div class="text-center mt-10 sm:mt-12 md:mt-16">
+            <a href="#" class="inline-block bg-[var(--primary-color)] text-white font-semibold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-opacity-80 transition duration-300 text-base sm:text-lg cta-button">
                 Explore All Projects
             </a>
         </div>

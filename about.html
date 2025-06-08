@@ -26,6 +26,12 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.9rem;
+        }
+        @media (min-width: 640px) {
+            .simple-nav a {
+                font-size: 1rem;
+            }
         }
         .simple-nav a:hover {
             text-decoration: underline;
@@ -40,26 +46,26 @@
 
     <section id="about-content" class="content-section bg-white">
         <div class="container-custom mx-auto">
-            <div class="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
                 <div class="order-2 lg:order-1">
-                    <h1 class="section-title !text-left !mb-8">Creative With Purpose.</h1>
-                    <p class="font-body text-gray-700 text-lg mb-8 leading-relaxed">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is the solo venture of Jake Fischer, serving clients nationwide. I'm not just a designer or marketer; I'm your strategic partner, deeply invested in how authentic creative work drives tangible business growth.</p>
-                    <p class="font-body text-gray-700 text-lg mb-10 leading-relaxed">I believe true impact starts with a single, powerful idea – a core truth – allowed to flow, adapt, and amplify through thoughtful design and strategic storytelling.</p>
-                    <div class="mt-8 p-8 rounded-lg bg-bg-subtle border-l-4 border-primary shadow-sm">
-                        <h4 class="font-subheader text-xl text-primary mb-4">What Drives Me:</h4>
-                        <p class="text-gray-600 leading-relaxed italic">"My goal is simple: produce work that resonates, moves audiences, and sparks momentum. Every project is crafted intentionally, because good ideas deserve to ripple far beyond their starting point."</p>
+                    <h1 class="section-title !text-left !mb-6 sm:!mb-7 lg:!mb-8">Creative With Purpose.</h1>
+                    <p class="font-body text-gray-700 text-base sm:text-lg mb-6 sm:mb-7 lg:mb-8 leading-relaxed">Based in the vibrant Pacific Northwest hub of Bend, Oregon, Cascade Theory is the solo venture of Jake Fischer, serving clients nationwide. I'm not just a designer or marketer; I'm your strategic partner, deeply invested in how authentic creative work drives tangible business growth.</p>
+                    <p class="font-body text-gray-700 text-base sm:text-lg mb-8 sm:mb-9 lg:mb-10 leading-relaxed">I believe true impact starts with a single, powerful idea – a core truth – allowed to flow, adapt, and amplify through thoughtful design and strategic storytelling.</p>
+                    <div class="mt-6 sm:mt-7 lg:mt-8 p-6 sm:p-7 lg:p-8 rounded-lg bg-bg-subtle border-l-4 border-primary shadow-sm">
+                        <h4 class="font-subheader text-lg sm:text-xl text-primary mb-3 sm:mb-4">What Drives Me:</h4>
+                        <p class="text-gray-600 leading-relaxed italic text-sm sm:text-base">"My goal is simple: produce work that resonates, moves audiences, and sparks momentum. Every project is crafted intentionally, because good ideas deserve to ripple far beyond their starting point."</p>
                     </div>
                 </div>
                 <div class="order-1 lg:order-2 flex justify-center">
-                    <img src="assets/photo_misc/jake_1.jpg" alt="Jake Fischer of Cascade Theory" class="rounded-xl shadow-xl w-full max-w-md lg:max-w-none h-auto object-cover aspect-[4/5]">
+                    <img src="assets/photo_misc/jake_1.jpg" alt="Jake Fischer of Cascade Theory" class="rounded-xl shadow-xl w-full max-w-sm sm:max-w-md lg:max-w-none h-auto object-cover aspect-[4/5]">
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-text-dark text-gray-400 py-12 md:py-16 mt-12">
+    <footer class="bg-text-dark text-gray-400 py-10 sm:py-12 md:py-16 mt-8 sm:mt-10 lg:mt-12">
         <div class="container-custom mx-auto text-center">
-            <a href="index.html#hero" class="font-header text-xl text-white mb-6 inline-block">Cascade Theory</a>
+            <a href="index.html#hero" class="font-header text-lg sm:text-xl text-white mb-4 sm:mb-6 inline-block">Cascade Theory</a>
             <p class="text-xs">© <span id="currentYearAboutPage"></span> Cascade Theory. All rights reserved. Bend, Oregon.</p>
         </div>
     </footer>
