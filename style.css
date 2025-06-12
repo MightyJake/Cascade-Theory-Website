@@ -288,8 +288,6 @@ section#case-studies {
 
 /* Enhanced CTA Button Responsive Design */
 .cta-button { 
-    background-color: var(--primary-color); 
-    color: var(--text-light); 
     font-weight: 700; 
     padding: 0.7rem 1.5rem; 
     font-size: 0.9rem; 
@@ -299,6 +297,12 @@ section#case-studies {
     border: 2px solid transparent; 
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
 }
+
+.cta-button:not(.cta-button-secondary) {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
 @media (min-width: 640px) { 
     .cta-button { 
         padding: 0.75rem 1.6rem; 
@@ -318,7 +322,7 @@ section#case-studies {
     } 
 }
 
-.cta-button:hover, .cta-button:focus-visible { 
+.cta-button:not(.cta-button-secondary):hover, .cta-button:not(.cta-button-secondary):focus-visible { 
     background-color: transparent; 
     color: var(--primary-color); 
     border-color: var(--primary-color); 
@@ -327,7 +331,7 @@ section#case-studies {
 }
 
 @media (min-width: 768px) {
-    .cta-button:hover, .cta-button:focus-visible { 
+    .cta-button:not(.cta-button-secondary):hover, .cta-button:not(.cta-button-secondary):focus-visible { 
         transform: translateY(-3px) scale(1.03); 
         box-shadow: 0 6px 20px rgba(26, 97, 114, 0.2); 
     }
@@ -834,6 +838,8 @@ body.modal-open { overflow: hidden; }
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     overflow: hidden;
+    transition: opacity 0.4s ease-out;
+    will-change: opacity;
 }
 
 @media (min-width: 768px) {

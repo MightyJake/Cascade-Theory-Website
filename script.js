@@ -325,6 +325,22 @@ document.addEventListener('DOMContentLoaded', () => {
             mainHeaderLogo.style.opacity = '1';
         }
 
+        const clientLogoMarquee = document.querySelector('.hero-client-logo-marquee-container');
+        if (clientLogoMarquee) {
+            const scrollY = window.scrollY;
+            const fadeStart = 0;
+            const fadeEnd = 200;
+            let opacity = 1;
+            if (scrollY <= fadeStart) {
+                opacity = 1;
+            } else if (scrollY >= fadeEnd) {
+                opacity = 0;
+            } else {
+                opacity = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
+            }
+            clientLogoMarquee.style.opacity = opacity.toFixed(2);
+        }
+
         if (servicesMarquee) {
             const rect = servicesMarquee.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
