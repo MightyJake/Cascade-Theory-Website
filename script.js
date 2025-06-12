@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const scrollSpySections = document.querySelectorAll('section[id]:not(#case-studies), div#video-pin-outer-container'); 
+    const scrollSpySections = document.querySelectorAll('section[id], div#video-pin-outer-container'); 
     const mainHeaderLogo = document.getElementById('main-header-logo');
     const servicesMarquee = document.getElementById('services-marquee');
     let scrollTimeoutUniversal;
@@ -444,130 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateFabActiveState(activeFabLinkOnLoad);
         if (!activeFabLinkOnLoad) setTimeout(triggerMobileScrollActiveState, 250);
     }
-
-    // --- Case Study Desktop Logic ---
-    if (window.innerWidth >= 1024) {
-        const caseStudySectionDesktop = document.getElementById('case-studies');
-        const caseStudyHeaderStickyDesktop = document.getElementById('case-study-header-sticky');
-        const caseStudyStageStickyWrapperDesktop = document.getElementById('case-study-stage-sticky-wrapper');
-
-        function updateCaseStudyStageOffsetDesktop() {
-            if (!caseStudyHeaderStickyDesktop || !caseStudyStageStickyWrapperDesktop || !caseStudyHeaderStickyDesktop.offsetParent) {
-                return;
-            }
-            const headerStickyComputedStyle = getComputedStyle(caseStudyHeaderStickyDesktop);
-            const headerActualStickyTop = parseFloat(headerStickyComputedStyle.top) || 0;
-            const headerContentHeight = caseStudyHeaderStickyDesktop.offsetHeight;
-            const stageTopPosition = headerActualStickyTop + headerContentHeight;
-            caseStudyStageStickyWrapperDesktop.style.top = `${stageTopPosition}px`;
-            caseStudyStageStickyWrapperDesktop.style.setProperty('--case-study-stage-top-offset', `${stageTopPosition}px`);
-        }
-
-        if (caseStudyHeaderStickyDesktop && caseStudyStageStickyWrapperDesktop) {
-            requestAnimationFrame(() => { setTimeout(updateCaseStudyStageOffsetDesktop, 100); });
-            let resizeTimeoutCaseStudyDesktop;
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024) {
-                    clearTimeout(resizeTimeoutCaseStudyDesktop);
-                    resizeTimeoutCaseStudyDesktop = setTimeout(updateCaseStudyStageOffsetDesktop, 150);
-                } else {
-                    if(caseStudyStageStickyWrapperDesktop) caseStudyStageStickyWrapperDesktop.style.top = '';
-                    if(caseStudyHeaderStickyDesktop) caseStudyHeaderStickyDesktop.style.zIndex = '';
-                }
-            });
-        }
-
-        if (caseStudySectionDesktop && caseStudyStageStickyWrapperDesktop) { // Ensure stage wrapper exists for desktop logic
-            const scrollTriggersDesktop = document.querySelectorAll('.case-study-scroll-trigger');
-            const projectPanelsDesktop = document.querySelectorAll('.case-study-panel');
-            let lastActivatedPanelIdDesktop = null;
-
-            if (scrollTriggersDesktop.length > 0 && projectPanelsDesktop.length > 0) {
-                const observerOptionsDesktop = {
-                    root: null,
-                    rootMargin: '0px',
-                    threshold: 0.3 
-                };
-                const observerCallbackDesktop = (entries, observer) => {
-                    let bestCandidateId = null;
-                    let maxIntersectionRatio = 0;
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            if (entry.intersectionRatio > maxIntersectionRatio) {
-                                maxIntersectionRatio = entry.intersectionRatio;
-                                bestCandidateId = entry.target.dataset.triggerFor;
-                            }
-                        }
-                    });
-                    if (bestCandidateId && lastActivatedPanelIdDesktop !== bestCandidateId) {
-                        projectPanelsDesktop.forEach(panel => {
-                            if (panel.dataset.projectId === bestCandidateId) {
-                                panel.classList.add('is-active');
-                            } else {
-                                panel.classList.remove('is-active');
-                            }
-                        });
-                        lastActivatedPanelIdDesktop = bestCandidateId;
-                    } else if (!bestCandidateId && lastActivatedPanelIdDesktop) {
-                        // Optional: Deactivate all if no trigger is active
-                        // projectPanelsDesktop.forEach(panel => panel.classList.remove('is-active'));
-                        // lastActivatedPanelIdDesktop = null;
-                    }
-                };
-                const intersectionObserverDesktop = new IntersectionObserver(observerCallbackDesktop, observerOptionsDesktop);
-                scrollTriggersDesktop.forEach(trigger => intersectionObserverDesktop.observe(trigger));
-            }
-
-            const customCursorDesktop = document.getElementById('custom-project-cursor');
-            const caseStudyFullLinksDesktop = document.querySelectorAll('.case-study-panel .case-study-full-link');
-            if (customCursorDesktop && caseStudyFullLinksDesktop.length > 0) {
-                caseStudyFullLinksDesktop.forEach(linkWrapper => {
-                    linkWrapper.addEventListener('mouseenter', () => {
-                        if (window.innerWidth >= 1024) customCursorDesktop.classList.add('visible');
-                    });
-                    linkWrapper.addEventListener('mouseleave', () => {
-                        if (window.innerWidth >= 1024) customCursorDesktop.classList.remove('visible');
-                    });
-                    linkWrapper.addEventListener('mousemove', (e) => {
-                        if (window.innerWidth >= 1024 && customCursorDesktop.classList.contains('visible')) {
-                            customCursorDesktop.style.left = `${e.clientX}px`;
-                            customCursorDesktop.style.top = `${e.clientY}px`;
-                        }
-                    });
-                });
-            }
-
-            const interactiveZoneDesktop = document.getElementById('case-study-interactive-zone');
-            const lastScrollTriggerDesktop = document.querySelector('.case-study-scroll-trigger:last-of-type');
-            if (interactiveZoneDesktop && caseStudyHeaderStickyDesktop && lastScrollTriggerDesktop) {
-                let headerSentinelDesktop = interactiveZoneDesktop.querySelector('.header-overlap-sentinel');
-                if (!headerSentinelDesktop) { // Create sentinel only if it doesn't exist
-                    headerSentinelDesktop = document.createElement('div');
-                    headerSentinelDesktop.className = 'header-overlap-sentinel'; // Add a class for potential re-find
-                    lastScrollTriggerDesktop.parentNode.insertBefore(headerSentinelDesktop, lastScrollTriggerDesktop.nextSibling);
-                    headerSentinelDesktop.style.height = '1px';
-                    headerSentinelDesktop.style.position = 'relative';
-                    headerSentinelDesktop.style.bottom = '150px'; // Adjust to trigger a bit before end of triggers scroll area
-                }
-
-                const headerOverlapObserverDesktop = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (window.innerWidth < 1024) {
-                             caseStudyHeaderStickyDesktop.style.zIndex = ''; 
-                             return;
-                        }
-                        if (entry.isIntersecting) {
-                            caseStudyHeaderStickyDesktop.style.zIndex = '45'; // Lower than stage (z-[50])
-                        } else {
-                            caseStudyHeaderStickyDesktop.style.zIndex = '60'; // Default z-index from Tailwind
-                        }
-                    });
-                }, { rootMargin: `0px 0px -${window.innerHeight * 0.80}px 0px`, threshold: 0.01 }); // Sentinel intersecting bottom 20% of viewport
-                headerOverlapObserverDesktop.observe(headerSentinelDesktop);
-            }
-        }
-    } // --- End Case Study Desktop Logic ---
-
 
     const heroStatsWrapper = document.getElementById('hero-stats-wrapper');
     if (heroStatsWrapper) {
