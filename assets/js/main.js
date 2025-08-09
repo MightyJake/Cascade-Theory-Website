@@ -372,10 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (scheduleModal && scheduleModal.classList.contains('active')) {
-                 if (window.innerWidth < 1024) { 
-                     const fabScheduleLink = document.querySelector('#mobile-fab-actions-wrapper .schedule-call-link');
-                     updateFabActiveState(fabScheduleLink);
-                 } else { 
+                 if (window.innerWidth >= 1024) { 
                      const contactDeskLink = Array.from(desktopNavLinks).find(link => link.getAttribute('href') === '#contact');
                      if (contactDeskLink) updateDesktopSlider(contactDeskLink);
                  }
@@ -383,11 +380,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (window.innerWidth < 1024) { 
-                let activeFabLink = document.querySelector(`#mobile-fab-actions-wrapper .mobile-fab-action-item[href="#${currentSectionId}"]`);
-                if (currentSectionId === 'hero' && !activeFabLink) { 
-                    activeFabLink = document.querySelector(`#mobile-fab-actions-wrapper .mobile-fab-action-item[href="#hero"]`);
-                }
-                updateFabActiveState(activeFabLink);
+                // Update mobile menu active state
+                updateMobileNavActiveState();
             } else { 
                 const activeNavLink = document.querySelector(`#desktop-nav-list .desktop-nav-item a[href="#${currentSectionId}"]`);
                 if (activeNavLink) {
