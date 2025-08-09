@@ -1202,6 +1202,58 @@ body.has-mobile-fab-nav {
     border-radius: inherit;
 }
 
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 767px) {
+    .section-title {
+        font-size: clamp(2rem, 8vw, 3rem) !important;
+        line-height: 1.1 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .hero-stat-pod {
+        padding: 1rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+    }
+    
+    #hero {
+        padding-top: 80px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .container-custom {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .project-card {
+        margin-bottom: 2rem;
+    }
+    
+    .services-marquee-container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: clamp(1.75rem, 9vw, 2.5rem) !important;
+    }
+    
+    .mobile-nav-item {
+        font-size: 16px;
+        padding: 14px 0;
+    }
+    
+    .container-custom {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
 /* === NEW PROJECT CARD STYLES === */
 .project-card {
     display: block;
