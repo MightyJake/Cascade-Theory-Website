@@ -129,12 +129,120 @@ body::before {
     }
 }
 
-#mobile-menu { 
-    transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1); 
-    transform: translateX(100%); 
-    z-index: 1100; 
+/* Enhanced Mobile Menu Styles */
+#mobile-nav-toggle {
+    display: block; /* Always visible on mobile */
 }
-#mobile-menu.open { transform: translateX(0); }
+
+.hamburger-menu {
+    width: 20px;
+    height: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+#mobile-nav-toggle.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+#mobile-nav-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+#mobile-nav-toggle.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+#mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#mobile-menu.open {
+    transform: translateX(0);
+}
+
+.mobile-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    border-bottom: 1px solid #f3f4f6;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.mobile-nav-item:hover {
+    color: var(--primary-color);
+    padding-left: 8px;
+}
+
+.mobile-nav-item.active {
+    color: var(--primary-color);
+    background-color: rgba(26, 97, 114, 0.05);
+    padding-left: 8px;
+    margin: 0 -24px;
+    padding-left: 32px;
+    padding-right: 24px;
+    border-radius: 8px;
+    border-bottom: 1px solid transparent;
+}
+
+.mobile-nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 20px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.mobile-nav-text {
+    flex: 1;
+}
+
+.mobile-nav-arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+    opacity: 0.5;
+}
+
+.mobile-nav-item:hover .mobile-nav-arrow,
+.mobile-nav-item.active .mobile-nav-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* Mobile menu body scroll lock */
+body.mobile-menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    #mobile-nav-toggle {
+        display: none;
+    }
+}
 
 /* Enhanced Content Spacing */
 #page-content-after-hero {
