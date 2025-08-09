@@ -166,180 +166,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set initial active state
     updateMobileNavActiveState();
 
-    const fabNavContainer = document.getElementById('mobile-fab-nav-container');
-    const fabToggle = document.getElementById('mobile-fab-toggle');
-    const fabBackdrop = document.getElementById('mobile-fab-backdrop');
-    const fabIconMenu = document.getElementById('fab-icon-menu');
-    const fabIconClose = document.getElementById('fab-icon-close');
-    const fabActionItems = document.querySelectorAll('.mobile-fab-action-item');
-
-    function isFabNavExpanded() {
-        return fabNavContainer && fabNavContainer.classList.contains('is-expanded');
-    }
-
-    function closeFabNav(forceBodyUnlock = false) {
-        if (!fabNavContainer || !isFabNavExpanded()) return;
-        fabNavContainer.classList.remove('is-expanded');
-        if (fabToggle) fabToggle.setAttribute('aria-expanded', 'false');
-        if (fabIconMenu) {
-            fabIconMenu.classList.remove('hidden');
-            fabIconMenu.classList.add('block');
-        }
-        if (fabIconClose) {
-            fabIconClose.classList.add('hidden');
-            fabIconClose.classList.remove('block');
-        }
-        if (forceBodyUnlock || (scheduleModal && !scheduleModal.classList.contains('active') && mobileMenu && !mobileMenu.classList.contains('open'))) {
-            document.body.classList.remove('modal-open');
-        }
-    }
-
-    function openFabNav() {
-        if (!fabNavContainer || isFabNavExpanded()) return;
-        fabNavContainer.classList.add('is-expanded');
-        if (fabToggle) fabToggle.setAttribute('aria-expanded', 'true');
-        if (fabIconMenu) {
-            fabIconMenu.classList.add('hidden');
-            fabIconMenu.classList.remove('block');
-        }
-        if (fabIconClose) {
-            fabIconClose.classList.remove('hidden');
-            fabIconClose.classList.add('block');
-        }
-        document.body.classList.add('modal-open');
-    }
-
-    if (fabToggle) {
-        fabToggle.addEventListener('click', () => {
-            if (isFabNavExpanded()) {
-                closeFabNav();
-            } else {
-                openFabNav();
-            }
-        });
-    }
-    if (fabBackdrop) {
-        fabBackdrop.addEventListener('click', () => closeFabNav());
-    }
-    
-    function handleFabNavResize() {
-        if (window.innerWidth < 1024) {
-            document.body.classList.add('has-mobile-fab-nav');
-            const oldMobileNavToggle = document.getElementById('mobile-nav-toggle'); 
-            if(oldMobileNavToggle) oldMobileNavToggle.style.display = 'none';
-        } else {
-            document.body.classList.remove('has-mobile-fab-nav');
-            closeFabNav(true); 
-        }
-    }
-
-    if (fabNavContainer) { 
-        handleFabNavResize(); 
-        window.addEventListener('resize', handleFabNavResize);
-    }
-
-    const scheduleLinks = document.querySelectorAll('.schedule-call-link');
-    const scheduleModal = document.getElementById('schedule-modal');
-    const scheduleIframe = document.getElementById('schedule-iframe');
-    const modalCloseBtn = document.getElementById('modal-close-btn');
-    const modalLoading = document.querySelector('#schedule-modal .modal-loading');
-    const CALENDAR_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true';
-
-    function openScheduleModal() {
-        if (!scheduleModal || !scheduleIframe || !modalLoading) return;
-        if (scheduleIframe.src !== CALENDAR_URL) {
-            scheduleIframe.src = CALENDAR_URL;
-        }
-        modalLoading.style.display = 'flex';
-        scheduleIframe.onload = () => { modalLoading.style.display = 'none'; };
-        scheduleModal.classList.add('active');
-        document.body.classList.add('modal-open');
-        closeFabNav(); 
-        if (window.innerWidth >= 1024) {
-            const contactLinkForSlider = Array.from(desktopNavLinks).find(navLink => navLink.getAttribute('href') === '#contact');
-            if (contactLinkForSlider) updateDesktopSlider(contactLinkForSlider);
-        } else {
-            const fabScheduleLink = document.querySelector('#mobile-fab-actions-wrapper .schedule-call-link');
-            updateFabActiveState(fabScheduleLink);
-        }
-    }
-
-    function closeScheduleModal() {
-        if (!scheduleModal) return;
-        scheduleModal.classList.remove('active');
-        if (!isFabNavExpanded() && (mobileMenu && !mobileMenu.classList.contains('open'))) {
-            document.body.classList.remove('modal-open');
-        }
-        setTimeout(() => { if (scheduleIframe) scheduleIframe.src = ''; }, 300);
-        if (window.innerWidth >= 1024 && scrollSpySections.length > 0) triggerScrollSpy(); 
-        else if (window.innerWidth < 1024) triggerMobileScrollActiveState();
-    }
-    
-    function triggerScrollSpy() { 
-        window.dispatchEvent(new Event('scroll'));
-    }
-
-    function triggerMobileScrollActiveState() {
-        if (window.innerWidth >= 1024 || !fabNavContainer || scrollSpySections.length === 0) return;
-        let currentSectionId = '';
-        const threshold = 50; 
-        scrollSpySections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const effectiveThreshold = section.id === 'video-pin-outer-container' ? threshold : 60 + threshold; 
-            if (window.scrollY >= sectionTop - effectiveThreshold && window.scrollY < sectionTop + sectionHeight - effectiveThreshold) {
-                currentSectionId = section.getAttribute('id');
-                if (currentSectionId === 'video-pin-outer-container') currentSectionId = 'hero';
-            }
-        });
-        if (scheduleModal && scheduleModal.classList.contains('active')) {
-            const fabScheduleLink = document.querySelector('#mobile-fab-actions-wrapper .schedule-call-link');
-            updateFabActiveState(fabScheduleLink);
-        } else {
-            let activeFabLink = document.querySelector(`#mobile-fab-actions-wrapper .mobile-fab-action-item[href="#${currentSectionId}"]`);
-            if (!activeFabLink && !currentSectionId && scrollSpySections.length > 0 && window.scrollY < (scrollSpySections[0].offsetTop - threshold)) {
-                 activeFabLink = document.querySelector(`#mobile-fab-actions-wrapper .mobile-fab-action-item[href="#hero"]`);
-            }
-            updateFabActiveState(activeFabLink);
-        }
-    }
-
-    function handleNavLinkClick(e, linkElement, isMobileSource = false, isFabSource = false) {
+    // Handle navigation link clicks with improved mobile support
+    function handleNavLinkClick(e, linkElement, isMobileSource = false) {
         const href = linkElement.getAttribute('href');
         if (linkElement.classList.contains('schedule-call-link')) {
             e.preventDefault();
-            if (isMobileSource && mobileMenu && mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open'); 
+            if (isMobileSource && mobileMenu && mobileMenu.classList.contains('open')) {
+                closeMobileMenu(); 
+            }
             openScheduleModal();
             return;
         }
         if (href && !href.startsWith('#')) { 
             if (isMobileSource && mobileMenu && mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                if (!isFabNavExpanded() && (!scheduleModal || !scheduleModal.classList.contains('active'))) document.body.classList.remove('modal-open');
+                closeMobileMenu();
             }
-            if (isFabSource) {
-                closeFabNav();
-                updateFabActiveState(linkElement); 
-            }
-            if (!isMobileSource && !isFabSource && linkElement.closest('#desktop-nav-list')) updateDesktopSlider(linkElement); 
+            if (!isMobileSource && linkElement.closest('#desktop-nav-list')) updateDesktopSlider(linkElement); 
             return; 
         }
         if (href && href.startsWith('#') && href.length > 1) {
             e.preventDefault();
             if (isMobileSource && mobileMenu && mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                if (!isFabNavExpanded() && (!scheduleModal || !scheduleModal.classList.contains('active'))) document.body.classList.remove('modal-open');
-            }
-            if (isFabSource) {
-                closeFabNav();
-                updateFabActiveState(linkElement);
+                closeMobileMenu();
             }
             
             const targetId = href.substring(1); 
             let targetElement = (targetId === 'hero') ? (document.getElementById('video-pin-outer-container') || document.getElementById('hero')) : document.getElementById(targetId);
             
             if (targetElement) {
-                if (!isMobileSource && !isFabSource && linkElement.closest('#desktop-nav-list')) updateDesktopSlider(linkElement);
+                if (!isMobileSource && linkElement.closest('#desktop-nav-list')) updateDesktopSlider(linkElement);
                 
                 let headerOffset = 0;
                 const isDesktop = window.innerWidth >= 1024;
@@ -347,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (targetId === 'hero' || targetId === 'video-pin-outer-container') {
                     headerOffset = 0; 
                 } else {
-                    headerOffset = isDesktop ? 80 : 60; 
+                    headerOffset = isDesktop ? 80 : 70; 
                 }
             
                 const elementPosition = targetElement.getBoundingClientRect().top;
@@ -361,17 +216,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    desktopNavLinks.forEach(link => { link.addEventListener('click', (e) => handleNavLinkClick(e, link, false, false)); });
-    mobileNavLinksJS.forEach(link => { link.addEventListener('click', (e) => handleNavLinkClick(e, link, true, false)); });
-    if (mobileScheduleButton) mobileScheduleButton.addEventListener('click', (e) => handleNavLinkClick(e, mobileScheduleButton, true, false));
-    fabActionItems.forEach(link => { link.addEventListener('click', (e) => handleNavLinkClick(e, link, false, true)); });
+    desktopNavLinks.forEach(link => { 
+        link.addEventListener('click', (e) => handleNavLinkClick(e, link, false)); 
+    });
 
-    scheduleLinks.forEach(link => {
-        const isHandledByDesktop = link.closest('#desktop-nav-list'); 
-        const isHandledByMobileMenu = link.closest('#mobile-menu nav') || link === mobileScheduleButton; 
-        const isHandledByFab = Array.from(fabActionItems).includes(link);
-        if (!isHandledByDesktop && !isHandledByMobileMenu && !isHandledByFab) {
-             link.addEventListener('click', (e) => { e.preventDefault(); openScheduleModal(); });
+    // Handle remaining schedule links not in navigation
+    const remainingScheduleLinks = document.querySelectorAll('.schedule-call-link');
+    remainingScheduleLinks.forEach(link => {
+        const isInDesktopNav = link.closest('#desktop-nav-list'); 
+        const isInMobileMenu = link.closest('#mobile-menu'); 
+        if (!isInDesktopNav && !isInMobileMenu) {
+             link.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                openScheduleModal(); 
+            });
         }
     });
 
