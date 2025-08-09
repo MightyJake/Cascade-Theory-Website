@@ -64,19 +64,107 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => updateDesktopSlider(initialDesktopActiveLink), 200); 
     }
 
+    // Enhanced Mobile Menu Functionality
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
     const mobileNavClose = document.getElementById('mobile-nav-close');
     const mobileMenu = document.getElementById('mobile-menu'); 
-    const mobileNavLinksJS = document.querySelectorAll('#mobile-menu .mobile-nav-link');
-    const mobileScheduleButton = document.querySelector('#mobile-menu .schedule-call-link.cta-button');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
 
-    if (mobileMenu && mobileNavClose) { 
-        mobileNavClose.addEventListener('click', () => {
+    function openMobileMenu() {
+        if (mobileMenu && mobileMenuOverlay && mobileNavToggle) {
+            mobileMenu.classList.add('open');
+            mobileMenuOverlay.classList.add('active');
+            mobileNavToggle.classList.add('active');
+            mobileNavToggle.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('mobile-menu-open');
+        }
+    }
+
+    function closeMobileMenu() {
+        if (mobileMenu && mobileMenuOverlay && mobileNavToggle) {
             mobileMenu.classList.remove('open');
-            if (scheduleModal && !scheduleModal.classList.contains('active') && !isFabNavExpanded()) {
-                document.body.classList.remove('modal-open');
+            mobileMenuOverlay.classList.remove('active');
+            mobileNavToggle.classList.remove('active');
+            mobileNavToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('mobile-menu-open');
+        }
+    }
+
+    if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', () => {
+            if (mobileMenu && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
             }
         });
     }
+
+    if (mobileNavClose) {
+        mobileNavClose.addEventListener('click', closeMobileMenu);
+    }
+
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Handle mobile nav item clicks
+    mobileNavItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const href = item.getAttribute('href');
+            
+            // Update active state
+            mobileNavItems.forEach(navItem => navItem.classList.remove('active'));
+            item.classList.add('active');
+            
+            // Close menu after clicking
+            setTimeout(closeMobileMenu, 100);
+        });
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
+            closeMobileMenu();
+        }
+    });
+
+    // Update active nav item based on scroll position
+    function updateMobileNavActiveState() {
+        if (window.innerWidth >= 1024) return;
+        
+        const sections = document.querySelectorAll('section[id], div#video-pin-outer-container');
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+                currentSection = section.getAttribute('id');
+                if (currentSection === 'video-pin-outer-container') currentSection = 'hero';
+            }
+        });
+        
+        mobileNavItems.forEach(item => {
+            const href = item.getAttribute('href');
+            item.classList.remove('active');
+            
+            if (href === `#${currentSection}` || (currentSection === 'hero' && href === '#hero')) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Update active state on scroll (throttled)
+    let mobileNavScrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(mobileNavScrollTimeout);
+        mobileNavScrollTimeout = setTimeout(updateMobileNavActiveState, 100);
+    }, { passive: true });
+
+    // Set initial active state
+    updateMobileNavActiveState();
 
     const fabNavContainer = document.getElementById('mobile-fab-nav-container');
     const fabToggle = document.getElementById('mobile-fab-toggle');
