@@ -166,7 +166,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set initial active state
     updateMobileNavActiveState();
 
-    // Handle navigation link clicks with improved mobile support
+    // Schedule Modal Functionality
+    const scheduleModal = document.getElementById('schedule-modal');
+    const scheduleIframe = document.getElementById('schedule-iframe');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalLoading = document.querySelector('#schedule-modal .modal-loading');
+    const CALENDAR_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2I8mK189lg8ti0kyS5AG9_0j6rP1643Z0PY75TTA8lN1osU5PrHt7YRyRGu9sqhUaq4iNF7muL?gv=true';
+
+    function openScheduleModal() {
+        if (!scheduleModal || !scheduleIframe || !modalLoading) return;
+        if (scheduleIframe.src !== CALENDAR_URL) {
+            scheduleIframe.src = CALENDAR_URL;
+        }
+        modalLoading.style.display = 'flex';
+        scheduleIframe.onload = () => { modalLoading.style.display = 'none'; };
+        scheduleModal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        if (window.innerWidth >= 1024) {
+            const contactLinkForSlider = Array.from(desktopNavLinks).find(navLink => navLink.getAttribute('href') === '#contact');
+            if (contactLinkForSlider) updateDesktopSlider(contactLinkForSlider);
+        }
+    }
+
+    function closeScheduleModal() {
+        if (!scheduleModal) return;
+        scheduleModal.classList.remove('active');
+        if (mobileMenu && !mobileMenu.classList.contains('open')) {
+            document.body.classList.remove('modal-open');
+        }
+        setTimeout(() => { if (scheduleIframe) scheduleIframe.src = ''; }, 300);
+        if (window.innerWidth >= 1024 && scrollSpySections.length > 0) {
+            window.dispatchEvent(new Event('scroll'));
+        }
+    }
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeScheduleModal);
+    if (scheduleModal) scheduleModal.addEventListener('click', (e) => { if (e.target === scheduleModal) closeScheduleModal(); });
+    
+    window.addEventListener('keydown', (e) => { 
+        if (e.key === 'Escape') {
+            if (scheduleModal && scheduleModal.classList.contains('active')) {
+                closeScheduleModal();
+            } else if (mobileMenu && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        }
+    });
     function handleNavLinkClick(e, linkElement, isMobileSource = false) {
         const href = linkElement.getAttribute('href');
         if (linkElement.classList.contains('schedule-call-link')) {
