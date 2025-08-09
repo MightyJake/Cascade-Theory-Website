@@ -1083,51 +1083,7 @@ body.modal-open { overflow: hidden; }
     }
 }
 
-/* Enhanced Mobile FAB Navigation */
-#mobile-fab-nav-container.is-expanded #mobile-fab-backdrop { opacity: 1; pointer-events: auto; }
-#mobile-fab-nav-container.is-expanded #mobile-fab-actions-wrapper { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); pointer-events: auto; }
-#mobile-fab-nav-container.is-expanded #mobile-fab-toggle { transform: translateX(-50%) scale(0.95) rotate(180deg);  }
-
-.mobile-fab-action-item { 
-    padding: 0.45rem 0.8rem;  
-    text-decoration: none; 
-    font-weight: 500;  
-    color: var(--text-dark); 
-    border-radius: 18px;  
-    font-size: 0.75rem;  
-    transition: color 0.2s ease, background-color 0.2s ease; 
-    white-space: nowrap; 
-    display: block;  
-    line-height: 1.4;  
-    cursor: pointer; 
-}
-
-@media (min-width: 640px) {
-    .mobile-fab-action-item { 
-        padding: 0.5rem 0.9rem;  
-        border-radius: 20px;  
-        font-size: 0.8rem;  
-    }
-}
-
-.mobile-fab-action-item.active { 
-    background-color: var(--primary-color); 
-    color: var(--text-light) !important;  
-}
-.mobile-fab-action-item:not(.active):hover { 
-    background-color: rgba(0,0,0,0.05);  
-    color: var(--primary-color); 
-}
-
-body.has-mobile-fab-nav { 
-    padding-bottom: 60px; 
-}
-
-@media (min-width: 640px) {
-    body.has-mobile-fab-nav { 
-        padding-bottom: 70px; 
-    }
-}
+/* Clean up: Remove old mobile FAB navigation styles */
 
 /* Video Pin Container Styles */
 #video-pin-outer-container {
