@@ -646,6 +646,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            const isMobileView = window.innerWidth < 768;
+            const isTabletView = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+            // Mobile-first approach - show video by default on mobile
+            if (isMobileView) {
+                scrollVideoContainer.style.opacity = '1';
+                scrollVideoContainer.style.transform = 'translate(-50%, -50%)';
+                scrollVideoContainer.style.pointerEvents = 'auto';
+                
+                // Simple scroll-based opacity for mobile
+                const scrollY = window.scrollY;
+                const containerHeight = videoPinOuterContainer.offsetHeight;
+                const fadeStart = containerHeight * 0.1;
+                const fadeEnd = containerHeight * 0.8;
+                
+                let opacity = 1;
+                if (scrollY > fadeStart && scrollY < fadeEnd) {
+                    opacity = 1;
+                } else if (scrollY >= fadeEnd) {
+                    opacity = Math.max(0, 1 - (scrollY - fadeEnd) / (containerHeight * 0.2));
+                }
+                
+                scrollVideoContainer.style.opacity = opacity;
+                
+                if (opacity > 0.1 && scrollVideo.paused) {
+                    scrollVideo.play().catch(e => {/* Silent catch */});
+                } else if (opacity <= 0.1 && !scrollVideo.paused) {
+                    scrollVideo.pause();
+                }
+                return;
+            }
+
+            // Desktop animation logic
             const pinOuterRect = videoPinOuterContainer.getBoundingClientRect();
             if (pinOuterRect.height < 100 && pinOuterRect.top === 0 && pinOuterRect.bottom === 0 && window.scrollY < 100) { 
                 return;
@@ -659,20 +692,17 @@ document.addEventListener('DOMContentLoaded', () => {
             let currentScrollY = window.scrollY;
             let scrollProgress = 0;
 
-            const isMobileView = window.innerWidth < 768; 
-            const videoMargin = isMobileView ? 16 : 32; 
-            const maxBorderRadius = isMobileView ? 16 : 24; 
+            const videoMargin = isTabletView ? 32 : 64; 
+            const maxBorderRadius = isTabletView ? 24 : 32; 
 
             if (scrollableDistanceInPin <= 0) { 
                 scrollVideoContainer.style.opacity = 1;
                 scrollVideoContainer.style.width = `calc(100vw - ${videoMargin * 2}px)`;
                 scrollVideoContainer.style.height = `calc(100vh - ${videoMargin * 2}px)`;
-                scrollVideoContainer.style.left = '50%'; 
-                scrollVideoContainer.style.bottom = `${videoMargin}px`; 
-                scrollVideoContainer.style.transform = 'translateX(-50%) scale(1)'; 
+                scrollVideoContainer.style.transform = 'translate(-50%, -50%)'; 
                 scrollVideoContainer.style.borderRadius = `${maxBorderRadius}px`;
                 if (scrollVideo.paused) { 
-                    scrollVideo.play().catch(e => {/* console.error("Error playing video:", e) */});
+                    scrollVideo.play().catch(e => {/* Silent catch */});
                 }
                 return;
             }
@@ -698,35 +728,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 scrollVideoContainer.style.width = targetWidthWithMargin;
                 scrollVideoContainer.style.height = targetHeightWithMargin;
-                 
-                const p1InitialTranslateYPercent = 100; 
-                const p1TranslateY = p1InitialTranslateYPercent * (1 - phase1Progress); 
-
+                
                 scrollVideoContainer.style.borderRadius = `${maxBorderRadius}px`; 
                 scrollVideoContainer.style.opacity = p1Opacity;
-                scrollVideoContainer.style.left = '50%';
-                scrollVideoContainer.style.bottom = `${videoMargin}px`; 
-                scrollVideoContainer.style.transform = `translate(-50%, ${p1TranslateY}%) scale(${p1Scale})`;
-                scrollVideoContainer.style.transformOrigin = 'center bottom';
+                scrollVideoContainer.style.transform = `translate(-50%, -50%) scale(${p1Scale})`;
                 scrollVideoContainer.style.pointerEvents = p1Opacity > 0.5 ? 'auto' : 'none';
 
                 if (p1Opacity > 0.1 && scrollVideo.paused) { 
-                    scrollVideo.play().catch(error => {/* console.error("Error playing video:", error); */});
+                    scrollVideo.play().catch(error => {/* Silent catch */});
                 }
 
             } else { 
                 scrollVideoContainer.style.opacity = 1;
                 scrollVideoContainer.style.width = targetWidthWithMargin;
                 scrollVideoContainer.style.height = targetHeightWithMargin;
-                scrollVideoContainer.style.left = '50%';
-                scrollVideoContainer.style.bottom = `${videoMargin}px`;
-                scrollVideoContainer.style.transform = 'translateX(-50%) scale(1)'; 
+                scrollVideoContainer.style.transform = 'translate(-50%, -50%) scale(1)'; 
                 scrollVideoContainer.style.borderRadius = `${maxBorderRadius}px`;
-                scrollVideoContainer.style.transformOrigin = 'center bottom'; 
                 scrollVideoContainer.style.pointerEvents = 'auto';
 
                 if (scrollVideo.paused) { 
-                    scrollVideo.play().catch(error => {/* console.error("Error playing video:", error); */});
+                    scrollVideo.play().catch(error => {/* Silent catch */});
                 }
             }
 
