@@ -1023,19 +1023,19 @@ body.has-mobile-fab-nav {
 
 /* Enhanced Video Pin Section */
 #video-pin-outer-container {
-    height: 150vh; 
+    height: 120vh; 
     position: relative;
 }
 
 @media (min-width: 640px) {
     #video-pin-outer-container {
-        height: 175vh; 
+        height: 130vh; 
     }
 }
 
 @media (min-width: 768px) {
     #video-pin-outer-container {
-        height: 200vh; 
+        height: 140vh; 
     }
 }
 
